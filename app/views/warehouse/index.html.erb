@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>Warehouse Layout</title>
+	  <style>
+		#content { float: left;   height: 510px; width: 1160px; background: white; border: 0px dashed #999;}
+        #area {  float: left;   height: 500px; width: 380px; background: white; border: 1px dashed #999;}             
+
+        .bay { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		.bay_Empty { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
+		.aisle_divider { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
+		.aisle_drivepath { float: left;  height: 5px; width: 324px; border: 0px solid #000; background: white}
+
+        #zonearea { float: left;  height: 500px; width: 770px; background: white; border-width:1px; border: 1px dashed #999;}        
+
+     </style>
+     
+	  <%= javascript_include_tag :application %>
+	  <%= yield :head %>
+
+      <script type="text/javascript">	    
+	  $( init );
+	  
+	  $(document).ready(function(){
+  
+	    $('.bay').click(function(){    	
+		 	/*if ((this.id).substring(0,3) !="Bay"){ 
+		    	var lastSelected ="#"+ $("#lastSelected").attr("value")
+			    $(lastSelected).css("background-color","white");
+			    $(lastSelected).text("");
+			    $("#lastSelected").attr("value", this.id);  
+			  	$(this).css("background-color","yellow");  	
+		  		//Call the Ajax to populate the location detail	
+			   
+			*/
+			  
+			  $("#zonearea").load("/warehouse/bay/"+this.id);  });
+	 	});
+  
+	  //making the ceel editable,so that you can go ahead with your own naming convension
+
+      $(document).ready(function(){
+      $('.bay, .bay_Empty').dblclick(function(){
+     if($('#'+ $(this).attr('id') + '_text').length>0) { 
+  	
+  	 labelID = $(this).attr('id') + '_label';	
+ 	 textID  = $(this).attr('id') + '_text';
+ 	
+ 	 newlabel = $(document.createElement("label"))
+     .attr("id", labelID);
+      $(this).append(newlabel);     	
+     $('#'+labelID).html( $('#'+ textID).attr('value'));
+ 	 $('#'+ textID).remove();
+ 	 }
+ 	
+ 	else{
+
+  	labelID = $(this).attr('id') + '_label';	
+ 	textID  = $(this).attr('id') + '_text';
+
+     newTextBox = $(document.createElement("input"))
+    .attr("type", "text")
+    .attr("id", textID)
+    .attr("name", $(this).attr('id'))
+    .attr("style", "width: 80px")
+    .attr("value", $("#"+labelID).html())
+     $(this).append(newTextBox);
+  	 $("#" + labelID).remove();
+
+	} 
+  }); 
+
+});	
+
+//To swap the position of two items
+function init() { 
+ 
+  $('.bay').draggable(
+     {containment: '#content',
+      cursor: 'move',
+      snap: '#area',
+      revert: true, 
+      
+      start: function(event, ui) {
+				 var offset = $(this).offset();    
+				 $("#hidden_top").attr("value",  offset.top);
+				 $("#hidden_left").attr("value", offset.left);	
+ 	   }
+  });
+
+
+  $('.bay_Empty').droppable( {
+    drop: handleDropEvent
+  } ); 
+  
+  $('.bay').droppable();
+  }
+
+
+function handleDropEvent( event, ui ) {
+  var draggable = ui.draggable;  
+  var pos = draggable.position();
+
+  ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+  ui.draggable.draggable( 'option', 'revert', false );
+  ui.draggable.element = $(this); 
+  $(this).offset({top: $("#hidden_top").attr("value"), left: $("#hidden_left").attr("value")})	
+} 
+
+/*$(document).ready(function() {
+   
+    $( '.bay' ).draggable({ revert: true, helper: "clone" });
+  });*/
+
+
+//To get the details of bay
+$(function() {
+    $('.bay').tooltip();
+  });
+
+</script>
+
+  </head>
+<body>
+
+<div style="width: 2500px; height: 1000px">
+	<div style="float: left; left-margin: 20px; width: 2500px; height: 60px" >
+		<%= link_to image_tag("compass.jpg", alt: "direction", :width => 60, :height => 60), '' %>
+		<br>
+	</div>
+<div id="content" class="content" style="margin: 20px">
+	
+   <div id="area" class="area"> 
+   	
+   	<% @aislehash.each do |key,value| %>
+ 
+    	<% value.each do |key1,value1| %>
+  
+ 				<%if key1== :aisleseparation %>
+ 					<%if value1== "drivepath" %>
+ 					
+ 						<div  class="aisle_drivepath"> </div>   	       
+	   	       			 <hr style="width: 320px; float: left" color="blue">   	       
+	   	      		    <div class="aisle_drivepath"> </div> 
+	   	      		 <% else %>
+	   	      		   	<div  class="aisle_divider"> </div>
+          			<% end %>
+          			
+          		<% else %>
+	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title="<%= value1[:item] %>" >	   	    	  
+		   	    	 <label id="<%= key1%>_label"> <%= key1 %> </label> 	   	    	
+		   	    </div>
+	   		<% end %>
+	   	    
+    
+         <%end%>
+         
+  <%end%>
+   
+ 
+
+  
+   </div>
+   
+   <div id="zonearea" class= "zonearea"> </div>
+   
+</div>
+ 
+ <input type="hidden" id="hidden_top" value=" "/> 
+ <input type="hidden" id="hidden_left" value=" "/>
+</div>
+
+  <%= yield %>
+  </body>
+</html>

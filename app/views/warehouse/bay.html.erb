@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>bay.html</title>
+	  <style>
+	  	.pos { float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"}
+	    #position { float: left;  ; background: white; border-width:1px;	border-style:dotted;}  
+	  </style>
+	  <%= javascript_include_tag :application %>
+	  <%= yield :head %>
+  </head>
+  <body>
+ 
+<div id="position" class="position" style="height: 300; width: 410px; margin-left:30px">
+   
+   <div align="center" > This  is <%= @id %> </div>
+	
+  <% (1..56).each do |i| %>
+  
+		 <div id="pos<%= i %>" class="pos" title="Item"> </div>
+	
+		  <%if (i).%(8).zero?  %>
+			<div style="float: left; height: 15px; border: 0px solid black; background-color: 
+			<%if i==24 or i==32 or i==40 %>red
+				<% else %> grey
+			<%end%> ;"> Level <%= i/8 %> </div>
+		  <%end%>
+	
+	
+		 <% if i.%(8).zero? %>
+		   <div style=" float: left; width: 365px; height: 5px; border: 1px solid grey; background: white;"> </div>
+		 <% end %>
+		   	    
+     <% end %>    
+
+</div>
+
+  <%= yield %>
+ </body>
+
+</html>
