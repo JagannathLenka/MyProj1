@@ -6,28 +6,98 @@
 	  <title>bay.html</title>
 	  <style>
 	  	.pos { float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"}
-	    #position { float: left;  ; background: white; border-width:1px;	border-style:dotted;}  
+	    #position { float: left;  ; background: white; border-width:1px;	border-style:dotted;}
+	    .pos_Empty { float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: white;}
+	    .pos_draggedhelper { float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"}   
 	  </style>
 	  <%= javascript_include_tag :application %>
 	  <%= yield :head %>
+<script type="text/javascript">	
+
+//global variable
+    bay_html_map = {}	
+          
+ $( init );
+ 
+//To swap the position of two items
+function init() { 
+ 
+ 	bayHTML.setDragnDrop()
+}
+
+var bayHTML = {
+	
+setDragnDrop: function setDragnDrop() { 
+ 
+	  $('.pos').draggable(
+	     {containment: '#position',
+	      cursor: 'move',
+	      snap: '#position',
+	      revert: true, 
+	      helper: helpermethod,
+	      
+	      start: function(event, ui) {
+					 var offset = $(this).offset(); 
+					 
+					 bay_html_map.pos= $(this).attr('id');
+					 bay_html_map.title= $(this).attr('title');
+					 bay_html_map.content= $(this).attr('class') ;
+					 
+	 	   }
+	  });
+
+	function helpermethod( event ) {
+  	
+		  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
+  		   newdiv = '<div id ="pos_draggedhelper" class="pos_draggedhelper">' +  $(this).attr('title') + '</div>'
+  		   return newdiv;
+	}
+	
+	//alert($('#hidden_pos').attr('value'));
+	
+	  $('.pos_Empty').droppable( {
+	  	  drop: handleDropEvent
+	  	  
+	    } ); 
+	  
+   
+	function handleDropEvent( event, ui ) {
+
+		  ui.draggable.element = $(this); 		  
+		  oldTitle = $(this).attr('title');
+		  oldClass = $(this).attr('class');
+		  $(this).attr('title', bay_html_map.title);
+		  $(this).attr('class', bay_html_map.content);
+
+		 $('#pos_draggedhelper').html("");			  
+		 $('#pos_draggedhelper').attr('class', 'pos_Empty');	
+		  pos = bay_html_map.pos;
+		  $("#"+pos).attr('title', oldTitle);
+		  $("#"+pos).attr('class', oldClass);
+		  bayHTML.setDragnDrop();	
+		  ui.draggable.draggable( 'disable' );
+
+
+	} 
+} //ends the init function
+
+//To get the details of bay
+	//    $('.bay').tooltip();
+	  //});
+}
+
+</script>
+
   </head>
   <body>
  
 <div id="position" class="position" style="height: 300; width: 410px; margin-left:30px">
    
    <div align="center" > This  is <%= @id %> </div>
-	
-  <% (1..56).each do |i| %>
-  
-		 <div id="pos<%= i %>" class="pos" title="Item"> </div>
-	
-		  <%if (i).%(8).zero?  %>
-			<div style="float: left; height: 15px; border: 0px solid black; background-color: 
-			<%if i==24 or i==32 or i==40 %>red
-				<% else %> grey
-			<%end%> ;"> Level <%= i/8 %> </div>
-		  <%end%>
-	
+   <% i=0 %>
+   <% @poshash.each do |key, value| %>
+   <% i= i+1 %>
+			 <div id="<%= key %>" class="<%= value[:type] %>" title="<%= value[:item] %>"> </div>	
 	
 		 <% if i.%(8).zero? %>
 		   <div style=" float: left; width: 365px; height: 5px; border: 1px solid grey; background: white;"> </div>

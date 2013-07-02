@@ -5,11 +5,15 @@
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>Warehouse Layout</title>
 	  <style>
-		#content { float: left;   height: 510px; width: 1160px; background: white; border: 0px dashed #999;}
-        #area {  float: left;   height: 500px; width: 380px; background: white; border: 1px dashed #999;}             
+		#content { float: left;   height: 510px; width: 1360px; background: white; border: 0px dashed #999;}
+        #area {  float: left;   height: 500px; width: 600px; background: white; border: 1px dashed #999;}             
+
+		.col { float: left;  height: 20px; width: 80px;}
 
         .bay { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
 		.bay_Empty { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
+		.bay_draggedhelper { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		
 		.aisle_divider { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
 		.aisle_drivepath { float: left;  height: 5px; width: 324px; border: 0px solid #000; background: white}
 
@@ -20,105 +24,121 @@
 	  <%= javascript_include_tag :application %>
 	  <%= yield :head %>
 
-      <script type="text/javascript">	    
+      <script type="text/javascript">
+      
+      //global variable
+      index_html_map = {}	    
 	  $( init );
+  
 	  
-	  $(document).ready(function(){
   
-	    $('.bay').click(function(){    	
-		 	/*if ((this.id).substring(0,3) !="Bay"){ 
-		    	var lastSelected ="#"+ $("#lastSelected").attr("value")
-			    $(lastSelected).css("background-color","white");
-			    $(lastSelected).text("");
-			    $("#lastSelected").attr("value", this.id);  
-			  	$(this).css("background-color","yellow");  	
-		  		//Call the Ajax to populate the location detail	
-			   
-			*/
-			  
-			  $("#zonearea").load("/warehouse/bay/"+this.id);  });
-	 	});
-  
-	  //making the ceel editable,so that you can go ahead with your own naming convension
+	  $(document).ready(function(){  
 
-      $(document).ready(function(){
-      $('.bay, .bay_Empty').dblclick(function(){
-     if($('#'+ $(this).attr('id') + '_text').length>0) { 
-  	
-  	 labelID = $(this).attr('id') + '_label';	
- 	 textID  = $(this).attr('id') + '_text';
- 	
- 	 newlabel = $(document.createElement("label"))
-     .attr("id", labelID);
-      $(this).append(newlabel);     	
-     $('#'+labelID).html( $('#'+ textID).attr('value'));
- 	 $('#'+ textID).remove();
- 	 }
- 	
- 	else{
+		    $('.bay').click(function(){    	
+				  $("#zonearea").load("/warehouse/bay/"+this.id);  });
+	
+	
+	      $('.bay, .bay_Empty').dblclick(function(){
+	    		 if($('#'+ $(this).attr('id') + '_text').length>0) { 
+	  	
+	  				labelID = $(this).attr('id') + '_label';	
+		     		textID  = $(this).attr('id') + '_text';
+	 	
+			 	 	newlabel = $(document.createElement("label"))
+			     	.attr("id", labelID);
+			     	 $(this).append(newlabel);     	
+			    	 $('#'+labelID).html( $('#'+ textID).attr('value'));
+			 	 	 $('#'+ textID).remove();
+			 	 }
+	 	
+			 	else{
+	
+				  	labelID = $(this).attr('id') + '_label';	
+				 	textID  = $(this).attr('id') + '_text';
+				
+				     newTextBox = $(document.createElement("input"))
+				    .attr("type", "text")
+				    .attr("id", textID)
+				    .attr("name", $(this).attr('id'))
+				    .attr("style", "width: 80px")
+				    .attr("value", $("#"+labelID).html())
+				     $(this).append(newTextBox);
+				  	 $("#" + labelID).remove();
+				
+				} 
+		  	}); 
 
-  	labelID = $(this).attr('id') + '_label';	
- 	textID  = $(this).attr('id') + '_text';
+		//To get the details of bay
+		//$(function() {
+		  //  $('.bay').tooltip();
+	  //});
 
-     newTextBox = $(document.createElement("input"))
-    .attr("type", "text")
-    .attr("id", textID)
-    .attr("name", $(this).attr('id'))
-    .attr("style", "width: 80px")
-    .attr("value", $("#"+labelID).html())
-     $(this).append(newTextBox);
-  	 $("#" + labelID).remove();
-
-	} 
-  }); 
-
-});	
+	});	
+	
 
 //To swap the position of two items
 function init() { 
- 
-  $('.bay').draggable(
-     {containment: '#content',
-      cursor: 'move',
-      snap: '#area',
-      revert: true, 
-      
-      start: function(event, ui) {
-				 var offset = $(this).offset();    
-				 $("#hidden_top").attr("value",  offset.top);
-				 $("#hidden_left").attr("value", offset.left);	
- 	   }
-  });
+ 				 indexHTML.setDragnDrop();
+ 			}
 
+var indexHTML = {
+	
+setDragnDrop: function setDragnDrop() { 
+  			 	
+	  $('.bay').draggable(
+	     {containment: '#content',
+	      cursor: 'move',
+	      snap: '#area',
+	      revert: true, 
+	      helper: helpermethod,
+	      
+	      start: function(event, ui) {
+					 var offset = $(this).offset();  
+					 
+				     index_html_map.bay = $(this).attr('id');
+				     index_html_map.title = $(this).attr('title');
+				     index_html_map.content = $(this).attr('class');
+	
+	 	   }
+	  });
 
-  $('.bay_Empty').droppable( {
-    drop: handleDropEvent
-  } ); 
+	function helpermethod( event ) {
+  	
+		  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
+  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  $(this).attr('title') + '</div>'
+  		   return newdiv;
+	}
+
   
-  $('.bay').droppable();
-  }
+
+	  $('.bay_Empty, .bay').droppable( {
+	  	  drop: handleDropEvent
+	  	  
+	    } ); 
+	  
 
 
-function handleDropEvent( event, ui ) {
-  var draggable = ui.draggable;  
-  var pos = draggable.position();
+	function handleDropEvent( event, ui ) {
 
-  ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
-  ui.draggable.draggable( 'option', 'revert', false );
-  ui.draggable.element = $(this); 
-  $(this).offset({top: $("#hidden_top").attr("value"), left: $("#hidden_left").attr("value")})	
+		  ui.draggable.element = $(this); 		  
+		  oldTitle = $(this).attr('title');
+		  oldClass = $(this).attr('class');
+		  $(this).attr('title', index_html_map.title);
+		  $(this).attr('class', index_html_map.content);
+		  
+		  $('#bay_draggedhelper').html(oldTitle);			  
+		  $('#bay_draggedhelper').attr('class', oldClass);	
+		  bay = index_html_map.bay;
+		  $("#"+bay).attr('title', oldTitle);
+		  $("#"+bay).attr('class', oldClass);
+		  indexHTML.setDragnDrop(); 	
+		  ui.draggable.draggable( 'disable' );
+
+
+	} 
 } 
 
-/*$(document).ready(function() {
-   
-    $( '.bay' ).draggable({ revert: true, helper: "clone" });
-  });*/
-
-
-//To get the details of bay
-$(function() {
-    $('.bay').tooltip();
-  });
+}
 
 </script>
 
@@ -133,33 +153,36 @@ $(function() {
 <div id="content" class="content" style="margin: 20px">
 	
    <div id="area" class="area"> 
-   	
+   	<table border="0" style="border-collapse:collapse;">
    	<% @aislehash.each do |key,value| %>
- 
+		<tr> 
     	<% value.each do |key1,value1| %>
   
  				<%if key1== :aisleseparation %>
+					<td>	
+
  					<%if value1== "drivepath" %>
- 					
  						<div  class="aisle_drivepath"> </div>   	       
 	   	       			 <hr style="width: 320px; float: left" color="blue">   	       
 	   	      		    <div class="aisle_drivepath"> </div> 
 	   	      		 <% else %>
 	   	      		   	<div  class="aisle_divider"> </div>
           			<% end %>
-          			
+          			</td></tr><tr>
           		<% else %>
+          			<td class="col">
 	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title="<%= value1[:item] %>" >	   	    	  
 		   	    	 <label id="<%= key1%>_label"> <%= key1 %> </label> 	   	    	
 		   	    </div>
+		   	    </td>
 	   		<% end %>
-	   	    
     
          <%end%>
+    </tr>
          
   <%end%>
    
- 
+ </table>
 
   
    </div>
@@ -168,8 +191,6 @@ $(function() {
    
 </div>
  
- <input type="hidden" id="hidden_top" value=" "/> 
- <input type="hidden" id="hidden_left" value=" "/>
 </div>
 
   <%= yield %>

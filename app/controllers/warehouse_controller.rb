@@ -1,5 +1,7 @@
 class WarehouseController < ApplicationController
-  
+
+#Dynamically arranging bays in the aisle 
+ 
 def index
   
   @aislehash=Hash.new
@@ -21,9 +23,21 @@ def index
   end
 end
 
+#dynamically arranging position and level of the item in the  bay
+
 def bay
+  
  @id = params[:id]
+ @poshash=Hash.new
  
+ position = Position.where(bay_id: @id)
+ 
+     position.each do |posvalue|
+       
+      @poshash = @poshash.merge({posvalue.pos_id => {:type =>posvalue.properties1 , :item => posvalue.properties2}})
+       
+     end
+     
 end
 
 end

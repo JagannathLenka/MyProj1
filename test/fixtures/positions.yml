@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pos_id: MyString
+  bay_id: MyString
+  level_id: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
+
+two:
+  pos_id: MyString
+  bay_id: MyString
+  level_id: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
