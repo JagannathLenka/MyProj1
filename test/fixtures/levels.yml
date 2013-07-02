@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  level_id: MyString
+  customerlevel_id: MyString
+  bay_id: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
+
+two:
+  level_id: MyString
+  customerlevel_id: MyString
+  bay_id: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
