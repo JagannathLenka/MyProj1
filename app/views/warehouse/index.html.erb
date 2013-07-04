@@ -47,6 +47,19 @@
 			 	 	newlabel = $(document.createElement("label"))
 			     	.attr("id", labelID);
 			     	 $(this).append(newlabel);     	
+
+				    $.post("/warehouse",
+				    {
+				      "warehouse[event]": "update_position",		
+				      "warehouse[bay_id]": $(this).attr('id'),
+				      "warehouse[customer_bay_id]": $('#'+ textID).attr('value')
+				    },
+				    function(data,status){
+				      //alert("Data: " + data + "\nStatus: " + status);
+				    });
+				  
+		
+
 			    	 $('#'+labelID).html( $('#'+ textID).attr('value'));
 			 	 	 $('#'+ textID).remove();
 			 	 }
@@ -74,7 +87,16 @@
 	  //});
 
 	});	
-	
+/*$(document).ready( function() {
+ $('.bay, .bay_Empty').hover(
+    function() {
+        $(this).animate({ 'zoom': 1.4 }, 800);
+    },
+    function() {
+        $(this).animate({ 'zoom': 1 }, 800);
+    });
+});
+*/	
 
 //To swap the position of two items
 function init() { 
@@ -134,7 +156,6 @@ setDragnDrop: function setDragnDrop() {
 		  indexHTML.setDragnDrop(); 	
 		  ui.draggable.draggable( 'disable' );
 
-
 	} 
 } 
 
@@ -154,12 +175,12 @@ setDragnDrop: function setDragnDrop() {
 	
    <div id="area" class="area"> 
    	<table border="0" style="border-collapse:collapse;">
-   	<% @aislehash.each do |key,value| %>
-		<tr> 
-    	<% value.each do |key1,value1| %>
+   	<% @aislehash.each do |key, value| %>
+		<tr>
+    	<% value.each do |key1, value1| %>
   
  				<%if key1== :aisleseparation %>
-					<td>	
+					<td>
 
  					<%if value1== "drivepath" %>
  						<div  class="aisle_drivepath"> </div>   	       
@@ -172,7 +193,7 @@ setDragnDrop: function setDragnDrop() {
           		<% else %>
           			<td class="col">
 	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title="<%= value1[:item] %>" >	   	    	  
-		   	    	 <label id="<%= key1%>_label"> <%= key1 %> </label> 	   	    	
+		   	    	 <label id="<%= key1%>_label"> <%= value1[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
 	   		<% end %>
