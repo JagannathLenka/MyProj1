@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-=begin
+#=begin
 Bay.delete_all
 Aisle.delete_all
 
@@ -59,7 +59,7 @@ Bay.create(bay_id: "bay30",customer_bay_id: "",aisle_id: "aisle8",properties1: "
 Bay.create(bay_id: "bay31",customer_bay_id: "",aisle_id: "aisle8",properties1: "bay",properties2: "item2",properties3: "")
 Bay.create(bay_id: "bay32",customer_bay_id: "",aisle_id: "aisle8",properties1: "bay",properties2: "item3",properties3: "")
 
-=end
+#=end
 Position.delete_all
 
 Position.create(pos_id: "pos1",bay_id: "bay1",level_id: "level1",properties1:"pos",properties2:"Item5",properties3: "")
@@ -164,9 +164,4 @@ Position.create(pos_id:  "pos61" ,bay_id:  "bay4" ,level_id:  "level4" ,properti
 Position.create(pos_id:  "pos62" ,bay_id:  "bay4" ,level_id:  "level4" ,properties1:  "pos" ,properties2:  "item2" ,properties3:  "" )
 Position.create(pos_id:  "pos63" ,bay_id:  "bay4" ,level_id:  "level4" ,properties1:  "pos" ,properties2:  "item2" ,properties3:  "" )
 Position.create(pos_id:  "pos64" ,bay_id:  "bay4" ,level_id:  "level4" ,properties1:  "pos" ,properties2:  "item2" ,properties3:  "" )
-
-
-
-
-
 

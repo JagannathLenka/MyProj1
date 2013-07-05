@@ -26,16 +26,16 @@
 
       <script type="text/javascript">
       
-      //global variable
+      //global variable and call initialize function.
       index_html_map = {}	    
 	  $( init );
   
 	  
-  
+  	 //JQuery 		
 	  $(document).ready(function(){  
 
 		    $('.bay').click(function(){    	
-				  $("#zonearea").load("/warehouse/bay/"+this.id);  });
+				  $("#zonearea").load("/position/"+this.id);  });
 	
 	
 	      $('.bay, .bay_Empty').dblclick(function(){
@@ -48,7 +48,7 @@
 			     	.attr("id", labelID);
 			     	 $(this).append(newlabel);     	
 
-				    $.post("/warehouse",
+				    $.post("/bay",
 				    {
 				      "warehouse[event]": "update_position",		
 				      "warehouse[bay_id]": $(this).attr('id'),
@@ -57,8 +57,6 @@
 				    function(data,status){
 				      //alert("Data: " + data + "\nStatus: " + status);
 				    });
-				  
-		
 
 			    	 $('#'+labelID).html( $('#'+ textID).attr('value'));
 			 	 	 $('#'+ textID).remove();
@@ -77,26 +75,15 @@
 				    .attr("value", $("#"+labelID).html())
 				     $(this).append(newTextBox);
 				  	 $("#" + labelID).remove();
-				
-				} 
-		  	}); 
-
-		//To get the details of bay
-		//$(function() {
-		  //  $('.bay').tooltip();
-	  //});
-
+				}
+			}); 
 	});	
-/*$(document).ready( function() {
- $('.bay, .bay_Empty').hover(
-    function() {
-        $(this).animate({ 'zoom': 1.4 }, 800);
-    },
-    function() {
-        $(this).animate({ 'zoom': 1 }, 800);
-    });
-});
-*/	
+
+function enlarge()
+		    {
+		       $('#content').animate({ 'zoom': 1.4 }, 800);
+		    }
+
 
 //To swap the position of two items
 function init() { 
@@ -105,61 +92,87 @@ function init() {
 
 var indexHTML = {
 	
-setDragnDrop: function setDragnDrop() { 
-  			 	
-	  $('.bay').draggable(
-	     {containment: '#content',
-	      cursor: 'move',
-	      snap: '#area',
-	      revert: true, 
-	      helper: helpermethod,
-	      
-	      start: function(event, ui) {
-					 var offset = $(this).offset();  
-					 
-				     index_html_map.bay = $(this).attr('id');
-				     index_html_map.title = $(this).attr('title');
-				     index_html_map.content = $(this).attr('class');
+	setDragnDrop: function setDragnDrop() { 
+	  			 	
+		  $('.bay').draggable(
+		     {containment: '#content',
+		      cursor: 'move',
+		      snap: '#area',
+		      revert: true, 
+		      helper: helpermethod,
+		      
+		      
+		      start: function(event, ui) {
+						 var offset = $(this).offset();  
+						 
+					     index_html_map.bay = $(this).attr('id');
+					     index_html_map.title = $(this).attr('title');
+					     index_html_map.content = $(this).attr('class');
+		
+			alert($(this).attr('class'));	   	
+			
+		 	   }
+		  });
 	
-	 	   }
-	  });
-
-	function helpermethod( event ) {
-  	
-		  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
-  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  $(this).attr('title') + '</div>'
-  		   return newdiv;
-	}
-
-  
-
-	  $('.bay_Empty, .bay').droppable( {
-	  	  drop: handleDropEvent
-	  	  
-	    } ); 
+		function helpermethod( event ) {
+	  	
+			  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
+	  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  $(this).attr('title') + '</div>'
+	  		   return newdiv;
+		}
+	
 	  
-
-
-	function handleDropEvent( event, ui ) {
-
-		  ui.draggable.element = $(this); 		  
-		  oldTitle = $(this).attr('title');
-		  oldClass = $(this).attr('class');
-		  $(this).attr('title', index_html_map.title);
-		  $(this).attr('class', index_html_map.content);
+	
+		  $('.bay_Empty, .bay').droppable( {
+		  	  drop: handleDropEvent
+		  	  
+		    } ); 
 		  
-		  $('#bay_draggedhelper').html(oldTitle);			  
-		  $('#bay_draggedhelper').attr('class', oldClass);	
-		  bay = index_html_map.bay;
-		  $("#"+bay).attr('title', oldTitle);
-		  $("#"+bay).attr('class', oldClass);
-		  indexHTML.setDragnDrop(); 	
-		  ui.draggable.draggable( 'disable' );
-
-	} 
-} 
-
-}
+	
+	
+		function handleDropEvent( event, ui ) {
+	
+			  ui.draggable.element = $(this); 		  
+			  oldTitle = $(this).attr('title');
+			  
+			  //this code is written because ui-droppable is always appeneded after the JQuery
+			  $(this).removeClass('ui-droppable ui-draggable')
+			  oldClass = $(this).attr('class');
+			  
+			  $(this).attr('title', index_html_map.title);
+			  $(this).attr('class', index_html_map.content);
+			  $(this).removeClass('ui-draggable ui-droppable')
+			  
+			  $('#bay_draggedhelper').html(oldTitle);			  
+			  $('#bay_draggedhelper').attr('class', oldClass);	
+			  
+			  bay = index_html_map.bay;
+			  
+			  $("#"+bay).attr('title', oldTitle);
+			  $("#"+bay).attr('class', oldClass);
+			  
+	    	  indexHTML.setDragnDrop(); 
+			
+			  $.post("/bay",
+				{
+					"warehouse[event]": "update_class",
+					"warehouse[dragbay_id]": bay,
+					"warehouse[dragbay_class]": oldClass,
+					"warehouse[dragbay_title]" : oldTitle,
+					"warehouse[dropbay_id]": $(this).attr('id'),
+					"warehouse[dropbay_class]":  $(this).attr('class'),
+					"warehouse[dropbay_title]" :  $(this).attr('title')
+					
+				},
+				function(data,status)
+				{
+					
+				});
+			
+				
+			} 
+		} 
+} //End of indexHTML
 
 </script>
 

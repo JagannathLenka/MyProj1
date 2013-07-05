@@ -1,6 +1,7 @@
 MyProj1::Application.routes.draw do
-  resources :warehouse
-  get ':controller(/:action(/:id))'
+  resources :warehouse, :bay, :position
+  #get ':controller(/:action(/:id))'
+  #post ':controller(/:action)'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

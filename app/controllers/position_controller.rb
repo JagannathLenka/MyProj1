@@ -1,0 +1,47 @@
+class PositionController < ApplicationController
+  def show
+    
+#dynamically arranging position and level of the item in the  bay
+  
+    @id = Bay.where("bay_id = ?", params[:id]).first
+    
+    @levelhash=Hash.new
+    level = Level.where(bay_id: params[:id])
+    level.each do |levelvalue|
+      pos = Position.where("level_id = ? AND bay_id = ?", levelvalue.level_id, params[:id])
+      poshash=Hash.new
+      poshash= poshash.merge({:leveltype => levelvalue.properties1})
+      pos.each do |posvalue|
+        poshash = poshash.merge({posvalue.pos_id => {:postype => posvalue.properties1 , :item => posvalue.properties2}})
+        
+      end
+      @levelhash = @levelhash.merge(levelvalue.level_id  => poshash)
+    
+    end
+  
+  end
+  
+  def create
+  
+   case params[:warehouse][:event]
+        
+        
+ #updating class and title of positions
+   when "update_posclass"
+        dragpos=Position.where("pos_id = ?" , params[:warehouse][:dragpos_id]).first
+        dragpos.properties1 = params[:warehouse][:dragpos_class]
+        dragpos.properties2 = params[:warehouse][:dragpos_title]
+        dragpos.save
+        
+        droppos=Position.where("pos_id = ?" , params[:warehouse][:droppos_id]).first
+        droppos.properties1 = params[:warehouse][:droppos_class]
+        droppos.properties2 = params[:warehouse][:droppos_title]
+        droppos.save      
+   end    
+       render text: "ok"
+   #b= Posts.where("text = ?", params[:post][:text]).first
+   
+end
+
+
+end
