@@ -28,17 +28,18 @@ def index
   end
 end
 
-#Update the new id
 def create
   
+#Update the customer id for a bay  
    case params[:bay][:event]
       when "update_position" 
        newbay= Bay.where("bay_id = ?", params[:bay][:bay_id] ).first
        newbay.customer_bay_id = params[:bay][:customer_bay_id] 
        newbay.save
+       render text: newbay.bay_id 
        
 #Updating class and title after dragging
-  
+ 
    when "update_class"
 
         dragbay=Bay.where("bay_id = ?" , params[:bay][:dragbay_id]).first
@@ -51,7 +52,7 @@ def create
         dropbay.save
         
    end    
-       render text: newbay.bay_id 
+       
    #b= Posts.where("text = ?", params[:post][:text]).first
    
 end
