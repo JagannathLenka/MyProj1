@@ -31,27 +31,27 @@ end
 #Update the new id
 def create
   
-   case params[:warehouse][:event]
+   case params[:bay][:event]
       when "update_position" 
-       newbay= Bay.where("bay_id = ?", params[:warehouse][:bay_id] ).first
-       newbay.customer_bay_id = params[:warehouse][:customer_bay_id] 
+       newbay= Bay.where("bay_id = ?", params[:bay][:bay_id] ).first
+       newbay.customer_bay_id = params[:bay][:customer_bay_id] 
        newbay.save
        
 #Updating class and title after dragging
   
    when "update_class"
 
-        dragbay=Bay.where("bay_id = ?" , params[:warehouse][:dragbay_id]).first
-        dragbay.properties1 = params[:warehouse][:dragbay_class]
-        dragbay.properties2 = params[:warehouse][:dragbay_title]
+        dragbay=Bay.where("bay_id = ?" , params[:bay][:dragbay_id]).first
+        dragbay.properties1 = params[:bay][:dragbay_class]
+        dragbay.properties2 = params[:bay][:dragbay_title]
         dragbay.save
-        dropbay=Bay.where("bay_id = ?" , params[:warehouse][:dropbay_id]).first
-        dropbay.properties1 = params[:warehouse][:dropbay_class]
-        dropbay.properties2 = params[:warehouse][:dropbay_title]
+        dropbay=Bay.where("bay_id = ?" , params[:bay][:dropbay_id]).first
+        dropbay.properties1 = params[:bay][:dropbay_class]
+        dropbay.properties2 = params[:bay][:dropbay_title]
         dropbay.save
         
    end    
-       render text: "ok"
+       render text: newbay.bay_id 
    #b= Posts.where("text = ?", params[:post][:text]).first
    
 end

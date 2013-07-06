@@ -5,19 +5,26 @@
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>Warehouse Layout</title>
 	  <style>
-		#content { float: left;   height: 510px; width: 1360px; background: white; border: 0px dashed #999;}
-        #area {  float: left;   height: 500px; width: 600px; background: white; border: 1px dashed #999;}             
+		#content 	      { float: left;  height: 510px; width: 100%; background: white; }
+        #area 	          { float: left;  height: 400px; width: 40%; background: white; border: 1px solid #000; }             
+		.col              { float: left;  height: 20px; width: 80px;}
+        .bay              { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		.bay_Empty        { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
+		.bay_draggedhelper{ float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		.aisle_divider    { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
+		.aisle_drivepath  { float: left;  height: 5px; width: 324px; border: 0px solid #000; background: white}
+        #positionspace    { float: left;  height: 400px; width: 55%; background: white; border: 1px solid #000;; }        
 
-		.col { float: left;  height: 20px; width: 80px;}
+body {
+	padding: 40px;
+	overflow-x: hidden; /* For Opera */
+	-webkit-box-shadow:
+		inset #19d4ff 0 0 0 5px,
+		inset #18cdf7 0 0 0 1px,
+		inset #53dfff 0 0 0 10px,
+		inset #50d8f7 0 0 0 11px;
 
-        .bay { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-		.bay_Empty { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
-		.bay_draggedhelper { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-		
-		.aisle_divider { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
-		.aisle_drivepath { float: left;  height: 5px; width: 324px; border: 0px solid #000; background: white}
-
-        #zonearea { float: left;  height: 500px; width: 770px; background: white; border-width:1px; border: 1px dashed #999;}        
+}
 
      </style>
      
@@ -29,66 +36,15 @@
       //global variable and call initialize function.
       index_html_map = {}	    
 	  $( init );
-  
-	  
-  	 //JQuery 		
-	  $(document).ready(function(){  
-
-		    $('.bay').click(function(){    	
-				  $("#zonearea").load("/position/"+this.id);  });
-	
-	
-	      $('.bay, .bay_Empty').dblclick(function(){
-	    		 if($('#'+ $(this).attr('id') + '_text').length>0) { 
-	  	
-	  				labelID = $(this).attr('id') + '_label';	
-		     		textID  = $(this).attr('id') + '_text';
-	 	
-			 	 	newlabel = $(document.createElement("label"))
-			     	.attr("id", labelID);
-			     	 $(this).append(newlabel);     	
-
-				    $.post("/bay",
-				    {
-				      "warehouse[event]": "update_position",		
-				      "warehouse[bay_id]": $(this).attr('id'),
-				      "warehouse[customer_bay_id]": $('#'+ textID).attr('value')
-				    },
-				    function(data,status){
-				      //alert("Data: " + data + "\nStatus: " + status);
-				    });
-
-			    	 $('#'+labelID).html( $('#'+ textID).attr('value'));
-			 	 	 $('#'+ textID).remove();
-			 	 }
-	 	
-			 	else{
-	
-				  	labelID = $(this).attr('id') + '_label';	
-				 	textID  = $(this).attr('id') + '_text';
-				
-				     newTextBox = $(document.createElement("input"))
-				    .attr("type", "text")
-				    .attr("id", textID)
-				    .attr("name", $(this).attr('id'))
-				    .attr("style", "width: 80px")
-				    .attr("value", $("#"+labelID).html())
-				     $(this).append(newTextBox);
-				  	 $("#" + labelID).remove();
-				}
-			}); 
-	});	
-
-function enlarge()
-		    {
-		       $('#content').animate({ 'zoom': 1.4 }, 800);
-		    }
 
 
-//To swap the position of two items
-function init() { 
+	//To swap the position of two items
+	function init() { 
  				 indexHTML.setDragnDrop();
- 			}
+ 				 indexHTML.setClickitem();
+ 			}  
+	  
+
 
 var indexHTML = {
 	
@@ -96,8 +52,8 @@ var indexHTML = {
 	  			 	
 		  $('.bay').draggable(
 		     {containment: '#content',
-		      cursor: 'move',
-		      snap: '#area',
+		      //cursor: 'move',
+		      //snap: '#area',
 		      revert: true, 
 		      helper: helpermethod,
 		      
@@ -108,16 +64,16 @@ var indexHTML = {
 					     index_html_map.bay = $(this).attr('id');
 					     index_html_map.title = $(this).attr('title');
 					     index_html_map.content = $(this).attr('class');
-		
-			alert($(this).attr('class'));	   	
+					
+			 			 //alert('After drag' + ' ' +  $(this).attr('class'));	
 			
 		 	   }
 		  });
 	
 		function helpermethod( event ) {
 	  	
-			  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
-	  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  $(this).attr('title') + '</div>'
+			  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 80, :height => 80) %>' 	
+	  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  ($(this).attr('title')).substring(14) + '</div>'
 	  		   return newdiv;
 		}
 	
@@ -132,7 +88,7 @@ var indexHTML = {
 	
 		function handleDropEvent( event, ui ) {
 	
-			  ui.draggable.element = $(this); 		  
+			  //ui.draggable.element = $(this); 		  
 			  oldTitle = $(this).attr('title');
 			  
 			  //this code is written because ui-droppable is always appeneded after the JQuery
@@ -147,21 +103,28 @@ var indexHTML = {
 			  $('#bay_draggedhelper').attr('class', oldClass);	
 			  
 			  bay = index_html_map.bay;
+		
 			  
 			  $("#"+bay).attr('title', oldTitle);
-			  $("#"+bay).attr('class', oldClass);
+			  $("#"+bay).attr('class',  oldClass);
+					  
+			  //alert('After drop' + ' ' + $(this).attr('class'));
 			  
-	    	  indexHTML.setDragnDrop(); 
+	    	  
+			  //$("#"+bay).unbind();
+			  
+	    	  indexHTML.setDragnDrop();
+	    	  indexHTML.setClickitem();
 			
 			  $.post("/bay",
 				{
-					"warehouse[event]": "update_class",
-					"warehouse[dragbay_id]": bay,
-					"warehouse[dragbay_class]": oldClass,
-					"warehouse[dragbay_title]" : oldTitle,
-					"warehouse[dropbay_id]": $(this).attr('id'),
-					"warehouse[dropbay_class]":  $(this).attr('class'),
-					"warehouse[dropbay_title]" :  $(this).attr('title')
+					"bay[event]": "update_class",
+					"bay[dragbay_id]": bay,
+					"bay[dragbay_class]": oldClass,
+					"bay[dragbay_title]" : oldTitle.substring(14),
+					"bay[dropbay_id]": $(this).attr('id'),
+					"bay[dropbay_class]":  $(this).attr('class'),
+					"bay[dropbay_title]" :  ($(this).attr('title')).substring(14)
 					
 				},
 				function(data,status)
@@ -171,7 +134,76 @@ var indexHTML = {
 			
 				
 			} 
-		} 
+	},
+
+  	 //JQuery 		
+
+	  //$(document).ready(function(){  
+	  setClickitem: function setClickitem() {	
+		    
+		    $('.bay').click(function(){   
+		    	
+		    	//if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
+		    	  		    	  	
+				  $("#positionspace").load("/position/"+this.id); 
+				  
+				  //}
+				  
+			});
+	
+	
+	
+		      $('.bay, .bay_Empty').dblclick(function(){
+	    		 if($('#'+ $(this).attr('id') + '_text').length>0) { 
+	  	
+	  				labelID = $(this).attr('id') + '_label';	
+		     		textID  = $(this).attr('id') + '_text';
+	 	
+			 	 	newlabel = $(document.createElement("label"))
+			     	.attr("id", labelID);
+			     	 $(this).append(newlabel);     	
+
+				    $.post("/bay",
+				    {
+				      "bay[event]": "update_position",		
+				      "bay[bay_id]": $(this).attr('id'),
+				      "bay[customer_bay_id]": $('#'+ textID).attr('value')
+				    },
+				    function(data,status){
+				    	  //alert(status);	
+						  if (status=="success") {
+
+				      			$("#positionspace").load("/position/"+data);
+							}	
+						  else
+						  	{
+						  		alert("Internal server Error");
+						  	}	
+				    });
+
+			    	 $('#'+labelID).html( "Bay " + $('#'+ textID).attr('value'));
+			 	 	 $('#'+ textID).remove();
+			 	 }
+	 	
+			 	else{
+	
+				  	labelID = $(this).attr('id') + '_label';	
+				 	textID  = $(this).attr('id') + '_text';
+				
+				     newTextBox = $(document.createElement("input"))
+				    .attr("type", "text")
+				    .attr("id", textID)
+				    .attr("name", $(this).attr('id'))
+				    .attr("style", "width: 80px")
+				    .attr("value", ($("#"+labelID).html()).substring(4))
+				     $(this).append(newTextBox);
+				  	 $("#" + labelID).remove();
+				}
+			}); 
+	}
+	//);	
+
+
 } //End of indexHTML
 
 </script>
@@ -179,15 +211,15 @@ var indexHTML = {
   </head>
 <body>
 
-<div style="width: 2500px; height: 1000px">
-	<div style="float: left; left-margin: 20px; width: 2500px; height: 60px" >
-		<%= link_to image_tag("compass.jpg", alt: "direction", :width => 60, :height => 60), '' %>
+<div id="main" style="width: 100%; height: 600px;" >
+	<div id="navingation" style="float: left; left-margin: 10px; width: 100%; height: 80px;  " >
+		<%= link_to image_tag("compass.jpg", alt: "direction", :width => "80px", :height => "80px"), '' %>
 		<br>
 	</div>
-<div id="content" class="content" style="margin: 20px">
+<div id="content" class="content">
 	
    <div id="area" class="area"> 
-   	<table border="0" style="border-collapse:collapse;">
+   	<table border="0" id ="bayTable" style="border-collapse:collapse;">
    	<% @aislehash.each do |key, value| %>
 		<tr>
     	<% value.each do |key1, value1| %>
@@ -205,8 +237,8 @@ var indexHTML = {
           			</td></tr><tr>
           		<% else %>
           			<td class="col">
-	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title="<%= value1[:item] %>" >	   	    	  
-		   	    	 <label id="<%= key1%>_label"> <%= value1[:customerid] %> </label> 	   	    	
+	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title=" Product Type: <%= value1[:item] %>" >	   	    	  
+		   	    	 <label id="<%= key1%>_label"> Bay <%= value1[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
 	   		<% end %>
@@ -221,7 +253,7 @@ var indexHTML = {
   
    </div>
    
-   <div id="zonearea" class= "zonearea"> </div>
+   <div id="positionspace" class= "positionspace"> </div>
    
 </div>
  

@@ -3,7 +3,13 @@ class PositionController < ApplicationController
     
 #dynamically arranging position and level of the item in the  bay
   
-    @id = Bay.where("bay_id = ?", params[:id]).first
+    id = Bay.where("bay_id = ?", params[:id]).first
+    if id.customer_bay_id == ""
+      @customer_bay_id = id.bay_id
+    else
+      @customer_bay_id = id.customer_bay_id
+    end
+    @bay_id =id.bay_id
     
     @levelhash=Hash.new
     level = Level.where(bay_id: params[:id])
@@ -23,19 +29,19 @@ class PositionController < ApplicationController
   
   def create
   
-   case params[:warehouse][:event]
+   case params[:position][:event]
         
         
  #updating class and title of positions
    when "update_posclass"
-        dragpos=Position.where("pos_id = ?" , params[:warehouse][:dragpos_id]).first
-        dragpos.properties1 = params[:warehouse][:dragpos_class]
-        dragpos.properties2 = params[:warehouse][:dragpos_title]
+        dragpos=Position.where("pos_id = ?" , params[:position][:dragpos_id]).first
+        dragpos.properties1 = params[:position][:dragpos_class]
+        dragpos.properties2 = params[:position][:dragpos_title]
         dragpos.save
         
-        droppos=Position.where("pos_id = ?" , params[:warehouse][:droppos_id]).first
-        droppos.properties1 = params[:warehouse][:droppos_class]
-        droppos.properties2 = params[:warehouse][:droppos_title]
+        droppos=Position.where("pos_id = ?" , params[:position][:droppos_id]).first
+        droppos.properties1 = params[:position][:droppos_class]
+        droppos.properties2 = params[:position][:droppos_title]
         droppos.save      
    end    
        render text: "ok"

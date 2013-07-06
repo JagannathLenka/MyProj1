@@ -4,16 +4,21 @@
   <head>
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>bay.html</title>
+	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	  <style>
-	  	 #position 			{ float: left; background: white; border-width:1px;	border-style:dotted;}
-	  	.pos 				{ float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"}
-	    .pos_Empty 			{ float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: white;}
-	    .pos_draggedhelper  { float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"} 
-	    .orange				{ float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: orange;}
-	    .green				{ float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: green;}
-	    .red				{ float: left; height: 15px; width: 40px;  border: 1px solid #000; border-right:5px solid black;background-color: red;}
-	    .pos_divider 		{ float: left; height: 2px;  width: 327px; border: 2px solid #999; background: black}  
+	  	 #position 			{ float: left; background: white; border-width:1px;}
+	  	.pos 				{ float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"}
+	    .pos_Empty 			{ float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: white;}
+	    .pos_draggedhelper  { float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;"} 
+	    .orange				{ float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: orange;}
+	    .green				{ float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: green;}
+	    .red				{ float: left; height: 15px; width: 60px;  border: 1px solid #000; border-right:5px solid black;background-color: red;}
+	    .pos_divider 		{ float: left; height: 2px;  width: 520px; border: 2px solid #999; background: black}  
 		.bay                { float: center;  margin:auto; height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+
+
+		
+
 		</style>
 	  <%= javascript_include_tag :application %>
 	  <%= yield :head %>
@@ -23,20 +28,23 @@
     bay_html_map = {}	          
 	$( init );
  
- /*$(document).ready(function(){  
+ $(document).ready(function(){  
 
 		    $('#zoom').click(function(){
-					$("#position").dialog({
-						     autoOpen: false,
-     						 height: 300,
-      						 width: 350,
-      						 modal: true
-						
-					});
+		    $('#location2').load("/position/"+ <%= @bay_id %>); 
+		    $('#location2').animate({ 'zoom': 1.4 }, 800);
+		    $('#location2').dialog({
+    	  	height: 500,
+      		width: 1000,
+      		modal: true
+    });
 					
-		    });
-	});	    	    	
-*/
+	});	    
+});
+
+  
+ 
+
 
 //To swap the position of two items
 function init() { 
@@ -49,9 +57,10 @@ var bayHTML = {
 setDragnDrop: function setDragnDrop() { 
  
 	  $('.pos').draggable(
-	     {containment: '#position',
-	      cursor: 'move',
-	      snap: '#position',
+	     {
+	     //containment: '#position',
+	      //cursor: 'move',
+	      //snap: '#position',
 	      revert: true, 
 	      helper: helpermethod,
 	      
@@ -96,13 +105,13 @@ setDragnDrop: function setDragnDrop() {
 		  bayHTML.setDragnDrop();
 		  $.post("/position",
 		  				{
-		  					"warehouse[event]": "update_posclass",
-		  					"warehouse[dragpos_id]": pos,
-		  					"warehouse[dragpos_class]": oldClass,
-		  					"warehouse[dragpos_title]" :oldTitle,
-		  					"warehouse[droppos_id]": $(this).attr('id'),
-		  					"warehouse[droppos_class]":bay_html_map.content,
-		  					"warehouse[droppos_title]" :bay_html_map.title
+		  					"position[event]": "update_posclass",
+		  					"position[dragpos_id]": pos,
+		  					"position[dragpos_class]": oldClass,
+		  					"position[dragpos_title]" :oldTitle,
+		  					"position[droppos_id]": $(this).attr('id'),
+		  					"position[droppos_class]":bay_html_map.content,
+		  					"position[droppos_title]" :bay_html_map.title
 		  					
 		  				},
 		  				function(data,status)
@@ -120,10 +129,11 @@ setDragnDrop: function setDragnDrop() {
   </head>
   <body>
  
-<div id="position" class="position" style="height: 300; width: 450px; margin-left:30px">
+<div id="position" class="position" style="height: 300px; width: 520px; margin-left: 30px">
    
-   <div align="center" class="bay"> <%= @id.customer_bay_id %> </div>
-    
+   <div align="center" class="bay"> Bay <%= @customer_bay_id %> </div>
+   
+   <div style="float: left" id="location"> 
     <table border="0" style="border-collapse:collapse">
    	
    	<% @levelhash.each do |key,value| %>
@@ -135,13 +145,13 @@ setDragnDrop: function setDragnDrop() {
      	<% if key1 == :leveltype %>
    	   	  <td>
    	   	  	<% if value1 == "stretch" %>
-   	   	  	  <div class="orange"><%= key %></div>
+   	   	  	  <div class="orange">Level <%= key %></div>
    	   	  	  <% end %>
    	   	  	<%  if value1 == "normal" %>
-   	   	  	   <div class="green"><%= key%> </div>
+   	   	  	   <div class="green">Level <%= key%> </div>
    	   	  	   <% end %>
    	   	  	 <% if value1 == "bend" %>
-   	   	  	     <div class="red"><%= key %></div>
+   	   	  	     <div class="red">Level <%= key %></div>
    	   	  	 <% end %>
    	   	  </td>
    	   	
@@ -165,7 +175,9 @@ setDragnDrop: function setDragnDrop() {
 <% end %>
 </table>
 </div>
-<!--div style="float: left"><%= image_tag("zoom.jpg", alt: "", :width => 40, :height => 40, :id => "zoom")%></div-->
+<div style="float: left; border: 1px solid #000;"><%= image_tag("zoom.jpg", alt: "", :width => 40, :height => 40, :id => "zoom")%></div>
+</div>
+<div id="location2"></div>
 
   <%= yield %>
  </body>

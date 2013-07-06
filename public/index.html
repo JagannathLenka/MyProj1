@@ -1,179 +1,35 @@
 <!doctype html>
+ 
 <html lang="en">
 <head>
- <title>
- 	Title of this page
- </title>
-<style>
-.bay { float: left; width: 80px; height: 20px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-.bay_Empty { float: left; width: 80px; height: 20px; border: 1px solid #999; background: white;}
-.aisle_divider { float: left; width: 324px; height: 2px; border: 2px solid #999; background: black}
-.aisle_drivepath { float: left; width: 324px; height: 25px; border: 0px solid #000; background: white}
-.txt1 { align: center; float: right; width: 60px; height: 15px; border: 0px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-.bayx { float: left; width: 800px; height: 200px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+  <meta charset="utf-8" />
+  <title>jQuery UI Dialog - Basic modal</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
+  <script>
+ $(document).ready(function(){  
 
-#area { width: 400px; height: 100px; background: white; }
-
-
-</style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
- <script type="text/javascript" src="hovercard.js"></script>
- 
-<script type="text/javascript">
- 
-
-$( init );
-
-$(document).ready(function(){
-  $('.bay').dblclick(function(){
-  
-  
-  if($('#'+ $(this).attr('id') + '_text').length>0) { 
-  	
-  	labelID = $(this).attr('id') + '_label';	
- 	textID  = $(this).attr('id') + '_text';
- 	
- 	newlabel = $(document.createElement("label"))
-    .attr("id", labelID);
-    $(this).append(newlabel);     	
-    $('#'+labelID).html( $('#'+ textID).attr('value'));
- 	$('#'+ textID).remove();
- 	}
- 	
- 	else{
-
-  	labelID = $(this).attr('id') + '_label';	
- 	textID  = $(this).attr('id') + '_text';
-
-     newTextBox = $(document.createElement("input"))
-    .attr("type", "text")
-    .attr("id", textID)
-    .attr("name", $(this).attr('id'))
-    .attr("style", "width: 80px")
-    .attr("value", $("#"+labelID).html())
-     $(this).append(newTextBox);
-  	 $("#bay1_label").remove();
-
-	} 
-  }); 
-
-});	
-
-//To make the bay editable,so that user can change it accoridng to his convenience
-/*$(document).ready(function(){
-  $(".bay").dblclick(function(){
-		//('#txt').attr('enabled', true)
-		alert($(this).attr('text'));
-		if($(this).attr('readonly'))
-		{
-			$(this).removeAttr('readonly');
-		}
-		else
-		{
-			$(this).attr('readonly','readonly');
-		} 
-  }); 
-
-});	*/ 
-
-
-
-//To swap the position of two items
-function init() { 
- 
-  $('.bay').draggable(
-     {containment: '#content',
-      cursor: 'move',
-      snap: '#content',
-      revert: true, 
-      
-      start: function(event, ui) {
-				 var offset = $(this).offset();    
-				 $("#hidden_top").attr("value",  offset.top);
-				 $("#hidden_left").attr("value", offset.left);	
- 	   }
-  });
-
-
-  $('.bay_Empty').droppable( {
-    drop: handleDropEvent
-  } ); 
-  
-  $('.bay').droppable();
-  }
-
-
-function handleDropEvent( event, ui ) {
-  var draggable = ui.draggable;  
-  var pos = draggable.position();
-
-  ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
-  ui.draggable.draggable( 'option', 'revert', false );
-  ui.draggable.element = $(this); 
-  $(this).offset({top: $("#hidden_top").attr("value"), left: $("#hidden_left").attr("value")})	
-} 
-/*$(document).ready(function() {
-   
-    $( '.bay' ).draggable({ revert: true, helper: "clone" });
-  });*/
-
-
-//To get the details of bay
-$(function() {
-    $('.bay').tooltip();
-  });
-
-
-
-</script>
- 
+		    $('#zoom').click(function(){
+		    $( "#location" ).dialog({
+    	  	height: 300,
+      		width: 300,
+      		modal: true
+    });
+					
+	});	    
+});
+  </script>
 </head>
 <body>
-
-
-
-
-<div id="content" style="height: 1000px;">
-   <div id="area" class="area"> 
-   
-		<div style="float: left; height: 40px; width: 10px border: 1px solid #999;-webkit-transform:rotate(90deg);">Aisle 1</div>
-   	    <div id="bay1" class="bay" title="Item: Item1 Item2 Item3"><label id="bay1_label" >bay1 </label> </div>
-   	    <div id="bay2" class="bay" title="Item: Item1 Item4 Item3"> </div>
-   	    <div id="bay3" class="bay" title="Item: Item6 Item2 Item3"> </div>   	       	    
-   	    <div id="bay4" class="bay" title="Item: Item1 Item2 Item3"> </div>
-   	    
-		<div  class="aisle_divider"> </div>
-
-		<div style="float: left; height: 40; width: 10px"> </div> 
-        <div id="bay5"  class="bay_Empty" > </div>
-        <div id="bay6"  class="bay_Empty"> </div>           	    
-        <div id="bay7" class="bay" title="Item: Item1 Item4 Item3">  </div>
-        <div id="bay8" class="bay" title="Item: Item7 Item2 Item3"> </div>
-        
-		<div class=aisle_drivepath> </div>	
-		<div id="bay9" class="bay" title="Item: Item 7 Item2 Item3"> </div>
-   	    <div id="bay10" class="bay" title="Item: Item1 Item6 Item3"> </div>
-   	    <div id="bay11" class="bay" title="Item: Item1 Item2 Item5"> </div>   	       	    
-   	    <div id="bay12" class="bay" title="Item: Item1 Item4 Item7"> </div>
-   	    
-   	    <div class="aisle_divider"> </div>
-   	    
-   	    <div id="bay13"  class="bay_Empty"> </div>
-        <div id="bay14"  class="bay_Empty"> </div>           	    
-        <div id="bay15" class="bay" title="Item: Item9 Item2 Item3"> </div>
-        <div id="bay16" class="bay" title="Item: Item1 Item7 Item9"> </div>
-        
-		<div class=aisle_drivepath> </div>	
-			
-   </div>
-  
-</div> 
-<input type="hidden" id="hidden_top" value=" "/> 
- <input type="hidden" id="hidden_left" value=" "/>
-
+<div id="zoom">Zoom</div>
+<div id="location" title="Basic modal dialog">
+  <p>Adding the modal overlay screen makes the dialog look more prominent because it dims out the page content.</p>
+</div>
+ 
+<p>Sed vel diam id libero <a href="http://example.com">rutrum convallis</a>. Donec aliquet leo vel magna. Phasellus rhoncus faucibus ante. Etiam bibendum, enim faucibus aliquet rhoncus, arcu felis ultricies neque, sit amet auctor elit eros a lectus.</p>
+ 
  
 </body>
 </html>
-		
