@@ -1,6 +1,11 @@
 class PositionController < ApplicationController
   def show
-    
+    #zoom functionality
+    if(params[:zoom] == "yes")
+       @zoom = "yes"
+     else
+       
+     end   
 #dynamically arranging position and level of the item in the  bay
   
     id = Bay.where("bay_id = ?", params[:id]).first
@@ -34,12 +39,12 @@ class PositionController < ApplicationController
         
  #updating class and title of positions
    when "update_posclass"
-        dragpos=Position.where("pos_id = ?" , params[:position][:dragpos_id]).first
+        dragpos=Position.where("pos_id = ? AND bay_id = ?" , params[:position][:dragpos_id] , params[:position][:bay_id]).first
         dragpos.properties1 = params[:position][:dragpos_class]
         dragpos.properties2 = params[:position][:dragpos_title]
         dragpos.save
         
-        droppos=Position.where("pos_id = ?" , params[:position][:droppos_id]).first
+        droppos=Position.where("pos_id = ? AND bay_id = ?" , params[:position][:droppos_id] , params[:position][:bay_id]).first
         droppos.properties1 = params[:position][:droppos_class]
         droppos.properties2 = params[:position][:droppos_title]
         droppos.save      

@@ -13,6 +13,10 @@ group :production do
   gem 'pg'
 end
 
+#gem 'jqgrid_for_rails', git: 'git://github.com/Juanmcuello/jqgrid_for_rails.git'
+gem "jqgrid_for_rails", "~> 1.0.2"
+gem 'will_paginate'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,7 +25,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+   #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -29,6 +33,7 @@ end
 #gem 'jquery-rails'
 gem "jquery-rails", "~>1.0.19"
 gem 'jquery-ui-rails', "~> 3.0.0"
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

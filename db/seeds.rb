@@ -63,7 +63,7 @@ Bay.create(bay_id: "32",customer_bay_id: "",aisle_id: "8",properties1: "bay",pro
 Position.delete_all
 Level.delete_all
 
-
+#Level
 Level.create(bay_id: "1", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
 Level.create(bay_id: "1", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
 Level.create(bay_id: "1", customerlevel_id: "" , level_id: "C", properties1:"normal",properties2:"",properties3: "")
@@ -72,13 +72,13 @@ Level.create(bay_id: "1", customerlevel_id: "" , level_id: "E", properties1:"nor
 Level.create(bay_id: "1", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
 Level.create(bay_id: "1", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
 
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "C", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "D", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "E", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
-Level.create(bay_id: "bay2", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "C", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "D", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "E", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
+Level.create(bay_id: "2", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
 
 Level.create(bay_id: "13", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
 Level.create(bay_id: "13", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
@@ -88,13 +88,13 @@ Level.create(bay_id: "13", customerlevel_id: "" , level_id: "E", properties1:"no
 Level.create(bay_id: "13", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
 Level.create(bay_id: "13", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
 
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "C", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "D", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "E", properties1:"normal",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
-Level.create(bay_id: "bay31", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "A", properties1:"stretch",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "B", properties1:"stretch",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "C", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "D", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "E", properties1:"normal",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "F", properties1:"bend",properties2:"",properties3: "")
+Level.create(bay_id: "31", customerlevel_id: "" , level_id: "G", properties1:"bend",properties2:"",properties3: "")
 
 
 

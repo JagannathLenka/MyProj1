@@ -4,6 +4,7 @@
   <head>
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>bay.html</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
 	  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	  <style>
 	  	 #position 			{ float: left; background: white; border-width:1px;}
@@ -18,7 +19,8 @@
 
 
 		
-
+	
+	
 		</style>
 	  <%= javascript_include_tag :application %>
 	  <%= yield :head %>
@@ -31,8 +33,9 @@
  $(document).ready(function(){  
 
 		    $('#zoom').click(function(){
-		    $('#location2').load("/position/"+ <%= @bay_id %>); 
+		    $('#location2').load("/position/"+ <%= @bay_id %> + '?zoom=yes'); 
 		    $('#location2').animate({ 'zoom': 1.4 }, 800);
+		    
 		    $('#location2').dialog({
     	  	height: 500,
       		width: 1000,
@@ -107,6 +110,7 @@ setDragnDrop: function setDragnDrop() {
 		  				{
 		  					"position[event]": "update_posclass",
 		  					"position[dragpos_id]": pos,
+		  					"Position[bay_id]": <%=@bay_id%>
 		  					"position[dragpos_class]": oldClass,
 		  					"position[dragpos_title]" :oldTitle,
 		  					"position[droppos_id]": $(this).attr('id'),
@@ -157,17 +161,29 @@ setDragnDrop: function setDragnDrop() {
    	   	
    	   <% else %>
    
-    	
     	<td>
-			<div id="<%= key1 %>" class="<%= value1[:postype] %>" title="<%= value1[:item] %>"> 
-				<label id="<%= key1%>_label"> <%= key1 %></label>
-		    </div>
-			 
-		</td>
-	<% end %>
-	
- <% end %>
- 
+
+           		<div id="<%= key1 %>" class="<%= value1[:postype] %>" 
+           			title= 
+                             <%if (@zoom=="yes")%>
+                                  "<%= key1 %>"
+                              <%else%>
+                                  "<%= value1[:item] %>"
+                              <%end%>" 
+                              
+                              "<%= value1[:item] %>"> 
+                  			  <label id="<%= key1%>_label"> 
+                  			  	<%if (@zoom=="yes")%> 
+                  	                <%= value1[:item] %>
+                                 <%else%>
+                                      <%= key1 %>
+                                  <%end%> 
+                                 </label>
+                </div>
+       </td>
+    <% end %>
+
+<% end %> 
 </tr>
  <tr>
  	<td style="height: 2px; border: 2px solid #000;" colspan="9"></td></tr>
@@ -175,7 +191,9 @@ setDragnDrop: function setDragnDrop() {
 <% end %>
 </table>
 </div>
+<% if @zoom != "yes"%>
 <div style="float: left; border: 1px solid #000;"><%= image_tag("zoom.jpg", alt: "", :width => 40, :height => 40, :id => "zoom")%></div>
+<% end %>
 </div>
 <div id="location2"></div>
 
