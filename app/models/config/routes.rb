@@ -1,5 +1,6 @@
 MyProj1::Application.routes.draw do
-  resources :warehouse, :bay, :position, :aislemaintenance
+  resources :warehouse, :bay, :position, :aislemaintenance, :baysmaintenance, :warehousemaintenance
+  
   #get ':controller(/:action(/:id))'
   #post ':controller(/:action)'
   

@@ -5,7 +5,7 @@ class AislemaintenanceController < ApplicationController
 
     #@columns = ['invid', 'invdate', 'amount', 'tax', 'total', 'note']
     
-    @columns =  ['id', 'aisle_id','customer_aisle_id', 'properties1', 'properties2' , 'properties3', 'zone_id', '/baymaintenance/']
+    @columns =  ['id', 'aisle_id','customer_aisle_id', 'properties1', 'properties2' , 'properties3', 'zone_id']
     @aisles = Aisle.paginate(
       :page     => params[:page],
       :per_page => params[:rows],

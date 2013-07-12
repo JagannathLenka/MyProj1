@@ -50,7 +50,7 @@ def create
         dropbay.properties1 = params[:bay][:dropbay_class]
         dropbay.properties2 = params[:bay][:dropbay_title]
         dropbay.save
-        
+             render text: 'ok'        
    end    
        
    #b= Posts.where("text = ?", params[:post][:text]).first

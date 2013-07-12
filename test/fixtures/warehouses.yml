@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  warehouse_id: MyString
+  descripton: MyString
+  noof_zones: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
+
+two:
+  warehouse_id: MyString
+  descripton: MyString
+  noof_zones: MyString
+  properties1: MyString
+  properties2: MyString
+  properties3: MyString
