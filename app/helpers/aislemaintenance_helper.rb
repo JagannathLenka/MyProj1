@@ -5,20 +5,22 @@ module AislemaintenanceHelper
   def aisle_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
-
+    url = "/aislemaintenance?id=" +  params["id"]
+    
     grid = [{
-      :url => '/aislemaintenance/',
+      :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['id', 'aisle_id','customer_aisle_id', 'properties1','properties2','properties3', 'zone_id'],
+      :colNames => ['id', 'Aisle id(cust)', 'Zone id','No of Bays','Properties1','Properties2','Properties3'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}},
-        { :name => 'aisle_id',   :index => 'aisle_id',    :width => 55, :align => 'right', :editable => true},
-        { :name => 'customer_aisle_id', :index => 'customer_aisle_id',  :width => 190, :align => 'right', :editable => true},
-        { :name => 'properties1',  :index => 'properties1',   :width => 80,   :align => 'right', :editable => true},
-        { :name => 'properties2',     :index => 'properties2',      :width => 80,   :align => 'right', :editable => true},
-        { :name => 'properties3',   :index => 'properties3',    :width => 80,   :align => 'right', :editable => true },
-        { :name => 'zone_id',    :index => 'zone_id',     :width => 150,  :align => 'right', :editable => true }
+        { :name => 'customer_aisle_id', :index => 'customer_aisle_id',  :width => 190, :align => 'center', :editable => true},
+        { :name => 'zone_id',    :index => 'zone_id',     :width => 150,  :align => 'center', :editable => true },
+        { :name => 'noof_bays',    :index => 'noof_bays',     :width => 150,  :align => 'left', :editable => true },
+        { :name => 'properties1',  :index => 'properties1',   :width => 80,   :align => 'center', :editable => true},
+        { :name => 'properties2',     :index => 'properties2',      :width => 80,   :align => 'center', :editable => true},
+        { :name => 'properties3',   :index => 'properties3',    :width => 80,   :align => 'center', :editable => true }
+        
       ],
       :editurl => '/aislemaintenance',
       :pager => '#aisle_pager',
@@ -28,7 +30,7 @@ module AislemaintenanceHelper
       :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'My first grid',
-      :onSelectRow => "function() { alert('Row selected!');}".to_json_var
+      :onSelectRow => "function() {}".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator

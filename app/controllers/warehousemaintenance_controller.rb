@@ -2,7 +2,7 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id', 'warehouse_customerid','description', 'properties1', 'properties2' , 'properties3', 'noof_zones']
+    @columns =  ['id', 'warehouse_customerid','description', 'noof_zones', 'properties1', 'properties2' , 'properties3' ]
     @warehouse = Warehouse.paginate(
       :page     => params[:page],
       :per_page => params[:rows],
