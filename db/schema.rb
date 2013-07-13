@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712042950) do
+ActiveRecord::Schema.define(:version => 20130713013537) do
 
   create_table "aisles", :force => true do |t|
     t.string   "aisle_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130712042950) do
     t.string   "properties3"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "noof_bays"
   end
 
   create_table "bays", :force => true do |t|
@@ -33,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20130712042950) do
     t.string   "properties3"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "row_aisle"
+    t.string   "noof_pos"
   end
 
   create_table "levels", :force => true do |t|
@@ -59,13 +62,28 @@ ActiveRecord::Schema.define(:version => 20130712042950) do
 
   create_table "warehouses", :force => true do |t|
     t.string   "warehouse_id"
-    t.string   "descripton"
+    t.string   "warehouse_customerid"
+    t.string   "description"
     t.string   "noof_zones"
     t.string   "properties1"
     t.string   "properties2"
     t.string   "properties3"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "zones", :force => true do |t|
+    t.string   "zone_id"
+    t.string   "zone_customerid"
+    t.string   "warehouse_id"
+    t.string   "description"
+    t.string   "noofaisles_zone"
+    t.string   "noofbays_aisle"
+    t.string   "properties1"
+    t.string   "properties2"
+    t.string   "properties3"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

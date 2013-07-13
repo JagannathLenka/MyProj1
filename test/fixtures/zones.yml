@@ -1,19 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  zone_id: MyString
+  zone_customerid: MyString
   warehouse_id: MyString
-  warehouse_customerid: MyString
   description: MyString
-  noof_zones: MyString
+  noofaisles_zone: MyString
+  noofbays_aisle: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
 
 two:
+  zone_id: MyString
+  zone_customerid: MyString
   warehouse_id: MyString
-  warehouse_customerid: MyString
   description: MyString
-  noof_zones: MyString
+  noofaisles_zone: MyString
+  noofbays_aisle: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString

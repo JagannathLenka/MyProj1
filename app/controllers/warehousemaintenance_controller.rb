@@ -2,7 +2,7 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id', 'warehouse_id','description', 'properties1', 'properties2' , 'properties3', 'noof_zones']
+    @columns =  ['id', 'warehouse_customerid','description', 'properties1', 'properties2' , 'properties3', 'noof_zones']
     @warehouse = Warehouse.paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -20,7 +20,8 @@ class WarehousemaintenanceController < ApplicationController
   case params[:oper]
   when "edit"
         @warehouse = Warehouse.find_by_id(params[:id])
-        @warehouse.update_attributes({:warehouse_id => params[:warehouse_id], 
+        @warehouse.update_attributes({
+                                   :warehouse_customerid => params[:warehouse_customerid], 
                                    :description => params[:description],
                                    :properties1 => params[:properties1],
                                    :properties2 => params[:properties2], 
@@ -30,7 +31,8 @@ class WarehousemaintenanceController < ApplicationController
 
   when "add"
         
-        @warehouse= Warehouse.new(:warehouse_id => params[:warehouse_id], 
+        @warehouse= Warehouse.new(:warehouse_id => "", 
+                                    :warehouse_customerid => params[:warehouse_customerid],
                                    :description => params[:description],
                                    :properties1 => params[:properties1],
                                    :properties2 => params[:properties2], 
@@ -38,7 +40,24 @@ class WarehousemaintenanceController < ApplicationController
                                    :noof_zones  => params[:noof_zones]   
           )
         
-         @warehouse.save         
+         @warehouse.save 
+         
+         zoneval = params[:noof_zones].to_i
+         (1..zoneval).each do |z| 
+         
+                     Zone.create(:zone_id => "",
+                                 :zone_customerid => "",
+                                 :description => "",
+                                 :noofaisles_zone => "",
+                                 :noofbays_aisle => "",
+                                 :properties1 => "",
+                                 :properties2 => "",
+                                 :properties3 => "",
+                                 :warehouse_id => @warehouse.id 
+                               
+                               )
+                           end 
+                               
 end
     if request.xhr?
       render :json => @warehouse
