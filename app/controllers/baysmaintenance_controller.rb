@@ -3,7 +3,7 @@ class BaysmaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id', 'bay_id','customer_bay_id','aisle_id','noof_pos','row_aisle', 'properties1', 'properties2', 'properties3' ]
+    @columns =  ['id', 'customer_bay_id','aisle_id','noof_pos','row_aisle', 'properties1', 'properties2', 'properties3' ]
     @bay = Bay.where(:aisle_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -33,7 +33,7 @@ class BaysmaintenanceController < ApplicationController
 
   when "add"
         
-        @bay= Bay.new(:aisle_id => "", 
+        @bay= Bay.new(:bay_id => "", 
                          :customer_bay_id => params[:customer_bay_id],
                          :aisle_id     => params[:aisle_id],
                          :noof_pos     => params[:noof_pos],

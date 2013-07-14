@@ -29,7 +29,7 @@ module AislemaintenanceHelper
       :sortname => 'aisle_id',
       :sortorder => 'desc',
       :viewrecords => true,
-      :caption => 'My first grid',
+      :caption => 'Aisle Maintenance',
       :onSelectRow => "function() {}".to_json_var
     }]
 

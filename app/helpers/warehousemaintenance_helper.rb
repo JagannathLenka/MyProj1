@@ -26,7 +26,7 @@ module WarehousemaintenanceHelper
       :sortname => 'warehouse_customerid',
       :sortorder => 'desc',
       :viewrecords => true,
-      :caption => 'WarehouseMaintenance',
+      :caption => 'Warehouse Maintenance',
       :onSelectRow => "function() {}".to_json_var
     }]
 

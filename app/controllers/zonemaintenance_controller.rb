@@ -2,9 +2,7 @@ class ZonemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    
-    #:description, :noofaisles_zone, :noofbays_aisle, :properties1, :properties2, :properties3, :warehouse_id, :zone_customerid, :zone_id
-    @columns =  ['id','zone_customerid','description', 'noofaisles_zone', 'noofbays_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
+    @columns =  ['id','zone_customerid','description', 'noofaisles_zone', 'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
     @zone = Zone.where(:warehouse_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -28,6 +26,7 @@ class ZonemaintenanceController < ApplicationController
                                      :description => params[:description],
                                      :noofaisles_zone => params[:noofaisles_zone],
                                      :noofbays_aisle => params[:noofbays_aisle],
+                                     :nooflevel_aisle => params[:nooflevel_aisle],
                                      :warehouse_id => params[:warehouse_id],
                                      :properties1 => params[:properties1],
                                      :properties2 => params[:properties2], 
@@ -35,6 +34,7 @@ class ZonemaintenanceController < ApplicationController
                                          
             })
            create_aisles_and_bays 
+           create_level
     when "add"
           
           @zone= Zone.new(:zone_id => "", 
@@ -42,6 +42,7 @@ class ZonemaintenanceController < ApplicationController
                              :description => params[:description],
                              :noofaisles_zone => params[:noofaisles_zone],
                              :noofbays_aisle => params[:noofbays_aisle],
+                             :nooflevel_aisle => params[:nooflevel_aisle],
                              :warehouse_id => params[:warehouse_id],
                              :properties1 => params[:properties1],
                              :properties2 => params[:properties2], 
@@ -49,6 +50,7 @@ class ZonemaintenanceController < ApplicationController
             )
            @zone.save
            create_aisles_and_bays
+           create_level
     end
   
       
@@ -66,7 +68,7 @@ def create_aisles_and_bays
          (1..aisleval).each do |a|
             @aval = Aisle.new(:aisle_id => "",
                             :customer_aisle_id => "",
-                            :noof_bays => "",
+                            :noof_bays => params[:noofbays_aisle],
                             :properties1 => "",
                             :properties2 => "",
                             :properties3 => "",
@@ -92,6 +94,21 @@ def create_aisles_and_bays
        end     
 
   
+end
+
+def create_level
+  
+  levelval = params[:nooflevel_aisle].to_i
+  (1..levelval).each do |lev|
+    @lval = Level.create(:zone_id => @zone.id,
+                         :level_customerid => "",
+                         :level_id => "",
+                         :properties1 => "",
+                         :properties2 => "",
+                         :properties3 => "",
+                      
+                        )
+  end
 end
  
  

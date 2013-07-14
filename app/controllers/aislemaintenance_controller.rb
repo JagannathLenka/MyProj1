@@ -4,7 +4,7 @@ class AislemaintenanceController < ApplicationController
   def index
  
     @columns =  ['id', 'customer_aisle_id', 'zone_id', 'noof_bays', 'properties1', 'properties2' , 'properties3']
-    @aisles = Aisle.paginate(
+    @aisles = Aisle.where(:zone_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -42,7 +42,20 @@ class AislemaintenanceController < ApplicationController
                                 
                           )
         
-         @aisles.save         
+         @aisles.save 
+         @bayval = params[:noof_bays]
+         (1..bayval).each do |bval|
+           Bay.create(:bay_id => "",
+                             :customer_bay_id => "",
+                             :aisle_id => @aisles.id,
+                             :noof_pos => "",
+                             :properties1 => "",
+                             :properties2 => "",
+                             :properties3 => "",
+                             :row_aisle => "",
+           )
+         end
+                 
 end
     if request.xhr?
       render :json => @aisles

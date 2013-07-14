@@ -12,9 +12,9 @@ module BaysmaintenanceHelper
       :mtype => 'GET',
       :colNames => ['id', 'Bay id(cust)','Aisle id','No Position','Row of aisle', 'Properties1','Properties2','Properties3'],
       :colModel  => [
-        { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}},
+        { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
         { :name => 'customer_bay_id', :index => 'customer_bay_id',  :width => 120, :align => 'left', :editable => true},
-        { :name => 'aisle_id',    :index => 'aisle_id',     :width => 55,  :align => 'cleftenter', :editable => true },
+        { :name => 'aisle_id',    :index => 'aisle_id',     :width => 55,  :align => 'center', :editable => true },
         { :name => 'noof_pos',    :index => 'noof_pos',     :width => 120,  :align => 'left', :editable => true },
         { :name => 'row_aisle',    :index => 'row_aisle',     :width => 150,  :align => 'left', :editable => true },
         { :name => 'properties1',  :index => 'properties1',   :width => 120,   :align => 'left', :editable => true},
@@ -30,7 +30,7 @@ module BaysmaintenanceHelper
       :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'Bay Maintenance',
-      :onSelectRow => "function() { alert('Row selected!');}".to_json_var
+      :onSelectRow => "function() {}".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator

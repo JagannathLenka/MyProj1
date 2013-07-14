@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713013537) do
+ActiveRecord::Schema.define(:version => 20130714034619) do
 
   create_table "aisles", :force => true do |t|
     t.string   "aisle_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20130713013537) do
 
   create_table "levels", :force => true do |t|
     t.string   "level_id"
-    t.string   "customerlevel_id"
-    t.string   "bay_id"
+    t.string   "level_customerid"
+    t.string   "zone_id"
     t.string   "properties1"
     t.string   "properties2"
     t.string   "properties3"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130713013537) do
     t.string   "properties3"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "nooflevel_aisle"
   end
 
 end
