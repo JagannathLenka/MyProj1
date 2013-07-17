@@ -2,7 +2,7 @@ class ZonemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id','zone_customerid','description', 'noofaisles_zone', 'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
+    @columns =  ['id','zone_id','zone_customerid','description', 'noofaisles_zone', 'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
     @zone = Zone.where(:warehouse_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -37,7 +37,7 @@ class ZonemaintenanceController < ApplicationController
            create_level
     when "add"
           
-          @zone= Zone.new(:zone_id => "", 
+          @zone= Zone.new(:zone_id => params[:zone_id], 
                              :zone_customerid => params[:zone_customerid],
                              :description => params[:description],
                              :noofaisles_zone => params[:noofaisles_zone],
@@ -66,7 +66,7 @@ def create_aisles_and_bays
          aisleval = params[:noofaisles_zone].to_i
          bayval = params[:noofbays_aisle].to_i
          (1..aisleval).each do |a|
-            @aval = Aisle.new(:aisle_id => "",
+            @aval = Aisle.new(:aisle_id => a,
                             :customer_aisle_id => "",
                             :noof_bays => params[:noofbays_aisle],
                             :properties1 => "",
@@ -76,7 +76,7 @@ def create_aisles_and_bays
                            )
             @aval.save
           (1..bayval).each do |b|
-             @bval = Bay.new(:bay_id => "",
+             @bval = Bay.new(:bay_id => b,
                              :customer_bay_id => "",
                              :aisle_id => @aval.id,
                              :noof_pos => "",
@@ -99,16 +99,19 @@ end
 def create_level
   
   levelval = params[:nooflevel_aisle].to_i
+  
   (1..levelval).each do |lev|
-    @lval = Level.create(:zone_id => @zone.id,
+    @lval = Level.new(:level_id => lev,
+                         :zone_id => @zone.id,
                          :level_customerid => "",
-                         :level_id => "",
                          :properties1 => "",
                          :properties2 => "",
                          :properties3 => "",
                       
                         )
-  end
+              @lval.save
+              
+        end
 end
  
  

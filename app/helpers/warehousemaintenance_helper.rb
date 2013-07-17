@@ -23,7 +23,7 @@ module WarehousemaintenanceHelper
       :pager => '#warehouse_pager',
       :rowNum => 10,
       :rowList => [10, 20, 30],
-      :sortname => 'warehouse_customerid',
+      :sortname => 'id',
       :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'Warehouse Maintenance',

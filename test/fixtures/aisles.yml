@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  aisle_id: MyString
-  customer_aisle_id: MyString
   zone_id: MyString
+  aisle_id: MyString
+  aisle_customerid: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_bays: MyString
 
 two:
-  aisle_id: MyString
-  customer_aisle_id: MyString
   zone_id: MyString
+  aisle_id: MyString
+  aisle_customerid: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_bays: MyString

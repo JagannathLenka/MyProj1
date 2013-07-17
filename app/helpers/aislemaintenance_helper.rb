@@ -11,9 +11,10 @@ module AislemaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['id', 'Aisle id(cust)', 'Zone id','No of Bays','Properties1','Properties2','Properties3'],
+      :colNames => ['id','Aisle id', 'Aisle id(cust)', 'Zone id','No of Bays','Properties1','Properties2','Properties3'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}},
+        { :name => 'aisle_id', :index => 'aisle_id',  :width => 190, :align => 'center', :editable => false},
         { :name => 'customer_aisle_id', :index => 'customer_aisle_id',  :width => 190, :align => 'center', :editable => true},
         { :name => 'zone_id',    :index => 'zone_id',     :width => 150,  :align => 'center', :editable => true },
         { :name => 'noof_bays',    :index => 'noof_bays',     :width => 150,  :align => 'left', :editable => true },

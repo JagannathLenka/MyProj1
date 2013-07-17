@@ -4,16 +4,16 @@ one:
   warehouse_id: MyString
   warehouse_customerid: MyString
   description: MyString
-  noof_zones: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_zones: MyString
 
 two:
   warehouse_id: MyString
   warehouse_customerid: MyString
   description: MyString
-  noof_zones: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_zones: MyString

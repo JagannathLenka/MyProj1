@@ -5,11 +5,12 @@ class CreateZones < ActiveRecord::Migration
       t.string :zone_customerid
       t.string :warehouse_id
       t.string :description
-      t.string :noofaisles_zone
-      t.string :noofbays_aisle
       t.string :properties1
       t.string :properties2
       t.string :properties3
+      t.string :noofaisles_zone
+      t.string :noofbays_aisle
+      t.string :nooflevels_aisle
 
       t.timestamps
     end

@@ -2,16 +2,20 @@
 
 one:
   bay_id: MyString
-  customer_bay_id: MyString
   aisle_id: MyString
+  bay_customerid: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_pos: MyString
+  row_aisle: MyString
 
 two:
   bay_id: MyString
-  customer_bay_id: MyString
   aisle_id: MyString
+  bay_customerid: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noof_pos: MyString
+  row_aisle: MyString

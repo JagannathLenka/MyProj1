@@ -45,7 +45,7 @@ class WarehousemaintenanceController < ApplicationController
          zoneval = params[:noof_zones].to_i
          (1..zoneval).each do |z| 
          
-                     Zone.create(:zone_id => "",
+                     Zone.create(:zone_id => z,
                                  :zone_customerid => "",
                                  :description => "",
                                  :noofaisles_zone => "",

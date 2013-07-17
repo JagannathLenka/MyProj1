@@ -2,7 +2,7 @@ class LevelmaintenanceController < ApplicationController
     # GET /maintenance
   def index
 
-    @columns =  ['id','zone_id','level_customerid','properties1', 'properties2', 'properties3']
+    @columns =  ['id','level_id','zone_id','level_customerid','properties1', 'properties2', 'properties3']
     @level = Level.where(:zone_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -31,7 +31,7 @@ class LevelmaintenanceController < ApplicationController
             })
     when "add"
           
-                @level= Level.create(:level_id => "", 
+                @level= Level.create(:level_id => params[:level_id], 
                                      :zone_id => params[:zone_id],
                                      :level_customerid => params[:level_customerid],
                                      :properties1 => params[:properties1],

@@ -9,9 +9,10 @@ module LevelmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['id', 'Zone id','Level id(cust)','Properties1','Properties2','Properties3'],
+      :colNames => ['id','Level Id', 'Zone id','Level id(cust)','Properties1','Properties2','Properties3'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
+        { :name => 'level_id',    :index => 'level_id',     :width => 55,  :align => 'center', :editable => false },
         { :name => 'zone_id',    :index => 'zone_id',     :width => 55,  :align => 'center', :editable => true },
         { :name => 'level_customerid', :index => 'level_customerid',  :width => 120, :align => 'left', :editable => true},
         { :name => 'properties1',  :index => 'properties1',   :width => 120,   :align => 'left', :editable => true},

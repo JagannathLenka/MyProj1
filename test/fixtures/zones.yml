@@ -5,19 +5,21 @@ one:
   zone_customerid: MyString
   warehouse_id: MyString
   description: MyString
-  noofaisles_zone: MyString
-  noofbays_aisle: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noofaisles_zone: MyString
+  noofbays_aisle: MyString
+  nooflevels_aisle: MyString
 
 two:
   zone_id: MyString
   zone_customerid: MyString
   warehouse_id: MyString
   description: MyString
-  noofaisles_zone: MyString
-  noofbays_aisle: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  noofaisles_zone: MyString
+  noofbays_aisle: MyString
+  nooflevels_aisle: MyString

@@ -3,7 +3,7 @@ class AislemaintenanceController < ApplicationController
    # GET /maintenance
   def index
  
-    @columns =  ['id', 'customer_aisle_id', 'zone_id', 'noof_bays', 'properties1', 'properties2' , 'properties3']
+    @columns =  ['id','aisle_id', 'customer_aisle_id', 'zone_id', 'noof_bays', 'properties1', 'properties2' , 'properties3']
     @aisles = Aisle.where(:zone_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -16,7 +16,7 @@ class AislemaintenanceController < ApplicationController
   end
 
  def create
-   
+  
   case params[:oper]
   when "edit"
         @aisles = Aisle.find_by_id(params[:id])
@@ -32,7 +32,7 @@ class AislemaintenanceController < ApplicationController
 
   when "add"
         
-        @aisles= Aisle.new(:aisle_id => "" , 
+        @aisles= Aisle.new(:aisle_id => params[:aisle_id], 
                            :customer_aisle_id => params[:customer_aisle_id],
                            :zone_id     => params[:zone_id],
                            :noof_bays => params[:noof_bays],
@@ -45,7 +45,7 @@ class AislemaintenanceController < ApplicationController
          @aisles.save 
          @bayval = params[:noof_bays]
          (1..bayval).each do |bval|
-           Bay.create(:bay_id => "",
+           Bay.create(:bay_id => bval,
                              :customer_bay_id => "",
                              :aisle_id => @aisles.id,
                              :noof_pos => "",

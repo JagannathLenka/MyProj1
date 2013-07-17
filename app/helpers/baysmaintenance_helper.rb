@@ -10,9 +10,10 @@ module BaysmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['id', 'Bay id(cust)','Aisle id','No Position','Row of aisle', 'Properties1','Properties2','Properties3'],
+      :colNames => ['id','Bay Id', 'Bay id(cust)','Aisle id','No Position','Row of aisle', 'Properties1','Properties2','Properties3'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
+        { :name => 'bay_id', :index => 'bay_id',  :width => 120, :align => 'left', :editable => false},
         { :name => 'customer_bay_id', :index => 'customer_bay_id',  :width => 120, :align => 'left', :editable => true},
         { :name => 'aisle_id',    :index => 'aisle_id',     :width => 55,  :align => 'center', :editable => true },
         { :name => 'noof_pos',    :index => 'noof_pos',     :width => 120,  :align => 'left', :editable => true },
