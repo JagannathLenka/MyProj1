@@ -2,8 +2,8 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id', 'warehouse_customerid','description', 'noof_zones', 'properties1', 'properties2' , 'properties3' ]
-    @warehouse = Warehouse.paginate(
+    @columns =  ['id', 'warehouse_customerid','description', 'noof_zones','noof_zones_hidden', 'properties1', 'properties2' , 'properties3' ]
+    @warehouse = Warehouse.select(" id, warehouse_customerid ,description , noof_zones , noof_zones_hidden , properties1 , properties2  , properties3 ").paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -15,6 +15,9 @@ class WarehousemaintenanceController < ApplicationController
 
   end
 
+
+ #POST /warehousemaintenance
+ #Creates the warehouse and the zones
  def create
    
   case params[:oper]
@@ -42,7 +45,10 @@ class WarehousemaintenanceController < ApplicationController
         
          @warehouse.save 
          
-         zoneval = params[:noof_zones].to_i
+         
+         zonevalue = params[:noof_zones].to_i
+         hidden_zonevalue = params[:noof_zones_hidden].to_i
+         max_zone = Zone.where(:warehouse_id => params[:id])
          (1..zoneval).each do |z| 
          
                      Zone.create(:zone_id => z,
