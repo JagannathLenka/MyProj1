@@ -9,12 +9,13 @@ module WarehousemaintenanceHelper
       :url => '/warehousemaintenance/',
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['id', 'Warehouse id(Cust)','Description', 'No of Zones', 'Properties1','Properties2','Properties3'],
+      :colNames => ['id', 'Warehouse id(Cust)','Description', 'No of Zones','Noof zones_hidden', 'Properties1','Properties2','Properties3'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},
         { :name => 'warehouse_customerid',   :index => 'warehouse_customerid',    :width => 55, :align => 'center', :editable => true},
         { :name => 'description',  :index => 'description',  :width => 150, :align => 'center', :editable => true},
         { :name => 'noof_zones' ,   :index => 'noof_zones',     :width => 60,  :align => 'left', :editable => true },
+        { :name => 'noof_zones_hidden' ,   :index => 'noof_zones_hidden',     :width => 60,  :align => 'left',hidden:true, :editable => true },
         { :name => 'properties1',  :index => 'properties1',   :width => 150,   :align => 'center', :editable => true},
         { :name => 'properties2',   :index => 'properties2',      :width => 150,   :align => 'left', :editable => true},
         { :name => 'properties3',   :index => 'properties3',    :width => 150,   :align => 'left', :editable => true }

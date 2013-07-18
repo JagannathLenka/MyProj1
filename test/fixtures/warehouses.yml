@@ -1,19 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  warehouse_id: MyString
-  warehouse_customerid: MyString
+  client_id: MyString
+  sm_warehouse_id: MyString
+  cl_warehouse_id: MyString
   description: MyString
-  properties1: MyString
-  properties2: MyString
-  properties3: MyString
-  noof_zones: MyString
+  no_of_zones: MyString
+  atrribute1: MyString
+  atrribute2: MyString
+  atrribute3: MyString
+  atrribute4: MyString
+  atrribute5: MyString
+  atrribute6: MyString
+  atrribute7: MyString
+  atrribute8: MyString
 
 two:
-  warehouse_id: MyString
-  warehouse_customerid: MyString
+  client_id: MyString
+  sm_warehouse_id: MyString
+  cl_warehouse_id: MyString
   description: MyString
-  properties1: MyString
-  properties2: MyString
-  properties3: MyString
-  noof_zones: MyString
+  no_of_zones: MyString
+  atrribute1: MyString
+  atrribute2: MyString
+  atrribute3: MyString
+  atrribute4: MyString
+  atrribute5: MyString
+  atrribute6: MyString
+  atrribute7: MyString
+  atrribute8: MyString

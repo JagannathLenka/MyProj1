@@ -48,8 +48,11 @@ class WarehousemaintenanceController < ApplicationController
          
          zonevalue = params[:noof_zones].to_i
          hidden_zonevalue = params[:noof_zones_hidden].to_i
-         max_zone = Zone.where(:warehouse_id => params[:id])
-         (1..zoneval).each do |z| 
+         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("zone_id")
+         if(zonevalue > hidden_zonevalue)
+         diff_zonevalue = zonevalue - hidden_zonevalue
+         
+         (1..diff_zonevalue).each do |z| 
          
                      Zone.create(:zone_id => z,
                                  :zone_customerid => "",
@@ -63,6 +66,8 @@ class WarehousemaintenanceController < ApplicationController
                                
                                )
                            end 
+                           
+          end                 
                                
 end
     if request.xhr?

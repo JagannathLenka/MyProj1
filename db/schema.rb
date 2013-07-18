@@ -11,31 +11,52 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130714034619) do
+ActiveRecord::Schema.define(:version => 20130718191447) do
 
   create_table "aisles", :force => true do |t|
-    t.string   "aisle_id"
-    t.string   "customer_aisle_id"
+    t.string   "client_id"
+    t.string   "sm_aisle_id"
+    t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
     t.string   "zone_id"
-    t.string   "properties1"
-    t.string   "properties2"
-    t.string   "properties3"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.string   "noof_bays"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
+    t.string   "description"
+    t.string   "no_of_bays_aisle"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "bays", :force => true do |t|
-    t.string   "bay_id"
-    t.string   "customer_bay_id"
+    t.string   "client_id"
+    t.string   "sm_aisle_id"
+    t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
     t.string   "aisle_id"
-    t.string   "properties1"
-    t.string   "properties2"
-    t.string   "properties3"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
+    t.string   "description"
+    t.string   "no_of_level_bay"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "row_aisle"
-    t.string   "noof_pos"
   end
 
   create_table "levels", :force => true do |t|
@@ -61,30 +82,44 @@ ActiveRecord::Schema.define(:version => 20130714034619) do
   end
 
   create_table "warehouses", :force => true do |t|
-    t.string   "warehouse_id"
-    t.string   "warehouse_customerid"
+    t.string   "client_id"
+    t.string   "sm_warehouse_id"
+    t.string   "cl_warehouse_id"
     t.string   "description"
-    t.string   "noof_zones"
-    t.string   "properties1"
-    t.string   "properties2"
-    t.string   "properties3"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.string   "no_of_zones"
+    t.string   "atrribute1"
+    t.string   "atrribute2"
+    t.string   "atrribute3"
+    t.string   "atrribute4"
+    t.string   "atrribute5"
+    t.string   "atrribute6"
+    t.string   "atrribute7"
+    t.string   "atrribute8"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "zones", :force => true do |t|
+    t.string   "client_id"
+    t.string   "sm_aisle_id"
+    t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
     t.string   "zone_id"
-    t.string   "zone_customerid"
-    t.string   "warehouse_id"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
     t.string   "description"
-    t.string   "noofaisles_zone"
-    t.string   "noofbays_aisle"
-    t.string   "properties1"
-    t.string   "properties2"
-    t.string   "properties3"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "nooflevel_aisle"
+    t.string   "no_of_bays_aisle"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end
