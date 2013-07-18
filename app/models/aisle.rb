@@ -1,3 +1,3 @@
 class Aisle < ActiveRecord::Base
-  attr_accessible :aisle_id, :customer_aisle_id, :properties1, :properties2, :properties3, :zone_id, :noof_bays
+  attr_accessible :customer_aisle_id, :aisle_id, :noof_bays, :properties1, :properties2, :properties3, :zone_id
 end

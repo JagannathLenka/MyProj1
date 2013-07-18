@@ -2,13 +2,14 @@ class ZonemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id','zone_customerid','description', 'noofaisles_zone', 'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
-    @zone = Zone.where(:warehouse_id => params[:id]).paginate(
+    @columns =  ['id','zone_id','zone_customerid','description', 'noofaisles_zone', 'noofaisles_zone_hidden',  'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
+    @zone = Zone.select(" id,zone_id , zone_customerid , description ,  noofaisles_zone , noofaisles_zone as noofaisles_zone_hidden,  noofbays_aisle , nooflevel_aisle , warehouse_id ,  properties1 ,  properties2 ,  properties3 ").where(:warehouse_id => params[:id]).paginate(
+    
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
-    if request.xhr?
+    if request.xhr? 
       
       render :json => json_for_jqgrid(@zone, @columns)
     end
@@ -37,7 +38,7 @@ class ZonemaintenanceController < ApplicationController
            create_level
     when "add"
           
-          @zone= Zone.new(:zone_id => "", 
+          @zone= Zone.new(:zone_id => params[:zone_id], 
                              :zone_customerid => params[:zone_customerid],
                              :description => params[:description],
                              :noofaisles_zone => params[:noofaisles_zone],
@@ -63,10 +64,15 @@ class ZonemaintenanceController < ApplicationController
 
 def create_aisles_and_bays
 
-         aisleval = params[:noofaisles_zone].to_i
-         bayval = params[:noofbays_aisle].to_i
-         (1..aisleval).each do |a|
-            @aval = Aisle.new(:aisle_id => "",
+         aislevalue = params[:noofaisles_zone].to_i
+         hidden_aislevalue = params[:noofaisles_zone_hidden].to_i
+         bayvalue = params[:noofbays_aisle].to_i
+         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("aisle_id")
+         
+         if(aislevalue > hidden_aislevalue)
+           diff_aislevalue = aislevalue - hidden_aislevalue
+            (1..diff_aislevalue).each do |a|
+            @aval = Aisle.new(:aisle_id => max_aisle.to_i + a,
                             :customer_aisle_id => "",
                             :noof_bays => params[:noofbays_aisle],
                             :properties1 => "",
@@ -74,9 +80,10 @@ def create_aisles_and_bays
                             :properties3 => "",
                             :zone_id => @zone.id
                            )
-            @aval.save
+             @aval.save
+             
           (1..bayval).each do |b|
-             @bval = Bay.new(:bay_id => "",
+             @bval = Bay.new(:bay_id => b,
                              :customer_bay_id => "",
                              :aisle_id => @aval.id,
                              :noof_pos => "",
@@ -86,30 +93,33 @@ def create_aisles_and_bays
                              :row_aisle => "",
                            )
              @bval.save
-          
+             
+           end
           
           end
-         
-         
-       end     
-
   
+     end
+      
 end
 
-def create_level
+ def create_level
   
   levelval = params[:nooflevel_aisle].to_i
+  
   (1..levelval).each do |lev|
-    @lval = Level.create(:zone_id => @zone.id,
+    @lval = Level.new(:level_id => lev,
+                         :zone_id => @zone.id,
                          :level_customerid => "",
-                         :level_id => "",
                          :properties1 => "",
                          :properties2 => "",
                          :properties3 => "",
                       
                         )
-  end
-end
+              @lval.save
+              
+        end
+
  
  
+   end
 end

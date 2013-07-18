@@ -4,10 +4,10 @@ class CreateWarehouses < ActiveRecord::Migration
       t.string :warehouse_id
       t.string :warehouse_customerid
       t.string :description
-      t.string :noof_zones
       t.string :properties1
       t.string :properties2
       t.string :properties3
+      t.string :noof_zones
 
       t.timestamps
     end

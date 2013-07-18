@@ -3,15 +3,15 @@
 one:
   level_id: MyString
   level_customerid: MyString
-  zone_id: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  zone_id: MyString
 
 two:
   level_id: MyString
   level_customerid: MyString
-  zone_id: MyString
   properties1: MyString
   properties2: MyString
   properties3: MyString
+  zone_id: MyString
