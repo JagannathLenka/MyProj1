@@ -10,20 +10,30 @@ module ZonemaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['Id','Zone Id','Zone Id(Cust)','Client Id','Description','Warehouse Id(cust)', 'Aisles/Zone', 'no_of_aisles_zone_hidden', 'Bays/Zone','Level/Zone','Warehouse', 'Properties1', 'Properties2', 'Properties3'], 
+                   
+      :colNames => ['Id','Sequence','Zone','Client Id','sm_warehouse_id','Warehouse','warehouse_id','Description', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Attribute1', 'Attribute2', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
-        { :name => 'zone_id',   :index => 'zone_id',    :width => 85, :align => 'center',:editable => true,formatter:'showlink', formatoptions:{baseLinkUrl:'/aislemaintenance'}, :editable => false},
-        { :name => 'zone_customerid',   :index => 'zone_customerid',    :width => 125, :align => 'center', :editable => true},
+        { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 100, :align => 'center',:editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/aislemaintenance'}, :editable => false},
+        { :name => 'cl_zone_id',   :index => 'cl_zone_id',    :width => 100, :align => 'center', :editable => true},
+        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
+        { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
+        { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
+        { :name => 'warehouse_id',   :index => 'warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},      
         { :name => 'description',   :index => 'description',    :width => 150, :align => 'center', :editable => true},
-        { :name => 'noofaisles_zone',    :index => 'noofaisles_zone',     :width => 100,  :align => 'center', :editable => true },
-        { :name => 'noofaisles_zone_hidden',    :index => 'noofaisles_zone_hidden',     :width => 100,  :align => 'center', hidden:true, :editable => true },
-        { :name => 'noofbays_aisle',    :index => 'noofbays_aisle',     :width => 100,  :align => 'center', :editable => true },
-        { :name => 'nooflevel_aisle',    :index => 'nooflevel_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'} },
-        { :name => 'warehouse_id', :index => 'warehouse_id',  :width => 150, :align => 'center', :editable => true},
-        { :name => 'properties1',  :index => 'properties1',   :width => 150,   :align => 'center', :editable => true},
-        { :name => 'properties2',     :index => 'properties2',      :width => 150,   :align => 'left', :editable => true},
-        { :name => 'properties3',   :index => 'properties3',    :width => 150,   :align => 'left', :editable => true },
+        { :name => 'no_of_aisles_zone',    :index => 'no_of_aisles_zone',     :width => 150,  :align => 'center', :editable => true },
+        { :name => 'no_of_aisles_zone_hidden',    :index => 'no_of_aisles_zone_hidden',     :width => 100,  :align => 'center', hidden:true, :editable => true },
+        { :name => 'no_of_bays_aisle',    :index => 'no_of_bays_aisle',     :width => 150,  :align => 'center', :editable => true },
+        { :name => 'no_of_levels_aisle',    :index => 'no_of_levels_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'} },
+        { :name => 'attribute1',  :index => 'attribute1',   :width => 150,   :align => 'center', :editable => true},
+        { :name => 'attribute2',     :index => 'attribute2',      :width => 150,   :align => 'left', :editable => true},
+        { :name => 'attribute3',   :index => 'attribute3',    :width => 150,   :align => 'left', :editable => true },
+        { :name => 'attribute4',   :index => 'attribute4',    :width => 150,   :align => 'left', :editable => true },
+        { :name => 'attribute5',   :index => 'attribute5',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute6',   :index => 'attribute6',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute7',   :index => 'attribute7',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute8',   :index => 'attribute8',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
+
         
         
       ],
@@ -31,17 +41,18 @@ module ZonemaintenanceHelper
       :pager => '#zone_pager',
       :rowNum => 10,
       :rowList => [10, 20, 30],
-      :sortname => 'zone_id',
+      :sortname => 'sm_zone_id',
       :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'Zone Maintenance',
+      :reloadAfterEdit => true,
       :onSelectRow => "function() { }".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    pager = [:navGrid, "#zone_pager", {edit:false,add:false,del:false}]
+    pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
     pager2 = [:inlineNav, "#zone_pager"]
 
     

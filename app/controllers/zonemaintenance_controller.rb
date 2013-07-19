@@ -1,9 +1,14 @@
 class ZonemaintenanceController < ApplicationController
-   # GET /maintenance
+   # GET /zonemaintenance
   def index
-:attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_aisle_id, :cl_warehouse_id, :cl_zone_id, :client_id, :description, :no_of_bays_aisle, :sm_aisle_id, :sm_warehouse_id, :sm_zone_id, :zone_id
-    @columns =  ['id','zone_id','zone_customerid','description', 'noofaisles_zone', 'noofaisles_zone_hidden',  'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
-    @zone = Zone.select(" id,zone_id , zone_customerid , description ,  noofaisles_zone , noofaisles_zone as noofaisles_zone_hidden,  noofbays_aisle , nooflevel_aisle , warehouse_id ,  properties1 ,  properties2 ,  properties3 ").where(:warehouse_id => params[:id]).paginate(
+
+    @columns =         ['id','sm_zone_id','cl_zone_id','client_id','sm_warehouse_id','cl_warehouse_id',
+                        'warehouse_id','description', 'no_of_aisles_zone', 'no_of_aisles_zone_hidden', 'no_of_bays_aisle','no_of_levels_aisle', 
+                         'attribute1', 'attribute2', 'attribute3','attribute4','attribute5','attribute6','attribute7','attribute8']
+   
+    @zone = Zone.select("id , sm_zone_id , cl_zone_id , client_id ,sm_warehouse_id , cl_warehouse_id, 
+                          warehouse_id ,description , no_of_aisles_zone,no_of_aisles_zone as no_of_aisles_zone_hidden,  no_of_bays_aisle, no_of_levels_aisle  ,
+                          attribute1, attribute2, attribute3 , attribute4 , attribute5, attribute6, attribute7 , attribute8").where(:warehouse_id => params[:id]).paginate(
     
       :page     => params[:page],
       :per_page => params[:rows],
@@ -15,7 +20,8 @@ class ZonemaintenanceController < ApplicationController
     end
 
   end
-
+  
+  #POST /zonemaintenance - Create aisle
  def create
    
     case params[:oper]
@@ -23,35 +29,46 @@ class ZonemaintenanceController < ApplicationController
     when "edit"
           @zone = Zone.find_by_id(params[:id])
           @zone.update_attributes({ 
-                                     :zone_customerid => params[:zone_customerid],
+                                     :cl_zone_id => params[:cl_zone_id],
                                      :description => params[:description],
-                                     :noofaisles_zone => params[:noofaisles_zone],
-                                     :noofbays_aisle => params[:noofbays_aisle],
-                                     :nooflevel_aisle => params[:nooflevel_aisle],
-                                     :warehouse_id => params[:warehouse_id],
-                                     :properties1 => params[:properties1],
-                                     :properties2 => params[:properties2], 
-                                     :properties3 => params[:properties3]
-                                         
+                                     :no_of_aisles_zone => params[:no_of_aisles_zone],
+                                     :no_of_bays_aisle => params[:no_of_bays_aisle],
+                                     :no_of_levels_aisle => params[:no_of_levels_aisle],
+                                     :attribute1 => params[:attribute1],
+                                     :attribute2 => params[:attribute2], 
+                                     :attribute3 => params[:attribute3],
+                                     :attribute4 => params[:attribute4],
+                                     :attribute5 => params[:attribute5],
+                                     :attribute6 => params[:attribute6],
+                                     :attribute7 => params[:attribute7],
+                                     :attribute8 => params[:attribute8]    
             })
-           create_aisles_and_bays 
-           create_level
+           #create_aisles_and_bays 
+           #create_level
+           
     when "add"
-          
-          @zone= Zone.new(:zone_id => params[:zone_id], 
-                             :zone_customerid => params[:zone_customerid],
-                             :description => params[:description],
-                             :noofaisles_zone => params[:noofaisles_zone],
-                             :noofbays_aisle => params[:noofbays_aisle],
-                             :nooflevel_aisle => params[:nooflevel_aisle],
-                             :warehouse_id => params[:warehouse_id],
-                             :properties1 => params[:properties1],
-                             :properties2 => params[:properties2], 
-                             :properties3 => params[:properties3]
+          maximum_zone_id =  Zone.maximum("sm_zone_id").to_i + 1
+          @zone= Zone.new(           :sm_zone_id => maximum_zone_id, 
+                                     :sm_warehouse_id => params[:sm_warehouse_id], #This is not correct
+                                     :warehouse_id  => params[:warehouse_id],      #This is not correct                                
+                                     :cl_zone_id => params[:cl_zone_id],
+                                     :description => params[:description],
+                                     :no_of_aisles_zone => params[:no_of_aisles_zone],
+                                     :no_of_bays_aisle => params[:no_of_bays_aisle],
+                                     :no_of_levels_aisle => params[:no_of_levels_aisle],
+                                     :attribute1 => params[:attribute1],
+                                     :attribute2 => params[:attribute2], 
+                                     :attribute3 => params[:attribute3],
+                                     :attribute4 => params[:attribute4],
+                                     :attribute5 => params[:attribute5],
+                                     :attribute6 => params[:attribute6],
+                                     :attribute7 => params[:attribute7],
+                                     :attribute8 => params[:attribute8]    
+
             )
            @zone.save
-           create_aisles_and_bays
-           create_level
+           #create_aisles_and_bays
+           #create_level
     end
   
       
@@ -67,7 +84,7 @@ def create_aisles_and_bays
          aislevalue = params[:noofaisles_zone].to_i
          hidden_aislevalue = params[:noofaisles_zone_hidden].to_i
          bayvalue = params[:noofbays_aisle].to_i
-         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("aisle_id")
+         max_aisle = Aisle.where(:sm_zone_id => params[:id]).maximum("aisle_id")
          
          if(aislevalue > hidden_aislevalue)
            diff_aislevalue = aislevalue - hidden_aislevalue
@@ -78,7 +95,7 @@ def create_aisles_and_bays
                             :properties1 => "",
                             :properties2 => "",
                             :properties3 => "",
-                            :zone_id => @zone.id
+                            :sm_zone_id => @zone.id
                            )
              @aval.save
              
@@ -108,7 +125,7 @@ end
   
   (1..levelval).each do |lev|
     @lval = Level.new(:level_id => lev,
-                         :zone_id => @zone.id,
+                         :sm_zone_id => @zone.id,
                          :level_customerid => "",
                          :properties1 => "",
                          :properties2 => "",
@@ -122,4 +139,5 @@ end
  
  
    end
+
 end

@@ -28,10 +28,10 @@ class WarehousemaintenanceController < ApplicationController
                                    :client_id => params[:client_id],
                                    :description => params[:description],
                                    :no_of_zones => params[:no_of_zones],
-                                   :atrribute1 => params[:atrribute1],
-                                   :atrribute2 => params[:atrribute2], 
-                                   :atrribute3 => params[:atrribute3],
-                                   :atrribute4 => params[:atrribute4]
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4]
                                         
           })
 
@@ -61,6 +61,7 @@ class WarehousemaintenanceController < ApplicationController
          
                      Zone.create(
                                   :sm_warehouse_id => maximum_warehouse_id ,
+                                  :sm_zone_id  => max_zone. to_i + z,
                                   :warehouse_id => @warehouse.id,
                                   :cl_warehouse_id => params[:cl_warehouse_id]
                                )
