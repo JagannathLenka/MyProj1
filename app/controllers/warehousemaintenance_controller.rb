@@ -2,8 +2,8 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id', 'warehouse_customerid','description', 'noof_zones','noof_zones_hidden', 'properties1', 'properties2' , 'properties3' ]
-    @warehouse = Warehouse.select(" id, warehouse_customerid ,description , noof_zones , noof_zones_hidden , properties1 , properties2  , properties3 ").paginate(
+    @columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'atrribute1','atrribute2','atrribute3','atrribute4','atrribute5','atrribute6','atrribute7','atrribute8' ]
+    @warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , atrribute1 , atrribute2 , atrribute3 , atrribute4, atrribute5, atrribute6 , atrribute7 , atrribute8 ").paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -23,47 +23,46 @@ class WarehousemaintenanceController < ApplicationController
   case params[:oper]
   when "edit"
         @warehouse = Warehouse.find_by_id(params[:id])
-        @warehouse.update_attributes({
-                                   :warehouse_customerid => params[:warehouse_customerid], 
+        @warehouse.update_atrributes({
+                                   :cl_warehouse_id => params[:cl_warehouse_id], 
+                                   :client_id => params[:client_id],
                                    :description => params[:description],
-                                   :properties1 => params[:properties1],
-                                   :properties2 => params[:properties2], 
-                                   :properties3 => params[:properties3],
-                                   :noof_zones  => params[:noof_zones]     
+                                   :no_of_zones => params[:no_of_zones],
+                                   :atrribute1 => params[:atrribute1],
+                                   :atrribute2 => params[:atrribute2], 
+                                   :atrribute3 => params[:atrribute3],
+                                   :atrribute4 => params[:atrribute4]
+                                        
           })
 
   when "add"
-        
-        @warehouse= Warehouse.new(:warehouse_id => "", 
-                                    :warehouse_customerid => params[:warehouse_customerid],
+        maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i + 1
+        @warehouse= Warehouse.new( :sm_warehouse_id => maximum_warehouse_id ,
+                                   :cl_warehouse_id => params[:cl_warehouse_id], 
+                                   :client_id => params[:client_id],
                                    :description => params[:description],
-                                   :properties1 => params[:properties1],
-                                   :properties2 => params[:properties2], 
-                                   :properties3 => params[:properties3],
-                                   :noof_zones  => params[:noof_zones]   
+                                   :no_of_zones => params[:no_of_zones],
+                                   :atrribute1 => params[:atrribute1],
+                                   :atrribute2 => params[:atrribute2], 
+                                   :atrribute3 => params[:atrribute3],
+                                   :atrribute4 => params[:atrribute4]
           )
         
          @warehouse.save 
          
          
-         zonevalue = params[:noof_zones].to_i
-         hidden_zonevalue = params[:noof_zones_hidden].to_i
-         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("zone_id")
+         zonevalue = params[:no_of_zones].to_i
+         hidden_zonevalue = params[:no_of_zones_hidden].to_i
+         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id")
          if(zonevalue > hidden_zonevalue)
          diff_zonevalue = zonevalue - hidden_zonevalue
          
          (1..diff_zonevalue).each do |z| 
          
-                     Zone.create(:zone_id => z,
-                                 :zone_customerid => "",
-                                 :description => "",
-                                 :noofaisles_zone => "",
-                                 :noofbays_aisle => "",
-                                 :properties1 => "",
-                                 :properties2 => "",
-                                 :properties3 => "",
-                                 :warehouse_id => @warehouse.id 
-                               
+                     Zone.create(
+                                  :sm_warehouse_id => maximum_warehouse_id ,
+                                  :warehouse_id => @warehouse.id,
+                                  :cl_warehouse_id => params[:cl_warehouse_id]
                                )
                            end 
                            

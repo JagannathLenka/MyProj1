@@ -1,7 +1,7 @@
 class ZonemaintenanceController < ApplicationController
    # GET /maintenance
   def index
-
+:attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_aisle_id, :cl_warehouse_id, :cl_zone_id, :client_id, :description, :no_of_bays_aisle, :sm_aisle_id, :sm_warehouse_id, :sm_zone_id, :zone_id
     @columns =  ['id','zone_id','zone_customerid','description', 'noofaisles_zone', 'noofaisles_zone_hidden',  'noofbays_aisle','nooflevel_aisle','warehouse_id', 'properties1', 'properties2', 'properties3']
     @zone = Zone.select(" id,zone_id , zone_customerid , description ,  noofaisles_zone , noofaisles_zone as noofaisles_zone_hidden,  noofbays_aisle , nooflevel_aisle , warehouse_id ,  properties1 ,  properties2 ,  properties3 ").where(:warehouse_id => params[:id]).paginate(
     
@@ -31,7 +31,7 @@ class ZonemaintenanceController < ApplicationController
                                      :warehouse_id => params[:warehouse_id],
                                      :properties1 => params[:properties1],
                                      :properties2 => params[:properties2], 
-                                     :properties3 => params[:properties3],
+                                     :properties3 => params[:properties3]
                                          
             })
            create_aisles_and_bays 
@@ -47,7 +47,7 @@ class ZonemaintenanceController < ApplicationController
                              :warehouse_id => params[:warehouse_id],
                              :properties1 => params[:properties1],
                              :properties2 => params[:properties2], 
-                             :properties3 => params[:properties3],
+                             :properties3 => params[:properties3]
             )
            @zone.save
            create_aisles_and_bays

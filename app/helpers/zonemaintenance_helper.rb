@@ -10,7 +10,7 @@ module ZonemaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['Id','Zone Id','Zone Id(Cust)','Description', 'Aisles/Zone', 'noofaisles_zone_hidden', 'Bays/Aisle','Level/Aisle','Warehouse', 'Properties1', 'Properties2', 'Properties3'], 
+      :colNames => ['Id','Zone Id','Zone Id(Cust)','Client Id','Description','Warehouse Id(cust)', 'Aisles/Zone', 'no_of_aisles_zone_hidden', 'Bays/Zone','Level/Zone','Warehouse', 'Properties1', 'Properties2', 'Properties3'], 
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
         { :name => 'zone_id',   :index => 'zone_id',    :width => 85, :align => 'center',:editable => true,formatter:'showlink', formatoptions:{baseLinkUrl:'/aislemaintenance'}, :editable => false},
@@ -53,7 +53,7 @@ module ZonemaintenanceHelper
                                           win.focus();
                                           }'.to_json_var }]
 
-    jqgrid_api 'zone_list', grid, pager, pager2, pager_button, options
+    jqgrid_api 'zone_list', grid, pager, pager_button, options
 
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718191447) do
+ActiveRecord::Schema.define(:version => 20130719020154) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -101,15 +101,15 @@ ActiveRecord::Schema.define(:version => 20130718191447) do
 
   create_table "zones", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_aisle_id"
     t.string   "sm_zone_id"
     t.string   "sm_warehouse_id"
-    t.string   "zone_id"
-    t.string   "cl_aisle_id"
+    t.string   "warehouse_id"
     t.string   "cl_zone_id"
     t.string   "cl_warehouse_id"
     t.string   "description"
+    t.string   "no_of_aisles_zone"
     t.string   "no_of_bays_aisle"
+    t.string   "no_of_levels_aisle"
     t.string   "attribute1"
     t.string   "attribute2"
     t.string   "attribute3"
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20130718191447) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

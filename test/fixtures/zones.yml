@@ -2,15 +2,15 @@
 
 one:
   client_id: MyString
-  sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
-  cl_aisle_id: MyString
+  warehouse_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
+  no_of_aisles_zone: MyString
   no_of_bays_aisle: MyString
+  no_of_levels_aisle: MyString
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString
@@ -22,15 +22,15 @@ one:
 
 two:
   client_id: MyString
-  sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
-  cl_aisle_id: MyString
+  warehouse_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
+  no_of_aisles_zone: MyString
   no_of_bays_aisle: MyString
+  no_of_levels_aisle: MyString
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString
