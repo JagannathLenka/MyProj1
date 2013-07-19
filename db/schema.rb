@@ -11,10 +11,81 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718081746) do
+ActiveRecord::Schema.define(:version => 20130719053524) do
+
+  create_table "aisles", :force => true do |t|
+    t.string   "client_id"
+    t.string   "sm_aisle_id"
+    t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
+    t.string   "zone_id"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
+    t.string   "description"
+    t.string   "no_of_bays_aisle"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "bays", :force => true do |t|
+    t.string   "client_id"
+    t.string   "sm_bay_id"
+    t.string   "sm_aisle_id"
+    t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
+    t.string   "aisle_id"
+    t.string   "cl_bay_id"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
+    t.string   "description"
+    t.string   "no_of_level_bay"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "levels", :force => true do |t|
+    t.string   "level_id"
+    t.string   "level_customerid"
+    t.string   "zone_id"
+    t.string   "properties1"
+    t.string   "properties2"
+    t.string   "properties3"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "positions", :force => true do |t|
+    t.string   "pos_id"
+    t.string   "bay_id"
+    t.string   "level_id"
+    t.string   "properties1"
+    t.string   "properties2"
+    t.string   "properties3"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "warehouses", :force => true do |t|
     t.string   "client_id"
+    t.string   "sm_warehouse_id"
     t.string   "cl_warehouse_id"
     t.string   "description"
     t.string   "no_of_zones"
@@ -33,12 +104,14 @@ ActiveRecord::Schema.define(:version => 20130718081746) do
   create_table "zones", :force => true do |t|
     t.string   "client_id"
     t.string   "sm_zone_id"
+    t.string   "sm_warehouse_id"
     t.string   "warehouse_id"
+    t.string   "cl_zone_id"
     t.string   "cl_warehouse_id"
     t.string   "description"
     t.string   "no_of_aisles_zone"
-    t.string   "no_of_bays_zone"
-    t.string   "no_of_levels_zone"
+    t.string   "no_of_bays_aisle"
+    t.string   "no_of_levels_aisle"
     t.string   "attribute1"
     t.string   "attribute2"
     t.string   "attribute3"
@@ -47,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20130718081746) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

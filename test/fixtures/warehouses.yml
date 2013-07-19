@@ -2,6 +2,7 @@
 
 one:
   client_id: MyString
+  sm_warehouse_id: MyString
   cl_warehouse_id: MyString
   description: MyString
   no_of_zones: MyString
@@ -16,6 +17,7 @@ one:
 
 two:
   client_id: MyString
+  sm_warehouse_id: MyString
   cl_warehouse_id: MyString
   description: MyString
   no_of_zones: MyString

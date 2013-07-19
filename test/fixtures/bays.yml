@@ -1,21 +1,45 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  bay_id: MyString
+  client_id: MyString
+  sm_bay_id: MyString
+  sm_aisle_id: MyString
+  sm_zone_id: MyString
+  sm_warehouse_id: MyString
   aisle_id: MyString
-  bay_customerid: MyString
-  properties1: MyString
-  properties2: MyString
-  properties3: MyString
-  noof_pos: MyString
-  row_aisle: MyString
+  cl_bay_id: MyString
+  cl_aisle_id: MyString
+  cl_zone_id: MyString
+  cl_warehouse_id: MyString
+  description: MyString
+  no_of_level_bay: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
 
 two:
-  bay_id: MyString
+  client_id: MyString
+  sm_bay_id: MyString
+  sm_aisle_id: MyString
+  sm_zone_id: MyString
+  sm_warehouse_id: MyString
   aisle_id: MyString
-  bay_customerid: MyString
-  properties1: MyString
-  properties2: MyString
-  properties3: MyString
-  noof_pos: MyString
-  row_aisle: MyString
+  cl_bay_id: MyString
+  cl_aisle_id: MyString
+  cl_zone_id: MyString
+  cl_warehouse_id: MyString
+  description: MyString
+  no_of_level_bay: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString

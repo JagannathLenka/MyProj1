@@ -205,8 +205,11 @@ var indexHTML = {
 				    .attr("id", textID)
 				    .attr("name", $(this).attr('id'))
 				    .attr("style", "width: 80px")
+				    .attr("style" , "border-style: solid")
+				    .attr("style" , "border-color: orange")
 				    .attr("value", ($("#"+labelID).html()).substring(4))
 				     $(this).append(newTextBox);
+				     $("#" + textID).focus();
 				  	 $("#" + labelID).remove();
 				}
 			}); 
