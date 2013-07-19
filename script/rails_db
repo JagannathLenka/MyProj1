@@ -1,0 +1,3 @@
+#rails generate model warehouse client_id:string cl_warehouse_id:string description:string no_of_zones:string atrribute1:string atrribute2:string atrribute3:string atrribute4:string atrribute5:string atrribute6:string atrribute7:string atrribute8:string 
+#rails generate model zone client_id:string sm_zone_id:string warehouse_id:string cl_warehouse_id:string description:string no_of_aisles_zone:string no_of_bays_zone:string no_of_levels_zone:string attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string 
+
