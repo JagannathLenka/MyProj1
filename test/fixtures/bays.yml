@@ -2,10 +2,12 @@
 
 one:
   client_id: MyString
+  sm_bay_id: MyString
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
   aisle_id: MyString
+  cl_bay_id: MyString
   cl_aisle_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString
@@ -22,10 +24,12 @@ one:
 
 two:
   client_id: MyString
+  sm_bay_id: MyString
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
   aisle_id: MyString
+  cl_bay_id: MyString
   cl_aisle_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString

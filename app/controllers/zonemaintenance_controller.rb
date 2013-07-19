@@ -43,7 +43,7 @@ class ZonemaintenanceController < ApplicationController
                                      :attribute7 => params[:attribute7],
                                      :attribute8 => params[:attribute8]    
             })
-           #create_aisles_and_bays 
+           create_aisles_and_bays 
            #create_level
            
     when "add"
@@ -67,7 +67,7 @@ class ZonemaintenanceController < ApplicationController
 
             )
            @zone.save
-           #create_aisles_and_bays
+           create_aisles_and_bays
            #create_level
     end
   
@@ -81,41 +81,42 @@ class ZonemaintenanceController < ApplicationController
 
 def create_aisles_and_bays
 
-         aislevalue = params[:noofaisles_zone].to_i
-         hidden_aislevalue = params[:noofaisles_zone_hidden].to_i
-         bayvalue = params[:noofbays_aisle].to_i
-         max_aisle = Aisle.where(:sm_zone_id => params[:id]).maximum("aisle_id")
+         aislevalue = params[:no_of_aisles_zone].to_i
+         hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
+         bayvalue = params[:no_of_bays_aisle].to_i
+         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("sm_aisle_id")
          
-         if(aislevalue > hidden_aislevalue)
            diff_aislevalue = aislevalue - hidden_aislevalue
-            (1..diff_aislevalue).each do |a|
-            @aval = Aisle.new(:aisle_id => max_aisle.to_i + a,
-                            :customer_aisle_id => "",
-                            :noof_bays => params[:noofbays_aisle],
-                            :properties1 => "",
-                            :properties2 => "",
-                            :properties3 => "",
-                            :sm_zone_id => @zone.id
-                           )
-             @aval.save
-             
-          (1..bayval).each do |b|
-             @bval = Bay.new(:bay_id => b,
-                             :customer_bay_id => "",
-                             :aisle_id => @aval.id,
-                             :noof_pos => "",
-                             :properties1 => "",
-                             :properties2 => "",
-                             :properties3 => "",
-                             :row_aisle => "",
-                           )
-             @bval.save
+           (1..diff_aislevalue).each do |a|
+           @aisle  = Aisle.new(:sm_aisle_id      => max_aisle.to_i + a,
+                              :sm_zone_id         => params[:sm_zone_id],
+                              :sm_warehouse_id    => params[:sm_warehouse_id],
+                              :zone_id            => @zone.id,
+                              :no_of_bays_aisle   => params[:no_of_bays_aisle],
+                              :cl_aisle_id        => "",
+                              :cl_zone_id         => params[:cl_zone_id],
+                              :cl_warehouse_id    => @zone.cl_warehouse_id
+                          )
+             @aisle.save
+
+          max_bays = Bay.where(:aisle_id => @aisle.id).maximum("sm_bay_id")             
+          (1..bayvalue).each do |b|
+             @bays = Bay.new(:sm_bay_id           => max_bays.to_i + b,
+                             :sm_aisle_id         => @aisle.sm_aisle_id,
+                             :sm_zone_id          => @aisle.sm_zone_id,
+                             :sm_warehouse_id     => @aisle.sm_warehouse_id,
+                             :aisle_id            => @aisle.id,
+                             :cl_bay_id           => "",
+                             :cl_aisle_id         => @aisle.cl_aisle_id,
+                             :cl_zone_id          => @aisle.cl_warehouse_id,
+                             :no_of_level_bay     => params[:no_of_level_bay]
+                          )
+             @bays.save
              
            end
           
-          end
-  
      end
+  
       
 end
 
