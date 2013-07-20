@@ -5,42 +5,38 @@ class BayController < ApplicationController
 def index
   
   @aislehash=Hash.new
-  
-  #aisle=Aisle.all
+  @bayhash = Hash.new
+  @rowhash = Hash.new
+   
   aisle = Aisle.where(zone_id: params[:id])
   aisle.each do |aislevalue|
-  bay= Bay.where(aisle_id: aislevalue.id).order("attribute1")
-  save_attribute1 =""   
-  @bayhash = Hash.new 
-  
-  bay.each do |bayvalue|
-   
-    
-    if save_attribute1 != bayvalue.attribute1 {
-         
-        
-        if bayvalue.attribute1 == '1' 
-             @bayhash= @bayhash.merge({:aisleseparation => 'drivepath'})
-        else
-             @bayhash= @bayhash.merge({:aisleseparation => 'divider'})
-        end        
-        save_attribute1 = bayvalue.attribute1
-    }
-    
-    end
-      if bayvalue.cl_bay_id.blank?
-        customer_bay_id = bayvalue.id
-      else
-        customer_bay_id = bayvalue.cl_bay_id
-      end
-      baytype =  bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1 
-      @bayhash= @bayhash.merge({bayvalue.id =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
+      @bay= Bay.where(aisle_id: aislevalue.id).order("attribute3 ASC, id ASC")
       
-    end
-      
-      @aislehash = @aislehash.merge(aislevalue.id => @bayhash)
+      save_attribute3 = @bay[1].attribute3
+      @bay.each do |bayvalue|
 
-  end
+          if save_attribute3 != bayvalue.attribute3 
+            @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
+            save_attribute3 = bayvalue.attribute3              
+            @bayhash= Hash.new
+         end
+
+          if bayvalue.cl_bay_id.blank?
+            customer_bay_id = bayvalue.id
+          else
+            customer_bay_id = bayvalue.cl_bay_id
+          end
+          
+          baytype =  bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
+          @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute1, :customerid => customer_bay_id}})
+          
+    
+      end
+      @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
+      @aislehash = @aislehash.merge(aislevalue.id.to_s => @rowhash)
+      @rowhash = Hash.new
+      @bayhash = Hash.new    
+    end
 end
 
 def create
@@ -53,7 +49,7 @@ def create
        newbay.save
        render text: newbay.bay_id 
        
-#Updating class and title after dragging
+#Updating class and title after dragging  
  
    when "update_class"
 

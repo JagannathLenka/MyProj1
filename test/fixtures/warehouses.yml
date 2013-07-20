@@ -6,14 +6,14 @@ one:
   cl_warehouse_id: MyString
   description: MyString
   no_of_zones: MyString
-  atrribute1: MyString
-  atrribute2: MyString
-  atrribute3: MyString
-  atrribute4: MyString
-  atrribute5: MyString
-  atrribute6: MyString
-  atrribute7: MyString
-  atrribute8: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
 
 two:
   client_id: MyString
@@ -21,11 +21,11 @@ two:
   cl_warehouse_id: MyString
   description: MyString
   no_of_zones: MyString
-  atrribute1: MyString
-  atrribute2: MyString
-  atrribute3: MyString
-  atrribute4: MyString
-  atrribute5: MyString
-  atrribute6: MyString
-  atrribute7: MyString
-  atrribute8: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString

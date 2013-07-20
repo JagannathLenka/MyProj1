@@ -47,6 +47,8 @@ body {
 
 
 var indexHTML = {
+	
+  
 
 	setDragnDrop: function setDragnDrop() { 
 
@@ -161,6 +163,23 @@ var indexHTML = {
 
 			});
 
+		   $(function() {
+	        $('.bay').contextPopup({
+	          title: 'My Popup Menu',
+	          items: [
+	            {label:'Some Item',                  action:function() { alert('clicked 1') } },
+	            {label:'Another Thing',               action:function() { alert('clicked 2') } },
+	            {label:'Blah Blah',                   action:function() { alert('clicked 3') } },
+	            null, // divider
+	            {label:'Sheep',                  action:function() { alert('clicked 4') } },
+	            {label:'Cheese',                           action:function() { alert('clicked 5') } },
+	            {label:'Bacon',          action:function() { alert('clicked 6') } },
+	            null, // divider
+	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
+	            {label:'Flutters',                          action:function() { alert('clicked 8') } }
+	          ]
+	        });
+	     });
 
 
 		      $('.bay, .bay_Empty').dblclick(function(){
@@ -230,35 +249,34 @@ var indexHTML = {
 		<br>
 	</div>
 <div id="content" class="content">
-<%= @aislehash %>
+
 
    <div id="area" class="area"> 
+   	
    	<table border="0" id ="bayTable" style="border-collapse:collapse;">
-   	<% @aislehash.each do |key, value| %>
-		<tr>
-    	<% value.each do |key1, value1| %>
-  
- 				<%if key1== :aisleseparation %>
-					<td>
-
- 					<%if value1== "drivepath" %>
+   	<% @aislehash.each do |aisle, aislevalue| %>
+		
+    	<% aislevalue.each do |row, rowvalue| %>
+ 		 <tr>
+ 				<%if row  == "R" %> 				
+					<td> 
  						<div  class="aisle_drivepath"> </div>   	       
 	   	       			 <hr style="width: 320px; float: left" color="blue">   	       
 	   	      		    <div class="aisle_drivepath"> </div> 
-	   	      		 <% else %>
-	   	      		   	<div  class="aisle_divider"> </div>
-          			<% end %>
-          			</td></tr><tr>
-          		<% else %>
-          			<td class="col">
-	 	 		     <div id="<%= key1 %>" class="<%= value1[:type] %>" title=" Product Type: <%= value1[:item] %>" >	   	    	  
-		   	    	 <label id="<%= key1%>_label"> Bay <%= value1[:customerid] %> </label> 	   	    	
+          			</td>
+          			<td class="bay">Aisle: <%= aisle %></td>
+          			</tr><tr>
+          		<% end %>
+          		
+          		<% rowvalue.each do |bay, bayvalue| %>	
+          			 <td class="col">
+	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
+		   	    	 <label id="<%= bay%>_label"> Bay <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
 	   		<% end %>
-    
-         <%end%>
-    </tr>
+	   		</tr>
+	   <% end %>		
          
   <%end%>
    

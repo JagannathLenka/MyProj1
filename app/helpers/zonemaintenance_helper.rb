@@ -56,8 +56,8 @@ module ZonemaintenanceHelper
                                                        {:beforeSubmit =>
                                                         "function(postdata, formid) 
                                                                   {
-                                                                   postdata.warehouse_id='1';
-                                                                   postdata.sm_warehouse_id='1';   
+                                                                   postdata.pt_warehouse='1';
+                                                                   postdata.pt_sm_warehouse_id='1';   
                                                                    return [true, ' ']}".to_json_var 
                                                                    }, {}, {}, {}]                                                                                             
                                                                                    

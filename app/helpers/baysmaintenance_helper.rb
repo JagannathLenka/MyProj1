@@ -44,13 +44,24 @@ module BaysmaintenanceHelper
       :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'Bay Maintenance',
+      :closeAfterEdit => true,
+      :reloadAfterEdit => true,
       :onSelectRow => "function() {}".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    pager = [:navGrid, "#bays_pager", {edit:true,add:true,del:true}]
+        pager = [:navGrid, "#bays_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true}, 
+                                                       {:beforeSubmit =>
+                                                        "function(postdata, formid) 
+                                                                  {
+                                                                   postdata.warehouse_id='1';
+                                                                   postdata.sm_warehouse_id='1';   
+                                                                   return [true, ' ']}".to_json_var 
+                                                                   }, {}, {}, {}]                                                                                             
+
     #pager2 = [:inlineNav, "#bays_pager"]
 
     

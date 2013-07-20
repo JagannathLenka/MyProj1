@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130720030017) do
+ActiveRecord::Schema.define(:version => 20130720174413) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -106,14 +106,14 @@ ActiveRecord::Schema.define(:version => 20130720030017) do
     t.string   "cl_warehouse_id"
     t.string   "description"
     t.string   "no_of_zones"
-    t.string   "atrribute1"
-    t.string   "atrribute2"
-    t.string   "atrribute3"
-    t.string   "atrribute4"
-    t.string   "atrribute5"
-    t.string   "atrribute6"
-    t.string   "atrribute7"
-    t.string   "atrribute8"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
