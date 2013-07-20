@@ -44,7 +44,16 @@ module WarehousemaintenanceHelper
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    pager = [:navGrid, "#warehouse_pager", {edit:true,add:true,del:true}]
+    #pager = [:navGrid, "#warehouse_pager", {edit:true,add:true,del:true}]
+    pager = [:navGrid, "#warehouse_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true}, 
+                                                       {:beforeSubmit =>
+                                                        "function(postdata, formid) 
+                                                                  {
+                                                                   postdata.pt_warehouse='1';
+                                                                   postdata.pt_sm_warehouse_id='1';   
+                                                                   return [true, ' ']}".to_json_var 
+                                                                   }, {}, {}, {}]                                                                   
     pager2 = [:inlineNav, "#warehouse_pager"]
     pager_button = [:navButtonAdd, "#warehouse_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
 

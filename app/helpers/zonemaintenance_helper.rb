@@ -51,13 +51,22 @@ module ZonemaintenanceHelper
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
-    #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
-    #pager2 = [:inlineNav, "#zone_pager"]
+    pager = [:navGrid, "#zone_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true}, 
+                                                       {:beforeSubmit =>
+                                                        "function(postdata, formid) 
+                                                                  {
+                                                                   postdata.pt_warehouse='1';
+                                                                   postdata.pt_sm_warehouse_id='1';   
+                                                                   return [true, ' ']}".to_json_var 
+                                                                   }, {}, {}, {}]                                                                                             
+                                                                                   
+    #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
+    pager2 = [:inlineNav, "#zone_pager"]
 
     
     pager_button = [:navButtonAdd, "#zone_pager", 
-                    {:caption => 'Show Layout', :onClickButton => 'function() {
+                   {:caption => 'Show Layout', :onClickButton => 'function() {
                                           var grid = $("#zone_list");
                                           selectedRowId= grid.jqGrid ("getGridParam","selrow");
                                           win = window.open("/bay?id=" + selectedRowId, "_blank");

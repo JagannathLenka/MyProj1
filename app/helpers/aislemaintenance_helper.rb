@@ -48,7 +48,17 @@ module AislemaintenanceHelper
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
+    #pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
+    pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true}, 
+                                                       {:beforeSubmit =>
+                                                        "function(postdata, formid) 
+                                                                  {
+                                                                   postdata.pt_warehouse='1';
+                                                                   postdata.pt_sm_warehouse_id='1';   
+                                                                   return [true, ' ']}".to_json_var 
+                                                                   }, {}, {}, {}]                                                                   
+
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     
