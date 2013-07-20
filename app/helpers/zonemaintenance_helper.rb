@@ -16,7 +16,7 @@ module ZonemaintenanceHelper
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 100, :align => 'center',:editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/aislemaintenance'}, :editable => false},
         { :name => 'cl_zone_id',   :index => 'cl_zone_id',    :width => 100, :align => 'center', :editable => true},
-        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
+        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, :hidden => false},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
         { :name => 'warehouse_id',   :index => 'warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},      
@@ -53,7 +53,7 @@ module ZonemaintenanceHelper
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
-    pager2 = [:inlineNav, "#zone_pager"]
+    #pager2 = [:inlineNav, "#zone_pager"]
 
     
     pager_button = [:navButtonAdd, "#zone_pager", 
