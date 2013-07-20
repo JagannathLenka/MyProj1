@@ -2,9 +2,8 @@ class BaysmaintenanceController < ApplicationController
   
    # GET /maintenance
   def index
-
-    @columns =  ['id','bay_id', 'customer_bay_id','aisle_id','noof_pos','row_aisle', 'properties1', 'properties2', 'properties3' ]
-    @bay = Bay.where(:aisle_id => params[:id]).paginate(
+    @columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
+    @bay = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -22,33 +21,66 @@ class BaysmaintenanceController < ApplicationController
   when "edit"
         @bay = Bay.find_by_id(params[:id])
         @bay.update_attributes({ 
-                                   :customer_bay_id => params[:customer_bay_id],
-                                   :aisle_id     => params[:aisle_id],
-                                   :noof_pos     => params[:noof_pos],
-                                   :row_aisle    => params[:row_aisle],
-                                   :properties1 => params[:properties1],
-                                   :properties2 => params[:properties2], 
-                                   :properties3 => params[:properties3]
+                                   :cl_bay_id => params[:cl_bay_id],
+                                   :description => params[:description],
+                                   :no_of_level_bay  => params[:no_of_level_bay],
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
                                 })
+                                
+                  create_level              
 
   when "add"
-        
-        @bay= Bay.new(:bay_id => params[:bay_id], 
-                         :customer_bay_id => params[:customer_bay_id],
+        maximum_bay_add = Bay.maximum("sm_bay_id").to_i + 1
+        @bay= Bay.new(:sm_bay_id =>  maximum_bay_add, 
+                         :cl_bay_id => params[:cl_bay_id],
                          :aisle_id     => params[:aisle_id],
-                         :noof_pos     => params[:noof_pos],
-                         :row_aisle    => params[:row_aisle],
-                         :properties1 => params[:properties1],
-                         :properties2 => params[:properties2], 
-                         :properties3 => params[:properties3]
+                         :description  => params[:description],
+                         :no_of_level_bay  => params[:no_of_level_bay],
+                         :attribute1 => params[:attribute1],
+                         :attribute2 => params[:attribute2], 
+                         :attribute3 => params[:attribute3],
+                         :attribute4 => params[:attribute4],
+                         :attribute5 => params[:attribute5],
+                         :attribute6 => params[:attribute6],
+                         :attribute7 => params[:attribute7],
+                         :attribute8 => params[:attribute8]    
                          
                        )
         
-         @bay.save         
+         @bay.save 
+         create_level
+         
 end
     if request.xhr?
       render :json => @bay
     end
  end
  
+ def create_level
+   levelvalue = params[:no_of_level_bay ].to_i
+         max_levels = Level.where(:bay_id => @bay.id).maximum("sm_bay_id")             
+          (1..levelvalue).each do |lev|
+             @levels = Level.new(:sm_level_id     => max_levels.to_i + lev,
+                             :sm_bay_id           => @bay.sm_bay_id,
+                             :sm_aisle_id         => @bay.sm_aisle_id,
+                             :sm_zone_id          => @bay.sm_zone_id,
+                             :sm_warehouse_id     => @bay.sm_warehouse_id,
+                             :bay_id              => @bay.id,
+                             :cl_level_id         => "",
+                             :cl_bay_id           => @bay.cl_bay_id,
+                             :cl_aisle_id         => @bay.cl_aisle_id,
+                             :cl_zone_id          => @bay.cl_zone_id,
+                             :cl_warehouse_id     => @bay.cl_warehouse_id,
+                             :no_of_pos_level    => params[:no_of_pos_level]
+                          )
+             @levels.save
+         end        
+ end
 end
