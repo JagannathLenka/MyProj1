@@ -33,11 +33,13 @@ class BaysmaintenanceController < ApplicationController
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8]    
                                 })
+                                
+                  create_level              
 
   when "add"
         maximum_bay_add = Bay.maximum("sm_bay_id").to_i + 1
         @bay= Bay.new(:sm_bay_id =>  maximum_bay_add, 
-                         cl_bay_id => params[:cl_bay_id],
+                         :cl_bay_id => params[:cl_bay_id],
                          :aisle_id     => params[:aisle_id],
                          :description  => params[:description],
                          :no_of_level_bay  => params[:no_of_level_bay],
@@ -52,11 +54,33 @@ class BaysmaintenanceController < ApplicationController
                          
                        )
         
-         @bay.save         
+         @bay.save 
+         create_level
+         
 end
     if request.xhr?
       render :json => @bay
     end
  end
  
+ def create_level
+   levelvalue = params[:no_of_level_bay ].to_i
+         max_levels = Level.where(:bay_id => @bay.id).maximum("sm_bay_id")             
+          (1..levelvalue).each do |lev|
+             @levels = Level.new(:sm_level_id     => max_levels.to_i + lev,
+                             :sm_bay_id           => @bay.sm_bay_id,
+                             :sm_aisle_id         => @bay.sm_aisle_id,
+                             :sm_zone_id          => @bay.sm_zone_id,
+                             :sm_warehouse_id     => @bay.sm_warehouse_id,
+                             :bay_id              => @bay.id,
+                             :cl_level_id         => "",
+                             :cl_bay_id           => @bay.cl_bay_id,
+                             :cl_aisle_id         => @bay.cl_aisle_id,
+                             :cl_zone_id          => @bay.cl_zone_id,
+                             :cl_warehouse_id     => @bay.cl_warehouse_id,
+                             :no_of_pos_level    => params[:no_of_pos_level]
+                          )
+             @levels.save
+         end        
+ end
 end

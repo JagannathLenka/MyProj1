@@ -33,7 +33,6 @@ class ZonemaintenanceController < ApplicationController
                                      :description => params[:description],
                                      :no_of_aisles_zone => params[:no_of_aisles_zone],
                                      :no_of_bays_aisle => params[:no_of_bays_aisle],
-                                     :no_of_levels_aisle => params[:no_of_levels_aisle],
                                      :attribute1 => params[:attribute1],
                                      :attribute2 => params[:attribute2], 
                                      :attribute3 => params[:attribute3],
@@ -55,7 +54,6 @@ class ZonemaintenanceController < ApplicationController
                                      :description => params[:description],
                                      :no_of_aisles_zone => params[:no_of_aisles_zone],
                                      :no_of_bays_aisle => params[:no_of_bays_aisle],
-                                     :no_of_levels_aisle => params[:no_of_levels_aisle],
                                      :attribute1 => params[:attribute1],
                                      :attribute2 => params[:attribute2], 
                                      :attribute3 => params[:attribute3],
@@ -108,7 +106,8 @@ def create_aisles_and_bays
                              :aisle_id            => @aisle.id,
                              :cl_bay_id           => "",
                              :cl_aisle_id         => @aisle.cl_aisle_id,
-                             :cl_zone_id          => @aisle.cl_warehouse_id,
+                             :cl_zone_id          => @aisle.cl_zone_id,
+                             :cl_warehouse_id     => @aisle.cl_warehouse_id,
                              :no_of_level_bay     => params[:no_of_level_bay]
                           )
              @bays.save
@@ -119,7 +118,7 @@ def create_aisles_and_bays
   
       
 end
-
+=begin
  def create_level
   
   levelval = params[:nooflevel_aisle].to_i
@@ -133,12 +132,9 @@ end
                          :properties3 => "",
                       
                         )
-              @lval.save
-              
+              @lval.save              
         end
 
- 
- 
    end
-
+=end
 end

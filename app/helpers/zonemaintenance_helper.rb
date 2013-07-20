@@ -24,7 +24,7 @@ module ZonemaintenanceHelper
         { :name => 'no_of_aisles_zone',    :index => 'no_of_aisles_zone',     :width => 150,  :align => 'center', :editable => true },
         { :name => 'no_of_aisles_zone_hidden',    :index => 'no_of_aisles_zone_hidden',     :width => 100,  :align => 'center', hidden:true, :editable => true },
         { :name => 'no_of_bays_aisle',    :index => 'no_of_bays_aisle',     :width => 150,  :align => 'center', :editable => true },
-        { :name => 'no_of_levels_aisle',    :index => 'no_of_levels_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'} },
+        { :name => 'no_of_levels_aisle',    :index => 'no_of_levels_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'},:hidden => true},
         { :name => 'attribute1',  :index => 'attribute1',   :width => 150,   :align => 'center', :editable => true},
         { :name => 'attribute2',     :index => 'attribute2',      :width => 150,   :align => 'left', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',    :width => 150,   :align => 'left', :editable => true },

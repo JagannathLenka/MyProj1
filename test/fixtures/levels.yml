@@ -7,7 +7,6 @@ one:
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
   bay_id: MyString
   cl_level_id: MyString
   cl_bay_id: MyString
@@ -15,7 +14,7 @@ one:
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
-  no_of_level_bay: MyString
+  no_of_pos_level: MyString
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString
@@ -32,7 +31,6 @@ two:
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
   bay_id: MyString
   cl_level_id: MyString
   cl_bay_id: MyString
@@ -40,7 +38,7 @@ two:
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
-  no_of_level_bay: MyString
+  no_of_pos_level: MyString
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString
