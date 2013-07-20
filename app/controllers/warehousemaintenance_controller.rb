@@ -2,8 +2,8 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
 
-    @columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'atrribute1','atrribute2','atrribute3','atrribute4','atrribute5','atrribute6','atrribute7','atrribute8' ]
-    @warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , atrribute1 , atrribute2 , atrribute3 , atrribute4, atrribute5, atrribute6 , atrribute7 , atrribute8 ").paginate(
+    @columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
+    @warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ").paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -23,7 +23,7 @@ class WarehousemaintenanceController < ApplicationController
   case params[:oper]
   when "edit"
         @warehouse = Warehouse.find_by_id(params[:id])
-        @warehouse.update_atrributes({
+        @warehouse.update_attributes({
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :client_id => params[:client_id],
                                    :description => params[:description],
@@ -42,10 +42,10 @@ class WarehousemaintenanceController < ApplicationController
                                    :client_id => params[:client_id],
                                    :description => params[:description],
                                    :no_of_zones => params[:no_of_zones],
-                                   :atrribute1 => params[:atrribute1],
-                                   :atrribute2 => params[:atrribute2], 
-                                   :atrribute3 => params[:atrribute3],
-                                   :atrribute4 => params[:atrribute4]
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4]
           )
         
          @warehouse.save 

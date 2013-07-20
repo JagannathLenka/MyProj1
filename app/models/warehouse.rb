@@ -1,3 +1,3 @@
 class Warehouse < ActiveRecord::Base
-  attr_accessible :atrribute1, :atrribute2, :atrribute3, :atrribute4, :atrribute5, :atrribute6, :atrribute7, :atrribute8, :cl_warehouse_id, :client_id, :description, :no_of_zones, :sm_warehouse_id
+  attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_warehouse_id, :client_id, :description, :no_of_zones, :sm_warehouse_id
 end
