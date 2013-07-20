@@ -9,23 +9,36 @@ def index
   #aisle=Aisle.all
   aisle = Aisle.where(zone_id: params[:id])
   aisle.each do |aislevalue|
-  bay= Bay.where(aisle_id: aislevalue.id)
-  bayhash = Hash.new
+  bay= Bay.where(aisle_id: aislevalue.id).order("attribute1")
+  save_attribute1 =""   
+  @bayhash = Hash.new 
   
-  bayhash= bayhash.merge({:aisleseparation => aislevalue.attribute1})
-    
   bay.each do |bayvalue|
+   
+    
+    if save_attribute1 != bayvalue.attribute1 {
+         
+        
+        if bayvalue.attribute1 == '1' 
+             @bayhash= @bayhash.merge({:aisleseparation => 'drivepath'})
+        else
+             @bayhash= @bayhash.merge({:aisleseparation => 'divider'})
+        end        
+        save_attribute1 = bayvalue.attribute1
+    }
+    
+    end
       if bayvalue.cl_bay_id.blank?
         customer_bay_id = bayvalue.id
       else
         customer_bay_id = bayvalue.cl_bay_id
       end
       baytype =  bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1 
-      bayhash= bayhash.merge({bayvalue.id =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
+      @bayhash= @bayhash.merge({bayvalue.id =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
       
     end
       
-      @aislehash = @aislehash.merge(aislevalue.id => bayhash)
+      @aislehash = @aislehash.merge(aislevalue.id => @bayhash)
 
   end
 end

@@ -64,23 +64,24 @@ ActiveRecord::Schema.define(:version => 20130719053524) do
   create_table "levels", :force => true do |t|
     t.string   "level_id"
     t.string   "level_customerid"
-    t.string   "zone_id"
     t.string   "properties1"
     t.string   "properties2"
     t.string   "properties3"
+    t.string   "zone_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
 
   create_table "positions", :force => true do |t|
     t.string   "pos_id"
+    t.string   "pos_customerid"
     t.string   "bay_id"
     t.string   "level_id"
     t.string   "properties1"
     t.string   "properties2"
     t.string   "properties3"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "warehouses", :force => true do |t|
