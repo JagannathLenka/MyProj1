@@ -9,6 +9,7 @@
         #area 	          { float: left;  height: 400px; width: 40%; background: white; border: 1px solid #000; }             
 		.col              { float: left;  height: 20px; width: 80px;}
         .bay              { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+        .reserve          { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: orange;}
 		.bay_Empty        { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
 		.bay_draggedhelper{ float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
 		.aisle_divider    { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
@@ -164,19 +165,20 @@ var indexHTML = {
 			});
 
 		   $(function() {
+		   	id = $(this).closest('div').attr('id');
 	        $('.bay').contextPopup({
-	          title: 'My Popup Menu',
+	          title: 'Bay Update',
 	          items: [
-	            {label:'Some Item',                  action:function() { alert('clicked 1') } },
-	            {label:'Another Thing',               action:function() { alert('clicked 2') } },
-	            {label:'Blah Blah',                   action:function() { alert('clicked 3') } },
+	            {label:'Reserve bay',                  action:function() { alert(id); $('#109').attr('class', 'reserve') } },
+	            {label:'Empty bay',                    action:function() { alert('clicked 2') } },
+	            {label:'Delete bay',                   action:function() { alert('clicked 3') } },
 	            null, // divider
-	            {label:'Sheep',                  action:function() { alert('clicked 4') } },
-	            {label:'Cheese',                           action:function() { alert('clicked 5') } },
-	            {label:'Bacon',          action:function() { alert('clicked 6') } },
+	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
+	            {label:'Edit bay',                     action:function() { alert('clicked 5') } },
+	            {label:'Merge bay',         		   action:function() { alert('clicked 6') } },
 	            null, // divider
 	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
-	            {label:'Flutters',                          action:function() { alert('clicked 8') } }
+	            {label:'Close',                        action:function() { alert('clicked 8') } }
 	          ]
 	        });
 	     });

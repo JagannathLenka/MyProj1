@@ -32,7 +32,7 @@ class ZonemaintenanceController < ApplicationController
                                      :cl_zone_id => params[:cl_zone_id],
                                      :description => params[:description],
                                      :no_of_aisles_zone => params[:no_of_aisles_zone],
-                                     :no_of_bays_aisle => params[:no_of_bays_aisle],
+                                     #:no_of_bays_aisle => params[:no_of_bays_aisle],
                                      :attribute1 => params[:attribute1],
                                      :attribute2 => params[:attribute2], 
                                      :attribute3 => params[:attribute3],
@@ -42,7 +42,7 @@ class ZonemaintenanceController < ApplicationController
                                      :attribute7 => params[:attribute7],
                                      :attribute8 => params[:attribute8]    
             })
-           create_aisles_and_bays 
+           create_aisles
            #create_level
            
     when "add"
@@ -53,7 +53,7 @@ class ZonemaintenanceController < ApplicationController
                                      :cl_zone_id => params[:cl_zone_id],
                                      :description => params[:description],
                                      :no_of_aisles_zone => params[:no_of_aisles_zone],
-                                     :no_of_bays_aisle => params[:no_of_bays_aisle],
+                                     #:no_of_bays_aisle => params[:no_of_bays_aisle],
                                      :attribute1 => params[:attribute1],
                                      :attribute2 => params[:attribute2], 
                                      :attribute3 => params[:attribute3],
@@ -65,7 +65,7 @@ class ZonemaintenanceController < ApplicationController
 
             )
            @zone.save
-           create_aisles_and_bays
+           create_aisles
            #create_level
     end
   
@@ -73,15 +73,14 @@ class ZonemaintenanceController < ApplicationController
       if request.xhr?
         render :json => @zone
       end
+end
 
- end
 
-
-def create_aisles_and_bays
+def create_aisles
 
          aislevalue = params[:no_of_aisles_zone].to_i
          hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
-         bayvalue = params[:no_of_bays_aisle].to_i
+         #bayvalue = params[:no_of_bays_aisle].to_i
          max_aisle = Aisle.where(:zone_id => params[:id]).maximum("sm_aisle_id")
          
            diff_aislevalue = aislevalue - hidden_aislevalue
@@ -96,7 +95,10 @@ def create_aisles_and_bays
                               :cl_warehouse_id    => @zone.cl_warehouse_id
                           )
              @aisle.save
-
+   end
+ 
+end
+=begin
           max_bays = Bay.where(:aisle_id => @aisle.id).maximum("sm_bay_id")             
           (1..bayvalue).each do |b|
              @bays = Bay.new(:sm_bay_id           => max_bays.to_i + b,
@@ -118,7 +120,7 @@ def create_aisles_and_bays
   
       
 end
-=begin
+
  def create_level
   
   levelval = params[:nooflevel_aisle].to_i
@@ -137,4 +139,5 @@ end
 
    end
 =end
+ 
 end

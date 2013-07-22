@@ -10,7 +10,7 @@ module WarehousemaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
       
-      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:editable => false, formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},

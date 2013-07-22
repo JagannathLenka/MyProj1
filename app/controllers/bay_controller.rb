@@ -28,7 +28,7 @@ def index
           end
           
           baytype =  bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
-          @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute1, :customerid => customer_bay_id}})
+          @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
           
     
       end
@@ -47,7 +47,7 @@ def create
        newbay= Bay.where("id = ?", params[:bay][:bay_id] ).first
        newbay.cl_bay_id = params[:bay][:customer_bay_id] 
        newbay.save
-       render text: newbay.bay_id 
+       render text: newbay.cl_bay_id 
        
 #Updating class and title after dragging  
  

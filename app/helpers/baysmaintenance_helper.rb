@@ -11,7 +11,7 @@ module BaysmaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
      
-      :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'left', :editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
