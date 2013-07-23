@@ -34,10 +34,12 @@ class WarehousemaintenanceController < ApplicationController
                                    :attribute4 => params[:attribute4]
                                         
           })
+          
+          create_zones
 
   when "add"
-        maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i + 1
-        @warehouse= Warehouse.new( :sm_warehouse_id => maximum_warehouse_id ,
+        @maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i + 1
+        @warehouse= Warehouse.new( :sm_warehouse_id => @maximum_warehouse_id ,
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :client_id => params[:client_id],
                                    :description => params[:description],
@@ -50,28 +52,40 @@ class WarehousemaintenanceController < ApplicationController
         
          @warehouse.save 
          
-         
+         create_zones
+                             
+                               
+end
+    if request.xhr?
+      render :json => @warehouse
+    end
+end    
+    def create_zones
+         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id")
          zonevalue = params[:no_of_zones].to_i
          hidden_zonevalue = params[:no_of_zones_hidden].to_i
-         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id")
-         if(zonevalue > hidden_zonevalue)
+      if(zonevalue > hidden_zonevalue)
          diff_zonevalue = zonevalue - hidden_zonevalue
          
          (1..diff_zonevalue).each do |z| 
          
                      Zone.create(
-                                  :sm_warehouse_id => maximum_warehouse_id ,
+                                  :sm_warehouse_id => @warehouse.sm_warehouse_id,
                                   :sm_zone_id  => max_zone. to_i + z,
                                   :warehouse_id => @warehouse.id,
                                   :cl_warehouse_id => params[:cl_warehouse_id]
                                )
                            end 
                            
-          end                 
-                               
+      else
+            
+            flash.alert = "You must have the authority"
+            
+      end
+          
+    
+   end
+ 
+
 end
-    if request.xhr?
-      render :json => @warehouse
-    end
- end
-end
+

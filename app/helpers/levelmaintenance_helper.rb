@@ -13,13 +13,13 @@ module LevelmaintenanceHelper
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_level_id',    :index => 'sm_level_id',     :width => 55,  :align => 'center', :editable => false, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'} },
-        { :name => 'cl_level_id',    :index => 'cl_level_id',     :width => 55,  :align => 'center', :editable => true },
+        { :name => 'cl_level_id',    :index => 'cl_level_id',     :width => 55,  :align => 'center', :editable => true,editrules:{required:true} },
         { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'left', :editable => false},
         { :name => 'description',  :index => 'description',   :width => 120,   :align => 'left', :editable => true},
         { :name => 'sm_bay_id',   :index => 'sm_bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_bay_id',   :index => 'cl_bay_id',    :width => 60,   :align => 'center', :editable => false },
         { :name => 'bay_id',   :index => 'bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
-        { :name => 'no_of_pos_level',   :index => 'no_of_pos_level',    :width => 60,   :align => 'center', :editable => true},
+        { :name => 'no_of_pos_level',   :index => 'no_of_pos_level',    :width => 60,   :align => 'center', :editable => true,editrules:{required:true,number:true}},
         { :name => 'sm_aisle_id',   :index => 'sm_aisle_id',    :width => 60,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_aisle_id',   :index => 'cl_aisle_id',    :width => 60,   :align => 'center', :editable => false, :hidden => false},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 60,   :align => 'center', :editable => false, :hidden => true},
@@ -66,7 +66,7 @@ module LevelmaintenanceHelper
     
     pager_button = [:navButtonAdd, "#level_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
 
-    jqgrid_api 'level_list', grid, pager, pager_button, options
+    jqgrid_api 'level_list', grid, pager,  options
 
   end
 
