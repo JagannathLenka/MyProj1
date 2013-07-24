@@ -11,7 +11,7 @@ module BaysmaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
      
-      :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'left', :editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
@@ -26,6 +26,7 @@ module BaysmaintenanceHelper
         { :name => 'sm_warehouse_id',:index => 'sm_warehouse_id',   :width => 80,   :align => 'center', :editable => false,:hidden => true },
         { :name => 'cl_warehouse_id', :index => 'cl_warehouse_id',   :width => 80,   :align => 'center', :editable => false},
         { :name => 'no_of_level_bay', :index => 'no_of_level_bay',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true,number:true}},
+        { :name => 'no_of_level_bay_hidden', :index => 'no_of_level_bay_hidden',   :width => 80,   :align => 'center', :hidden => true},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true}},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true}},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,editrules:{required:true}},

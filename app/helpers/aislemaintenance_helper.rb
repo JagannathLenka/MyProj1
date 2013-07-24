@@ -26,7 +26,7 @@ module AislemaintenanceHelper
         { :name => 'no_of_bays_aisle_hidden',:index => 'no_of_bays_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
         { :name => 'attribute1',   :index => 'attribute1',   :width => 90,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 60,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 60,   :align => 'center', :editable => true , edittype:"select", editoptions: {value: "L:Single Side Aisle- Left; R:Single Side Aisle- Right; LR:Double Side Aisle" }},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 60,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "L:Single Side Aisle- Left;R:Single Side Aisle- Right;LR:Double Side Aisle" }},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 60,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute6',   :index => 'attribute6',   :width => 60,   :align => 'center', :editable => true, :hidden => true },

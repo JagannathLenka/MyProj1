@@ -77,11 +77,19 @@ end
                                )
                            end 
                            
-      else
-            
-            flash.alert = "You must have the authority"
-            
+      
       end
+      
+      #When there is no change in zone value but just change in other parameters
+        if(zonevalue = hidden_zonevalue)
+             zone_set = Zone.where(:warehouse_id => @warehouse.id.to_s)
+             zone_set.each do |zones| 
+                 zones.update_attributes({ 
+                                  :cl_warehouse_id    => @warehouse.cl_warehouse_id
+                                 
+                                  })
+                  end      
+        end         
           
     
    end

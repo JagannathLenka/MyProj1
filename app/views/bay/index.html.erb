@@ -6,15 +6,16 @@
 	  <title>Warehouse Layout</title>
 	  <style>
 		#content 	      { float: left;  height: 510px; width: 100%; background: white; }
-        #area 	          { float: left;  height: 400px; width: 40%; background: white; border: 1px solid #000; }             
-		.col              { float: left;  height: 20px; width: 80px;}
-        .bay              { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-        .reserve          { float: left;  height: 20px; width: 80px; border: 1px solid #000; background: orange;}
-		.bay_Empty        { float: left;  height: 20px; width: 80px; border: 1px solid #999; background: white;}
-		.bay_draggedhelper{ float: left;  height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-		.aisle_divider    { float: left;  height: 2px; width: 327px; border: 2px solid #999; background: black}
-		.aisle_drivepath  { float: left;  height: 5px; width: 324px; border: 0px solid #000; background: white}
-        #positionspace    { float: left;  height: 400px; width: 55%; background: white; border: 1px solid #000;; }        
+        #area 	          { float: left;  height: 400px; width: 80%; background: white; border: 1px solid #000; }             
+		.col              { float: left;  height: 20px;  width: 80px;}
+        .bay              { float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+        .reserve          { float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: orange;}
+		.bay_Empty        { float: left;  height: 20px;  width: 80px; border: 1px solid #999; background: white;}
+		.bay_draggedhelper{ float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
+		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 0px solid #000; background: white}
+		.aisle_Empty      { float: left;  height: 20px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
+        #positionspace    { float: left;  height: 400px; width: 18%; background: white; border: 1px solid #000;; }        
 
 body {
 	padding: 40px;
@@ -165,11 +166,11 @@ var indexHTML = {
 			});
 
 		   $(function() {
-		   	id = $(this).closest('div').attr('id');
-	        $('.bay').contextPopup({
+		   
+	        $('.bay, aisle_Empty').contextPopup({
 	          title: 'Bay Update',
 	          items: [
-	            {label:'Reserve bay',                  action:function() { alert(id); $('#109').attr('class', 'reserve') } },
+	            {label:'Reserve bay',                  action:function() { $('#'+ id).attr('class', 'reserve') } },
 	            {label:'Empty bay',                    action:function() { alert('clicked 2') } },
 	            {label:'Delete bay',                   action:function() { alert('clicked 3') } },
 	            null, // divider
@@ -250,26 +251,45 @@ var indexHTML = {
 		<%= link_to image_tag("compass.jpg", alt: "direction", :width => "80px", :height => "80px"), '' %>
 		<br>
 	</div>
+
 <div id="content" class="content">
 
 
    <div id="area" class="area"> 
-   	
+
    	<table border="0" id ="bayTable" style="border-collapse:collapse;">
    	<% @aislehash.each do |aisle, aislevalue| %>
 		
     	<% aislevalue.each do |row, rowvalue| %>
- 		 <tr>
+    	
+    	   <%if row == "aisletype" %>
+    	   			 <%if rowvalue=="B"%>
+	    	   			 <tr><td><div  class="aisle_Empty"> </div></td>
+	    	   			 	<td class="bay">Aisle: <%= aisle %></td>
+	    	   			 </tr> 	    	             
+	    	          <%end%>
+	    	          
+	    	          <% @aisletype = rowvalue %>
+	    	   <% else %>
+ 		        <tr>
  				<%if row  == "R" %> 				
 					<td> 
  						<div  class="aisle_drivepath"> </div>   	       
-	   	       			 <hr style="width: 320px; float: left" color="blue">   	       
+	   	       			 <hr style="width: <%= @aisle_width %>px; float: left" color="blue">   	       
 	   	      		    <div class="aisle_drivepath"> </div> 
           			</td>
           			<td class="bay">Aisle: <%= aisle %></td>
           			</tr><tr>
           		<% end %>
           		
+ 				<%if row  == "L" %> 				
+					<td> 
+ 						<div  class="aisle_divider"> </div>   	       
+          			</td>
+          			</tr><tr>
+          		<% end %>
+
+
           		<% rowvalue.each do |bay, bayvalue| %>	
           			 <td class="col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
@@ -277,10 +297,19 @@ var indexHTML = {
 		   	    </div>
 		   	    </td>
 	   		<% end %>
-	   		</tr>
-	   <% end %>		
-         
-  <%end%>
+	   		<%if row == "L" and @aisletype== "L" %>
+	   			</tr><tr>
+	   			<td>
+	   		   	<div  class="aisle_drivepath"> </div>   	       
+   			 	<hr style="width: <%= @aisle_width %>px; float: left" color="blue">   	       
+	   	      	<div class="aisle_drivepath"> </div> 
+	   			</td>
+	   			<td class="bay">Aisle: <%= aisle %></td>
+	   		<% end %>		
+       		</tr>  
+    	 <% end %>
+    <% end %>
+  <% end %>
    
  </table>
 

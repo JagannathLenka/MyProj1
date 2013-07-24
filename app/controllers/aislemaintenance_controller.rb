@@ -75,7 +75,7 @@ class AislemaintenanceController < ApplicationController
  #Create and save atribute for bays
  def create_bays
    
-     max_bays  = Bay.where(:aisle_id => @aisles.id).maximum("sm_bay_id")
+     max_bays  = Bay.where(:aisle_id => @aisles.id.to_s).maximum("sm_bay_id")
      bayvalue = params[:no_of_bays_aisle].to_i
      hidden_bayvalue = params[:no_of_bays_aisle_hidden].to_i 
      if(bayvalue > hidden_bayvalue)
@@ -105,7 +105,7 @@ class AislemaintenanceController < ApplicationController
      
      #When there is no change in aisle value but just change in other parameters
      if(bayvalue = hidden_bayvalue)
-             bay_set = Bay.where(:aisle_id => @aisles.id)
+             bay_set = Bay.where(:aisle_id => @aisles.id.to_s)
              counter = 0
              bay_set.each do |bays| 
                  counter = counter + 1

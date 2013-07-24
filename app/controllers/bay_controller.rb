@@ -7,36 +7,54 @@ def index
   @aislehash=Hash.new
   @bayhash = Hash.new
   @rowhash = Hash.new
+  max_bay = 0
    
   aisle = Aisle.where(zone_id: params[:id])
+  
   aisle.each do |aislevalue|
-      @bay= Bay.where(aisle_id: aislevalue.id).order("attribute3 ASC, id ASC")
+      @bay= Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
       
-      save_attribute3 = @bay[1].attribute3
+      
+      if @bay[1].nil? 
+        @rowhash   = @rowhash.merge({"aisletype" => "B"})    
+        
+      else
+        @rowhash = @rowhash.merge({"aisletype" => aislevalue.attribute3})
+        save_attribute3 = @bay[1].attribute3
+      end
+      bay_ctr = 0
       @bay.each do |bayvalue|
 
+  
+         
          if save_attribute3 != bayvalue.attribute3 
             @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
             save_attribute3 = bayvalue.attribute3              
             @bayhash= Hash.new
+            max_bay = max_bay > bay_ctr ? max_bay : bay_ctr
+            bay_ctr = 0
          end
-
+         bay_ctr = bay_ctr + 1 
          if bayvalue.cl_bay_id.blank?
             customer_bay_id = bayvalue.id
-         else
+          else
             customer_bay_id = bayvalue.cl_bay_id
          end
+
+         #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
          @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
-          
-    
+   
       end
-      @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
-      @aislehash = @aislehash.merge(aislevalue.id.to_s => @rowhash)
+      @rowhash   = @rowhash.merge({save_attribute3 => @bayhash})
+      @aislehash = @aislehash.merge(aislevalue.cl_aisle_id.blank? ? aislevalue.id : aislevalue.cl_aisle_id => @rowhash)
+      max_bay = max_bay > bay_ctr ? max_bay : bay_ctr
       @rowhash = Hash.new
-      @bayhash = Hash.new    
+      @bayhash = Hash.new   
+      bay_ctr = 0 
     end
+    @aisle_width = (max_bay) * 82
 end
 
 def create

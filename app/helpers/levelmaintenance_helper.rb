@@ -9,7 +9,7 @@ module LevelmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['Id','Sequence','Level id(cust)','Clent Id','Description','sm_bay_id','Bay','bay_id','Position/Level','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence','Level id(cust)','Clent Id','Description','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_level_id',    :index => 'sm_level_id',     :width => 55,  :align => 'center', :editable => false, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'} },
@@ -20,6 +20,7 @@ module LevelmaintenanceHelper
         { :name => 'cl_bay_id',   :index => 'cl_bay_id',    :width => 60,   :align => 'center', :editable => false },
         { :name => 'bay_id',   :index => 'bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'no_of_pos_level',   :index => 'no_of_pos_level',    :width => 60,   :align => 'center', :editable => true,editrules:{required:true,number:true}},
+        { :name => 'no_of_pos_level_hidden',   :index => 'no_of_pos_level',    :width => 60,   :align => 'center', :hidden => true},
         { :name => 'sm_aisle_id',   :index => 'sm_aisle_id',    :width => 60,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_aisle_id',   :index => 'cl_aisle_id',    :width => 60,   :align => 'center', :editable => false, :hidden => false},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 60,   :align => 'center', :editable => false, :hidden => true},
