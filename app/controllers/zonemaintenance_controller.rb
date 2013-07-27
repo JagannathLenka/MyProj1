@@ -79,11 +79,11 @@ end
          aislevalue = params[:no_of_aisles_zone].to_i
          hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
          bayvalue = params[:no_of_bays_aisle].to_i
-         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("sm_aisle_id")
+         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("sm_aisle_id").to_i
          if(aislevalue > hidden_aislevalue)
            diff_aislevalue = aislevalue - hidden_aislevalue
            (1..diff_aislevalue).each do |a|
-           @aisles  = Aisle.new(:sm_aisle_id       => max_aisle.to_i + a,
+           @aisles  = Aisle.new(:sm_aisle_id       => max_aisle + a,
                               :sm_zone_id         =>@zone.sm_zone_id,
                               :sm_warehouse_id    =>@zone.sm_warehouse_id,
                               :zone_id            => @zone.id,

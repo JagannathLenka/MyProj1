@@ -2,7 +2,7 @@ class CreateAisles < ActiveRecord::Migration
   def change
     create_table :aisles do |t|
       t.string :client_id
-      t.string :sm_aisle_id
+      t.integer :sm_aisle_id
       t.string :sm_zone_id
       t.string :sm_warehouse_id
       t.integer :zone_id

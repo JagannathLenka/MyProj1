@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726232314) do
+ActiveRecord::Schema.define(:version => 20130727002526) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_aisle_id"
+    t.integer  "sm_aisle_id"
     t.string   "sm_zone_id"
     t.string   "sm_warehouse_id"
     t.integer  "zone_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130726232314) do
 
   create_table "bays", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_bay_id"
+    t.integer  "sm_bay_id"
     t.string   "sm_aisle_id"
     t.string   "sm_zone_id"
     t.string   "sm_warehouse_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20130726232314) do
 
   create_table "levels", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_level_id"
+    t.integer  "sm_level_id"
     t.string   "sm_bay_id"
     t.string   "sm_aisle_id"
     t.string   "sm_zone_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20130726232314) do
 
   create_table "warehouses", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_warehouse_id"
+    t.integer  "sm_warehouse_id"
     t.string   "cl_warehouse_id"
     t.string   "description"
     t.integer  "no_of_zones"
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20130726232314) do
 
   create_table "zones", :force => true do |t|
     t.string   "client_id"
-    t.string   "sm_zone_id"
+    t.integer  "sm_zone_id"
     t.string   "sm_warehouse_id"
     t.integer  "warehouse_id"
     t.string   "cl_zone_id"

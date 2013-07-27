@@ -64,30 +64,33 @@ end
  end
  
  def create_level
-   levelvalue = params[:no_of_level_bay ]
-   hidden_levelvalue = params[:no_of_level_bay_hidden]
-         max_levels = Level.where(:bay_id => @bay.id).maximum("sm_bay_id")             
-          (1..levelvalue).each do |lev|
-             @levels = Level.new(:sm_level_id     => max_levels + lev,
-                             :sm_bay_id           => @bay.sm_bay_id,
-                             :sm_aisle_id         => @bay.sm_aisle_id,
-                             :sm_zone_id          => @bay.sm_zone_id,
-                             :sm_warehouse_id     => @bay.sm_warehouse_id,
-                             :bay_id              => @bay.id,
-                             :cl_level_id         => "",
-                             :cl_bay_id           => @bay.cl_bay_id,
-                             :cl_aisle_id         => @bay.cl_aisle_id,
-                             :cl_zone_id          => @bay.cl_zone_id,
-                             :cl_warehouse_id     => @bay.cl_warehouse_id,
-                             :no_of_pos_level    => params[:no_of_pos_level]
-                          )
-             @levels.save
-         end  
+         levelvalue = params[:no_of_level_bay ].to_i
+         hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
+         diff_levelvalue = levelvalue - hidden_levelvalue
+         max_levels = Level.where(:bay_id => @bay.id).maximum("sm_level_id").to_i  
+         if( levelvalue >  hidden_levelvalue)          
+            (1..diff_levelvalue).each do |lev|
+               @levels = Level.new(:sm_level_id     => max_levels + lev,
+                               :sm_bay_id           => @bay.sm_bay_id,
+                               :sm_aisle_id         => @bay.sm_aisle_id,
+                               :sm_zone_id          => @bay.sm_zone_id,
+                               :sm_warehouse_id     => @bay.sm_warehouse_id,
+                               :bay_id              => @bay.id,
+                               :cl_level_id         => "",
+                               :cl_bay_id           => @bay.cl_bay_id,
+                               :cl_aisle_id         => @bay.cl_aisle_id,
+                               :cl_zone_id          => @bay.cl_zone_id,
+                               :cl_warehouse_id     => @bay.cl_warehouse_id,
+                               :no_of_pos_level    => params[:no_of_pos_level]
+                            )
+               @levels.save
+            end  
          
+        else 
          #When there is no change in level value but just change in other parameters
-        if( levelvalue =  hidden_levelvalue)
+        
             level_set = Level.where(:bay_id => @bay.id.to_s)
-             level_set.each do |levels| 
+            level_set.each do |levels| 
                   levels.update_attributes({ 
                                   :cl_bay_id         =>@bay.cl_bay_id, 
                                   :cl_aisle_id       =>@bay.cl_aisle_id,
@@ -95,6 +98,6 @@ end
                                   :cl_warehouse_id    =>@bay.cl_warehouse_id
                                   })
                   end      
-        end               
+          end  
  end
 end

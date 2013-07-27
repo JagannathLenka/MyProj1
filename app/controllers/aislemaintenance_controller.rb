@@ -78,10 +78,12 @@ class AislemaintenanceController < ApplicationController
  #Create and save atribute for bays
  def create_bays aisles
    
+    
+     max_bays  = Bay.where(:aisle_id => aisles.id).maximum("sm_bay_id").to_i
+
      bayvalue = params[:no_of_bays_aisle].to_i
      hidden_bayvalue = params[:no_of_bays_aisle_hidden].to_i 
-    
-     max_bays  = Bay.where(:aisle_id => aisles.id.to_s).maximum("sm_bay_id")
+
      if(bayvalue > hidden_bayvalue)
          diff_bayval =  bayvalue - hidden_bayvalue     
           (1.. diff_bayval).each do |b|
@@ -90,7 +92,7 @@ class AislemaintenanceController < ApplicationController
              else
                side_of_aisle = params[:attribute3]
              end  
-             bays = Bay.new(:sm_bay_id           => max_bays.to_i + b,
+             bays = Bay.new(:sm_bay_id           => max_bays + b,
                              :sm_aisle_id         => aisles.sm_aisle_id,
                              :sm_zone_id          => aisles.sm_zone_id,
                              :sm_warehouse_id     => aisles.sm_warehouse_id,
@@ -117,7 +119,7 @@ class AislemaintenanceController < ApplicationController
              bay_set.each do |bays| 
                  counter = counter + 1
                  if params[:attribute3].strip == "LR"
-                   side_of_aisle = counter <= params[:no_of_bays_aisle].to_i/2? "L" : "R" 
+                   side_of_aisle = counter <= params[:no_of_bays_aisle]/2? "L" : "R" 
                  else
                    side_of_aisle = params[:attribute3]
                  end    
@@ -140,14 +142,17 @@ class AislemaintenanceController < ApplicationController
  #create levels for each bays
  def create_levels bay
    
-   levelvalue = params[:no_of_levels_aisles].to_i
-   levelvalue_hidden = params[:no_of_levels_aisles_hidden].to_i
+   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id").to_i
+
+   levelvalue = params[:no_of_levels_aisle].to_i
+   levelvalue_hidden = params[:no_of_levels_aisle_hidden].to_i
    
-   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id")
-   if(levelvalue > levelvalue_hidden)
+
+   if(levelvalue> levelvalue_hidden)
       diff_levelvalue = levelvalue - levelvalue_hidden
       (1..diff_levelvalue).each do |lev|
-                  @levels = Level.new(:sm_level_id     => max_levels.to_i + lev,
+                  @levels = Level.new(
+                             :sm_level_id     => max_levels + lev,
                              :sm_bay_id           => bay.sm_bay_id,
                              :sm_aisle_id         => bay.sm_aisle_id,
                              :sm_zone_id          => bay.sm_zone_id,

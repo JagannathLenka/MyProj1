@@ -34,7 +34,7 @@ module WarehousemaintenanceHelper
       :rowNum => 10,
       :rowList => [10, 20, 30],
       :sortname => 'id',
-      :sortorder => 'desc',
+      :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,

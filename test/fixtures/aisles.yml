@@ -2,7 +2,7 @@
 
 one:
   client_id: MyString
-  sm_aisle_id: MyString
+  sm_aisle_id: 1
   sm_zone_id: MyString
   sm_warehouse_id: MyString
   zone_id: 1
@@ -23,7 +23,7 @@ one:
 
 two:
   client_id: MyString
-  sm_aisle_id: MyString
+  sm_aisle_id: 1
   sm_zone_id: MyString
   sm_warehouse_id: MyString
   zone_id: 1

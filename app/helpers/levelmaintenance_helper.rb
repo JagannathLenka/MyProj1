@@ -42,7 +42,7 @@ module LevelmaintenanceHelper
       :rowNum => 10,
       :rowList => [10, 20, 30],
       :sortname => 'sm_level_id',
-      :sortorder => 'desc',
+      :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Level Maintenance',
       :onSelectRow => "function() {}".to_json_var

@@ -38,8 +38,8 @@ class WarehousemaintenanceController < ApplicationController
           create_zones
 
   when "add"
-        @maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id") + 1
-        @warehouse= Warehouse.new( :sm_warehouse_id => @maximum_warehouse_id ,
+        @maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i 
+        @warehouse= Warehouse.new( :sm_warehouse_id => @maximum_warehouse_id +1 ,
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :client_id => params[:client_id],
                                    :description => params[:description],
@@ -61,28 +61,28 @@ end
     end
 end    
     def create_zones
-         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id")
+         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id").to_i
          zonevalue = params[:no_of_zones].to_i
          hidden_zonevalue = params[:no_of_zones_hidden].to_i
-      if(zonevalue > hidden_zonevalue)
+        if(zonevalue > hidden_zonevalue)
          diff_zonevalue = zonevalue - hidden_zonevalue
          
          (1..diff_zonevalue).each do |z| 
          
                      Zone.create(
+                                  :sm_zone_id  => max_zone + z,
                                   :sm_warehouse_id => @warehouse.sm_warehouse_id,
-                                  :sm_zone_id  => max_zone. to_i + z,
                                   :warehouse_id => @warehouse.id,
                                   :cl_warehouse_id => params[:cl_warehouse_id]
                                )
-                           end 
+        end 
                            
       
       end
       
       #When there is no change in zone value but just change in other parameters
         if(zonevalue = hidden_zonevalue)
-             zone_set = Zone.where(:warehouse_id => @warehouse.id.to_s)
+             zone_set = Zone.where(:warehouse_id => @warehouse.id)
              zone_set.each do |zones| 
                  zones.update_attributes({ 
                                   :cl_warehouse_id    => @warehouse.cl_warehouse_id

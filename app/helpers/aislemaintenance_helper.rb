@@ -41,7 +41,7 @@ module AislemaintenanceHelper
       :rowNum => 10,
       :rowList => [10, 20, 30],
       :sortname => 'sm_aisle_id',
-      :sortorder => 'desc',
+      :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
