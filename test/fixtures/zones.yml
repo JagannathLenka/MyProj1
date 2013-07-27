@@ -3,7 +3,7 @@
 one:
   client_id: MyString
   sm_zone_id: 1
-  sm_warehouse_id: MyString
+  sm_warehouse_id: 1
   warehouse_id: 1
   cl_zone_id: MyString
   cl_warehouse_id: MyString
@@ -23,7 +23,7 @@ one:
 two:
   client_id: MyString
   sm_zone_id: 1
-  sm_warehouse_id: MyString
+  sm_warehouse_id: 1
   warehouse_id: 1
   cl_zone_id: MyString
   cl_warehouse_id: MyString

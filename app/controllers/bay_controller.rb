@@ -7,6 +7,7 @@ def index
   @aislehash=Hash.new
   @bayhash = Hash.new
   @rowhash = Hash.new
+  @bay_width = 80
   max_bay = 0
    
   aisle = Aisle.where(zone_id: params[:id])
@@ -52,7 +53,10 @@ def index
       @bayhash = Hash.new   
       bay_ctr = 0 
     end
-    @aisle_width = (max_bay) * 82
+    while (max_bay) * (@bay_width +2) >= 1000
+       @bay_width = @bay_width - 5
+    end
+        @aisle_width = (max_bay) * (@bay_width +2)
 end
 
 def create

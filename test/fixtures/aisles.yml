@@ -3,8 +3,8 @@
 one:
   client_id: MyString
   sm_aisle_id: 1
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   zone_id: 1
   cl_aisle_id: MyString
   cl_zone_id: MyString
@@ -24,8 +24,8 @@ one:
 two:
   client_id: MyString
   sm_aisle_id: 1
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   zone_id: 1
   cl_aisle_id: MyString
   cl_zone_id: MyString

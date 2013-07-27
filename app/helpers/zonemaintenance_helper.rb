@@ -5,7 +5,8 @@ module ZonemaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
     url = "/zonemaintenance?id=" +  params["id"]
- 
+    editcheckfunc = 'function(postdata, formid) {if (postdata.no_of_aisles_zone < postdata.no_of_aisles_zone_hidden) {return[false, "Can not delete Aisles from this screen, Please use Aisle Maintenance"];} return[true, " "]}'
+    
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -42,7 +43,7 @@ module ZonemaintenanceHelper
       :rowNum => 10,
       :rowList => [10, 20, 30],
       :sortname => 'sm_zone_id',
-      :sortorder => 'desc',
+      :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Zone Maintenance',
       :reloadAfterEdit => true,
@@ -52,7 +53,7 @@ module ZonemaintenanceHelper
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     pager = [:navGrid, "#zone_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true}, 
+                                                       :closeOnEscape => true, beforeSubmit => editcheckfunc.to_json_var}, 
                                                        {:beforeSubmit =>
                                                         "function(postdata, formid) 
                                                                   {
@@ -64,7 +65,6 @@ module ZonemaintenanceHelper
     #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
     pager2 = [:inlineNav, "#zone_pager"]
 
-    
     pager_button = [:navButtonAdd, "#zone_pager", 
                    {:caption => 'Show Layout', :onClickButton => 'function() {
                                           var grid = $("#zone_list");

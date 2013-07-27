@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727002526) do
+ActiveRecord::Schema.define(:version => 20130727060259) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
     t.integer  "sm_aisle_id"
-    t.string   "sm_zone_id"
-    t.string   "sm_warehouse_id"
+    t.integer  "sm_zone_id"
+    t.integer  "sm_warehouse_id"
     t.integer  "zone_id"
     t.string   "cl_aisle_id"
     t.string   "cl_zone_id"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20130727002526) do
   create_table "bays", :force => true do |t|
     t.string   "client_id"
     t.integer  "sm_bay_id"
-    t.string   "sm_aisle_id"
-    t.string   "sm_zone_id"
-    t.string   "sm_warehouse_id"
+    t.integer  "sm_aisle_id"
+    t.integer  "sm_zone_id"
+    t.integer  "sm_warehouse_id"
     t.integer  "aisle_id"
     t.string   "cl_bay_id"
     t.string   "cl_aisle_id"
@@ -65,10 +65,10 @@ ActiveRecord::Schema.define(:version => 20130727002526) do
   create_table "levels", :force => true do |t|
     t.string   "client_id"
     t.integer  "sm_level_id"
-    t.string   "sm_bay_id"
-    t.string   "sm_aisle_id"
-    t.string   "sm_zone_id"
-    t.string   "sm_warehouse_id"
+    t.integer  "sm_bay_id"
+    t.integer  "sm_aisle_id"
+    t.integer  "sm_zone_id"
+    t.integer  "sm_warehouse_id"
     t.integer  "bay_id"
     t.string   "cl_level_id"
     t.string   "cl_bay_id"
@@ -90,14 +90,41 @@ ActiveRecord::Schema.define(:version => 20130727002526) do
   end
 
   create_table "positions", :force => true do |t|
-    t.string   "pos_id"
-    t.string   "bay_id"
-    t.string   "level_id"
-    t.string   "properties1"
-    t.string   "properties2"
-    t.string   "properties3"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "client_id"
+    t.integer  "sm_pos_id"
+    t.integer  "sm_level_id"
+    t.integer  "sm_bay_id"
+    t.integer  "sm_aisle_id"
+    t.integer  "sm_zone_id"
+    t.integer  "sm_warehouse_id"
+    t.string   "sm_barcode"
+    t.integer  "level_id"
+    t.string   "cl_pos_id"
+    t.string   "cl_level_id"
+    t.string   "cl_bay_id"
+    t.string   "cl_aisle_id"
+    t.string   "cl_zone_id"
+    t.string   "cl_warehouse_id"
+    t.string   "cl_barcode"
+    t.string   "description"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.string   "attribute9"
+    t.string   "attribute10"
+    t.string   "attribute11"
+    t.string   "attribute12"
+    t.string   "attribute13"
+    t.string   "attribute14"
+    t.string   "attribute15"
+    t.string   "attribute16"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "warehouses", :force => true do |t|
@@ -121,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20130727002526) do
   create_table "zones", :force => true do |t|
     t.string   "client_id"
     t.integer  "sm_zone_id"
-    t.string   "sm_warehouse_id"
+    t.integer  "sm_warehouse_id"
     t.integer  "warehouse_id"
     t.string   "cl_zone_id"
     t.string   "cl_warehouse_id"

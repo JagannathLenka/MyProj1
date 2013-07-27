@@ -1,20 +1,17 @@
-class CreateLevels < ActiveRecord::Migration
+class CreateAisles < ActiveRecord::Migration
   def change
-    create_table :levels do |t|
+    create_table :aisles do |t|
       t.string :client_id
-      t.integer :sm_level_id
-      t.string :sm_bay_id
-      t.string :sm_aisle_id
-      t.string :sm_zone_id
-      t.string :sm_warehouse_id
-      t.integer :bay_id
-      t.string :cl_level_id
-      t.string :cl_bay_id
+      t.integer :sm_aisle_id
+      t.integer :sm_zone_id
+      t.integer :sm_warehouse_id
+      t.integer :zone_id
       t.string :cl_aisle_id
       t.string :cl_zone_id
       t.string :cl_warehouse_id
       t.string :description
-      t.integer :no_of_pos_level
+      t.integer :no_of_bays_aisle
+      t.integer :no_of_levels_aisle
       t.string :attribute1
       t.string :attribute2
       t.string :attribute3

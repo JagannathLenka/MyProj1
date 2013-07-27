@@ -3,9 +3,9 @@
 one:
   client_id: MyString
   sm_bay_id: 1
-  sm_aisle_id: MyString
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_aisle_id: 1
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   aisle_id: 1
   cl_bay_id: MyString
   cl_aisle_id: MyString
@@ -25,9 +25,9 @@ one:
 two:
   client_id: MyString
   sm_bay_id: 1
-  sm_aisle_id: MyString
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_aisle_id: 1
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   aisle_id: 1
   cl_bay_id: MyString
   cl_aisle_id: MyString

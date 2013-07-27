@@ -3,10 +3,10 @@
 one:
   client_id: MyString
   sm_level_id: 1
-  sm_bay_id: MyString
-  sm_aisle_id: MyString
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_bay_id: 1
+  sm_aisle_id: 1
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   bay_id: 1
   cl_level_id: MyString
   cl_bay_id: MyString
@@ -27,10 +27,10 @@ one:
 two:
   client_id: MyString
   sm_level_id: 1
-  sm_bay_id: MyString
-  sm_aisle_id: MyString
-  sm_zone_id: MyString
-  sm_warehouse_id: MyString
+  sm_bay_id: 1
+  sm_aisle_id: 1
+  sm_zone_id: 1
+  sm_warehouse_id: 1
   bay_id: 1
   cl_level_id: MyString
   cl_bay_id: MyString
