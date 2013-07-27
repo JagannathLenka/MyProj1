@@ -1,16 +1,11 @@
-class CreateZones < ActiveRecord::Migration
+class CreateWarehouses < ActiveRecord::Migration
   def change
-    create_table :zones do |t|
+    create_table :warehouses do |t|
       t.string :client_id
-      t.string :sm_zone_id
       t.string :sm_warehouse_id
-      t.string :warehouse_id
-      t.string :cl_zone_id
       t.string :cl_warehouse_id
       t.string :description
-      t.string :no_of_aisles_zone
-      t.string :no_of_bays_aisle
-      t.string :no_of_levels_aisle
+      t.integer :no_of_zones
       t.string :attribute1
       t.string :attribute2
       t.string :attribute3

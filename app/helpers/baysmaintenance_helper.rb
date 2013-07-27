@@ -27,7 +27,7 @@ module BaysmaintenanceHelper
         { :name => 'cl_warehouse_id', :index => 'cl_warehouse_id',   :width => 80,   :align => 'center', :editable => false},
         { :name => 'no_of_level_bay', :index => 'no_of_level_bay',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true,number:true}},
         { :name => 'no_of_level_bay_hidden', :index => 'no_of_level_bay_hidden',   :width => 80,   :align => 'center', :hidden => true},
-        { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true}},
+        { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true,editrules:{required:true}},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,editrules:{required:true}},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true},

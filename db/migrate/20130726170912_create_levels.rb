@@ -1,18 +1,20 @@
-class CreateBays < ActiveRecord::Migration
+class CreateLevels < ActiveRecord::Migration
   def change
-    create_table :bays do |t|
+    create_table :levels do |t|
       t.string :client_id
+      t.string :sm_level_id
       t.string :sm_bay_id
       t.string :sm_aisle_id
       t.string :sm_zone_id
       t.string :sm_warehouse_id
-      t.string :aisle_id
+      t.integer :bay_id
+      t.string :cl_level_id
       t.string :cl_bay_id
       t.string :cl_aisle_id
       t.string :cl_zone_id
       t.string :cl_warehouse_id
       t.string :description
-      t.string :no_of_level_bay
+      t.integer :no_of_pos_level
       t.string :attribute1
       t.string :attribute2
       t.string :attribute3

@@ -64,11 +64,11 @@ end
  end
  
  def create_level
-   levelvalue = params[:no_of_level_bay ].to_i
-   hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
+   levelvalue = params[:no_of_level_bay ]
+   hidden_levelvalue = params[:no_of_level_bay_hidden]
          max_levels = Level.where(:bay_id => @bay.id).maximum("sm_bay_id")             
           (1..levelvalue).each do |lev|
-             @levels = Level.new(:sm_level_id     => max_levels.to_i + lev,
+             @levels = Level.new(:sm_level_id     => max_levels + lev,
                              :sm_bay_id           => @bay.sm_bay_id,
                              :sm_aisle_id         => @bay.sm_aisle_id,
                              :sm_zone_id          => @bay.sm_zone_id,

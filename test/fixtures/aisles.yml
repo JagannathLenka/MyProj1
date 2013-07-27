@@ -5,12 +5,13 @@ one:
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
+  zone_id: 1
   cl_aisle_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
-  no_of_bays_aisle: MyString
+  no_of_bays_aisle: 1
+  no_of_levels_aisle: 1
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString
@@ -25,12 +26,13 @@ two:
   sm_aisle_id: MyString
   sm_zone_id: MyString
   sm_warehouse_id: MyString
-  zone_id: MyString
+  zone_id: 1
   cl_aisle_id: MyString
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
-  no_of_bays_aisle: MyString
+  no_of_bays_aisle: 1
+  no_of_levels_aisle: 1
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString

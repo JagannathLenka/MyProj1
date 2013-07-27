@@ -25,8 +25,6 @@ def index
       bay_ctr = 0
       @bay.each do |bayvalue|
 
-  
-         
          if save_attribute3 != bayvalue.attribute3 
             @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
             save_attribute3 = bayvalue.attribute3              
@@ -36,15 +34,15 @@ def index
          end
          bay_ctr = bay_ctr + 1 
          if bayvalue.cl_bay_id.blank?
-            customer_bay_id = bayvalue.id
+            cl_bay_id = bayvalue.id
           else
-            customer_bay_id = bayvalue.cl_bay_id
+            cl_bay_id = bayvalue.cl_bay_id
          end
 
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
-         @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute2, :customerid => customer_bay_id}})
+         @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id}})
    
       end
       @rowhash   = @rowhash.merge({save_attribute3 => @bayhash})

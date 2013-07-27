@@ -38,7 +38,7 @@ class WarehousemaintenanceController < ApplicationController
           create_zones
 
   when "add"
-        @maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i + 1
+        @maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id") + 1
         @warehouse= Warehouse.new( :sm_warehouse_id => @maximum_warehouse_id ,
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :client_id => params[:client_id],
