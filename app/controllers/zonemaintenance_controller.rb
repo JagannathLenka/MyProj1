@@ -13,7 +13,10 @@ class ZonemaintenanceController < ApplicationController
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
-  
+   
+    #Get the header details of the zone
+    get_header_details
+      
     if request.xhr? 
       
       render :json => json_for_jqgrid(zone, columns)
@@ -112,5 +115,12 @@ end
                   end      
         end         
     end
+
+
+  def get_header_details
+    warehouse  = Warehouse.find_by_id(params["id"].to_i)
+    @warehouse = warehouse.cl_warehouse_id
+    
+  end
 
 end

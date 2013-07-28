@@ -14,7 +14,9 @@ class AislemaintenanceController < ApplicationController
                    :page     => params[:page],
                    :per_page => params[:rows],
                    :order    => order_by_from_params(params))
-  
+    #Get the header details of the zone
+    get_header_details
+      
     if request.xhr?
       render :json => json_for_jqgrid(aisles, columns)
     end
@@ -119,7 +121,7 @@ class AislemaintenanceController < ApplicationController
              bay_set.each do |bays| 
                  counter = counter + 1
                  if params[:attribute3].strip == "LR"
-                   side_of_aisle = counter <= params[:no_of_bays_aisle]/2? "L" : "R" 
+                   side_of_aisle = counter <= params[:no_of_bays_aisle].to_i/2? "L" : "R" 
                  else
                    side_of_aisle = params[:attribute3]
                  end    
@@ -168,6 +170,16 @@ class AislemaintenanceController < ApplicationController
              @levels.save
       end
    end 
+ end
+ 
+ def get_header_details
+    zone  = Zone.find_by_id(params["id"].to_i)
+    @zone = zone.cl_zone_id
+    
+    warehouse = Warehouse.find_by_id(zone.warehouse_id)
+    @warehouse_id = warehouse.id
+    @warehouse    = warehouse.cl_warehouse_id
+    
  end
 
 end

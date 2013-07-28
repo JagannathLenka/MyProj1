@@ -18,11 +18,12 @@ module AislemaintenanceHelper
                      return[false, "Can not delete Levels from this screen, Please use Level Maintenance"];
                    } 
               return[true, " "]}'
-    addcheckfunc = 'function(postdata, formid) {postdata.pt_zone_id=' + params["id"] + '; return[true, " "]}' 
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_zone_id=' + params["id"] + '; return[true, " "]}'
+     
     showLayout   = 'function() {          
                                           win = window.open("/bay?id=' +params["id"] + '", "_blank");
                                           win.focus();
-                                          }'
+                               }'
 
 
     grid = [{
@@ -76,13 +77,7 @@ module AislemaintenanceHelper
     pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true}, 
                                                        {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.pt_warehouse='1';
-                                                                   postdata.pt_sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                   
-
+                                                        addcheckfunc.to_json_var}, {}, {}, {}]
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     

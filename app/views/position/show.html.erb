@@ -95,6 +95,8 @@ setDragnDrop: function setDragnDrop() {
 		  ui.draggable.element = $(this); 		  
 		  oldTitle = $(this).attr('title');
 		  oldClass = $(this).attr('class');
+		  $(this).removeClass('ui-draggable ui-droppable')
+		  
 		  $(this).attr('title', bay_html_map.title);
 		  $(this).attr('class', bay_html_map.content);
 
@@ -103,6 +105,8 @@ setDragnDrop: function setDragnDrop() {
 		  pos = bay_html_map.pos;
 		  $("#"+pos).attr('title', oldTitle);
 		  $("#"+pos).attr('class', oldClass);
+		  $(this).removeClass('ui-draggable ui-droppable')
+		  
 		  ui.draggable.draggable( 'disable' );
 		  bayHTML.setDragnDrop();
 		  $.post("/position",
@@ -111,10 +115,10 @@ setDragnDrop: function setDragnDrop() {
 		  					"position[dragpos_id]": pos,
 		  					"Position[bay_id]": "<%=@bay_id%>",
 		  					"position[dragpos_class]": oldClass,
-		  					"position[dragpos_title]" :oldTitle,
+		  					"position[dragpos_title]" :oldTitle.substring(6),
 		  					"position[droppos_id]": $(this).attr('id'),
 		  					"position[droppos_class]":bay_html_map.content,
-		  					"position[droppos_title]" :bay_html_map.title
+		  					"position[droppos_title]" :bay_html_map.title.substring(6)
 		  					
 		  				},
 		  				function(data,status)
@@ -132,7 +136,7 @@ setDragnDrop: function setDragnDrop() {
   </head>
   <body>
 
-<div id="position" class="position" style="height: 300px; width: 500px; margin-left: 30px">
+<div id="position" class="position" style="height: 300px; width: 600px; margin-left: 30px">
 
    <div align="center" class="bay"> Bay: <%= @cl_bay_id %> </div>
    
