@@ -34,6 +34,7 @@ class LevelmaintenanceController < ApplicationController
                                      :attribute8 => params[:attribute8]    
                                          
             })
+            create_pos
     when "add"
                  maximum_level_add = Level.maximum("sm_level_id").to_i + 1
                 @level= Level.create(:sm_level_id => maximum_level_add,
@@ -50,7 +51,7 @@ class LevelmaintenanceController < ApplicationController
                                      :attribute7 => params[:attribute7],
                                      :attribute8 => params[:attribute8] 
                 )   
-           
+           create_pos
     end
   
       
@@ -59,11 +60,13 @@ class LevelmaintenanceController < ApplicationController
       end
 
  end
+ 
  def create_pos
+ 
    posvalue = params[:no_of_pos_level].to_i
    posvalue_hidden = params[:no_of_pos_level_hidden].to_i
    diff_posvalue = posvalue - posvalue_hidden
-    max_pos = Positon.where(:level_id => @level.id).maximum("sm_pos_id").to_i
+   max_pos = Position.where(:level_id => @level.id).maximum("sm_pos_id").to_i
     if(posvalue > posvalue_hidden)
       (1..diff_posvalue).each do |p|
          @pos =Position.create(:sm_pos_id => max_pos + p,

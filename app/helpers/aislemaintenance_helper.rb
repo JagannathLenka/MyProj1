@@ -1,16 +1,33 @@
 module AislemaintenanceHelper
     
-    include JqgridsHelper
+  include JqgridsHelper
 
   def aisle_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
     url = "/aislemaintenance?id=" +  params["id"]
-        grid = [{
+    editcheckfunc = 'function(postdata, formid) 
+              {
+                if (postdata.no_of_bays_aisle < postdata.no_of_bays_aisle_hidden) 
+                   {
+                     return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];
+                   } 
+
+                if (postdata.no_of_levels_aisle < postdata.no_of_levels_aisle_hidden) 
+                   {
+                     return[false, "Can not delete Levels from this screen, Please use Level Maintenance"];
+                   } 
+              return[true, " "]}'
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_zone_id=' + params["id"] + '; return[true, " "]}' 
+
+
+    grid = [{
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :colNames => ['Id','Sequence', 'Aisle','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id','Warehouse','Description','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden','Attribute1','Attribute2','Types of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Aisle','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
+        'Warehouse','Description','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden',
+        'Attribute1','Attribute2','Types of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id',  :width => 80, :align => 'center',formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}, :editable => false},
@@ -28,7 +45,7 @@ module AislemaintenanceHelper
         { :name => 'no_of_levels_aisle_hidden',:index => 'no_of_levels_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
         { :name => 'attribute1',   :index => 'attribute1',   :width => 90,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 60,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 60,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "L:Single Side Aisle- Left;R:Single Side Aisle- Right;LR:Double Side Aisle" }},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 90,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "L:Single Side Aisle- Left;R:Single Side Aisle- Right;LR:Double Side Aisle" }},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 60,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute6',   :index => 'attribute6',   :width => 60,   :align => 'center', :editable => true, :hidden => true },

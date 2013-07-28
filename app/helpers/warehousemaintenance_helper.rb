@@ -4,7 +4,7 @@ module WarehousemaintenanceHelper
   def warehouse_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
-     editcheckfunc = 'function(postdata, formid) {if (postdata.no_of_zones < postdata.no_of_zones_hidden) {return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];} return[true, " "]}' 
+    editcheckfunc = 'function(postdata, formid) {if (postdata.no_of_zones < postdata.no_of_zones_hidden) {return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];} return[true, " "]}' 
     grid = [{
       :url => '/warehousemaintenance/',
       :datatype => 'json',
@@ -48,11 +48,8 @@ module WarehousemaintenanceHelper
     pager = [:navGrid, "#warehouse_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var }, 
                                                        {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.pt_warehouse='1';
-                                                                   postdata.pt_sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
+                                                        "function(postdata, formid) {
+                                                        return [true, ' ']}".to_json_var 
                                                                    }, {}, {}, {}]                                                                   
     pager2 = [:inlineNav, "#warehouse_pager"]
     pager_button = [:navButtonAdd, "#warehouse_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]

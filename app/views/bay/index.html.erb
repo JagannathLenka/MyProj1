@@ -6,7 +6,7 @@
 	  <title>Warehouse Layout</title>
 	  <style>
 		#content 	      { float: left;  height: 1000px; width: 100%; background: white; }
-        #area 	          { float: left;  height: 800px; width: 100%; background: white; border: 1px solid #000; }             
+        #area 	          { float: left;  height: 800px; width: 65%; background: white; border: 1px solid #000; }             
 		.col              { float: left;  height: 20px;  width: <%= @bay_width %>px;}
         .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
         .reserve          { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: orange;}
@@ -15,7 +15,7 @@
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
 		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: white}
 		.aisle_Empty      { float: left;  height: 20px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
-        #positionspace    { float: left;  height: 400px; width: 0%; background: white; border: 1px solid #000;; }        
+        #positionspace    { float: left;  height: 400px; width: 30%; background: white; border: 1px solid #000;; }        
 
 body {
 	padding: 40px;
@@ -298,7 +298,6 @@ var indexHTML = {
 	   			
 	   			<td>
    			 	<hr style="width: <%= @aisle_width %>px; float: left" color="blue"> </td>
-   			 	<td></td>
 	   			<td class="bay">Aisle: <%= aisle %></td>
 	   		<% end %>		
        		</tr>  

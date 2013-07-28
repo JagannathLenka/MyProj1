@@ -5,7 +5,14 @@ module ZonemaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
     url = "/zonemaintenance?id=" +  params["id"]
-    editcheckfunc = 'function(postdata, formid) {if (postdata.no_of_aisles_zone < postdata.no_of_aisles_zone_hidden) {return[false, "Can not delete Aisles from this screen, Please use Aisle Maintenance"];} return[true, " "]}'
+    editcheckfunc = 'function(postdata, formid) 
+              {
+               if (postdata.no_of_aisles_zone < postdata.no_of_aisles_zone_hidden) 
+                   {
+                     return[false, "Can not delete Aisles from this screen, Please use Aisles Maintenance"];
+                   } 
+              return[true, " "]}'
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_warehouse_id=' + params["id"] + '; return[true, " "]}' 
     
     grid = [{
       :url => url ,
@@ -53,14 +60,8 @@ module ZonemaintenanceHelper
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     pager = [:navGrid, "#zone_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true, beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.pt_warehouse='1';
-                                                                   postdata.pt_sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                                             
+                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                                             
                                                                                    
     #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
     pager2 = [:inlineNav, "#zone_pager"]

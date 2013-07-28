@@ -8,13 +8,13 @@ class PositionController < ApplicationController
      end   
 #dynamically arranging position and level of the item in the  bay
   
-    id = Bay.where("bay_id = ?", params[:id]).first
+    id = Level.where("level_id = ?", params[:id]).first
     if id.customer_bay_id == ""
       @customer_bay_id = id.bay_id
     else
       @customer_bay_id = id.customer_bay_id
     end
-    @bay_id =id.bay_id
+    @level_id =id.level_id
     
     @levelhash=Hash.new
     level = Level.where(bay_id: params[:id])

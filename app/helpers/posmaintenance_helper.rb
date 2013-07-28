@@ -9,8 +9,11 @@ module PosmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-                     id ,sm_pos_id,cl_pos_id,sm_level_id,cl_level_id, sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , level_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode
-      :colNames => ['Id','Sequence', 'Position','sm_level_id','Level','Bay','Client Id','Description','sm_aisle_id','Aisle','level_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      
+      :colNames => ['Id','Sequence', 'Position','sm_level_id','Level','sm_bay_id', 'Bay',
+        'Client Id','Description','sm_aisle_id','Aisle','level_id','sm_zone_id','Zone', 
+        'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode',
+        'Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_pos_id',  :index => 'sm_pos_id',  :width => 120, :align => 'center', :editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/posmaintenance'}},
@@ -69,7 +72,7 @@ module PosmaintenanceHelper
     #pager2 = [:inlineNav, "#bays_pager"]
 
     
-    pager_button = [:navButtonAdd, "#poss_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
+    pager_button = [:navButtonAdd, "#pos_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
 
     jqgrid_api 'pos_list', grid, pager, options
 

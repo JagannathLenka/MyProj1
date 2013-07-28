@@ -1,2 +1,0 @@
-class PositionmaintenanceController < ApplicationController
-end
