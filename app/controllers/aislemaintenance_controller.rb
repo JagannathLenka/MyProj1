@@ -129,7 +129,7 @@ class AislemaintenanceController < ApplicationController
                                       :cl_zone_id          => aisles.cl_zone_id,
                                       :cl_warehouse_id     => aisles.cl_warehouse_id,
                                       :attribute3          => side_of_aisle,
-                                      :no_of_level_bay     => aisles.no_of_levels_aisles
+                                      :no_of_level_bay     => aisles.no_of_levels_aisle
                                       
                                       })
                                       

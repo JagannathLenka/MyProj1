@@ -14,7 +14,8 @@ def index
   
   aisle.each do |aislevalue|
       @bay= Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
-      
+      @warehouse = aislevalue.cl_warehouse_id
+      @zone      = aislevalue.cl_zone_id
       
       if @bay[1].nil? 
         @rowhash   = @rowhash.merge({"aisletype" => "B"})    
@@ -64,8 +65,8 @@ def create
 #Update the customer id for a bay  
    case params[:bay][:event]
       when "update_position" 
-       newbay= Bay.where("id = ?", params[:bay][:bay_id] ).first
-       newbay.cl_bay_id = params[:bay][:customer_bay_id] 
+       newbay= Bay.find_by_id(params[:bay][:bay_id].to_i)
+       newbay.cl_bay_id = params[:bay][:cl_bay_id] 
        newbay.save
        render text: newbay.cl_bay_id 
        

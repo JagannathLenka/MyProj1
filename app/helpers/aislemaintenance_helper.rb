@@ -19,6 +19,10 @@ module AislemaintenanceHelper
                    } 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_zone_id=' + params["id"] + '; return[true, " "]}' 
+    showLayout   = 'function() {          
+                                          win = window.open("/bay?id=' +params["id"] + '", "_blank");
+                                          win.focus();
+                                          }'
 
 
     grid = [{
@@ -82,10 +86,11 @@ module AislemaintenanceHelper
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     
-    pager_button = [:navButtonAdd, "#aisle_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
-    
+    pager_button = [:navButtonAdd, "#aisle_pager", 
+                   {:caption => 'Show Layout', :onClickButton => showLayout.to_json_var }]
 
-    jqgrid_api 'aisle_list', grid, pager,  options
+
+    jqgrid_api 'aisle_list', grid, pager, pager_button,  options
 
   end
 
