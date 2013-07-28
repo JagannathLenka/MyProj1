@@ -6,31 +6,12 @@ class PositionController < ApplicationController
      else
        
      end   
-#dynamically arranging position and level of the item in the  bay
   
-    id = Level.where("level_id = ?", params[:id]).first
-    if id.customer_bay_id == ""
-      @customer_bay_id = id.bay_id
-    else
-      @customer_bay_id = id.customer_bay_id
-    end
-    @level_id =id.level_id
-    
-    @levelhash=Hash.new
-    level = Level.where(bay_id: params[:id])
-    level.each do |levelvalue|
-      pos = Position.where("level_id = ? AND bay_id = ?", levelvalue.level_id, params[:id])
-      poshash=Hash.new
-      poshash= poshash.merge({:leveltype => levelvalue.properties1})
-      pos.each do |posvalue|
-        poshash = poshash.merge({posvalue.pos_id => {:postype => posvalue.properties1 , :item => posvalue.properties2}})
-        
-      end
-      @levelhash = @levelhash.merge(levelvalue.level_id  => poshash)
-    
-    end
   
-  end
+  
+  
+  
+    end
   
   def create
   
