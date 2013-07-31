@@ -10,7 +10,7 @@ module AislemaintenanceHelper
               {
                 if (postdata.no_of_bays_aisle < postdata.no_of_bays_aisle_hidden) 
                    {
-                     return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];
+                     return[false, "Can not delete bay from this screen, Please use Bays Maintenance"];
                    } 
 
                 if (postdata.no_of_levels_aisle < postdata.no_of_levels_aisle_hidden) 
@@ -75,9 +75,8 @@ module AislemaintenanceHelper
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
     pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true}, 
-                                                       {:beforeSubmit =>
-                                                        addcheckfunc.to_json_var}, {}, {}, {}]
+                                                       :closeOnEscape => true,:beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}] 
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     

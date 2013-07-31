@@ -35,12 +35,12 @@ module ZonemaintenanceHelper
         { :name => 'no_of_levels_aisle',    :index => 'no_of_levels_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'},:hidden => true},
         { :name => 'attribute1',  :index => 'attribute1',   :width => 150,   :align => 'center', :editable => true},
         { :name => 'attribute2',     :index => 'attribute2',      :width => 150,   :align => 'left', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',    :width => 150,   :align => 'left', :editable => true },
-        { :name => 'attribute4',   :index => 'attribute4',    :width => 150,   :align => 'left', :editable => true },
-        { :name => 'attribute5',   :index => 'attribute5',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute6',   :index => 'attribute6',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute7',   :index => 'attribute7',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute8',   :index => 'attribute8',    :width => 150,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute3',   :index => 'attribute3',    :width => 100,   :align => 'left', :editable => true },
+        { :name => 'attribute4',   :index => 'attribute4',    :width => 100,   :align => 'left', :editable => true },
+        { :name => 'attribute5',   :index => 'attribute5',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute6',   :index => 'attribute6',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute7',   :index => 'attribute7',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute8',   :index => 'attribute8',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
 
         
         
@@ -70,6 +70,10 @@ module ZonemaintenanceHelper
                    {:caption => 'Show Layout', :onClickButton => 'function() {
                                           var grid = $("#zone_list");
                                           selectedRowId= grid.jqGrid ("getGridParam","selrow");
+                                          if (selectedRowId == "null"){
+                                            alert("Please select a zone to see the layout");
+                                            return;
+                                          }
                                           win = window.open("/bay?id=" + selectedRowId, "_blank");
                                           win.focus();
                                           }'.to_json_var }]

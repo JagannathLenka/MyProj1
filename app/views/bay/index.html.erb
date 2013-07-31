@@ -5,8 +5,8 @@
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>Warehouse Layout</title>
 	  <style>
-		#content 	      { float: left;  height: 600px; width: 100%; bbackground: #E0E0E0; }
-        #area 	          { float: left;  height: 600px; width: 100%; background: #E0E0E0; border: 0px solid #000; }             
+		#content 	      { float: left;  height: 5000px; width: 100%; background: #E0E0E0; }
+        #area 	          { float: left;  height: 5000px; width: 100%; background: #E0E0E0; border: 0px solid #000; }             
         .aisle            { float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(yellow), to(#F8F8F8));}
 
 		.bay_col          { float: left;  height: 20px;  width: <%= @bay_width %>px;}
@@ -157,7 +157,7 @@ var indexHTML = {
 	  //$(document).ready(function(){  
 	  setClickitem: function setClickitem() {	
 
-		    $('.bay').click(function(){   
+		    $('.bay, bay_Empty').click(function(){   
 
 		    	if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
 

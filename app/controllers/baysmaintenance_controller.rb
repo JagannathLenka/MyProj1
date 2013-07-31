@@ -2,15 +2,15 @@ class BaysmaintenanceController < ApplicationController
   
    # GET /maintenance
   def index
-    @columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
-    @bay = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
+    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
+    bay = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
     if request.xhr?
       #@invoices = 'ok'
-      render :json => json_for_jqgrid(@bay, @columns)
+      render :json => json_for_jqgrid(bay, columns)
     end
 
   end
@@ -19,8 +19,8 @@ class BaysmaintenanceController < ApplicationController
    
   case params[:oper]
   when "edit"
-        @bay = Bay.find_by_id(params[:id])
-        @bay.update_attributes({ 
+        bays = Bay.find_by_id(params[:id])
+        bays.update_attributes({ 
                                    :cl_bay_id => params[:cl_bay_id],
                                    :description => params[:description],
                                    :no_of_level_bay  => params[:no_of_level_bay],
@@ -34,11 +34,11 @@ class BaysmaintenanceController < ApplicationController
                                    :attribute8 => params[:attribute8]    
                                 })
                                 
-                  create_level              
+                  create_level  bays            
 
   when "add"
         maximum_bay_add = Bay.maximum("sm_bay_id").to_i + 1
-        @bay= Bay.new(:sm_bay_id =>  maximum_bay_add, 
+        bays= Bay.new(:sm_bay_id =>  maximum_bay_add, 
                          :cl_bay_id => params[:cl_bay_id],
                          :aisle_id     => params[:aisle_id],
                          :description  => params[:description],
@@ -54,33 +54,33 @@ class BaysmaintenanceController < ApplicationController
                          
                        )
         
-         @bay.save 
-         create_level
+         bays.save 
+         create_level bays
          
 end
     if request.xhr?
-      render :json => @bay
+      render :json => bays
     end
  end
  
- def create_level
+ def create_level bays
          levelvalue = params[:no_of_level_bay ].to_i
          hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
          diff_levelvalue = levelvalue - hidden_levelvalue
-         max_levels = Level.where(:bay_id => @bay.id).maximum("sm_level_id").to_i  
+         max_levels = Level.where(:bay_id => id).maximum("sm_level_id").to_i  
          if( levelvalue >  hidden_levelvalue)          
             (1..diff_levelvalue).each do |lev|
                @levels = Level.new(:sm_level_id     => max_levels + lev,
-                               :sm_bay_id           => @bay.sm_bay_id,
-                               :sm_aisle_id         => @bay.sm_aisle_id,
-                               :sm_zone_id          => @bay.sm_zone_id,
-                               :sm_warehouse_id     => @bay.sm_warehouse_id,
-                               :bay_id              => @bay.id,
+                               :sm_bay_id           => bays.sm_bay_id,
+                               :sm_aisle_id         => bays.sm_aisle_id,
+                               :sm_zone_id          => bays.sm_zone_id,
+                               :sm_warehouse_id     => bays.sm_warehouse_id,
+                               :bay_id              => bays.id,
                                :cl_level_id         => "",
-                               :cl_bay_id           => @bay.cl_bay_id,
-                               :cl_aisle_id         => @bay.cl_aisle_id,
-                               :cl_zone_id          => @bay.cl_zone_id,
-                               :cl_warehouse_id     => @bay.cl_warehouse_id,
+                               :cl_bay_id           => bays.cl_bay_id,
+                               :cl_aisle_id         => bays.cl_aisle_id,
+                               :cl_zone_id          => bayss.cl_zone_id,
+                               :cl_warehouse_id     => bays.cl_warehouse_id,
                                :no_of_pos_level    => params[:no_of_pos_level]
                             )
                @levels.save
@@ -89,13 +89,13 @@ end
         else 
          #When there is no change in level value but just change in other parameters
         
-            level_set = Level.where(:bay_id => @bay.id.to_s)
+            level_set = Level.where(:bay_id => bays.id.to_s)
             level_set.each do |levels| 
                   levels.update_attributes({ 
-                                  :cl_bay_id         =>@bay.cl_bay_id, 
-                                  :cl_aisle_id       =>@bay.cl_aisle_id,
-                                  :cl_zone_id         =>@bay.cl_zone_id,
-                                  :cl_warehouse_id    =>@bay.cl_warehouse_id
+                                  :cl_bay_id         =>bays.cl_bay_id, 
+                                  :cl_aisle_id       =>bays.cl_aisle_id,
+                                  :cl_zone_id         =>bays.cl_zone_id,
+                                  :cl_warehouse_id    =>bays.cl_warehouse_id
                                   })
                   end      
           end  

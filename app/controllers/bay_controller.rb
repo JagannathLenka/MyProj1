@@ -10,7 +10,7 @@ def index
   @bay_width = 80
   max_bay = 0
    
-  aisle = Aisle.where(zone_id: params[:id])
+  aisle = Aisle.where(zone_id: params[:id]).order("id ASC")
   
   aisle.each do |aislevalue|
       @bay= Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")

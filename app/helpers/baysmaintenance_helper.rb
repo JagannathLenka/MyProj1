@@ -6,6 +6,15 @@ module BaysmaintenanceHelper
     
     options = {:on_document_ready => true, :html_tags => false}
     url = "/baysmaintenance?id=" + params["id"]
+    editcheckfunc = 'function(postdata, formid) 
+              {
+                if (postdata.no_of_level_bay < postdata.no_of_level_bay_hidden) 
+                   {
+                     return[false, "Can not delete levels from this screen, Please use Level Maintenance"];
+                   } 
+
+              return[true, " "]}'
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + params["id"] + '; return[true, " "]}'
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -54,14 +63,8 @@ module BaysmaintenanceHelper
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
         pager = [:navGrid, "#bays_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true}, 
-                                                       {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.warehouse_id='1';
-                                                                   postdata.sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                                             
+                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var},
+                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
 
     #pager2 = [:inlineNav, "#bays_pager"]
 
