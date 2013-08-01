@@ -42,7 +42,7 @@ border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px"
   </br>
    <tr>
   
-   <td>
+   <td colspan="3">
 		<% flash.each do |key, value| %>
 		  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
 		<% end %>

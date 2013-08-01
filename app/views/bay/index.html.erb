@@ -1,10 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-  <head>
-	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	  <title>Warehouse Layout</title>
 	  <style>
+	    #main             {width: 100%; height: 600px; border: 0px solid #999; padding: 0px; margin-left:20px;}
 		#content 	      { float: left;  height: 5000px; width: 100%; background: #E0E0E0; }
         #area 	          { float: left;  height: 5000px; width: 100%; background: #E0E0E0; border: 0px solid #000; }             
         .aisle            { float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(yellow), to(#F8F8F8));}
@@ -21,20 +18,14 @@
 
 body {
 	background: #E0E0E0;
-	padding: 40px;
+	padding: 0px;
 	overflow-x: hidden; /* For Opera */
 	-webkit-box-shadow:
 		inset #19d4ff 0 0 0 5px,
-		
-		
-
 }
 
      </style>
      
-	  <%= javascript_include_tag :application %>
-	  <%= yield :head %>
-
       <script type="text/javascript">
       
       //global variable and call initialize function.
@@ -244,16 +235,17 @@ var indexHTML = {
 	}
 	//);	
 
-
 } //End of indexHTML
 
 </script>
 
-  </head>
-<body>
+<% content_for :head do %>
+<%end%>
 
-<div id="main" style="width: 100%; height: 600px; border: 0px solid #999" > 
-	<div id="navingation" style="float: left; left-margin: 10px; width: 100%; height: 80px; border: 0px solid #999" " >
+<body>
+	
+<div id="main" class="main" > 
+	<div id="navingation" style="float: left; left-margin: 20px; width: 100%; height: 80px; border: 0px solid #999" " >
 		
 		<div style="float: left"><%= link_to image_tag("compass.jpg", alt: "direction", :width => "80px", :height => "80px"), '' %></div>
 		<div style="float: right"><h2>Warehouse: <%=@warehouse%></h2> <h3>Zone: <%=@zone%></h3></div>
@@ -324,7 +316,5 @@ var indexHTML = {
 </div>
 
  <div id="positionspace" class= "positionspace"> </div>
-
-  <%= yield %>
-  </body>
+</body>
 </html>
