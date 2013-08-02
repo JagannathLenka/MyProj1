@@ -81,7 +81,7 @@ class AislemaintenanceController < ApplicationController
  def create_bays aisles
    
     
-     max_bays  = Bay.where(:aisle_id => aisles.id).maximum("sm_bay_id").to_i
+     max_bays  = Bay.where(:aisle_id => aisles.id).maximum("sm_bay_id")
 
      bayvalue = params[:no_of_bays_aisle].to_i
      hidden_bayvalue = params[:no_of_bays_aisle_hidden].to_i 
@@ -108,7 +108,7 @@ class AislemaintenanceController < ApplicationController
                              
                           )
              bays.save
-             create_levels bays
+             create_levels bay
          end
                  
      #end
@@ -135,7 +135,7 @@ class AislemaintenanceController < ApplicationController
                                       
                                       })
                                       
-                create_levels bays
+                create_levels bay
               end      
      end         
  end
@@ -144,7 +144,7 @@ class AislemaintenanceController < ApplicationController
  #create levels for each bays
  def create_levels bay
    
-   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id").to_i
+   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id")
 
    levelvalue = params[:no_of_levels_aisle].to_i
    levelvalue_hidden = params[:no_of_levels_aisle_hidden].to_i
@@ -153,7 +153,7 @@ class AislemaintenanceController < ApplicationController
    if(levelvalue> levelvalue_hidden)
       diff_levelvalue = levelvalue - levelvalue_hidden
       (1..diff_levelvalue).each do |lev|
-                  @levels = Level.new(
+                  levels = Level.new(
                              :sm_level_id     => max_levels + lev,
                              :sm_bay_id           => bay.sm_bay_id,
                              :sm_aisle_id         => bay.sm_aisle_id,
@@ -167,7 +167,7 @@ class AislemaintenanceController < ApplicationController
                              :cl_warehouse_id     => bay.cl_warehouse_id,
                              :no_of_pos_level     => ""
                           )
-             @levels.save
+             levels.save
       end
    end 
  end

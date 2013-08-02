@@ -47,7 +47,7 @@ class ZonemaintenanceController < ApplicationController
            create_aisles zone
            
     when "add"
-          warehouse = Warehouse.find_by_id(params[:pt_warehouse_id])         
+                
           zone = Zone.find_by_id(params[:id]) 
           maximum_zone_id =  Zone.where(:warehouse_id => params[:pt_warehouse_id]).maximum("sm_zone_id").to_i + 1
           zone= Zone.new(            :sm_zone_id => maximum_zone_id, 
@@ -68,6 +68,7 @@ class ZonemaintenanceController < ApplicationController
 
             )
            zone.save
+           warehouse = Warehouse.find_by_id(params[:pt_warehouse_id])   
            warehouse.update_attributes({
                                    :no_of_zones => warehouse.no_of_zones + 1
          })
@@ -87,7 +88,7 @@ end
          aislevalue = params[:no_of_aisles_zone].to_i
          hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
          bayvalue = params[:no_of_bays_aisle].to_i
-         max_aisle = Aisle.where(:zone_id => params[:id]).maximum("sm_aisle_id").to_i
+         max_aisle = Aisle.where(:zone_id => zone.id).maximum("sm_aisle_id")
          if(aislevalue > hidden_aislevalue)
            diff_aislevalue = aislevalue - hidden_aislevalue
            (1..diff_aislevalue).each do |a|

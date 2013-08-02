@@ -8,7 +8,8 @@ module BaysmaintenanceHelper
     url = "/baysmaintenance?id=" + params["id"]
     editcheckfunc = 'function(postdata, formid) 
               {
-                if (postdata.no_of_level_bay < postdata.no_of_level_bay_hidden) 
+               
+                if (parseInt(postdata.no_of_level_bay) < parseInt(postdata.no_of_level_bay_hidden)) 
                    {
                      return[false, "Can not delete levels from this screen, Please use Level Maintenance"];
                    } 
@@ -19,6 +20,8 @@ module BaysmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
+      
      
       :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [

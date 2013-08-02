@@ -7,7 +7,7 @@ module ZonemaintenanceHelper
     url = "/zonemaintenance?id=" +  params["id"]
     editcheckfunc = 'function(postdata, formid) 
               {
-               if (postdata.no_of_aisles_zone < postdata.no_of_aisles_zone_hidden) 
+               if (parseInt(postdata.no_of_aisles_zone) < parseInt(postdata.no_of_aisles_zone_hidden)) 
                    {
                      return[false, "Can not delete Aisles from this screen, Please use Aisles Maintenance"];
                    } 
@@ -18,13 +18,14 @@ module ZonemaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
                    
       :colNames => ['Id','Sequence','Zone','Client Id','sm_warehouse_id','Warehouse','warehouse_id','Description', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Attribute1', 'Attribute2', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 100, :align => 'center',:editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/aislemaintenance'}, :editable => false},
         { :name => 'cl_zone_id',   :index => 'cl_zone_id',    :width => 100, :align => 'center', :editable => true, editrules:{required:true}},
-        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, :hidden => false},
+        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, :hidden => true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
         { :name => 'warehouse_id',   :index => 'warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},      
@@ -47,21 +48,25 @@ module ZonemaintenanceHelper
       ],
       :editurl => '/zonemaintenance',
       :pager => '#zone_pager',
-      :rowNum => 10,
-      :rowList => [10, 20, 30],
+      :rowNum => 30,
+      :rowList => [30, 40, 50],
       :sortname => 'sm_zone_id',
       :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Zone Maintenance',
       :reloadAfterEdit => true,
+      :multiselect=> true,
       :onSelectRow => "function() { }".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
-    pager = [:navGrid, "#zone_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+    pager = [:navGrid, "#zone_pager",   {view:true}, {:del => true}, {:closeAfterEdit => true, 
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                                             
+                                                       {:beforeSubmit => addcheckfunc.to_json_var},
+                                                        {reloadAfterSubmit:false,jqModal:false, closeOnEscape:true}, 
+                                                        {closeOnEscape:true}, 
+                                                        {navkeys: [true,38,40], height:250,jqModal:false,closeOnEscape:true}]                                                                                             
                                                                                    
     #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
     pager2 = [:inlineNav, "#zone_pager"]
@@ -70,15 +75,19 @@ module ZonemaintenanceHelper
                    {:caption => 'Show Layout', :onClickButton => 'function() {
                                           var grid = $("#zone_list");
                                           selectedRowId= grid.jqGrid ("getGridParam","selrow");
-                                          if (selectedRowId == "null"){
-                                            alert("Please select a zone to see the layout");
-                                            return;
+                                          
+                                          if (selectedRowId == null){
+                                              alert("Please select a zone to see the layout");
+                                             return;
                                           }
                                           win = window.open("/bay?id=" + selectedRowId, "_blank");
                                           win.focus();
                                           }'.to_json_var }]
+                                          
+   
+    pager3 = [:gridResize, {minWidth:200,maxWidth:1500,minHeight:400, maxHeight:800}];                                       
 
-    jqgrid_api 'zone_list', grid, pager, pager_button, options
+    jqgrid_api 'zone_list', grid, pager, pager3, pager_button, options
 
   end
 

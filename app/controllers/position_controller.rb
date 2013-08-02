@@ -3,10 +3,13 @@ class PositionController < ApplicationController
     #zoom functionality
     if(params[:zoom] == "yes")
        @zoom = "yes"
-     else
-       
-     end   
-  
+    else
+    
+    end
+         
+  max_pos = 0
+  @pos_width = 80 
+  pos_ctr = 0
   @levelhash = Hash.new
   poshash = Hash.new
   level = Level.where(:bay_id => params[:id])
@@ -15,13 +18,20 @@ class PositionController < ApplicationController
     @bay_id    = levelvalue.bay_id
     
     pos = Position.where(:level_id => levelvalue.id)
+   
     pos.each do |posvalue|
       postype = posvalue.attribute1.blank?  ?  "pos_Empty"  :  posvalue.attribute1
       poshash = poshash.merge({posvalue.id => {:type => postype, :item => posvalue.attribute2}})
     end
     @levelhash = @levelhash.merge({levelvalue.cl_level_id.blank? ? levelvalue.id : levelvalue.cl_level_id => poshash})
     poshash = Hash.new
-  end
+    max_pos = max_pos > pos_ctr ? max_pos : pos_ctr
+    pos_ctr = 0
+    end
+   pos_ctr = pos_ctr + 1
+   while (max_pos) * (@pos_width +2) >= 800
+       @pos_width = @pos_width - 5
+    end
   
   
   

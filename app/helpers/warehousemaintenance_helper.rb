@@ -6,7 +6,7 @@ module WarehousemaintenanceHelper
     options = {:on_document_ready => true, :html_tags => false}
     editcheckfunc = 'function(postdata, formid) 
       {
-          if (postdata.no_of_zones < postdata.no_of_zones_hidden) 
+          if (parseInt(postdata.no_of_zones) < parseInt(postdata.no_of_zones_hidden)) 
                    {
                       return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];
                       
@@ -17,13 +17,14 @@ module WarehousemaintenanceHelper
       :url => '/warehousemaintenance/',
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
       
       :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 150, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},
-        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
+        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
         { :name => 'description',  :index => 'description',  :width => 150, :align => 'center', :editable => true},
         { :name => 'no_of_zones' ,   :index => 'no_of_zones',     :width => 150,  :align => 'left', :editable => true, editrules:{required:true,number:true} },
         { :name => 'no_of_zones_hidden' ,   :index => 'no_of_zones_hidden',     :width => 60,  :align => 'left',hidden:true, :editable => true },

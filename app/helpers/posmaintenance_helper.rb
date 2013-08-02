@@ -9,6 +9,7 @@ module PosmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
       
       :colNames => ['Id','Sequence', 'Position','sm_level_id','Level','sm_bay_id', 'Bay',
         'Client Id','Description','sm_aisle_id','Aisle','level_id','sm_zone_id','Zone', 

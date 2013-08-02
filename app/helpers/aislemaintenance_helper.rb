@@ -8,12 +8,12 @@ module AislemaintenanceHelper
     url = "/aislemaintenance?id=" +  params["id"]
     editcheckfunc = 'function(postdata, formid) 
               {
-                if (postdata.no_of_bays_aisle < postdata.no_of_bays_aisle_hidden) 
+                if (parseInt(postdata.no_of_bays_aisle) < parseInt(postdata.no_of_bays_aisle_hidden))
                    {
                      return[false, "Can not delete bay from this screen, Please use Bays Maintenance"];
                    } 
 
-                if (postdata.no_of_levels_aisle < postdata.no_of_levels_aisle_hidden) 
+                if (parseInt(postdata.no_of_levels_aisle) <parseInt(postdata.no_of_levels_aisle_hidden))
                    {
                      return[false, "Can not delete Levels from this screen, Please use Level Maintenance"];
                    } 
@@ -30,6 +30,8 @@ module AislemaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
+      
       :colNames => ['Id','Sequence', 'Aisle','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
         'Warehouse','Description','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden',
         'Attribute1','Attribute2','Types of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],

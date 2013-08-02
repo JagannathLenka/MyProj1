@@ -56,7 +56,7 @@ class LevelmaintenanceController < ApplicationController
   
       
       if request.xhr?
-        render :json => @level
+        render :json => level
       end
 
  end
@@ -66,24 +66,24 @@ class LevelmaintenanceController < ApplicationController
    posvalue = params[:no_of_pos_level].to_i
    posvalue_hidden = params[:no_of_pos_level_hidden].to_i
    diff_posvalue = posvalue - posvalue_hidden
-   max_pos = Position.where(:level_id => @level.id).maximum("sm_pos_id").to_i
+   max_pos = Position.where(:level_id => level.id).maximum("sm_pos_id")
     if(posvalue > posvalue_hidden)
       (1..diff_posvalue).each do |p|
          @pos =Position.create(:sm_pos_id => max_pos + p,
-                         :sm_level_id => @level.sm_level_id,
-                         :sm_bay_id => @level.sm_bay_id,
-                         :sm_aisle_id => @level.sm_aisle_id,
-                         :sm_zone_id => @level.sm_zone_id,
-                         :sm_warehouse_id => @level.sm_warehouse_id,
+                         :sm_level_id => level.sm_level_id,
+                         :sm_bay_id => level.sm_bay_id,
+                         :sm_aisle_id => level.sm_aisle_id,
+                         :sm_zone_id => level.sm_zone_id,
+                         :sm_warehouse_id => level.sm_warehouse_id,
                          :sm_barcode => "",
-                         :level_id => @level.id,
+                         :level_id => level.id,
                          :cl_barcode => "",
                          :cl_pos_id => "",
-                         :cl_level_id => @level.cl_level_id,
-                         :cl_bay_id => @level.cl_bay_id,
-                         :cl_aisle_id => @level.cl_aisle_id,
-                         :cl_zone_id => @level.cl_zone_id,
-                         :cl_warehouse_id => @level.cl_warehouse_id
+                         :cl_level_id => level.cl_level_id,
+                         :cl_bay_id => level.cl_bay_id,
+                         :cl_aisle_id => level.cl_aisle_id,
+                         :cl_zone_id => level.cl_zone_id,
+                         :cl_warehouse_id => level.cl_warehouse_id
                            
                      )
                 end     

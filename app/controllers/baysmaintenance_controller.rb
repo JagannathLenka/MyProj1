@@ -3,14 +3,14 @@ class BaysmaintenanceController < ApplicationController
    # GET /maintenance
   def index
     columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
-    bay = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
+    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
     if request.xhr?
       #@invoices = 'ok'
-      render :json => json_for_jqgrid(bay, columns)
+      render :json => json_for_jqgrid(bays, columns)
     end
 
   end
@@ -67,10 +67,10 @@ end
          levelvalue = params[:no_of_level_bay ].to_i
          hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
          diff_levelvalue = levelvalue - hidden_levelvalue
-         max_levels = Level.where(:bay_id => id).maximum("sm_level_id").to_i  
+         max_levels = Level.where(:bay_id => bays.id).maximum("sm_level_id")  #This bays is what u r passing in create_level
          if( levelvalue >  hidden_levelvalue)          
             (1..diff_levelvalue).each do |lev|
-               @levels = Level.new(:sm_level_id     => max_levels + lev,
+               levels = Level.new(:sm_level_id     => max_levels + lev,
                                :sm_bay_id           => bays.sm_bay_id,
                                :sm_aisle_id         => bays.sm_aisle_id,
                                :sm_zone_id          => bays.sm_zone_id,
@@ -79,11 +79,11 @@ end
                                :cl_level_id         => "",
                                :cl_bay_id           => bays.cl_bay_id,
                                :cl_aisle_id         => bays.cl_aisle_id,
-                               :cl_zone_id          => bayss.cl_zone_id,
+                               :cl_zone_id          => bays.cl_zone_id,
                                :cl_warehouse_id     => bays.cl_warehouse_id,
                                :no_of_pos_level    => params[:no_of_pos_level]
                             )
-               @levels.save
+               levels.save
             end  
          
         else 

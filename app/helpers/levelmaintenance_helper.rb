@@ -5,10 +5,21 @@ module LevelmaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
     url = "/levelmaintenance?id=" + params["id"]
+    editcheckfunc = 'function(postdata, formid) 
+              {
+                if (parseInt(postdata.no_of_pos_level) < parseInt(postdata.no_of_pos_level_hidden) )
+                   {
+                     return[false, "Can not delete positions from this screen, Please use Position Maintenance"];
+                   } 
+
+              return[true, " "]}'
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_bay_id=' + params["id"] + '; return[true, " "]}'
     grid = [{
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
+      :height=> 350,
+      
       :colNames => ['Id','Sequence','Level id(cust)','Clent Id','Description','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
@@ -53,14 +64,10 @@ module LevelmaintenanceHelper
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#level_pager", {edit:true,add:true,del:true}]
     pager = [:navGrid, "#level_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true}, 
-                                                       {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.pt_warehouse='1';
-                                                                   postdata.pt_sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                   
+                                                       :closeOnEscape => true, 
+                                                      :beforeSubmit => editcheckfunc.to_json_var},
+                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
+                                                        
 
     #pager2 = [:inlineNav, "#level_pager"]
 
