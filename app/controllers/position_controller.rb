@@ -7,13 +7,13 @@ class PositionController < ApplicationController
     
     end
          
-  max_pos = 0
-  @pos_width = 80 
-  pos_ctr = 0
-  @levelhash = Hash.new
-  poshash = Hash.new
-  level = Level.where(:bay_id => params[:id])
-  level.each do |levelvalue|
+    max_pos = 0
+    @pos_width = 80 
+    pos_ctr = 0
+    @levelhash = Hash.new
+    poshash = Hash.new
+    level = Level.where(:bay_id => params[:id])
+    level.each do |levelvalue|
     @cl_bay_id = levelvalue.cl_bay_id
     @bay_id    = levelvalue.bay_id
     
@@ -22,14 +22,15 @@ class PositionController < ApplicationController
     pos.each do |posvalue|
       postype = posvalue.attribute1.blank?  ?  "pos_Empty"  :  posvalue.attribute1
       poshash = poshash.merge({posvalue.id => {:type => postype, :item => posvalue.attribute2}})
+      pos_ctr = pos_ctr + 1
     end
     @levelhash = @levelhash.merge({levelvalue.cl_level_id.blank? ? levelvalue.id : levelvalue.cl_level_id => poshash})
     poshash = Hash.new
     max_pos = max_pos > pos_ctr ? max_pos : pos_ctr
     pos_ctr = 0
     end
-   pos_ctr = pos_ctr + 1
-   while (max_pos) * (@pos_width +2) >= 800
+   
+   while (max_pos) * (@pos_width +2) >= 600
        @pos_width = @pos_width - 5
     end
   

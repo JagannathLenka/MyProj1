@@ -39,7 +39,7 @@ module AislemaintenanceHelper
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id',  :width => 80, :align => 'center',formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}, :editable => false},
         { :name => 'cl_aisle_id', :index => 'cl_aisle_id',  :width => 90, :align => 'center', :editable => true, editrules:{required:true}},
-        { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'center', :editable => false, :hidden => false},
+        { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'center', :editable => false, :hidden => true},
         { :name => 'sm_zone_id', :index => 'sm_zone_id',  :width => 80, :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_zone_id', :index => 'cl_zone_id',  :width => 60, :align => 'center', :editable => false},
         { :name => 'zone_id',    :index => 'zone_id',     :width => 80,  :align => 'center', :editable => false, :hidden =>true},
@@ -69,16 +69,22 @@ module AislemaintenanceHelper
       :viewrecords => true,
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => "function() { }".to_json_var
+      :onSelectRow => "function(id) { 
+                       if(id && id!==lastsel){
+      jQuery('#aisle_list').jqGrid('restoreRow',lastsel);
+      jQuery('#aisle_list').jqGrid('editRow',id,true);
+      lastsel=id;
+    } 
+      }".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
-    pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true,:beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}] 
+    pager = [:navGrid, "#aisle_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     

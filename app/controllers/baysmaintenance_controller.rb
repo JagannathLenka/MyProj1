@@ -12,7 +12,7 @@ class BaysmaintenanceController < ApplicationController
       #@invoices = 'ok'
       render :json => json_for_jqgrid(bays, columns)
     end
-
+        get_header_details
   end
 
  def create
@@ -37,10 +37,19 @@ class BaysmaintenanceController < ApplicationController
                   create_level  bays            
 
   when "add"
-        maximum_bay_add = Bay.maximum("sm_bay_id").to_i + 1
-        bays= Bay.new(:sm_bay_id =>  maximum_bay_add, 
+    
+        bays = Bay.find_by_id(params[:id])
+        aisles = Aisle.find_by_id(params[:pt_aisle_id].to_i)
+        maximum_bay_id = Bay.where(:aisle_id => params[:pt_aisle_id]).maximum("sm_bay_id").to_i + 1
+        bays= Bay.new(:sm_bay_id =>  maximum_bay_id, 
                          :cl_bay_id => params[:cl_bay_id],
-                         :aisle_id     => params[:aisle_id],
+                         :sm_aisle_id => aisles.sm_aisle_id,
+                         :cl_aisle_id => aisles.cl_aisle_id,
+                         :sm_zone_id => aisles.sm_zone_id,
+                         :cl_zone_id => aisles.cl_zone_id,
+                         :sm_warehouse_id => aisles.sm_warehouse_id,
+                         :cl_warehouse_id => aisles.cl_warehouse_id,
+                         :aisle_id     => aisles.id,
                          :description  => params[:description],
                          :no_of_level_bay  => params[:no_of_level_bay],
                          :attribute1 => params[:attribute1],
@@ -54,7 +63,12 @@ class BaysmaintenanceController < ApplicationController
                          
                        )
         
-         bays.save 
+         bays.save
+         
+         aisles.update_attributes({
+                                   :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
+         })
+           
          create_level bays
          
 end
@@ -67,7 +81,7 @@ end
          levelvalue = params[:no_of_level_bay ].to_i
          hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
          diff_levelvalue = levelvalue - hidden_levelvalue
-         max_levels = Level.where(:bay_id => bays.id).maximum("sm_level_id")  #This bays is what u r passing in create_level
+         max_levels = Level.where(:bay_id => bays.id).maximum("sm_level_id").to_i  #This bays is what u r passing in create_level
          if( levelvalue >  hidden_levelvalue)          
             (1..diff_levelvalue).each do |lev|
                levels = Level.new(:sm_level_id     => max_levels + lev,
@@ -100,4 +114,14 @@ end
                   end      
           end  
  end
+ def get_header_details
+   aisle = Aisle.find_by_id(params["id"].to_i)
+   zone  = Zone.find_by_id(aisle.zone_id)
+   warehouse = Warehouse.find_by_id(zone.warehouse_id)
+
+   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
+   add_breadcrumb aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s 
+   
+end 
 end

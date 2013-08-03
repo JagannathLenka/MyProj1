@@ -18,7 +18,6 @@ class ZonemaintenanceController < ApplicationController
     get_header_details
       
     if request.xhr? 
-      
       render :json => json_for_jqgrid(zone, columns)
     end
 
@@ -48,9 +47,10 @@ class ZonemaintenanceController < ApplicationController
            
     when "add"
                 
-          zone = Zone.find_by_id(params[:id]) 
+          zone = Zone.find_by_id(params[:id])
+          warehouse = Warehouse.find_by_id(params[:pt_warehouse_id].to_i)    
           maximum_zone_id =  Zone.where(:warehouse_id => params[:pt_warehouse_id]).maximum("sm_zone_id").to_i + 1
-          zone= Zone.new(            :sm_zone_id => maximum_zone_id, 
+          zone= Zone.new(:sm_zone_id => maximum_zone_id, 
                                      :sm_warehouse_id => warehouse.sm_warehouse_id,  
                                      :warehouse_id  => warehouse.id,                                   
                                      :cl_zone_id => params[:cl_zone_id],
@@ -68,11 +68,11 @@ class ZonemaintenanceController < ApplicationController
 
             )
            zone.save
-           warehouse = Warehouse.find_by_id(params[:pt_warehouse_id])   
+           
            warehouse.update_attributes({
                                    :no_of_zones => warehouse.no_of_zones + 1
          })
-               
+          
            create_aisles zone
     end
   
@@ -88,7 +88,7 @@ end
          aislevalue = params[:no_of_aisles_zone].to_i
          hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
          bayvalue = params[:no_of_bays_aisle].to_i
-         max_aisle = Aisle.where(:zone_id => zone.id).maximum("sm_aisle_id")
+         max_aisle = Aisle.where(:zone_id => zone.id).maximum("sm_aisle_id").to_i
          if(aislevalue > hidden_aislevalue)
            diff_aislevalue = aislevalue - hidden_aislevalue
            (1..diff_aislevalue).each do |a|
@@ -119,9 +119,10 @@ end
 
 
   def get_header_details
-    warehouse  = Warehouse.find_by_id(params["id"].to_i)
-    @warehouse = warehouse.cl_warehouse_id
-    
+  
+   warehouse = Warehouse.find_by_id(params[:id])
+   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   
   end
-
+  
 end

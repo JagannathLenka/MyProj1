@@ -17,6 +17,7 @@ end
 gem "jqgrid_for_rails", "~> 1.0.2"
 gem 'will_paginate'
 
+gem "breadcrumbs_on_rails"
 
 # Gems used only for assets and not required
 # in production environments by default.

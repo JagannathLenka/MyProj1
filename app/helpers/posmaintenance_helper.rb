@@ -23,7 +23,7 @@ module PosmaintenanceHelper
         { :name => 'cl_level_id',  :index => 'cl_level_id',  :width => 120, :align => 'center', :editable => false },
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'center', :editable => false },
         {:name => 'cl_bay_id', :index => 'cl_bay_id',  :width => 120, :align => 'left', :editable => false, :hidden => true},
-        { :name => 'client_id',:index => 'client_id',     :width => 55,  :align => 'center', :editable => false },
+        { :name => 'client_id',:index => 'client_id',     :width => 55,  :align => 'center', :editable => false, :hidden => true },
         { :name => 'description', :index => 'description', :width => 120,  :align => 'left', :editable => true },
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id', :width => 150,  :align => 'left', :editable => false,:hidden => true },
         { :name => 'cl_aisle_id', :index => 'cl_aisle_id', :width => 80,  :align => 'left', :editable => false},
@@ -54,21 +54,21 @@ module PosmaintenanceHelper
       :caption => 'Position Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
-      :onSelectRow => "function() {}".to_json_var
+      :onSelectRow => "function(id) { 
+                       if(id && id!==lastsel){
+      jQuery('#pos_list').jqGrid('restoreRow',lastsel);
+      jQuery('#pos_list').jqGrid('editRow',id,true);
+      lastsel=id;
+    } 
+      }".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-        pager = [:navGrid, "#pos_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true}, 
-                                                       {:beforeSubmit =>
-                                                        "function(postdata, formid) 
-                                                                  {
-                                                                   postdata.warehouse_id='1';
-                                                                   postdata.sm_warehouse_id='1';   
-                                                                   return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                                             
+       pager = [:navGrid, "#pos_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true, }, 
+                                                       {:closeAfterAdd=>true}, {}, {}, {}]                                                                                                                                                        
 
     #pager2 = [:inlineNav, "#bays_pager"]
 

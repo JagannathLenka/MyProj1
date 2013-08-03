@@ -1,6 +1,8 @@
 <div style="margin-left: 20px;">
-<h2>Listing Zones - Warehouse: <a href="/warehousemaintenance"><%= @warehouse %></a></h2><br>
-
+<h2>Listing Zones For: <%= render_breadcrumbs %></a></h2><br>
+<script>
+	var lastsel;
+</script>
 <table id=zone_list></table>
 <div id=zone_pager></div>
 </div>

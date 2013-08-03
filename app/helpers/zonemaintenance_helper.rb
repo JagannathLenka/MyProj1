@@ -55,21 +55,24 @@ module ZonemaintenanceHelper
       :viewrecords => true,
       :caption => 'Zone Maintenance',
       :reloadAfterEdit => true,
-      :multiselect=> true,
-      :onSelectRow => "function() { }".to_json_var
+      :onSelectRow => "function(id) { 
+                       if(id && id!==lastsel){
+      jQuery('#zone_list').jqGrid('restoreRow',lastsel);
+      jQuery('#zone_list').jqGrid('editRow',id,true);
+      lastsel=id;
+    } 
+      }".to_json_var
     }]
+    
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
-    pager = [:navGrid, "#zone_pager",   {view:true}, {:del => true}, {:closeAfterEdit => true, 
+    pager = [:navGrid, "#zone_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:beforeSubmit => addcheckfunc.to_json_var},
-                                                        {reloadAfterSubmit:false,jqModal:false, closeOnEscape:true}, 
-                                                        {closeOnEscape:true}, 
-                                                        {navkeys: [true,38,40], height:250,jqModal:false,closeOnEscape:true}]                                                                                             
-                                                                                   
+                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
+                                                                                 
     #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
-    pager2 = [:inlineNav, "#zone_pager"]
+   # pager2 = [:inlineNav, "#zone_pager"]
 
     pager_button = [:navButtonAdd, "#zone_pager", 
                    {:caption => 'Show Layout', :onClickButton => 'function() {

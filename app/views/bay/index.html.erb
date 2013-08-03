@@ -148,9 +148,9 @@ var indexHTML = {
 	  //$(document).ready(function(){  
 	  setClickitem: function setClickitem() {	
 
-		    $('.bay, bay_Empty').click(function(){   
+		    $('.bay, .bay_Empty').click(function(){   
 
-		    	if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
+		    	//if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
 
 					$('#positionspace').load("/position/"+ this.id+ "?zoom=yes"); 
 				    $('#positionspace').animate({ 'zoom': 1.4 }, 800);
@@ -159,7 +159,7 @@ var indexHTML = {
 		      		width: 1000,
 		      		modal: true
 				 })
-			}
+			//}
 	});
 
 		   $(function() {

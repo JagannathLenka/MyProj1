@@ -25,7 +25,7 @@ module LevelmaintenanceHelper
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_level_id',    :index => 'sm_level_id',     :width => 55,  :align => 'center', :editable => false, formatter:'showlink', formatoptions:{baseLinkUrl:'/posmaintenance'} },
         { :name => 'cl_level_id',    :index => 'cl_level_id',     :width => 55,  :align => 'center', :editable => true,editrules:{required:true} },
-        { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'left', :editable => false},
+        { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'left', :editable => false, :hidden => true},
         { :name => 'description',  :index => 'description',   :width => 120,   :align => 'left', :editable => true},
         { :name => 'sm_bay_id',   :index => 'sm_bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_bay_id',   :index => 'cl_bay_id',    :width => 60,   :align => 'center', :editable => false },
@@ -56,17 +56,22 @@ module LevelmaintenanceHelper
       :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Level Maintenance',
-      :onSelectRow => "function() {}".to_json_var
+      :onSelectRow => "function(id) { 
+                       if(id && id!==lastsel){
+      jQuery('#level_list').jqGrid('restoreRow',lastsel);
+      jQuery('#level_list').jqGrid('editRow',id,true);
+      lastsel=id;
+    } 
+      }".to_json_var
     }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#level_pager", {edit:true,add:true,del:true}]
-    pager = [:navGrid, "#level_pager", {:del => true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true, 
-                                                      :beforeSubmit => editcheckfunc.to_json_var},
-                                                       {:beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
+     pager = [:navGrid, "#level_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
                                                         
 
     #pager2 = [:inlineNav, "#level_pager"]

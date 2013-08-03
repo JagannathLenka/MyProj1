@@ -48,13 +48,21 @@ class AislemaintenanceController < ApplicationController
           
           
   when "add"
-        maximum_aisle_add = Aisle.maximum("sm_aisle_id").to_i + 1
-        aisles= Aisle.new(:sm_aisle_id => maximum_aisle_add, 
+  
+        
+        aisles = Aisle.find_by_id(params[:id])
+        zone = Zone.find_by_id(params[:pt_zone_id].to_i)
+        maximum_aisle_id = Aisle.where(:zone_id => params[:pt_zone_id]).maximum("sm_aisle_id").to_i + 1
+        aisles= Aisle.new(:sm_aisle_id => maximum_aisle_id, 
                                    :cl_aisle_id => params[:cl_aisle_id],
-                                   :zone_id => params[:zone_id],
+                                   :sm_zone_id => zone.sm_zone_id,
+                                   :cl_zone_id => zone.cl_zone_id,
+                                   :sm_warehouse_id => zone.sm_warehouse_id,
+                                   :cl_warehouse_id => zone.cl_warehouse_id,
+                                   :zone_id => zone.id,
                                    :description  => params[:description],
                                    :no_of_bays_aisle => params[:no_of_bays_aisle],
-                                   :no_of_levels_aisle => param[:no_of_levels_aisle],
+                                   :no_of_levels_aisle => params[:no_of_levels_aisle],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
@@ -67,6 +75,10 @@ class AislemaintenanceController < ApplicationController
                           )
         
          aisles.save 
+          zone.update_attributes({
+                                   :no_of_aisles_zone => zone.no_of_aisles_zone + 1
+          })
+              
          create_bays aisles
          
            
@@ -81,7 +93,7 @@ class AislemaintenanceController < ApplicationController
  def create_bays aisles
    
     
-     max_bays  = Bay.where(:aisle_id => aisles.id).maximum("sm_bay_id")
+     max_bays  = Bay.where(:aisle_id => aisles.id).maximum("sm_bay_id").to_i
 
      bayvalue = params[:no_of_bays_aisle].to_i
      hidden_bayvalue = params[:no_of_bays_aisle_hidden].to_i 
@@ -108,7 +120,7 @@ class AislemaintenanceController < ApplicationController
                              
                           )
              bays.save
-             create_levels bay
+             create_levels bays
          end
                  
      #end
@@ -135,7 +147,7 @@ class AislemaintenanceController < ApplicationController
                                       
                                       })
                                       
-                create_levels bay
+                create_levels bays
               end      
      end         
  end
@@ -144,7 +156,7 @@ class AislemaintenanceController < ApplicationController
  #create levels for each bays
  def create_levels bay
    
-   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id")
+   max_levels  = Level.where(:bay_id => bay.id).maximum("sm_level_id").to_i
 
    levelvalue = params[:no_of_levels_aisle].to_i
    levelvalue_hidden = params[:no_of_levels_aisle_hidden].to_i
@@ -173,13 +185,13 @@ class AislemaintenanceController < ApplicationController
  end
  
  def get_header_details
-    zone  = Zone.find_by_id(params["id"].to_i)
-    @zone = zone.cl_zone_id
+   zone  = Zone.find_by_id(params["id"].to_i)
+   warehouse = Warehouse.find_by_id(zone.warehouse_id)
+
+   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
+end 
     
-    warehouse = Warehouse.find_by_id(zone.warehouse_id)
-    @warehouse_id = warehouse.id
-    @warehouse    = warehouse.cl_warehouse_id
-    
- end
+ 
 
 end

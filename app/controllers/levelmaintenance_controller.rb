@@ -11,7 +11,7 @@ class LevelmaintenanceController < ApplicationController
       
       render :json => json_for_jqgrid(level, columns)
     end
-
+    get_header_details
   end
 
  def create
@@ -36,21 +36,38 @@ class LevelmaintenanceController < ApplicationController
             })
             create_pos level
     when "add"
-                 maximum_level_add = Level.maximum("sm_level_id").to_i + 1
-                level= Level.create(:sm_level_id => maximum_level_add,
-                                     :description => params[:description],
-                                     :bay_id    => params[:bay_id],
-                                     :no_of_pos_level => params[:no_of_pos_level],
-                                     :cl_level_id=> params[:cl_level_id],
-                                     :attribute1 => params[:attribute1],
-                                     :attribute2 => params[:attribute2], 
-                                     :attribute3 => params[:attribute3],
-                                     :attribute4 => params[:attribute4],
-                                     :attribute5 => params[:attribute5],
-                                     :attribute6 => params[:attribute6],
-                                     :attribute7 => params[:attribute7],
-                                     :attribute8 => params[:attribute8] 
-                )   
+
+           level = Level.find_by_id(params[:id])
+           bays = Bay.find_by_id(params[:pt_bay_id].to_i)             
+           maximum_level_id = Level.where(:bay_id => params[:pt_bay_id]).maximum("sm_level_id").to_i + 1
+           level= Level.new(:sm_level_id => maximum_level_id,
+                                       :cl_level_id => params[:cl_level_id],
+                                       :sm_bay_id => bays.sm_bay_id,
+                                       :cl_bay_id => bays.cl_bay_id,
+                                       :sm_aisle_id => bays.sm_aisle_id,
+                                       :cl_aisle_id => bays.cl_aisle_id,
+                                       :sm_zone_id => bays.sm_zone_id,
+                                       :cl_zone_id => bays.cl_zone_id,
+                                       :sm_warehouse_id => bays.sm_warehouse_id,
+                                       :cl_warehouse_id => bays.cl_warehouse_id,
+                                       :bay_id    => bays.id,
+                                       :description => params[:description],
+                                       :no_of_pos_level => params[:no_of_pos_level],
+                                       :attribute1 => params[:attribute1],
+                                       :attribute2 => params[:attribute2], 
+                                       :attribute3 => params[:attribute3],
+                                       :attribute4 => params[:attribute4],
+                                       :attribute5 => params[:attribute5],
+                                       :attribute6 => params[:attribute6],
+                                       :attribute7 => params[:attribute7],
+                                       :attribute8 => params[:attribute8] 
+                ) 
+                
+           level.save  
+           bays.update_attributes({
+                                   :no_of_level_bay => bays.no_of_level_bay + 1
+         })
+           
            create_pos level
     end
   
@@ -66,7 +83,7 @@ class LevelmaintenanceController < ApplicationController
    posvalue = params[:no_of_pos_level].to_i
    posvalue_hidden = params[:no_of_pos_level_hidden].to_i
    diff_posvalue = posvalue - posvalue_hidden
-   max_pos = Position.where(:level_id => level.id).maximum("sm_pos_id")
+   max_pos = Position.where(:level_id => level.id).maximum("sm_pos_id").to_i
     if(posvalue > posvalue_hidden)
       (1..diff_posvalue).each do |p|
          @pos =Position.create(:sm_pos_id => max_pos + p,
@@ -91,5 +108,19 @@ class LevelmaintenanceController < ApplicationController
         end
 
  end
+ 
+ def get_header_details
+   bay =   Bay.find_by_id(params["id"].to_i)
+   aisle = Aisle.find_by_id(bay.aisle_id)
+   zone  = Zone.find_by_id(aisle.zone_id)
+   warehouse = Warehouse.find_by_id(zone.warehouse_id)
+
+
+   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
+   add_breadcrumb aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s
+   add_breadcrumb bay.cl_bay_id.blank? ?bay.sm_bay_id: bay.cl_bay_id, "/levelmaintenance?id="+ bay.id.to_s
+
+  end   
 
 end
