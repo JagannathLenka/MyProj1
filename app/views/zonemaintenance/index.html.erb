@@ -1,16 +1,14 @@
-<div style="margin-left: 20px;">
-<h2>Listing Zones For: <%= render_breadcrumbs %></a></h2><br>
+<% content_for :head do %>
 <script>
 	var lastsel;
 </script>
+<%end%>
+<%= render "shared/menu" %>
+<div style="margin-left: 20px;">
+<h2>Listing Zones For: <%= render_breadcrumbs %></a></h2><br>
 <table id=zone_list></table>
 <div id=zone_pager></div>
 </div>
-<% content_for :head do %>
-<%end%>
-
 <%= raw(zone_jqgrid) %>
-
-
 <br />
 

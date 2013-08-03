@@ -59,7 +59,7 @@ module LevelmaintenanceHelper
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#level_list').jqGrid('restoreRow',lastsel);
-      jQuery('#level_list').jqGrid('editRow',id,true);
+      jQuery('#level_list').jjqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 
       }".to_json_var

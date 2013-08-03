@@ -52,7 +52,7 @@ module AislemaintenanceHelper
         { :name => 'no_of_levels_aisle_hidden',:index => 'no_of_levels_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
         { :name => 'attribute1',   :index => 'attribute1',   :width => 90,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 60,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 90,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "L:Single Side Aisle- Left;R:Single Side Aisle- Right;LR:Double Side Aisle" }},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 90,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "LR:LR-Double Side Aisle;R:R-Single Side Aisle- Right;L:Single Side Aisle- Left" }},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 60,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute6',   :index => 'attribute6',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
@@ -72,7 +72,7 @@ module AislemaintenanceHelper
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#aisle_list').jqGrid('restoreRow',lastsel);
-      jQuery('#aisle_list').jqGrid('editRow',id,true);
+      jQuery('#aisle_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 
       }".to_json_var

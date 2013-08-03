@@ -62,7 +62,7 @@ module BaysmaintenanceHelper
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#bays_list').jqGrid('restoreRow',lastsel);
-      jQuery('#bays_list').jqGrid('editRow',id,true);
+      jQuery('#bays_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 
       }".to_json_var

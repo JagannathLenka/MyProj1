@@ -53,7 +53,8 @@ class WarehousemaintenanceController < ApplicationController
          warehouse.save          
          create_zones warehouse
                              
-                               
+    when "del"
+              Warehouse.destroy(params[:id].to_i)                               
     end
     if request.xhr?
       render :json => @warehouse

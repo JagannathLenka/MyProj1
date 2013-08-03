@@ -69,6 +69,9 @@ class LevelmaintenanceController < ApplicationController
          })
            
            create_pos level
+           
+    when "del"
+              pos = Level.destroy(params[:id].to_i)       
     end
   
       

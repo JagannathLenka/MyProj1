@@ -8,17 +8,11 @@
   <script src="/assets/jquery.jqGrid.min.js" type="text/javascript"></script>  
   <%= csrf_meta_tags %>
   <%= yield :head %>
- 
+ </head>
 	<body>
-	<div class="logo" id="l1">Slotting Management</div>		
-	<div class ="wrapper">
-		<div class="container" id="main-menu">
-			<ul class="menu" rel="sam1">
-		       <li><a href="/aboutus.html">Contact Us</a></li>
-		    </ul>
-		</div>
-	</div>
+	
 <%= yield %>
 
 </body>
-</head>
+</html>
+

@@ -29,7 +29,7 @@ class AislemaintenanceController < ApplicationController
   
   case params[:oper]
   when "edit"
-        aisles = Aisle.find_by_id(params[:id])
+        aisles = Aisle.find_by_id(params[:id].to_i)
         aisles.update_attributes({ 
                                    :cl_aisle_id => params[:cl_aisle_id],
                                    :description    => params[:description],
@@ -46,10 +46,7 @@ class AislemaintenanceController < ApplicationController
                                   })
         create_bays aisles
           
-          
   when "add"
-  
-        
         aisles = Aisle.find_by_id(params[:id])
         zone = Zone.find_by_id(params[:pt_zone_id].to_i)
         maximum_aisle_id = Aisle.where(:zone_id => params[:pt_zone_id]).maximum("sm_aisle_id").to_i + 1
@@ -80,7 +77,9 @@ class AislemaintenanceController < ApplicationController
           })
               
          create_bays aisles
-         
+
+  when "del"
+              Warehouse.destroy(params[:id].to_i)   
            
  end        
     #If it is a Ajax then send the json details
@@ -100,13 +99,13 @@ class AislemaintenanceController < ApplicationController
 
      if(bayvalue > hidden_bayvalue)
          diff_bayval =  bayvalue - hidden_bayvalue     
-          (1.. diff_bayval).each do |b|
+         (1.. diff_bayval).each do |b|
              if params[:attribute3].strip == "LR"
-               side_of_aisle =  b <= params[:no_of_bays_aisle].to_i/2? "L" : "R" 
+                 side_of_aisle =  b <= params[:no_of_bays_aisle].to_i/2? "L" : "R" 
              else
-               side_of_aisle = params[:attribute3]
+                 side_of_aisle = params[:attribute3]
              end  
-             bays = Bay.new(:sm_bay_id           => max_bays + b,
+             bays = Bay.new(:sm_bay_id            => max_bays + b,
                              :sm_aisle_id         => aisles.sm_aisle_id,
                              :sm_zone_id          => aisles.sm_zone_id,
                              :sm_warehouse_id     => aisles.sm_warehouse_id,
@@ -123,22 +122,22 @@ class AislemaintenanceController < ApplicationController
              create_levels bays
          end
                  
-     #end
      
-     #When there is no change in aisle value but just change in other parameters
-     #if(bayvalue = hidden_bayvalue)
+       #When there is no change in aisle value but just change in other parameters
         else
-             bay_set = Bay.where(:aisle_id => aisles.id.to_s)
+             bay_set = Bay.where(:aisle_id => aisles.id)
              counter = 0
              bay_set.each do |bays| 
                  counter = counter + 1
+                 
+                 #Change in Sides of aisles
                  if params[:attribute3].strip == "LR"
                    side_of_aisle = counter <= params[:no_of_bays_aisle].to_i/2? "L" : "R" 
                  else
                    side_of_aisle = params[:attribute3]
                  end    
     
-                  bays.update_attributes({ 
+                 bays.update_attributes({ 
                                       :cl_aisle_id         => aisles.cl_aisle_id,
                                       :cl_zone_id          => aisles.cl_zone_id,
                                       :cl_warehouse_id     => aisles.cl_warehouse_id,
@@ -147,9 +146,10 @@ class AislemaintenanceController < ApplicationController
                                       
                                       })
                                       
+                #Update the levels accordingly                      
                 create_levels bays
-              end      
-     end         
+        end      
+    end         
  end
  
 
@@ -179,11 +179,12 @@ class AislemaintenanceController < ApplicationController
                              :cl_warehouse_id     => bay.cl_warehouse_id,
                              :no_of_pos_level     => ""
                           )
-             levels.save
+                 levels.save
       end
    end 
  end
  
+ #Write the breadcrumbs
  def get_header_details
    zone  = Zone.find_by_id(params["id"].to_i)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)

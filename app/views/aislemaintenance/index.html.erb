@@ -1,15 +1,14 @@
-<div style="margin-left: 20px;">
-<h2>Listing Aisles For:  <%= render_breadcrumbs %></h2><br>
+<% content_for :head do %>
 <script>
 	var lastsel;
 </script>
+<%end%>
+<%= render "shared/menu" %>
+<div style="margin-left: 20px;">
+<h2>Listing Aisles For:  <%= render_breadcrumbs %></h2><br>
 <table id=aisle_list></table>
 <div id=aisle_pager></div>
 </div>
-<% content_for :head do %>
-<%end%>
-
 <%= raw(aisle_jqgrid) %>
-
 <br />
 

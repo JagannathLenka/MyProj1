@@ -57,7 +57,7 @@ module PosmaintenanceHelper
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#pos_list').jqGrid('restoreRow',lastsel);
-      jQuery('#pos_list').jqGrid('editRow',id,true);
+      jQuery('#pos_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 
       }".to_json_var

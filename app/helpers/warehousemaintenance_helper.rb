@@ -47,9 +47,14 @@ module WarehousemaintenanceHelper
       :viewrecords => true,
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => "function() {}".to_json_var
+      :onSelectRow => "function(id) { 
+                       if(id && id!==lastsel){
+      jQuery('#waehouse_list').jqGrid('restoreRow',lastsel);
+      jQuery('#warehouse_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
+      lastsel=id;
+    } 
+      }".to_json_var
     }]
-
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]

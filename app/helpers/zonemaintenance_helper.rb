@@ -58,7 +58,7 @@ module ZonemaintenanceHelper
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#zone_list').jqGrid('restoreRow',lastsel);
-      jQuery('#zone_list').jqGrid('editRow',id,true);
+      jQuery('#zone_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 
       }".to_json_var
