@@ -79,7 +79,11 @@ class AislemaintenanceController < ApplicationController
          create_bays aisles
 
   when "del"
-              Warehouse.destroy(params[:id].to_i)   
+              aisle = Aisle.destroy(params[:id].to_i) 
+               zone = Zone.find_by_id(aisle.zone_id)
+               zone.update_attributes({
+                                   :no_of_aisles_zone => zone.no_of_aisles_zone - 1})
+           
            
  end        
     #If it is a Ajax then send the json details
@@ -190,7 +194,7 @@ class AislemaintenanceController < ApplicationController
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
 
    add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
-   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
+   add_breadcrumb "Zone:" + zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
 end 
     
  

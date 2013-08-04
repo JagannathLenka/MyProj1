@@ -68,8 +68,16 @@ class BaysmaintenanceController < ApplicationController
          aisles.update_attributes({
                                    :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
          })
-           
+          
          create_level bays
+          when "del"
+               bays = Bay.destroy(params[:id].to_i) 
+               aisle = Aisle.find_by_id(bays.aisle_id)
+               aisle.update_attributes({
+                                   :no_of_bays_aisle => aisle.no_of_bays_aisle - 1})
+           
+             end   
+         
          
 end
     if request.xhr?
@@ -121,7 +129,7 @@ end
 
    add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
    add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
-   add_breadcrumb aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s 
+   add_breadcrumb "Aisle:" + aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s 
    
 end 
 end
