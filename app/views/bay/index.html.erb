@@ -13,7 +13,7 @@
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
 		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: white}
 		.aisle_Empty      { float: left;  height: 20px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
-        #positionspace    { float: left;  height: 200px; width: 2000px; background: #E0E0E0; border: 0px solid #000;; }        
+        #positionspace    { float: left;  height: 200px; width: 1000px; background: #E0E0E0; border: 0px solid #000;; }        
 
 body {
 	background: #E0E0E0;
@@ -152,7 +152,7 @@ var indexHTML = {
 		    	//if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
 
 					$('#positionspace').load("/position/"+ this.id+ "?zoom=yes"); 
-				    $('#positionspace').animate({ 'zoom': 1.4 }, 800);
+				    $('#positionspace').animate({ 'zoom': 1.2 }, 800);
 				    $('#positionspace').dialog({
 		    	  	height: 500,
 		      		width: 1000,
@@ -163,10 +163,11 @@ var indexHTML = {
 
 		   $(function() {
 		   
-	        $('.bay, aisle_Empty').contextPopup({
+	        $('.bay, .aisle_Empty').contextPopup({
 	          title: 'Bay Update',
 	          items: [
-	            {label:'Reserve bay',                  action:function() { $('#'+ id).attr('class', 'reserve') } },
+	            {label:'Edit bay',                  action:function() {showdata($(this).attr('id')); 
+	            									   } },
 	            {label:'Empty bay',                    action:function() { alert('clicked 2') } },
 	            {label:'Delete bay',                   action:function() { alert('clicked 3') } },
 	            null, // divider
@@ -178,6 +179,16 @@ var indexHTML = {
 	            {label:'Close',                        action:function() { alert('clicked 8') } }
 	          ]
 	        });
+	        
+	       function showdata(id){
+					$('#positionspace').load("/levelmaintenance?id=" + id); 
+				    $('#positionspace').animate({ 'zoom': 1.0 }, 800);
+				    $('#positionspace').dialog({
+		    	  	height: 500,
+		      		width: 1000,
+		      		modal: true
+				 })
+	       }
 	     });
 
 
@@ -242,10 +253,10 @@ var indexHTML = {
 <%= render "shared/menu" %>
 	
 <div id="main" class="main" > 
-	<div id="navingation" style="float: left; left-margin: 20px; width: 100%; height: 80px; border: 0px solid #999" " >
+	<div id="navingation" style="float: left; width: 100%; height: 80px; border: 0px solid #999" >
 		
 		<div style="float: left"><%= link_to image_tag("compass.jpg", alt: "direction", :width => "80px", :height => "80px"), '' %></div>
-		<div style="float: right"><h2>Warehouse: <%=@warehouse%></h2> <h3>Zone: <%=@zone%></h3></div>
+		<div style="float: left"><h2>Warehouse: <%=@warehouse%></h2> <h3>Zone: <%=@zone%></h3></div>
 		
 		<br>
 	</div>

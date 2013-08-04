@@ -33,7 +33,7 @@ class PositionController < ApplicationController
    while (max_pos) * (@pos_width +2) >= 600
        @pos_width = @pos_width - 5
     end
-  
+  @level_width = max_pos.zero? ? 600:(max_pos) * (@pos_width + 6)
   
   
     end

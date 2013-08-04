@@ -25,15 +25,16 @@
 jQuery.fn.contextPopup = function(menuData) {
 
   // Build popup menu HTML
-  function createMenu() {
+  function createMenu(id) {
     var menu = $('<ul class=contextMenuPlugin><div class=gutterLine></div></ul>')
       .appendTo(document.body);
+     
     if (menuData.title) {
       $('<li class=header></li>').text(menuData.title).appendTo(menu);
     }
     menuData.items.forEach(function(item) {
       if (item) {
-        var row = $('<li><a href="#"><img><span></span></a></li>').appendTo(menu);
+      	var row = $('<li><a id="'+ id + '" href="#" ><img><span ></span></a></li>').appendTo(menu);
         row.find('img').attr('src', item.icon);
         row.find('span').text(item.label);
         if (item.action) {
@@ -51,7 +52,7 @@ jQuery.fn.contextPopup = function(menuData) {
   this.bind('contextmenu', function(e) {
 
     // Create and show menu
-    var menu = createMenu()
+    var menu = createMenu($(this).attr("id"))
       .show()
       .css({zIndex:1000001, left:e.pageX + 5 /* nudge to the right, so the pointer is covering the title */, top:e.pageY})
       .bind('contextmenu', function() { return false; });

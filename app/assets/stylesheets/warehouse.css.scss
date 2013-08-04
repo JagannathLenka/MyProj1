@@ -294,7 +294,7 @@ blockquote{
       background: -moz-radial-gradient(center 80px 45deg, circle cover, black 0%, rgba(0,28,78, 1) 100%);
       }
    
-  ul li a {
+  ul.menu li a {
     text-decoration: none;
     color:#DEB887;
       display: block;
@@ -312,14 +312,14 @@ blockquote{
       -moz-transition-duration: 700ms;
       }
    
-  ul li a:hover {
+  ul.menu li a:hover {
       color: white;
       text-decoration: underline;
       background: transparent none;
       
   }
    
-  ul li.active a{
+  ul.menu li.active a{
     color: white;
       background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(white), to(white) );
       background: -moz-radial-gradient(center 80px 45deg, circle cover, white 0%, white 100%);

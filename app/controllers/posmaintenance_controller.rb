@@ -60,9 +60,10 @@ class PosmaintenanceController < ApplicationController
          pos.save 
          
     when "del"
-              pos = Position.destroy(params[:id].to_i)
+               Position.destroy(params[:id].to_i)
+               
          
-end
+    end
 
     if request.xhr?
       render :json => pos

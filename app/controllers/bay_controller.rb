@@ -57,7 +57,8 @@ def index
     while (max_bay) * (@bay_width +2) >= 1000
        @bay_width = @bay_width - 5
     end
-        @aisle_width = (max_bay) * (@bay_width +2)
+        @aisle_width = max_bay.zero? ? 1000:(max_bay) * (@bay_width +2)
+        
 end
 
 def create

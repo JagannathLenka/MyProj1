@@ -71,7 +71,12 @@ class LevelmaintenanceController < ApplicationController
            create_pos level
            
     when "del"
-              pos = Level.destroy(params[:id].to_i)       
+               level=Level.destroy(params[:id].to_i) 
+               bays = Bay.find_by_id(level.bay_id)
+               bays.update_attributes({
+                                   :no_of_level_bay => 
+                                   bays.no_of_level_bay - 1})
+           
     end
   
       
