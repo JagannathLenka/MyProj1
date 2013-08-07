@@ -297,7 +297,7 @@ var indexHTML = {
           		<% rowvalue.each do |bay, bayvalue| %>	
           			 <td class="bay_col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
-		   	    	 <label id="<%= bay%>_label"> Bay <%= bayvalue[:customerid] %> </label> 	   	    	
+		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
 	   		<% end %></tr><tr>

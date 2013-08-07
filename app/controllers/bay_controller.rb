@@ -36,7 +36,7 @@ def index
          end
          bay_ctr = bay_ctr + 1 
          if bayvalue.cl_bay_id.blank?
-            cl_bay_id = bayvalue.id
+            cl_bay_id = bayvalue.sm_bay_id
           else
             cl_bay_id = bayvalue.cl_bay_id
          end

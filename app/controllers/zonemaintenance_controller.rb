@@ -77,9 +77,9 @@ class ZonemaintenanceController < ApplicationController
            
             when "del"
                zone = Zone.destroy(params[:id].to_i) 
-               warehouse = warehouse.find_by_id(zone.warehouse_id)
+               warehouse = Warehouse.find_by_id(zone.warehouse_id)
                warehouse.update_attributes({
-                                   :no_of_zones => warhouse.no_of_zones - 1})
+                                   :no_of_zones => warehouse.no_of_zones - 1})
            
              end   
    
@@ -130,7 +130,7 @@ end
   
    warehouse = Warehouse.find_by_id(params[:id])
    add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
-   
+   @warehouse = warehouse.cl_warehouse_id
   end
   
 end

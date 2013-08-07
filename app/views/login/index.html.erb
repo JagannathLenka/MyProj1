@@ -11,18 +11,18 @@ border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px"
   <%= form_tag("/login", method: "post") do %>  
   <tr>
   	<td>
-      <%= label_tag(:lbl1, "UserName:") %>
+      <%= label_tag(:lbluid, "UserId:") %>
     </td>
     <td>
-      <%= text_field_tag(:txt1) %>
+      <%= text_field_tag(:txtuid) %>
     </td>
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lbl2, "Password:") %>
+      <%= label_tag(:lblpswd, "Password:") %>
     </td>
     <td>
-      <%= password_field_tag(:txt2) %>
+      <%= password_field_tag(:txtpswd) %>
     </td>
   </tr>
 <tr>

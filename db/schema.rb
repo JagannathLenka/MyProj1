@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730232801) do
+ActiveRecord::Schema.define(:version => 20130807030356) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -60,6 +60,31 @@ ActiveRecord::Schema.define(:version => 20130730232801) do
     t.string   "attribute8"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "clients", :force => true do |t|
+    t.string   "name_of_organization"
+    t.integer  "address1"
+    t.string   "address2"
+    t.string   "zipcode"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "phone_no1"
+    t.integer  "phone_no2"
+    t.string   "email_id"
+    t.string   "name_of_person"
+    t.string   "status"
+    t.string   "no_of_license_required"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "levels", :force => true do |t|

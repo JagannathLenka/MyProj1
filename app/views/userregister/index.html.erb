@@ -1,0 +1,139 @@
+<% content_for :head do %>
+<style>
+table.gridtable {
+	font-family: Georgia;
+	font-size:20px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: lightblue;
+}
+</style>
+
+<% end %>
+<%= render "shared/menu" %>
+<div align="center" >
+	<h1>Register Below</h1>
+	</div>
+ <table align="center" class = "gridtable">
+  <%= form_tag("/userregister", method: "post") do %>
+
+  <tr>
+  	<td>
+      <%= label_tag(:lblorg, "Organization Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:name_of_organization) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbladd1, "Address1:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:address1) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbladd2, "Address2:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:address2) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblzip, "Zipcode:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:zipcode) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblst, "State:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:state) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblcnt, "Country:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:country) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblph1, "Phone1:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:phone_no1) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblph2, "Phone2(Optional):") %>
+    </td>
+    <td>
+      <%= text_field_tag(:phone_no2) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblmail, "EmailId:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:email_id) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblname, "Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:name_of_person) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbllicense, "License Required:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:no_of_license_required) %>
+    </td>
+  </tr>
+  
+  
+  <tr>
+  	<td>
+      <%= submit_tag( "Save") %>
+   </td>
+   
+   <td>
+     
+   </td>
+  </tr>
+<% end %>
+</table>
+
+
+</html>
+
