@@ -7,7 +7,7 @@ def index
   @aislehash=Hash.new
   @bayhash = Hash.new
   @rowhash = Hash.new
-  @bay_width = 80
+  @bay_width = 120
   max_bay = 0
    
   aisle = Aisle.where(zone_id: params[:id]).order("id ASC")
@@ -48,7 +48,8 @@ def index
    
       end
       @rowhash   = @rowhash.merge({save_attribute3 => @bayhash})
-      @aislehash = @aislehash.merge(aislevalue.cl_aisle_id.blank? ? aislevalue.id : aislevalue.cl_aisle_id => @rowhash)
+      #@aislehash = @aislehash.merge(aislevalue.cl_aisle_id.blank? ? aislevalue.id : aislevalue.cl_aisle_id => @rowhash)
+      @aislehash = @aislehash.merge( aislevalue.id => @rowhash)
       max_bay = max_bay > bay_ctr ? max_bay : bay_ctr
       @rowhash = Hash.new
       @bayhash = Hash.new   

@@ -161,9 +161,9 @@ var indexHTML = {
 			//}
 	});
 
-		   $(function() {
+		    $(function() {
 		   
-	        $('.bay, .aisle_Empty').contextPopup({
+	        $('.bay, .aisle').contextPopup({
 	          title: 'Bay Update',
 	          items: [
 	            {label:'Edit bay',                  action:function() {showdata($(this).attr('id')); 
@@ -181,16 +181,28 @@ var indexHTML = {
 	        });
 	        
 	       function showdata(id){
-					$('#positionspace').load("/levelmaintenance?id=" + id); 
-				    $('#positionspace').animate({ 'zoom': 1.0 }, 800);
+					//$('#positionspace').load("/aislemaintenance?aisleid=" + id+"&show=load"); 
+				    //$('#positionspace').animate({ 'zoom': 1.0 }, 800);
+
+					// calc good width
+					var ww=$(window).width()*.95;
+					var wh=$(window).height()*.95;
+
+					//size iframe nice like
+					$("#datapanelframe").width(ww-10);
+					$("#datapanelframe").height(wh-10);
+
+				    $('#datapanelframe').attr('src',"/aislemaintenance?aisleid=" + id+"&show=load");
 				    $('#positionspace').dialog({
 		    	  	height: 500,
 		      		width: 1000,
-		      		modal: true
+		      		modal: true,
+		      		close: function() {
+      					   window.parent.document.location.reload(true);
+      				}
 				 })
 	       }
 	     });
-
 
 		      $('.bay, .bay_Empty').dblclick(function(){
 	    		 if($('#'+ $(this).attr('id') + '_text').length>0) { 
@@ -272,7 +284,7 @@ var indexHTML = {
     	   <%if row == "aisletype" %>
     	   			 <%if rowvalue=="B"%>
 	    	   			 <tr><td><div  class="aisle_Empty"></div></td> 
-	    	   			 	<td class="aisle">Aisle: <%= aisle %></td>
+	    	   			 	<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
 	    	   			 </tr> 	    	             
 	    	          <%end%>
 	    	          
@@ -282,7 +294,7 @@ var indexHTML = {
 
  				<%if row  == "R" %> 				
 					<td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>	   	       			 	       
-         			<td class="aisle">Aisle: <%= aisle %></td>
+         			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
           			</tr><tr>
           		<% end %>
           		
@@ -295,7 +307,7 @@ var indexHTML = {
 
 
           		<% rowvalue.each do |bay, bayvalue| %>	
-          			 <td class="bay_col">
+          			 <td>
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
 		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
@@ -305,7 +317,7 @@ var indexHTML = {
 	   			
 	   			<td>
    			 	<hr style="width: <%= @aisle_width %>px; float: left" color="blue"> </td>
-	   			<td class="aisle">Aisle: <%= aisle %></td>
+	   			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
 	   		<% end %>		
        		</tr>  
     	 <% end %>
@@ -323,6 +335,10 @@ var indexHTML = {
  
 </div>
 
- <div id="positionspace" class= "positionspace"> </div>
+ <div id="positionspace" class= "positionspace"> 
+ 	
+ 	<iframe id="datapanelframe" frameborder="no"></iframe>
+ 	
+ </div>
 </body>
 </html>

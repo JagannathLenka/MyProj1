@@ -19,6 +19,7 @@ module ZonemaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,
+      :width => 1100,
                    
       :colNames => ['Id','Sequence','Zone','Client Id','sm_warehouse_id','Warehouse','warehouse_id','Description', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Attribute1', 'Attribute2', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [

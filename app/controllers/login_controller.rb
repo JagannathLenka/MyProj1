@@ -4,14 +4,16 @@ class LoginController < ApplicationController
   end
   def create
  
-    u = User.where(user_id:params[:txtuid]).first
-      if u.nil?
+   newuser = User.where(user_id:params[:txtuid]).first
+      if newuser.nil?
            
            flash[:notice] = "Incorrect User"
            redirect_to :back
           
    
-     elsif u.password == params[:txtpswd]
+     elsif newuser.password == params[:txtpswd]
+              newuser.last_login = Time.now.to_s
+              newuser.save
               redirect_to "/warehousemaintenance"
      else
        flash[:notice] = "Incorrect Password"

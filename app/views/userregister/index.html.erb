@@ -1,35 +1,11 @@
 <% content_for :head do %>
-<style>
-table.gridtable {
-	font-family: Georgia;
-	font-size:20px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-}
-table.gridtable th {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
-table.gridtable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: lightblue;
-}
-</style>
 
 <% end %>
 <%= render "shared/menu" %>
-<div align="center" >
+<div align="center">
 	<h1>Register Below</h1>
-	</div>
- <table align="center" class = "gridtable">
+	
+ <table align="center">
   <%= form_tag("/userregister", method: "post") do %>
 
   <tr>
@@ -82,7 +58,7 @@ table.gridtable td {
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lblph1, "Phone1:") %>
+      <%= label_tag(:lblph1, "Phone(Work):") %>
     </td>
     <td>
       <%= text_field_tag(:phone_no1) %>
@@ -90,7 +66,7 @@ table.gridtable td {
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lblph2, "Phone2(Optional):") %>
+      <%= label_tag(:lblph2, "Phone(Mobile):") %>
     </td>
     <td>
       <%= text_field_tag(:phone_no2) %>
@@ -114,7 +90,7 @@ table.gridtable td {
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lbllicense, "License Required:") %>
+      <%= label_tag(:lbllicense, "No of Users") %>
     </td>
     <td>
       <%= text_field_tag(:no_of_license_required) %>
@@ -133,7 +109,7 @@ table.gridtable td {
   </tr>
 <% end %>
 </table>
-
+</div>
 
 </html>
 

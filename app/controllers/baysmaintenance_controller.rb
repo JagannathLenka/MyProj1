@@ -1,20 +1,29 @@
 class BaysmaintenanceController < ApplicationController
   
-   # GET /maintenance
+   # GET /Render the JQGrid for bay maintenance
   def index
-    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
-    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
-      :page     => params[:page],
-      :per_page => params[:rows],
-      :order    => order_by_from_params(params))
+    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id',
+                'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
+                'no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5',
+                'attribute6', 'attribute7','attribute8']
+      
+    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id ,
+                       cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , 
+                       cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden,
+                       attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 ,
+                        attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
+                                                         :page     => params[:page],
+                                                         :per_page => params[:rows],
+                                                         :order    => order_by_from_params(params))
   
     if request.xhr?
       #@invoices = 'ok'
       render :json => json_for_jqgrid(bays, columns)
     end
-        get_header_details
-  end
+      get_header_details
+    end
 
+#Update the bays and create bays and levels beased on the input from JQgrid
  def create
    
   case params[:oper]

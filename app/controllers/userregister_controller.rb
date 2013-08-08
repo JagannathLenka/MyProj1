@@ -5,7 +5,7 @@ class UserregisterController < ApplicationController
   def create
     newclient = Client.new(name_of_organization: params[:name_of_organization], address1: params[:address1], address2: params[:address2], zipcode: params[:zipcode], state: params[:state], country: params[:country],
      phone_no1: params[:phone_no1], phone_no2: params[:phone_no2], email_id: params[:email_id], name_of_person: params[:name_of_person], no_of_license_required: params[:no_of_license_required] )
-      newclient.save ?  (render text: "User Created") : (render text: "Error in Page")
+    newclient.save ?  (render "thanks") : (render text: "Error in Page")
   end
   
 =begin

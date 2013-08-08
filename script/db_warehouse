@@ -12,4 +12,4 @@
 
 #rails generate migration add_fieldname_to_aisles no_of_levels_aisles:string 
 #rails generate model user client_id:string contact_phone:integer user_name:string user_id:string email_id:string password:string last_login:string status:string attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string
-rails generate model client name_of_organization:string address1:integer address2:string zipcode:string state:string country:string phone_no1:integer phone_no2:integer email_id:string name_of_person:string status:string no_of_license_required:string attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string
+#rails generate model client name_of_organization:string address1:integer address2:string zipcode:string state:string country:string phone_no1:integer phone_no2:integer email_id:string name_of_person:string status:string no_of_license_required:string attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string

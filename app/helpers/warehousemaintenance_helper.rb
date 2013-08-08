@@ -18,6 +18,7 @@ module WarehousemaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,
+      :width => 1200,
       
       :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
@@ -25,8 +26,8 @@ module WarehousemaintenanceHelper
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 150, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},
         { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
-        { :name => 'description',  :index => 'description',  :width => 150, :align => 'center', :editable => true},
-        { :name => 'no_of_zones' ,   :index => 'no_of_zones',     :width => 150,  :align => 'left', :editable => true, editrules:{required:true,number:true} },
+        { :name => 'description',  :index => 'description',  :width => 150, :align => 'left', :editable => true},
+        { :name => 'no_of_zones' ,   :index => 'no_of_zones',     :width => 80,  :align => 'center', :editable => true, editrules:{required:true,number:true} },
         { :name => 'no_of_zones_hidden' ,   :index => 'no_of_zones_hidden',     :width => 60,  :align => 'left',hidden:true, :editable => true },
         { :name => 'attribute1',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute2',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},
@@ -59,15 +60,13 @@ module WarehousemaintenanceHelper
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#warehouse_pager", {edit:true,add:true,del:true}]
-    pager = [:navGrid, "#warehouse_pager", {:closeOnEscape => true}, 
-                                           {:closeAfterEdit => true, :beforeSubmit => editcheckfunc.to_json_var }, 
-                                                       {:closeAfterAdd => true, :beforeSubmit =>
-                                                        "function(postdata, formid) {
-                                                        return [true, ' ']}".to_json_var 
-                                                                   }, {}, {}, {}]                                                                   
-    pager2 = [:inlineNav, "#warehouse_pager"]
+    pager = [:navGrid, "#warehouse_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:closeAfterAdd=>true}, {}, {}, {}]                                                              
+    #pager2 = [:inlineNav, "#warehouse_pager"]
     pager_button = [:navButtonAdd, "#warehouse_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
-
+    
+    
     jqgrid_api 'warehouse_list', grid, pager , options
 
   end
