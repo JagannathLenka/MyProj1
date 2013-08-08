@@ -17,7 +17,7 @@ include JqgridsHelper
       :colNames => ['Id','Client Id','UserId','Name','Password','Email Id','PhoneNo.','Status','Last Login','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
-        { :name => 'client_id',  :index => 'client_id',  :width => 5, :align => 'center', :editable => true},
+        { :name => 'client_id',  :index => 'client_id',  :width => 80, :align => 'center', :editable => true},
         { :name => 'user_id',    :index => 'user_id',     :width => 80,  :align => 'center', :editable => true },
         { :name => 'user_name',  :index => 'user_name',  :width => 120,  :align => 'center', :editable => true },
         { :name => 'password', :index => 'password', :width => 80,  :align => 'center', :editable => true },

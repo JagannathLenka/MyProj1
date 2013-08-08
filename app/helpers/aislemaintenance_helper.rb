@@ -6,16 +6,19 @@ module AislemaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
     
-    if !params["aisleid"].blank?
+    
+    if params[:lightweight] == "yes"
+      lightweight = "yes"   
       aisles = Aisle.find_by_id(params["aisleid"].to_i)
       id =  aisles.zone_id.to_s
       height = 80
-      width = 800
+      width = 900
       url = "/aislemaintenance?id=" +  id + "&aisleid=" + params["aisleid"]
     else
+      lightweight = "no"
       id  = params["id"]
       url = "/aislemaintenance?id=" +  id
-      height = 350 
+      height = 300 
       width = 1100   
    end 
     editcheckfunc = 'function(postdata, formid) 
@@ -42,16 +45,16 @@ module AislemaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> height,
       :width => width,
       
       :colNames => ['Id','Sequence', 'Aisle','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
         'Warehouse','Description','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden',
-        'Attribute1','Attribute2','Types of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+        'Types of Aisle','Attribute1','Attribute2','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id',  :width => 80, :align => 'center', :editable => true, :hidden =>true},
-        { :name => 'cl_aisle_id', :index => 'cl_aisle_id',  :width => 80, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance'}},
+        { :name => 'cl_aisle_id', :index => 'cl_aisle_id',  :width => 80, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/baysmaintenance' , addParam: '&lightweight='+ lightweight}},
         { :name => 'client_id', :index => 'client_id',  :width => 60, :align => 'center', :editable => true, :hidden => true},
         { :name => 'sm_zone_id', :index => 'sm_zone_id',  :width => 80, :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_zone_id', :index => 'cl_zone_id',  :width => 80, :align => 'center', :editable => false},
@@ -63,9 +66,9 @@ module AislemaintenanceHelper
         { :name => 'no_of_bays_aisle_hidden',:index => 'no_of_bays_aisle_hidden',     :width => 80,  :align => 'center', :editable => true, :hidden => true },
         { :name => 'no_of_levels_aisle',:index => 'no_of_levels_aisle',     :width => 80,  :align => 'center', :editable => true , editrules:{required:true,number:true}},
         { :name => 'no_of_levels_aisle_hidden',:index => 'no_of_levels_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "LR:LR-Double Side Pick Aisle;R:R-Right Side Pick Aisle- Right;L:L-Left Side Aisle- Left" }},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "LR:LR-Double Side Pick Aisle;R:R-Right Side Pick Aisle- Right;L:L-Left Side Aisle- Left" }},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute6',   :index => 'attribute6',   :width => 60,   :align => 'center', :editable => true, :hidden => true },

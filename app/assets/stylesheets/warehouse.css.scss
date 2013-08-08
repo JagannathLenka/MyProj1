@@ -60,14 +60,14 @@ table {
   margin: 10px 0 30px 0;
   border-collapse: separate;
   border-spacing: 0px;
-  -webkit-border-horizontal-spacing: 1px;
-  -webkit-border-vertical-spacing: 1px;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
 }
 
 table tr th, table tr td { 
   background: #555;
   color: #FFF;
-  padding: 1px 0px;
+  padding: 1px 1px;
   text-align: center;
   text-shadow: none;
   font-weight:bold;

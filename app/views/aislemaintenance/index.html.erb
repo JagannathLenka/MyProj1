@@ -3,12 +3,16 @@
 	var lastsel;
 </script>
 <%end%>
-<%= render "shared/menu" %>
-<div style="margin-left: 30px;">
-<div align="center"><a href="/warehousemaintenance" >
-	<h1>Warehouse: <%= @warehouse%></h1></a>
+<% if params[:lightweight] != "yes" %>
+
+		<%= render "shared/menu" %>
+		<div align="center"><a href="/warehousemaintenance" >
+		<h1>Warehouse: <%= @warehouse%></h1></a>
 </div>
+<div style="margin-left: 30px;">
 <h2>Listing Aisles For:  <%= render_breadcrumbs %></h2><br>
+
+<%end%>
 <table id=aisle_list></table>
 <div id=aisle_pager></div>
 </div>

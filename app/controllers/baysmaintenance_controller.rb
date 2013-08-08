@@ -20,8 +20,11 @@ class BaysmaintenanceController < ApplicationController
       #@invoices = 'ok'
       render :json => json_for_jqgrid(bays, columns)
     end
+    
+    if params[:lightweight] != "yes"  
       get_header_details
-    end
+    end  
+end
 
 #Update the bays and create bays and levels beased on the input from JQgrid
  def create
@@ -35,7 +38,7 @@ class BaysmaintenanceController < ApplicationController
                                    :no_of_level_bay  => params[:no_of_level_bay],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
-                                   :attribute3 => params[:attribute3],
+                                   #:attribute3 => params[:attribute3],
                                    :attribute4 => params[:attribute4],
                                    :attribute5 => params[:attribute5],
                                    :attribute6 => params[:attribute6],
