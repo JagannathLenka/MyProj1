@@ -1,20 +1,32 @@
 class BaysmaintenanceController < ApplicationController
   
-   # GET /maintenance
+   # GET /Render the JQGrid for bay maintenance
   def index
-    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay','no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
-    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
-      :page     => params[:page],
-      :per_page => params[:rows],
-      :order    => order_by_from_params(params))
+    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id',
+                'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
+                'no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5',
+                'attribute6', 'attribute7','attribute8']
+      
+    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id ,
+                       cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , 
+                       cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden,
+                       attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 ,
+                        attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
+                                                         :page     => params[:page],
+                                                         :per_page => params[:rows],
+                                                         :order    => order_by_from_params(params))
   
     if request.xhr?
       #@invoices = 'ok'
       render :json => json_for_jqgrid(bays, columns)
     end
-        get_header_details
-  end
+    
+    if params[:lightweight] != "yes"  
+      get_header_details
+    end  
+end
 
+#Update the bays and create bays and levels beased on the input from JQgrid
  def create
    
   case params[:oper]
@@ -26,7 +38,7 @@ class BaysmaintenanceController < ApplicationController
                                    :no_of_level_bay  => params[:no_of_level_bay],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
-                                   :attribute3 => params[:attribute3],
+                                   #:attribute3 => params[:attribute3],
                                    :attribute4 => params[:attribute4],
                                    :attribute5 => params[:attribute5],
                                    :attribute6 => params[:attribute6],
@@ -68,10 +80,18 @@ class BaysmaintenanceController < ApplicationController
          aisles.update_attributes({
                                    :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
          })
-           
+          
          create_level bays
+          when "del"
+               bays = Bay.destroy(params[:id].to_i) 
+               aisle = Aisle.find_by_id(bays.aisle_id)
+               aisle.update_attributes({
+                                   :no_of_bays_aisle => aisle.no_of_bays_aisle - 1})
+           
+             end   
          
-end
+         
+
     if request.xhr?
       render :json => bays
     end
@@ -119,9 +139,9 @@ end
    zone  = Zone.find_by_id(aisle.zone_id)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
 
-   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
-   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
-   add_breadcrumb aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s 
-   
+   add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   add_breadcrumb "Zone:" + (zone.cl_zone_id.blank? ? zone.sm_zone_id.to_s : zone.cl_zone_id.to_s), "/aislemaintenance?id="+ zone.id.to_s
+   add_breadcrumb "Aisle:" + (aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id.to_s: aisle.cl_aisle_id), "/baysmaintenance?id="+ aisle.id.to_s 
+   @warehouse = warehouse.cl_warehouse_id 
 end 
 end

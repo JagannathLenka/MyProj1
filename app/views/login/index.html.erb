@@ -1,34 +1,51 @@
+<% content_for :head do %>
+<script>
+	       function register(){
+					$('#register').load("/userregister"); 
+				    $('#register').dialog({
+		    	  	height: 1000,
+		      		width: 800,
+		      		modal: true
+				 })
+	       }
+</script>
+
+<%end%>
+
 <%= render "shared/menu" %>
 <div style="float: left; height:600px; width:100%">
 <div  class = "c1" style="float: left; height:600px; width:70% ; margin: 20px"><%= image_tag("Slot2.jpg", alt: "", :width => 400, :height => 200) %></div>
 <div style="float: left; height:600px; width:25%;">
 
-
-<div  style=" float: right;font-size: 150%; border-width: 1px; height: 160px;  width: 100%;  
+<div><a href="/userregister" >New User? Please SignUp.</a></div>
+<div  style=" float: right;font-size: 150%; border-width: 1px; height: 200px;  width: 100%;  
 border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px">
 <div style="background: blue; float: left; height: 20px; width: 100%;font-weight:bold; color: white">Login</div>
-<table align="right">
+<table align="right" width="100%">
   <%= form_tag("/login", method: "post") do %>  
   <tr>
   	<td>
-      <%= label_tag(:lbl1, "UserName:") %>
+      <%= label_tag(:lbluid, "User Id:") %>
     </td>
     <td>
-      <%= text_field_tag(:txt1) %>
+      <%= text_field_tag(:txtuid) %>
     </td>
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lbl2, "Password:") %>
+      <%= label_tag(:lblpswd, "Password:") %>
     </td>
     <td>
-      <%= password_field_tag(:txt2) %>
+      <%= password_field_tag(:txtpswd) %>
     </td>
   </tr>
 <tr>
-  	<td>
+  	<td colspan="1">
       <%= submit_tag("Sign in") %>
    </td>
+   <td>
+   	<input type="button" value="Sign Up" onclick="window.location.href='/userregister'">
+   	</td>
   
   </tr>
   </br>
@@ -46,3 +63,6 @@ border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px"
 
 </div>
 </div>
+
+ <div id="register"> </div>
+

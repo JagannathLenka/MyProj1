@@ -1,0 +1,115 @@
+<% content_for :head do %>
+
+<% end %>
+<%= render "shared/menu" %>
+<div align="center">
+	<h1>Register Below</h1>
+	
+ <table align="center">
+  <%= form_tag("/userregister", method: "post") do %>
+
+  <tr>
+  	<td>
+      <%= label_tag(:lblorg, "Organization Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:name_of_organization) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbladd1, "Address1:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:address1) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbladd2, "Address2:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:address2) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblzip, "Zipcode:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:zipcode) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblst, "State:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:state) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblcnt, "Country:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:country) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblph1, "Phone(Work):") %>
+    </td>
+    <td>
+      <%= text_field_tag(:phone_no1) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblph2, "Phone(Mobile):") %>
+    </td>
+    <td>
+      <%= text_field_tag(:phone_no2) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblmail, "EmailId:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:email_id) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblname, "Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:name_of_person) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lbllicense, "No of Users") %>
+    </td>
+    <td>
+      <%= text_field_tag(:no_of_license_required) %>
+    </td>
+  </tr>
+  
+  
+  <tr>
+  	<td>
+      <%= submit_tag( "Save") %>
+   </td>
+   
+   <td>
+     
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+</html>
+

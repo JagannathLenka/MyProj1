@@ -1,121 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-  <head>
-	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	  <title>index.html</title>
-	  <%= javascript_include_tag :defaults %>
-	  <style>
-	  	<!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
+<% content_for :head do %>
+<script>
+	var lastsel;
+</script>
+<%end%>
+<%= render "shared/menu" %>
+<div style="margin-left: 20px;">
+<h2>User Maintenance </h2>
 
-table.gridtable {
-	font-family: verdana,arial,sans-serif;
-	font-size:60px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-}
-table.gridtable th {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
-table.gridtable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: lightblue;
-}
-</style>
+<table id=user_list></table>
+<div id=user_pager ></div>
+</div>
 
-	  <%= yield :head %>
-  </head>
-  <body>
- <table align="center" class = "gridtable">
-  <%= form_tag("/usermaintenance", method: "post") do %>
-  
-  <tr>
-  	<td>
-      <%= label_tag(:lbl1, "ClientId:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt1) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl2, "UserId:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt2) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl3, "User Name:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt3) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl4, "Password:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt4) %>
-    </td>
-  </tr>
-  <tr>
-  	<tr>
-  	<td>
-      <%= label_tag(:lbl5, "Email_id:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt5) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl6, "Contact_Phone:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt6) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl7, "last_login:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txt7) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lbl8, "Status:") %>
-    </td>
-    <td>
-    	 <%= text_field_tag(:txt8) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= submit_tag("Save  User") %>
-   </td>
-   
-   <td>
-      <%= submit_tag("Edit User") %>
-   </td>
-   
-  </tr>
-<% end %>
-</table>
-  <%= yield %>
-  </body>
-</html>
+<%= raw(user_jqgrid) %>
+
+<br />

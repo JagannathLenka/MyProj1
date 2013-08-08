@@ -124,11 +124,11 @@ class LevelmaintenanceController < ApplicationController
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
 
 
-   add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
-   add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
-   add_breadcrumb aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id: aisle.cl_aisle_id, "/baysmaintenance?id="+ aisle.id.to_s
-   add_breadcrumb bay.cl_bay_id.blank? ?bay.sm_bay_id: bay.cl_bay_id, "/levelmaintenance?id="+ bay.id.to_s
-
+   add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
+   add_breadcrumb "Zone:" + (zone.cl_zone_id.blank? ? zone.sm_zone_id.to_s: zone.cl_zone_id), "/aislemaintenance?id="+ zone.id.to_s
+   add_breadcrumb "Aisle:" + (aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id.to_s: aisle.cl_aisle_id), "/baysmaintenance?id="+ aisle.id.to_s
+   add_breadcrumb "Bay:" + (bay.cl_bay_id.blank? ?bay.sm_bay_id.to_s: bay.cl_bay_id), "/levelmaintenance?id="+ bay.id.to_s
+   @warehouse = warehouse.cl_warehouse_id
   end   
 
 end

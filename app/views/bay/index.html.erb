@@ -148,22 +148,25 @@ var indexHTML = {
 	  setClickitem: function setClickitem() {	
 
 		    $('.bay, .bay_Empty').click(function(){   
+					// calc good width
+					var ww=$(window).width()*.95;
+					var wh=$(window).height()*.95;
 
-		    	//if (($(this).attr('class')).substring(0, 9)!= "bay_Empty") {
+					//size iframe nice like
+					$("#positionframe").width(ww-10);
+					$("#positionframe").height(wh-10);
 
-					$('#positionspace').load("/position/"+ this.id+ "?zoom=yes"); 
-				    $('#positionspace').animate({ 'zoom': 1.2 }, 800);
+				    $('#positionframe').attr('src',"/position/"+ this.id+ "?zoom=yes");
 				    $('#positionspace').dialog({
-		    	  	height: 500,
-		      		width: 1000,
-		      		modal: true
-				 })
-			//}
+		    	  	height: 400,
+		      		width: 800,
+		      		modal: true,
+      			})
 	});
 
-		   $(function() {
+		    $(function() {
 		   
-	        $('.bay, .aisle_Empty').contextPopup({
+	        $('.bay, .aisle').contextPopup({
 	          title: 'Bay Update',
 	          items: [
 	            {label:'Edit bay',                  action:function() {showdata($(this).attr('id')); 
@@ -181,16 +184,25 @@ var indexHTML = {
 	        });
 	        
 	       function showdata(id){
-					$('#positionspace').load("/levelmaintenance?id=" + id); 
-				    $('#positionspace').animate({ 'zoom': 1.0 }, 800);
-				    $('#positionspace').dialog({
-		    	  	height: 500,
+					// calc good width
+					var ww=$(window).width()*.95;
+					var wh=$(window).height()*.95;
+
+					//size iframe nice like
+					$("#showdataframe").width(ww-10);
+					$("#showdataframe").height(wh-10);
+
+				    $('#showdataframe').attr('src',"/aislemaintenance?lightweight=yes&aisleid=" + id);
+				    $('#showdataspace').dialog({
+		    	  	height: 300,
 		      		width: 1000,
-		      		modal: true
+		      		modal: true,
+		      		close: function() {
+      					   window.parent.document.location.reload(true);
+      				}
 				 })
 	       }
 	     });
-
 
 		      $('.bay, .bay_Empty').dblclick(function(){
 	    		 if($('#'+ $(this).attr('id') + '_text').length>0) { 
@@ -272,7 +284,7 @@ var indexHTML = {
     	   <%if row == "aisletype" %>
     	   			 <%if rowvalue=="B"%>
 	    	   			 <tr><td><div  class="aisle_Empty"></div></td> 
-	    	   			 	<td class="aisle">Aisle: <%= aisle %></td>
+	    	   			 	<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
 	    	   			 </tr> 	    	             
 	    	          <%end%>
 	    	          
@@ -282,7 +294,7 @@ var indexHTML = {
 
  				<%if row  == "R" %> 				
 					<td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>	   	       			 	       
-         			<td class="aisle">Aisle: <%= aisle %></td>
+         			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
           			</tr><tr>
           		<% end %>
           		
@@ -297,7 +309,7 @@ var indexHTML = {
           		<% rowvalue.each do |bay, bayvalue| %>	
           			 <td class="bay_col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
-		   	    	 <label id="<%= bay%>_label"> Bay <%= bayvalue[:customerid] %> </label> 	   	    	
+		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
 	   		<% end %></tr><tr>
@@ -305,7 +317,7 @@ var indexHTML = {
 	   			
 	   			<td>
    			 	<hr style="width: <%= @aisle_width %>px; float: left" color="blue"> </td>
-	   			<td class="aisle">Aisle: <%= aisle %></td>
+	   			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
 	   		<% end %>		
        		</tr>  
     	 <% end %>
@@ -323,6 +335,14 @@ var indexHTML = {
  
 </div>
 
- <div id="positionspace" class= "positionspace"> </div>
+ <div id="positionspace" class= "positionspace"> 
+ 	<iframe id="positionframe" frameborder="no"></iframe>
+  </div>
+
+<div id="showdataspace" class= "showdataspace"> 
+ 	<iframe id="showdataframe" frameborder="no"></iframe>
+  </div>
+<
+
 </body>
 </html>
