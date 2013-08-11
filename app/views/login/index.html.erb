@@ -8,6 +8,24 @@
 		      		modal: true
 				 })
 	       }
+	       function login() {
+                                
+                                 $.post("/login",
+                                       {
+                                         "txtuid"  :$('#txtuid').attr("value"),
+                                         "txtpswd" :$('#txtpswd').attr("value")
+                                       },
+                                       function(data,status)
+                                       {
+                               				if (data.substring(0,5) == "Error")
+                               						$("#Error").html(data.substring(6));	
+                               				else
+                               					window.location.href='/warehousemaintenance';
+                               							
+                                       });
+                                   
+                   }
+	       
 </script>
 
 <%end%>
@@ -21,6 +39,7 @@
 <div  style=" float: right;font-size: 150%; border-width: 1px; height: 200px;  width: 100%;  
 border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px">
 <div style="background: blue; float: left; height: 20px; width: 100%;font-weight:bold; color: white">Login</div>
+
 <table align="right" width="100%">
   <%= form_tag("/login", method: "post") do %>  
   <tr>
@@ -41,7 +60,7 @@ border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px"
   </tr>
 <tr>
   	<td colspan="1">
-      <%= submit_tag("Sign in") %>
+      <%= button_to_function("Login", "login()") %>
    </td>
    <td>
    	<input type="button" value="Sign Up" onclick="window.location.href='/userregister'">
@@ -52,6 +71,7 @@ border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px"
    <tr>
   
    <td colspan="3">
+        <div id="Error" style="color: red"></div>
 		<% flash.each do |key, value| %>
 		  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
 		<% end %>

@@ -2,6 +2,12 @@ class AislemaintenanceController < ApplicationController
   
  # GET /Render the JQGrid for aisle maintenance
   def index
+    
+    if params["aisleid"].blank?
+          #Get the header details of the zone
+          get_header_details
+      end
+      
 
      columns =  ['id','sm_aisle_id', 'cl_aisle_id','client_id', 'sm_zone_id','cl_zone_id','zone_id',
                   'sm_warehouse_id' ,'cl_warehouse_id','description', 'no_of_bays_aisle', 'no_of_bays_aisle_hidden','no_of_levels_aisle','no_of_levels_aisle_hidden',
@@ -19,10 +25,6 @@ class AislemaintenanceController < ApplicationController
                      :per_page => params[:rows],
                      :order    => order_by_from_params(params))
 
-      if params["aisleid"].blank?
-          #Get the header details of the zone
-          get_header_details
-      end
       
       
     if request.xhr? and params[:lightweight] != "yes"
@@ -206,13 +208,14 @@ class AislemaintenanceController < ApplicationController
                  when  params[:no_of_levels_aisle].to_i > (bays.no_of_level_bay.nil? ? 0 : bays.no_of_level_bay)
                    add_levels_to_bay bays
                    
-                 #if there is a add in number of level of bay   
+                 #if there is a delete in number of level of bay   
                  when  params[:no_of_levels_aisle].to_i < (bays.no_of_level_bay.nil? ? 0 : bays.no_of_level_bay)
                    remove_levels_from_bay bays 
                  end  
                   
                  bays.update_attributes({ 
-                                      :no_of_level_bay     => params[:no_of_levels_aisle]
+                                      :no_of_level_bay     => params[:no_of_levels_aisle],
+                                      :cl_aisle_id        => params[:cl_aisle_id]
                                       })
              end
  end
@@ -266,6 +269,11 @@ class AislemaintenanceController < ApplicationController
 
  #Write the breadcrumbs
  def get_header_details
+   if cookies[:userid].nil? 
+               redirect_to "/login"
+    else
+      @userid = cookies[:userid]
+    end
    zone  = Zone.find_by_id(params["id"].to_i)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
    @warehouse = warehouse.cl_warehouse_id

@@ -23,7 +23,7 @@ module WarehousemaintenanceHelper
       :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
-        { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false},
+        { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false, hidden:true},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 150, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},
         { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
         { :name => 'description',  :index => 'description',  :width => 150, :align => 'left', :editable => true},
@@ -50,7 +50,7 @@ module WarehousemaintenanceHelper
       :reloadAfterEdit => true,
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
-      jQuery('#waehouse_list').jqGrid('restoreRow',lastsel);
+      jQuery('#warehouse_list').jqGrid('restoreRow',lastsel);
       jQuery('#warehouse_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
       lastsel=id;
     } 

@@ -5,7 +5,7 @@
 <div align="center">
 	<h1>Register Below</h1>
 	
- <table align="center">
+ <table align="center" class="register" id="register">
   <%= form_tag("/userregister", method: "post") do %>
 
   <tr>
@@ -61,7 +61,7 @@
       <%= label_tag(:lblph1, "Phone(Work):") %>
     </td>
     <td>
-      <%= text_field_tag(:phone_no1) %>
+      <%= telephone_field_tag(:phone_no1) %>
     </td>
   </tr>
   <tr>
@@ -69,7 +69,7 @@
       <%= label_tag(:lblph2, "Phone(Mobile):") %>
     </td>
     <td>
-      <%= text_field_tag(:phone_no2) %>
+      <%= telephone_field_tag(:phone_no2) %>
     </td>
   </tr>
   <tr>
@@ -77,15 +77,23 @@
       <%= label_tag(:lblmail, "EmailId:") %>
     </td>
     <td>
-      <%= text_field_tag(:email_id) %>
+      <%= email_field_tag(:email_id) %>
     </td>
   </tr>
   <tr>
   	<td>
-      <%= label_tag(:lblname, "Name:") %>
+      <%= label_tag(:lblname, "First Name:") %>
     </td>
     <td>
       <%= text_field_tag(:name_of_person) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblname, "Last Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:lastname_of_person) %>
     </td>
   </tr>
   <tr>

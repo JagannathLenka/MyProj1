@@ -1,6 +1,8 @@
 class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
+  
+    get_header_details
 
     columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
     warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ").paginate(
@@ -8,11 +10,11 @@ class WarehousemaintenanceController < ApplicationController
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
-    if request.xhr?
+    if request.xhr? and params[:lightweight] !="yes"
       #@invoices = 'ok'
       render :json => json_for_jqgrid(warehouse, columns)
     end
-
+   
   end
 
 
@@ -22,21 +24,10 @@ class WarehousemaintenanceController < ApplicationController
    
   case params[:oper]
   when "edit"
-        warehouse = Warehouse.find_by_id(params[:id])
-        warehouse.update_attributes({
-                                   :cl_warehouse_id => params[:cl_warehouse_id], 
-                                   :client_id => params[:client_id],
-                                   :description => params[:description],
-                                   :no_of_zones => params[:no_of_zones],
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => params[:attribute2], 
-                                   :attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4]
-                                        
-          })
-          create_zones warehouse
+    edit_warehouse_details
+  
 
- #When warehouse is added, create the resctive zones also
+       #When warehouse is added, create the respective zones also
   when "add"
         maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i 
         warehouse= Warehouse.new(  :sm_warehouse_id => maximum_warehouse_id + 1 ,
@@ -51,45 +42,105 @@ class WarehousemaintenanceController < ApplicationController
           )
         
          warehouse.save          
-         create_zones warehouse
+         add_zones_to_warehouse warehouse
+         
                              
     when "del"
               Warehouse.destroy(params[:id].to_i)                               
     end
+    
     if request.xhr?
       render :json => @warehouse
     end
 end 
 
-  #Create Zones if there is a change in zones with warehouse details   
-  def create_zones warehouse
+def edit_warehouse_details
+  warehouse = Warehouse.find_by_id(params[:id])
+  
+  case 
+        
+        #add in the number of zones
+        when params[:no_of_zones].to_i >  (warehouse.no_of_zones.nil? ? 0 :  warehouse.no_of_zones)
+             add_zones_to_warehouse warehouse
+             
+             
+        #delete in the number of zones
+        when params[:no_of_zones].to_i < (warehouse.no_of_zones.nil? ? 0 :  warehouse.no_of_zones)
+             remove_zones_from_warehouse warehouse
+             
+
+        else
+            update_zones warehouse
+       
+       end  
+       warehouse.update_attributes({
+                                   :cl_warehouse_id => params[:cl_warehouse_id], 
+                                   :description => params[:description],
+                                   :no_of_zones => params[:no_of_zones],
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4]
+                                        
+          }) 
+end
+
+def add_zones_to_warehouse warehouse
          max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id").to_i
-         zonevalue = params[:no_of_zones].to_i
-         hidden_zonevalue = params[:no_of_zones_hidden].to_i
-         if(zonevalue > hidden_zonevalue)
-               diff_zonevalue = zonevalue - hidden_zonevalue
+         newzone = params[:no_of_zones].to_i
+         existingzone = warehouse.no_of_zones.nil? ? 0 : warehouse.no_of_zones
+         diff_zonevalue = newzone - existingzone
+               
                
                (1..diff_zonevalue).each do |z| 
                
-                           Zone.create(
+                     zones = Zone.new(
                                         :sm_zone_id  => max_zone + z,
+                                        :cl_zone_id  =>"",
                                         :sm_warehouse_id => warehouse.sm_warehouse_id,
                                         :warehouse_id => warehouse.id,
-                                        :cl_warehouse_id => params[:cl_warehouse_id]
+                                        :cl_warehouse_id => params[:cl_warehouse_id],
+                                        :no_of_aisles_zone => 0,
+                                        
+                                        
                                      )
+                      zones.save
+                                
                 end 
+          update_zones warehouse
+end
 
-      else
-        
-      #When there is no change in zone value but just change in other parameters
-             zone_set = Zone.where(:warehouse_id => warehouse.id)
-             zone_set.each do |zones| 
-                 zones.update_attributes({ 
-                                  :cl_warehouse_id    => warehouse.cl_warehouse_id
-                                  })
-                  end      
-      end         
-    
+def remove_zones_from_warehouse warehouse
+         newzone = params[:no_of_zones].to_i
+         existingzone = warehouse.no_of_zones
+         diff_zonevalue = existingzone - newzone 
+         
+        (1..diff_zonevalue).each do |z| 
+               Zone.where(:warehouse_id => warehouse.id).last.destroy
+         end
+           
+        update_zones warehouse
+end
+#When there is no change in zone value but just change in other parameters 
+def update_zones warehouse
+ 
+  zone_set = Zone.where(:warehouse_id => warehouse.id)
+  zone_set.each do |zones| 
+  zones.update_attributes({ 
+                            :cl_warehouse_id    => params[:cl_warehouse_id]
+                          })
+                  end   
+end
+
+ def get_header_details
+  
+   if cookies[:userid].nil? 
+               redirect_to "/login"
+    else
+      @userid = cookies[:userid]
+    end
   end
+ 
+
 
 end

@@ -20,10 +20,18 @@ body {
 	padding: 0px;
 	overflow-x: hidden; /* For Opera */
 	-webkit-box-shadow:
-		inset #19d4ff 0 0 0 5px,
+     inset #19d4ff 0 0 0 5px,
 }
 
-     </style>
+table tr td { 
+  font-size: 10px;
+  background: #DDD;
+  color: #47433F;
+  border-top: 0px solid #FFF;
+  
+}
+
+    </style>	
      
       <script type="text/javascript">
       
@@ -278,56 +286,68 @@ var indexHTML = {
 
    	<table border="0" id ="bayTable" style="border-collapse:collapse;">
    	<% @aislehash.each do |aisle, aislevalue| %>
-		
-    	<% aislevalue.each do |row, rowvalue| %>
-    	
-    	   <%if row == "aisletype" %>
-    	   			 <%if rowvalue=="B"%>
-	    	   			 <tr><td><div  class="aisle_Empty"></div></td> 
-	    	   			 	<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
-	    	   			 </tr> 	    	             
-	    	          <%end%>
-	    	          
-	    	          <% @aisletype = rowvalue %>
-	    	   <% else %>
- 		        <tr>
+		  
+          <tr> 
 
- 				<%if row  == "R" %> 				
-					<td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>	   	       			 	       
-         			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
-          			</tr><tr>
-          		<% end %>
-          		
- 				<%if row  == "L" %> 				
+
+		  <% if aislevalue["row"].empty? %>
+          <!-- Empty Aisle --> 			
+          
+				<td><div  class="aisle_Empty"></div></td> 
+	    	   		<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aislevalue["aisle_properties"]["customer_id"] %></div></td>
+	    	   	</tr> 	    	             
+		  <%end %>
+		  	
+		  <% if !aislevalue["row"]["L"].nil? %>
+          <!-- Left side Aisle --> 			
+
 					<td> 
  						<div  class="aisle_divider"> </div>   	       
           			</td>
           			</tr><tr>
-          		<% end %>
+          				
 
+	    	  <% aislevalue["row"]["L"].to_a.each do |bay,bayvalue| %>
+	
+					<td class="bay_col">
+		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
+			   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
+			   	    </div>
+			   	   </td>
+	          <% end %>
+	          </tr>
+          <% end %>
+          
+          <% if !aislevalue["row"]["R"].nil? %>
+          <!-- Right side Aisle --> 
+		  	 		<td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>	   	       			 	       
+         			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aislevalue["aisle_properties"]["customer_id"] %></div></td>
+          			</tr><tr>
 
-          		<% rowvalue.each do |bay, bayvalue| %>	
-          			 <td class="bay_col">
+    	  <% aislevalue["row"]["R"].to_a.each do |bay,bayvalue| %>
+
+				<td class="bay_col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
 		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
-	   		<% end %></tr><tr>
-	   		<%if row == "L" and @aisletype== "L" %>
-	   			
-	   			<td>
-   			 	<hr style="width: <%= @aisle_width %>px; float: left" color="blue"> </td>
-	   			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aisle %></div></td>
-	   		<% end %>		
-       		</tr>  
-    	 <% end %>
-    <% end %>
-  <% end %>
-   
- </table>
+           <% end %>
+		 </tr> 
+	    <% end %>				
+      
+      <% @lastaislepick = aislevalue["aisle_properties"]["aisle_pick"] %>
+      
+  	 <%end %>
 
+
+     <% if @lastaislepick=="L" %>
+  	 <!-- At the end check if if this is a left side pick aisle, if so put a drive path -->
+		  <tr><td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td></tr>
+	 <%end %>	  	 			   	       			 	       
+  	 
+  </table>
   
-   </div>
+ </div>
    
   
    

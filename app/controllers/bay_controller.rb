@@ -12,28 +12,31 @@ def index
    
   aisle = Aisle.where(zone_id: params[:id]).order("id ASC")
   
+  
   aisle.each do |aislevalue|
+
+  aisle_properties = {"customer_id"=> (aislevalue.cl_aisle_id.blank? ? aislevalue.sm_aisle_id: aislevalue.cl_aisle_id), "aisle_pick" => aislevalue.attribute3} 
+
       @bay= Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
       @warehouse = aislevalue.cl_warehouse_id
       @zone      = aislevalue.cl_zone_id
       
-      if @bay[1].nil? 
-        @rowhash   = @rowhash.merge({"aisletype" => "B"})    
-        
-      else
-        @rowhash = @rowhash.merge({"aisletype" => aislevalue.attribute3})
-        save_attribute3 = @bay[1].attribute3
+      if !@bay[1].nil? 
+         save_attribute3 = @bay[1].attribute3
       end
+      
+      
       bay_ctr = 0
       @bay.each do |bayvalue|
 
          if save_attribute3 != bayvalue.attribute3 
-            @rowhash = @rowhash.merge({save_attribute3 => @bayhash})
+            @rowhash = @bayhash.empty? ?  @rowhash.merge({}) : @rowhash.merge( {save_attribute3 =>  @bayhash })
             save_attribute3 = bayvalue.attribute3              
             @bayhash= Hash.new
             max_bay = max_bay > bay_ctr ? max_bay : bay_ctr
             bay_ctr = 0
          end
+         
          bay_ctr = bay_ctr + 1 
          if bayvalue.cl_bay_id.blank?
             cl_bay_id = bayvalue.sm_bay_id
@@ -44,21 +47,29 @@ def index
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
-         @bayhash= @bayhash.merge({bayvalue.id.to_s =>{:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id}})
+         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id})
    
       end
-      @rowhash   = @rowhash.merge({save_attribute3 => @bayhash})
-      #@aislehash = @aislehash.merge(aislevalue.cl_aisle_id.blank? ? aislevalue.id : aislevalue.cl_aisle_id => @rowhash)
-      @aislehash = @aislehash.merge( aislevalue.id => @rowhash)
+     
+     if aislevalue.attribute3=="LR" && save_attribute3 == "R"
+       @bayhash = Hash[@bayhash.sort.reverse]
+     end
+          @rowhash = @bayhash.empty? ?  @rowhash.merge({}) : @rowhash.merge( {save_attribute3 =>  @bayhash })
+      
+     
+      @aislehash = @aislehash.merge( aislevalue.id.to_s => {"aisle_properties" => aisle_properties ,  "row" => @rowhash})
       max_bay = max_bay > bay_ctr ? max_bay : bay_ctr
       @rowhash = Hash.new
       @bayhash = Hash.new   
       bay_ctr = 0 
     end
+    
+    #render :json => @aislehash
+    #Get the maximum size of the bay divider    
     while (max_bay) * (@bay_width +2) >= 1000
        @bay_width = @bay_width - 5
     end
-        @aisle_width = max_bay.zero? ? 1000:(max_bay) * (@bay_width +2)
+        @aisle_width = max_bay.zero? ? 1000:(max_bay) * (@bay_width)
         
 end
 
@@ -74,6 +85,7 @@ def create
        
 #Updating class and title after dragging  
  
+ 
    when "update_class"
 
         dragbay=Bay.where("id = ?" , params[:bay][:dragbay_id]).first
@@ -84,7 +96,7 @@ def create
         dropbay.attribute1 = params[:bay][:dropbay_class]
         dropbay.attribute2 = params[:bay][:dropbay_title]
         dropbay.save
-             render text: 'ok'        
+        render text: 'ok'        
    end    
        
    #b= Posts.where("text = ?", params[:post][:text]).first

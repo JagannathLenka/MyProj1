@@ -16,6 +16,20 @@ module BaysmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + params["id"] + '; return[true, " "]}'
+    copyrowfunc  = 'function() {
+                                var ids = $("#bays_list").jqGrid("getGridParam","selarrrow");
+                                
+                                 $.post("/baysmaintenance",
+                                       {
+                                         "oper" :"cpy",
+                                         "id"   :ids[0]
+                                       },
+                                       function(data,status)
+                                       {
+                               
+                                       });
+                                 $("#bays_list").trigger("reloadGrid");       
+                   }'
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -59,6 +73,7 @@ module BaysmaintenanceHelper
       :caption => 'Bay Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
+      :multiselect => true,
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#bays_list').jqGrid('restoreRow',lastsel);
@@ -78,9 +93,9 @@ module BaysmaintenanceHelper
 
 
     
-    pager_button = [:navButtonAdd, "#bays_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
+    pager_button = [:navButtonAdd, "#bays_pager", {:caption => 'Copy to other bay', :onClickButton => copyrowfunc.to_json_var }]
 
-    jqgrid_api 'bays_list', grid, pager, options
+    jqgrid_api 'bays_list', grid, pager,pager_button, options
 
   end
 

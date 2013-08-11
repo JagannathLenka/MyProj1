@@ -2,20 +2,23 @@ class ZonemaintenanceController < ApplicationController
    # GET /zonemaintenance
   def index
 
+    #Get the header details of the zone
+    get_header_details
+    
     columns =         ['id','sm_zone_id','cl_zone_id','client_id','sm_warehouse_id','cl_warehouse_id',
                         'warehouse_id','description', 'no_of_aisles_zone', 'no_of_aisles_zone_hidden', 'no_of_bays_aisle','no_of_levels_aisle', 
                         'attribute1', 'attribute2', 'attribute3','attribute4','attribute5','attribute6','attribute7','attribute8']
    
     zone = Zone.select("id , sm_zone_id , cl_zone_id , client_id ,sm_warehouse_id , cl_warehouse_id, 
-                          warehouse_id ,description , no_of_aisles_zone,no_of_aisles_zone as no_of_aisles_zone_hidden,  no_of_bays_aisle, no_of_levels_aisle  ,
-                          attribute1, attribute2, attribute3 , attribute4 , attribute5, attribute6, attribute7 , attribute8").where(:warehouse_id => params[:id]).paginate(
+                        warehouse_id ,description , no_of_aisles_zone,no_of_aisles_zone as no_of_aisles_zone_hidden,
+                         no_of_bays_aisle, no_of_levels_aisle  , attribute1, attribute2, attribute3 , attribute4 ,
+                         attribute5, attribute6, attribute7 , attribute8").where(:warehouse_id => params[:id]).paginate(
     
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
    
-    #Get the header details of the zone
-    get_header_details
+    
       
     if request.xhr? 
       render :json => json_for_jqgrid(zone, columns)
@@ -29,22 +32,8 @@ class ZonemaintenanceController < ApplicationController
     case params[:oper]
   
     when "edit"
-          zone = Zone.find_by_id(params[:id])
-          zone.update_attributes({ 
-                                     :cl_zone_id => params[:cl_zone_id],
-                                     :description => params[:description],
-                                     :no_of_aisles_zone => params[:no_of_aisles_zone],
-                                     :attribute1 => params[:attribute1],
-                                     :attribute2 => params[:attribute2], 
-                                     :attribute3 => params[:attribute3],
-                                     :attribute4 => params[:attribute4],
-                                     :attribute5 => params[:attribute5],
-                                     :attribute6 => params[:attribute6],
-                                     :attribute7 => params[:attribute7],
-                                     :attribute8 => params[:attribute8]    
-            })
-           create_aisles zone
-           
+      edit_zones_details
+         
     when "add"
                 
           zone = Zone.find_by_id(params[:id])
@@ -68,19 +57,12 @@ class ZonemaintenanceController < ApplicationController
 
             )
            zone.save
-           
-           warehouse.update_attributes({
-                                   :no_of_zones => warehouse.no_of_zones + 1
-         })
-          
-           create_aisles zone
-           
+           add_aisles_to_zone zone
+           warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones + 1})
+  
             when "del"
                zone = Zone.destroy(params[:id].to_i) 
-               warehouse = Warehouse.find_by_id(zone.warehouse_id)
-               warehouse.update_attributes({
-                                   :no_of_zones => warehouse.no_of_zones - 1})
-           
+
              end   
    
   
@@ -90,47 +72,91 @@ class ZonemaintenanceController < ApplicationController
       end
 end
 
- #Create Aisles based on the parameters given by user in the form edit screen
- def create_aisles zone
+def edit_zones_details
+   zone = Zone.find_by_id(params[:id])
+   case  
+        #add in the number of Aisles
+        when params[:no_of_aisles_zone].to_i >  (zone.no_of_aisles_zone.nil? ? 0 : zone.no_of_aisles_zone)
+             add_aisles_to_zone zone
+             
+             
+        #delete in the number of Aisles
+        when params[:no_of_aisles_zone].to_i <  (zone.no_of_aisles_zone.nil? ? 0 : zone.no_of_aisles_zone)
+             remove_aisles_from_zone zone
+             
 
-         aislevalue = params[:no_of_aisles_zone].to_i
-         hidden_aislevalue = params[:no_of_aisles_zone_hidden].to_i
-         bayvalue = params[:no_of_bays_aisle].to_i
+        else
+            update_aisles zone
+       end 
+        zone.update_attributes({ 
+                                     :cl_zone_id => params[:cl_zone_id],
+                                     :description => params[:description],
+                                     :no_of_aisles_zone => params[:no_of_aisles_zone],
+                                     :attribute1 => params[:attribute1],
+                                     :attribute2 => params[:attribute2], 
+                                     :attribute3 => params[:attribute3],
+                                     :attribute4 => params[:attribute4],
+                                     :attribute5 => params[:attribute5],
+                                     :attribute6 => params[:attribute6],
+                                     :attribute7 => params[:attribute7],
+                                     :attribute8 => params[:attribute8]    
+            })  
+end
+
+def add_aisles_to_zone zone
          max_aisle = Aisle.where(:zone_id => zone.id).maximum("sm_aisle_id").to_i
-         if(aislevalue > hidden_aislevalue)
-           diff_aislevalue = aislevalue - hidden_aislevalue
+         newaisle = params[:no_of_aisles_zone].to_i
+         existingaisle = zone.no_of_aisles_zone.nil? ? 0 : zone.no_of_aisles_zone
+         diff_aislevalue = newaisle - existingaisle
+         
+           
            (1..diff_aislevalue).each do |a|
             aisles  = Aisle.new(:sm_aisle_id       => max_aisle + a,
                               :sm_zone_id         => zone.sm_zone_id,
                               :sm_warehouse_id    => zone.sm_warehouse_id,
                               :zone_id            => zone.id,
-                              :no_of_bays_aisle   => params[:no_of_bays_aisle],
                               :cl_aisle_id        => "",
                               :cl_zone_id         => zone.cl_zone_id,
-                              :cl_warehouse_id    => zone.cl_warehouse_id
+                              :cl_warehouse_id    => zone.cl_warehouse_id,
+                              :no_of_bays_aisle   => 0,
                               
                           )
              aisles.save
           end
-        else        
-        
-        #When there is no change in aisle value but just change in other parameters
+          update_aisles zone
+end
+
+def remove_aisles_from_zone zone
+         newaisle = params[:no_of_aisles_zone].to_i
+         existingaisle = zone.no_of_aisles_zone
+         diff_aislevalue = existingaisle -  newaisle 
+         
+           (1..diff_aislevalue).each do |a|
+             Aisle.where(:zone_id => zone.id).last.destroy
+            end 
+            update_aisles zone
+end
+
+ #When there is no change in aisle value but just change in other parameters
+ def update_aisles zone
         aisles_set = Aisle.where(:zone_id => zone.id)
         aisles_set.each do |aisles| 
-                  aisles.update_attributes({ 
-                                  :cl_zone_id         => zone.cl_zone_id,
-                                  :cl_warehouse_id    => zone.cl_warehouse_id
+        aisles.update_attributes({ 
+                                  :cl_zone_id    => params[:cl_zone_id]
                                   })
-                  end      
-        end         
-    end
-
-
+                  end    
+ end        
+       
   def get_header_details
-  
+    if cookies[:userid].nil? 
+               redirect_to "/login"
+    else
+      @userid = cookies[:userid]
+    end
    warehouse = Warehouse.find_by_id(params[:id])
    add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
    @warehouse = warehouse.cl_warehouse_id
+   
   end
   
 end
