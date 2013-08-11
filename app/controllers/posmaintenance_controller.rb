@@ -2,6 +2,7 @@ class PosmaintenanceController < ApplicationController
   # GET /maintenance
   
   def index
+    get_header_details
     columns =  ['id','sm_pos_id','cl_pos_id','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','level_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
     pos = Position.select(" id , sm_pos_id , cl_pos_id , sm_level_id , cl_level_id, sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , level_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:level_id => params[:id]).paginate(
       :page     => params[:page],
@@ -13,7 +14,7 @@ class PosmaintenanceController < ApplicationController
         render :json => json_for_jqgrid(pos, columns)
      end
   
-    get_header_details
+    
    end
 
  def create
@@ -65,14 +66,18 @@ class PosmaintenanceController < ApplicationController
                level.update_attributes({
                                    :no_of_pos_level => level.no_of_pos_level - 1 })
               
-         /./
-    end
+       end
 
     if request.xhr?
       render :json => pos
     end
  end
  def get_header_details
+   if cookies[:userid].nil? 
+               redirect_to "/login"
+    else
+      @userid = cookies[:userid]
+    end
    level = Level.find_by_id(params["id"].to_i)
    bay =   Bay.find_by_id(level.bay_id)
    aisle = Aisle.find_by_id(bay.aisle_id)

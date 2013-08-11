@@ -14,17 +14,18 @@ include JqgridsHelper
       :width =>1200,
       
     
-      :colNames => ['Id','Client Id','UserId','Name','Password','Email Id','PhoneNo.','Status','Last Login','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Client Id','UserId','Name','Password','Email Id','Phone(work)','Phone(mobile)','Status','Last Login','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
-        { :name => 'client_id',  :index => 'client_id',  :width => 80, :align => 'center', :editable => true},
-        { :name => 'user_id',    :index => 'user_id',     :width => 80,  :align => 'center', :editable => true },
-        { :name => 'user_name',  :index => 'user_name',  :width => 120,  :align => 'center', :editable => true },
-        { :name => 'password', :index => 'password', :width => 80,  :align => 'center', :editable => true },
-        { :name => 'email_id',:index => 'email_id',     :width => 100,  :align => 'center', :editable => true},
-        {:name => 'contact_phone', :index => 'contact_phone',  :width => 80, :align => 'center', :editable => true},
-        { :name => 'status', :index => 'status', :width => 60 ,  :align => 'center', :editable => true},
-        { :name => 'last_login', :index => 'last_login', :width => 120,  :align => 'left', :editable => false },
+        { :name => 'client_id',  :index => 'client_id',  :width => 80, :align => 'center', :editable => true,editrules:{required:true}},
+        { :name => 'user_id',    :index => 'user_id',     :width => 80,  :align => 'center', :editable => true,editrules:{required:true} },
+        { :name => 'user_name',  :index => 'user_name',  :width => 120,  :align => 'center', :editable => true ,editrules:{required:true}},
+        { :name => 'password', :index => 'password', :width => 80,  :align => 'center', :editable => true,:hidden =>true,:edittype => "password", editrules:{required:true,edithidden:true} },
+        { :name => 'email_id',:index => 'email_id',     :width => 100,  :align => 'center', :editable => true,editrules:{required:true,email:true}},
+        {:name => 'contact_phone', :index => 'contact_phone',  :width => 80, :align => 'center', :editable => true,editrules:{required:true,number:true}},
+        {:name => 'contact_phone2', :index => 'contact_phone2',  :width => 80, :align => 'center', :editable => true,editrules:{required:true,number:true}},
+        { :name => 'status', :index => 'status', :width => 60 ,  :align => 'center', :editable => true,editrules:{required:true}},
+        { :name => 'last_login', :index => 'last_login', :width => 120,  :align => 'left', :editable => false ,editrules:{required:true}},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 60,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 60,   :align => 'center', :editable => true,},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 60,   :align => 'center', :editable => true},
@@ -57,7 +58,7 @@ include JqgridsHelper
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-        pager = [:navGrid, "#user_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
+        pager = [:navGrid, "#user_pager", {edit:true, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true}, 
                                                        {:closeAfterAdd=>true}, {}, {}, {}]   
     #pager2 = [:inlineNav, "#bays_pager"]

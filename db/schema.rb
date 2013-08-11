@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807030356) do
+ActiveRecord::Schema.define(:version => 20130809190638) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20130807030356) do
     t.string   "attribute8"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.string   "lastname_of_person"
   end
 
   create_table "levels", :force => true do |t|
@@ -169,8 +170,21 @@ ActiveRecord::Schema.define(:version => 20130807030356) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "contact_phone2"
+    t.string   "attribute9"
+    t.string   "attribute10"
+    t.string   "attribute11"
+    t.string   "attribute12"
+    t.string   "attribute13"
+    t.string   "attribute14"
+    t.string   "attribute15"
+    t.string   "attribute16"
+    t.string   "attribute17"
+    t.string   "attribute18"
+    t.string   "attribute19"
+    t.string   "attribute20"
   end
 
   create_table "warehouses", :force => true do |t|

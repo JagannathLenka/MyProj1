@@ -1,7 +1,12 @@
+require 'copy_object'
 class BaysmaintenanceController < ApplicationController
   
+  include CopyObject
    # GET /Render the JQGrid for bay maintenance
   def index
+     if params[:lightweight] != "yes"  
+      get_header_details
+    end
     columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id',
                 'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
                 'no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5',
@@ -21,9 +26,7 @@ class BaysmaintenanceController < ApplicationController
       render :json => json_for_jqgrid(bays, columns)
     end
     
-    if params[:lightweight] != "yes"  
-      get_header_details
-    end  
+     
 end
 
 #Update the bays and create bays and levels beased on the input from JQgrid
@@ -31,23 +34,8 @@ end
    
   case params[:oper]
   when "edit"
-        bays = Bay.find_by_id(params[:id])
-        bays.update_attributes({ 
-                                   :cl_bay_id => params[:cl_bay_id],
-                                   :description => params[:description],
-                                   :no_of_level_bay  => params[:no_of_level_bay],
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => params[:attribute2], 
-                                   #:attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4],
-                                   :attribute5 => params[:attribute5],
-                                   :attribute6 => params[:attribute6],
-                                   :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
-                                })
-                                
-                  create_level  bays            
-
+        edit_bays_details
+       
   when "add"
     
         bays = Bay.find_by_id(params[:id])
@@ -75,21 +63,23 @@ end
                          
                        )
         
-         bays.save
-         
-         aisles.update_attributes({
-                                   :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
-         })
-          
-         create_level bays
-          when "del"
-               bays = Bay.destroy(params[:id].to_i) 
-               aisle = Aisle.find_by_id(bays.aisle_id)
-               aisle.update_attributes({
-                                   :no_of_bays_aisle => aisle.no_of_bays_aisle - 1})
-           
-             end   
-         
+               bays.save
+               add_levels_to_bay bays
+               
+               aisles.update_attributes({
+                                         :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
+               })
+                
+               
+    when "del"
+         bays = Bay.destroy(params[:id].to_i) 
+       
+    when "cpy"
+             
+             CopyObject.copyBaytoAisle params[:id]
+              
+    end   
+   
          
 
     if request.xhr?
@@ -97,12 +87,49 @@ end
     end
  end
  
- def create_level bays
-         levelvalue = params[:no_of_level_bay ].to_i
-         hidden_levelvalue = params[:no_of_level_bay_hidden].to_i
-         diff_levelvalue = levelvalue - hidden_levelvalue
-         max_levels = Level.where(:bay_id => bays.id).maximum("sm_level_id").to_i  #This bays is what u r passing in create_level
-         if( levelvalue >  hidden_levelvalue)          
+ def edit_bays_details
+     bays = Bay.find_by_id(params[:id].to_i)
+    
+     case 
+        
+        #add in the number of levels
+        when params[:no_of_level_bay].to_i >  (bays.no_of_level_bay.nil? ? 0 :   bays.no_of_level_bay)
+             add_levels_to_bay bays
+             
+             
+        #delete in the number of levels
+        when params[:no_of_level_bay].to_i < (bays.no_of_level_bay.nil? ? 0 :   bays.no_of_level_bay)
+             remove_levels_from_bay bays
+             
+
+        else
+            update_levels bays
+       
+       end   
+    
+      bays.update_attributes({ 
+                                   :cl_bay_id => params[:cl_bay_id],
+                                   :description => params[:description],
+                                   :no_of_level_bay  => params[:no_of_level_bay],
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   #:attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
+                                })
+
+ end
+ 
+ def add_levels_to_bay bays
+         max_levels = Level.where(:bay_id => bays.id).maximum("sm_level_id").to_i  
+         newlevel = params[:no_of_level_bay ].to_i
+         existinglevel = bays.no_of_level_bay.nil? ? 0 : bays.no_of_level_bay
+         diff_levelvalue = newlevel - existinglevel
+         
+                 
             (1..diff_levelvalue).each do |lev|
                levels = Level.new(:sm_level_id     => max_levels + lev,
                                :sm_bay_id           => bays.sm_bay_id,
@@ -115,26 +142,47 @@ end
                                :cl_aisle_id         => bays.cl_aisle_id,
                                :cl_zone_id          => bays.cl_zone_id,
                                :cl_warehouse_id     => bays.cl_warehouse_id,
-                               :no_of_pos_level    => params[:no_of_pos_level]
+                               :no_of_pos_level    => 0,
                             )
                levels.save
             end  
-         
-        else 
-         #When there is no change in level value but just change in other parameters
-        
-            level_set = Level.where(:bay_id => bays.id.to_s)
-            level_set.each do |levels| 
-                  levels.update_attributes({ 
-                                  :cl_bay_id         =>bays.cl_bay_id, 
-                                  :cl_aisle_id       =>bays.cl_aisle_id,
-                                  :cl_zone_id         =>bays.cl_zone_id,
-                                  :cl_warehouse_id    =>bays.cl_warehouse_id
-                                  })
-                  end      
-          end  
+         update_levels bays       
  end
+ def remove_levels_from_bay bays
+   
+         newlevel = params[:no_of_level_bay ].to_i
+         existinglevel = bays.no_of_level_bay
+         diff_levelvalue = existinglevel - newlevel
+         
+           (1..diff_levelvalue).each do |lev|
+             Level.where(:bay_id => bays.id).last.destroy
+            end
+            update_levels bays 
+ end
+ #When there is no change in level value but just change in other parameters
+ def update_levels bays
+    
+            level_set = Level.where(:bay_id => bays.id)
+            level_set.each do |levels| 
+            levels.update_attributes({ 
+                                  :cl_bay_id   => params[:cl_bay_id] 
+                                  
+                                  })
+                  end    
+ end
+ 
+ 
+        
+        
+              
+           
+ 
  def get_header_details
+   if cookies[:userid].nil? 
+               redirect_to "/login"
+    else
+      @userid = cookies[:userid]
+    end
    aisle = Aisle.find_by_id(params["id"].to_i)
    zone  = Zone.find_by_id(aisle.zone_id)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
