@@ -20,13 +20,13 @@ module LevelmaintenanceHelper
       :mtype => 'GET',
       :height=> 350,
       
-      :colNames => ['Id','Sequence','Level','Clent Id','Description','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence','Level','Description','Clent Id','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_level_id',    :index => 'sm_level_id',     :width => 55,  :align => 'center', :editable => true,:hidden => true },
         { :name => 'cl_level_id',    :index => 'cl_level_id',     :width => 100,  :align => 'center', :editable => true,editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/posmaintenance'} },
-        { :name => 'client_id', :index => 'client_id',  :width => 120, :align => 'left', :editable => false, :hidden => true},
         { :name => 'description',  :index => 'description',   :width => 120,   :align => 'left', :editable => true},
+        { :name => 'client_id', :index => 'client_id',  :width => 120, :align => 'left', :editable => false, :hidden => true},
         { :name => 'sm_bay_id',   :index => 'sm_bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_bay_id',   :index => 'cl_bay_id',    :width => 120,   :align => 'center', :editable => false },
         { :name => 'bay_id',   :index => 'bay_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},

@@ -1,8 +1,13 @@
+#require 'user_authentication'
 class WarehousemaintenanceController < ApplicationController
+  #include UserAuthentication
+  
    # GET /maintenance
   def index
-  
-    get_header_details
+   get_header_details
+   #UserAuthentication.authentication cookies[:userid]
+     
+   
 
     columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
     warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ").paginate(
@@ -67,11 +72,7 @@ def edit_warehouse_details
         #delete in the number of zones
         when params[:no_of_zones].to_i < (warehouse.no_of_zones.nil? ? 0 :  warehouse.no_of_zones)
              remove_zones_from_warehouse warehouse
-             
-
-        else
-            update_zones warehouse
-       
+                    
        end  
        warehouse.update_attributes({
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
@@ -107,7 +108,6 @@ def add_zones_to_warehouse warehouse
                       zones.save
                                 
                 end 
-          update_zones warehouse
 end
 
 def remove_zones_from_warehouse warehouse
@@ -119,28 +119,16 @@ def remove_zones_from_warehouse warehouse
                Zone.where(:warehouse_id => warehouse.id).last.destroy
          end
            
-        update_zones warehouse
-end
-#When there is no change in zone value but just change in other parameters 
-def update_zones warehouse
- 
-  zone_set = Zone.where(:warehouse_id => warehouse.id)
-  zone_set.each do |zones| 
-  zones.update_attributes({ 
-                            :cl_warehouse_id    => params[:cl_warehouse_id]
-                          })
-                  end   
 end
 
  def get_header_details
-  
-   if cookies[:userid].nil? 
+    if cookies[:userid].nil? 
                redirect_to "/login"
     else
       @userid = cookies[:userid]
     end
-  end
- 
+    
+ end
 
 
 end

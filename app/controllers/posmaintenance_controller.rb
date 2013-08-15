@@ -3,8 +3,8 @@ class PosmaintenanceController < ApplicationController
   
   def index
     get_header_details
-    columns =  ['id','sm_pos_id','cl_pos_id','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id','level_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
-    pos = Position.select(" id , sm_pos_id , cl_pos_id , sm_level_id , cl_level_id, sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id , cl_aisle_id , level_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:level_id => params[:id]).paginate(
+    columns =  ['id','sm_pos_id','cl_pos_id','description','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','client_id','sm_aisle_id','cl_aisle_id','level_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
+    pos = Position.select(" id , sm_pos_id , cl_pos_id , description , sm_level_id , cl_level_id, sm_bay_id , cl_bay_id , client_id , sm_aisle_id , cl_aisle_id , level_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:level_id => params[:id]).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -21,22 +21,8 @@ class PosmaintenanceController < ApplicationController
    
   case params[:oper]
   when "edit"
-        pos = Position.find_by_id(params[:id])
-        pos.update_attributes({ 
-                                   :cl_pos_id   => params[:cl_pos_id],
-                                   :description => params[:description],
-                                   :sm_barcode  => params[:sm_barcode],
-                                   :cl_barcode  => params[:cl_barcode],
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => params[:attribute2], 
-                                   :attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4],
-                                   :attribute5 => params[:attribute5],
-                                   :attribute6 => params[:attribute6],
-                                   :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
-                                })
-                                
+       update_position
+        
                                 
 
   when "add"
@@ -71,6 +57,66 @@ class PosmaintenanceController < ApplicationController
     if request.xhr?
       render :json => pos
     end
+ end
+ def update_position
+   
+  pos = Position.find_by_id(params[:id])
+  case params[:attribute1]
+    when "Default"
+      
+      pos.update_attributes({ 
+                                   :cl_pos_id   => params[:cl_pos_id],
+                                   :description => params[:description],
+                                   :sm_barcode  => params[:sm_barcode],
+                                   :cl_barcode  => pos.cl_zone_id + "-" + pos.cl_aisle_id  + "-" + pos.cl_bay_id + "-" + pos.cl_level_id + "-" + params[:cl_pos_id],
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
+                                })
+                                
+      when "Continue"
+        
+        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first
+        pos.update_attributes({ 
+                                   :cl_pos_id   => params[:cl_pos_id],
+                                   :description => params[:description],
+                                   :sm_barcode  => params[:sm_barcode],
+                                   :cl_barcode  => previous_pos.cl_barcode,
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => previous_pos.attribute2,
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
+                                })
+                                
+       when "Break"
+        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first        
+        pos.update_attributes({ 
+                                   :cl_pos_id   => params[:cl_pos_id],
+                                   :description => params[:description],
+                                   :sm_barcode  => params[:sm_barcode],
+                                   :cl_barcode  => previous_pos.cl_barcode,
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => previous_pos.attribute2,
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
+                                })
+        
+        
+                               
+   end
  end
  def get_header_details
    if cookies[:userid].nil? 

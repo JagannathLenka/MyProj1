@@ -16,7 +16,16 @@
 	    .pos_divider 		{ float: left; height: 1px;  width: <%= @level_width %>px; border: 1px solid #999; background: black}
 	    .level_Empty        { float: left;  height: 15px; width: <%= @level_width %>px; border:1px solid #000; background: white}  
 		.bay                { float: center;  margin:auto; height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
-		</style>
+		
+table tr td { 
+  font-size: 8px;
+  background: #DDD;
+  color: #47433F;
+  border-top: 0px solid #FFF;
+  
+}
+
+</style>
 
 	  
 <script type="text/javascript">	
@@ -33,7 +42,7 @@
 		    
 		    $('#location2').dialog({
     	  	height: 500,
-      		width: 1000,
+      		width: 1100,
       		modal: true
     });
 					
@@ -48,7 +57,26 @@
 function init() { 
  
  	bayHTML.setDragnDrop()
+ //Tooltip
+   $(function() {
+    $( document ).tooltip({
+      position: {
+        my: "center bottom-5",
+        at: "center top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+  });
+  
 }
+
 
 var bayHTML = {
 	
@@ -148,8 +176,22 @@ setDragnDrop: function setDragnDrop() {
 	    	  <% levelvalue.each do |pos, posvalue| %>
 	    	            
 	          			 
-			 	 		     <div id="<%= pos %>" class="<%= posvalue[:type] %>" title=" Item: <%= posvalue[:item] %>" >	   	    	  
-				   	    	 <label id="<%= pos%>_label">  <%= posvalue[:customer_id] %> </label> 	   	    	
+			 	<div id="<%= pos %>" class="pos" 
+							title=
+							"Item			: <%= posvalue[:item] %>
+							Allocated Inv	:
+							Maximum Inv		:
+							Minimum Inv		:
+							Lock Code		:	">
+	   	    	  
+				   	    	 <% case posvalue[:type] %>
+				   	    	 <% when "Continue"%>
+				   	    	 <%= image_tag("continue.jpg", alt: "", :width => 40, :height => 10, :id => "continue")%>
+				   	    	 <% when "Break"%>
+				   	    	 <%= image_tag("break.jpg", alt: "", :width => 40, :height => 10, :id => "break")%>
+				   	    	 <% else %>
+				   	    	 <label id="<%= pos%>_label">  <%= posvalue[:customer_id] %> </label> 
+				   	    	 <% end %>	   	    	
 			   	    		 </div>
 			   	    	 
 					

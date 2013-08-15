@@ -37,13 +37,13 @@ module BaysmaintenanceHelper
       :height=> 350,
       
      
-      :colNames => ['Id','Sequence', 'Bay','Client Id','Description','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'center', :editable => true, :hidden => true},
         {:name => 'cl_bay_id', :index => 'cl_bay_id',  :width => 80, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
-        { :name => 'client_id',:index => 'client_id',     :width => 55,  :align => 'center', :editable => false, :hidden => true},
         { :name => 'description', :index => 'description', :width => 120,  :align => 'left', :editable => true },
+        { :name => 'client_id',:index => 'client_id',     :width => 55,  :align => 'center', :editable => false, :hidden => true},
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id', :width => 150,  :align => 'center', :editable => false,:hidden => true },
         { :name => 'cl_aisle_id', :index => 'cl_aisle_id', :width => 120 ,  :align => 'center', :editable => false},
         { :name => 'aisle_id',    :index => 'aisle_id',     :width => 150,  :align => 'center', :editable => false,:hidden => true },
