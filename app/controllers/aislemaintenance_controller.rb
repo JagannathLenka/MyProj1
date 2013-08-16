@@ -63,7 +63,6 @@ class AislemaintenanceController < ApplicationController
                                    :attribute6 => params[:attribute6],
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8]   
-                                
                           )
         
          aisles.save 
@@ -80,8 +79,6 @@ class AislemaintenanceController < ApplicationController
       render :json => aisles
     end
  end
- 
- 
  
  
  def edit_aisle_details
@@ -125,8 +122,7 @@ class AislemaintenanceController < ApplicationController
                                   })
 
  end
- 
- 
+  
  #Create and save atribute for bays
  def add_bays_to_aisle aisles
    
@@ -150,10 +146,6 @@ class AislemaintenanceController < ApplicationController
                              :no_of_level_bay     => 0,
                           )
              bays.save
-             
-             #Add levels to bays based on the request
-              
-
        end
        update_bays aisles
        update_bays_row aisles

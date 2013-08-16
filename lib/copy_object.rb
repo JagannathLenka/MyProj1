@@ -100,8 +100,6 @@ def self.update_position copied_from_level_id, copied_to_level_id
                                  :attribute8 => from_position.attribute8    
                                 
      })
-     
-     
    end 
   
 end
