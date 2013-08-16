@@ -5,12 +5,12 @@ class ZonemaintenanceController < ApplicationController
     #Get the header details of the zone
     get_header_details
     
-    columns =         ['id','sm_zone_id','cl_zone_id','client_id','sm_warehouse_id','cl_warehouse_id',
-                        'warehouse_id','description', 'no_of_aisles_zone', 'no_of_aisles_zone_hidden', 'no_of_bays_aisle','no_of_levels_aisle', 
+    columns =         ['id','sm_zone_id','cl_zone_id','description','client_id','sm_warehouse_id','cl_warehouse_id',
+                        'warehouse_id', 'no_of_aisles_zone', 'no_of_aisles_zone_hidden', 'no_of_bays_aisle','no_of_levels_aisle', 
                         'attribute1', 'attribute2', 'attribute3','attribute4','attribute5','attribute6','attribute7','attribute8']
    
-    zone = Zone.select("id , sm_zone_id , cl_zone_id , client_id ,sm_warehouse_id , cl_warehouse_id, 
-                        warehouse_id ,description , no_of_aisles_zone,no_of_aisles_zone as no_of_aisles_zone_hidden,
+    zone = Zone.select("id , sm_zone_id , cl_zone_id , description , client_id ,sm_warehouse_id , cl_warehouse_id, 
+                        warehouse_id , no_of_aisles_zone,no_of_aisles_zone as no_of_aisles_zone_hidden,
                          no_of_bays_aisle, no_of_levels_aisle  , attribute1, attribute2, attribute3 , attribute4 ,
                          attribute5, attribute6, attribute7 , attribute8").where(:warehouse_id => params[:id]).paginate(
     
@@ -86,7 +86,7 @@ def edit_zones_details
              
 
         else
-            update_aisles zone
+            #update_aisles zone
        end 
         zone.update_attributes({ 
                                      :cl_zone_id => params[:cl_zone_id],
@@ -123,7 +123,6 @@ def add_aisles_to_zone zone
                           )
              aisles.save
           end
-          update_aisles zone
 end
 
 def remove_aisles_from_zone zone
@@ -134,25 +133,12 @@ def remove_aisles_from_zone zone
            (1..diff_aislevalue).each do |a|
              Aisle.where(:zone_id => zone.id).last.destroy
             end 
-            update_aisles zone
 end
 
- #When there is no change in aisle value but just change in other parameters
- def update_aisles zone
-        aisles_set = Aisle.where(:zone_id => zone.id)
-        aisles_set.each do |aisles| 
-        aisles.update_attributes({ 
-                                  :cl_zone_id    => params[:cl_zone_id]
-                                  })
-                  end    
- end        
+        
        
   def get_header_details
-    if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+    
    warehouse = Warehouse.find_by_id(params[:id])
    add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
    @warehouse = warehouse.cl_warehouse_id

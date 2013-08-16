@@ -84,10 +84,6 @@ class LevelmaintenanceController < ApplicationController
         when params[:no_of_pos_level].to_i <  (level.no_of_pos_level.nil? ? 0 : level.no_of_pos_level)
              remove_pos_from_level level
              
-
-        else
-            update_pos level
-       
        end 
        level.update_attributes({                                   
                                      :cl_level_id => params[:cl_level_id],
@@ -134,7 +130,6 @@ class LevelmaintenanceController < ApplicationController
                      )
                   pos.save
                 end    
-            update_pos level
  end
  
  def remove_pos_from_level level
@@ -144,25 +139,11 @@ class LevelmaintenanceController < ApplicationController
           (1..diff_posvalue).each do |p|
                  Position.where(:level_id => level.id).last.destroy
             end    
-            update_pos level
  end
  
- #When there is no change in pos value but just change in other parameters
- def update_pos level
-            pos_set = Position.where(:level_id => level.id)
-            pos_set.each do |pos| 
-            pos.update_attributes({:cl_level_id  => params[:cl_level_id] 
-                                  
-                                  })
-                  end    
- end
  
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+  
    bay =   Bay.find_by_id(params["id"].to_i)
    aisle = Aisle.find_by_id(bay.aisle_id)
    zone  = Zone.find_by_id(aisle.zone_id)

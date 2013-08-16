@@ -12,8 +12,8 @@
                                 
                                  $.post("/login",
                                        {
-                                         "txtuid"  :$('#txtuid').attr("value"),
-                                         "txtpswd" :$('#txtpswd').attr("value")
+                                         "txtuid"  :$('#txtuid').val(),
+                                         "txtpswd" :$('#txtpswd').val()
                                        },
                                        function(data,status)
                                        {

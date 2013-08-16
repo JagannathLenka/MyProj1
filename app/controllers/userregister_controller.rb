@@ -1,4 +1,5 @@
 class UserregisterController < ApplicationController
+   skip_before_filter :login_require
   def index
     
   end

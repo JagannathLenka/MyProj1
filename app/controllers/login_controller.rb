@@ -1,4 +1,6 @@
 class LoginController < ApplicationController
+  skip_before_filter :login_require
+  
    def index
     if params["logout"] == "yes"
       cookies.delete :userid

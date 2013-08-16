@@ -9,16 +9,16 @@ class AislemaintenanceController < ApplicationController
       end
       
 
-     columns =  ['id','sm_aisle_id', 'cl_aisle_id','client_id', 'sm_zone_id','cl_zone_id','zone_id',
-                  'sm_warehouse_id' ,'cl_warehouse_id','description', 'no_of_bays_aisle', 'no_of_bays_aisle_hidden','no_of_levels_aisle','no_of_levels_aisle_hidden',
+     columns =  ['id','sm_aisle_id', 'cl_aisle_id','description','client_id', 'sm_zone_id','cl_zone_id','zone_id',
+                  'sm_warehouse_id' ,'cl_warehouse_id', 'no_of_bays_aisle', 'no_of_bays_aisle_hidden','no_of_levels_aisle','no_of_levels_aisle_hidden',
                   'attribute3', 'attribute1', 'attribute2' , 'attribute4',
                   'attribute5','attribute6','attribute7','attribute8']
                   
        selectParam = params["aisleid"].blank? ? {:zone_id => params[:id]} : {:id => params["aisleid"].to_i}
 
 
-       aisles = Aisle.select(" id ,sm_aisle_id , cl_aisle_id ,client_id , sm_zone_id ,cl_zone_id , zone_id ,
-                    sm_warehouse_id , cl_warehouse_id,  description ,no_of_bays_aisle ,no_of_bays_aisle as no_of_bays_aisle_hidden,no_of_levels_aisle,no_of_levels_aisle as no_of_levels_aisle_hidden,
+       aisles = Aisle.select(" id ,sm_aisle_id , cl_aisle_id , description ,client_id , sm_zone_id ,cl_zone_id , zone_id ,
+                    sm_warehouse_id , cl_warehouse_id,no_of_bays_aisle ,no_of_bays_aisle as no_of_bays_aisle_hidden,no_of_levels_aisle,no_of_levels_aisle as no_of_levels_aisle_hidden,
                     attribute3 , attribute1 , attribute2  , attribute4 ,
                     attribute5, attribute6 , attribute7 , attribute8 ").where(selectParam).paginate(
                      :page     => params[:page],
@@ -63,7 +63,6 @@ class AislemaintenanceController < ApplicationController
                                    :attribute6 => params[:attribute6],
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8]   
-                                
                           )
         
          aisles.save 
@@ -80,8 +79,6 @@ class AislemaintenanceController < ApplicationController
       render :json => aisles
     end
  end
- 
- 
  
  
  def edit_aisle_details
@@ -125,8 +122,7 @@ class AislemaintenanceController < ApplicationController
                                   })
 
  end
- 
- 
+  
  #Create and save atribute for bays
  def add_bays_to_aisle aisles
    
@@ -150,10 +146,6 @@ class AislemaintenanceController < ApplicationController
                              :no_of_level_bay     => 0,
                           )
              bays.save
-             
-             #Add levels to bays based on the request
-              
-
        end
        update_bays aisles
        update_bays_row aisles
@@ -214,8 +206,7 @@ class AislemaintenanceController < ApplicationController
                  end  
                   
                  bays.update_attributes({ 
-                                      :no_of_level_bay     => params[:no_of_levels_aisle],
-                                      :cl_aisle_id        => params[:cl_aisle_id]
+                                      :no_of_level_bay     => params[:no_of_levels_aisle]
                                       })
              end
  end
@@ -269,11 +260,7 @@ class AislemaintenanceController < ApplicationController
 
  #Write the breadcrumbs
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+   
    zone  = Zone.find_by_id(params["id"].to_i)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
    @warehouse = warehouse.cl_warehouse_id

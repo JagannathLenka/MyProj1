@@ -5,14 +5,14 @@ class BaysmaintenanceController < ApplicationController
    # GET /Render the JQGrid for bay maintenance
   def index
      if params[:lightweight] != "yes"  
-      get_header_details
+        get_header_details
     end
-    columns =  ['id','sm_bay_id', 'cl_bay_id','client_id','description','sm_aisle_id','cl_aisle_id',
+    columns =  ['id','sm_bay_id', 'cl_bay_id','description','client_id','sm_aisle_id','cl_aisle_id',
                 'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
                 'no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5',
                 'attribute6', 'attribute7','attribute8']
       
-    bays = Bay.select(" id , sm_bay_id , cl_bay_id , client_id , description , sm_aisle_id ,
+    bays = Bay.select(" id , sm_bay_id , cl_bay_id ,description, client_id , sm_aisle_id ,
                        cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , 
                        cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden,
                        attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 ,
@@ -22,7 +22,6 @@ class BaysmaintenanceController < ApplicationController
                                                          :order    => order_by_from_params(params))
   
     if request.xhr?
-      #@invoices = 'ok'
       render :json => json_for_jqgrid(bays, columns)
     end
     
@@ -100,11 +99,7 @@ end
         #delete in the number of levels
         when params[:no_of_level_bay].to_i < (bays.no_of_level_bay.nil? ? 0 :   bays.no_of_level_bay)
              remove_levels_from_bay bays
-             
 
-        else
-            update_levels bays
-       
        end   
     
       bays.update_attributes({ 
@@ -146,8 +141,8 @@ end
                             )
                levels.save
             end  
-         update_levels bays       
  end
+
  def remove_levels_from_bay bays
    
          newlevel = params[:no_of_level_bay ].to_i
@@ -157,32 +152,11 @@ end
            (1..diff_levelvalue).each do |lev|
              Level.where(:bay_id => bays.id).last.destroy
             end
-            update_levels bays 
- end
- #When there is no change in level value but just change in other parameters
- def update_levels bays
-    
-            level_set = Level.where(:bay_id => bays.id)
-            level_set.each do |levels| 
-            levels.update_attributes({ 
-                                  :cl_bay_id   => params[:cl_bay_id] 
-                                  
-                                  })
-                  end    
  end
  
- 
-        
-        
-              
-           
  
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+   
    aisle = Aisle.find_by_id(params["id"].to_i)
    zone  = Zone.find_by_id(aisle.zone_id)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
