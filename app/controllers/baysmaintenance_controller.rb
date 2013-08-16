@@ -5,7 +5,7 @@ class BaysmaintenanceController < ApplicationController
    # GET /Render the JQGrid for bay maintenance
   def index
      if params[:lightweight] != "yes"  
-      get_header_details
+        get_header_details
     end
     columns =  ['id','sm_bay_id', 'cl_bay_id','description','client_id','sm_aisle_id','cl_aisle_id',
                 'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
@@ -156,11 +156,7 @@ end
  
  
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+   
    aisle = Aisle.find_by_id(params["id"].to_i)
    zone  = Zone.find_by_id(aisle.zone_id)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)

@@ -260,11 +260,7 @@ class AislemaintenanceController < ApplicationController
 
  #Write the breadcrumbs
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+   
    zone  = Zone.find_by_id(params["id"].to_i)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
    @warehouse = warehouse.cl_warehouse_id

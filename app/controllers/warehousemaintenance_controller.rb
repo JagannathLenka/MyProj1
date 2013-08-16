@@ -1,15 +1,9 @@
-#require 'user_authentication'
+
 class WarehousemaintenanceController < ApplicationController
-  #include UserAuthentication
   
    # GET /maintenance
   def index
-   get_header_details
-   #UserAuthentication.authentication cookies[:userid]
-     
-   
-
-    columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
+   columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
     warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ").paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -121,14 +115,6 @@ def remove_zones_from_warehouse warehouse
            
 end
 
- def get_header_details
-    if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
-    
- end
 
 
 end

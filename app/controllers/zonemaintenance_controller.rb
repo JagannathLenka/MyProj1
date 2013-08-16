@@ -138,11 +138,7 @@ end
         
        
   def get_header_details
-    if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+    
    warehouse = Warehouse.find_by_id(params[:id])
    add_breadcrumb "Warehouse:" + warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
    @warehouse = warehouse.cl_warehouse_id

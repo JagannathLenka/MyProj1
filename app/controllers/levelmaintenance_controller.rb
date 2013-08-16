@@ -143,11 +143,7 @@ class LevelmaintenanceController < ApplicationController
  
  
  def get_header_details
-   if cookies[:userid].nil? 
-               redirect_to "/login"
-    else
-      @userid = cookies[:userid]
-    end
+  
    bay =   Bay.find_by_id(params["id"].to_i)
    aisle = Aisle.find_by_id(bay.aisle_id)
    zone  = Zone.find_by_id(aisle.zone_id)
