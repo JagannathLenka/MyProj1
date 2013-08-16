@@ -45,7 +45,7 @@ class ZonemaintenanceController < ApplicationController
                                      :cl_zone_id => params[:cl_zone_id],
                                      :cl_warehouse_id => warehouse.cl_warehouse_id,
                                      :description => params[:description],
-                                     :no_of_aisles_zone => params[:no_of_aisles_zone],
+                                     :no_of_aisles_zone => 0,
                                      :attribute1 => params[:attribute1],
                                      :attribute2 => params[:attribute2], 
                                      :attribute3 => params[:attribute3],
@@ -58,7 +58,13 @@ class ZonemaintenanceController < ApplicationController
             )
            zone.save
            add_aisles_to_zone zone
-           warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones + 1})
+           warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones + 1
+                                        })
+
+           zone.update_attributes({
+                                    :no_of_aisles_zone => params[:no_of_aisles_zone],
+                                        })
+
   
             when "del"
                zone = Zone.destroy(params[:id].to_i) 

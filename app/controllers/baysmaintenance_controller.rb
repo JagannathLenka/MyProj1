@@ -50,7 +50,7 @@ end
                          :cl_warehouse_id => aisles.cl_warehouse_id,
                          :aisle_id     => aisles.id,
                          :description  => params[:description],
-                         :no_of_level_bay  => params[:no_of_level_bay],
+                         :no_of_level_bay  => 0,
                          :attribute1 => params[:attribute1],
                          :attribute2 => params[:attribute2], 
                          :attribute3 => params[:attribute3],
@@ -68,7 +68,10 @@ end
                aisles.update_attributes({
                                          :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
                })
-                
+               bays.update_attributes({
+                                        :no_of_level_bay  => params[:no_of_level_bay]
+               })                      
+ 
                
     when "del"
          bays = Bay.destroy(params[:id].to_i) 

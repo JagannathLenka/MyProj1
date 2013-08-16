@@ -40,7 +40,7 @@ class LevelmaintenanceController < ApplicationController
                                        :cl_warehouse_id => bays.cl_warehouse_id,
                                        :bay_id    => bays.id,
                                        :description => params[:description],
-                                       :no_of_pos_level => params[:no_of_pos_level],
+                                       :no_of_pos_level => 0,
                                        :attribute1 => params[:attribute1],
                                        :attribute2 => params[:attribute2], 
                                        :attribute3 => params[:attribute3],
@@ -56,7 +56,10 @@ class LevelmaintenanceController < ApplicationController
            bays.update_attributes({
                                    :no_of_level_bay => bays.no_of_level_bay + 1
          })
-           
+           level.update_attributes({
+                                    :no_of_pos_level => params[:no_of_pos_level]
+
+           })                     
        
            
     when "del"
