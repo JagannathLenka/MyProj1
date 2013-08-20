@@ -5,6 +5,7 @@ module PosmaintenanceHelper
     
     options = {:on_document_ready => true, :html_tags => false}
     url = "/posmaintenance?id=" + params["id"]
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_level_id=' + params["id"] + '; return[true, " "]}'
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -67,8 +68,8 @@ module PosmaintenanceHelper
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
        pager = [:navGrid, "#pos_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true, }, 
-                                                       {:closeAfterAdd=>true}, {}, {}, {}]                                                                                                                                                        
+                                                       :closeOnEscape => true }, 
+                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                                                                                                         
 
     #pager2 = [:inlineNav, "#bays_pager"]
 

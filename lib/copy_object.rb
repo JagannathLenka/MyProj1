@@ -8,14 +8,33 @@ def self.copyBaytoAisle bay_id
     bays = Bay.where(aisle_id: copied_from_bay.aisle_id)
     bays.each do |bay|
       if bay.id != bay_id
-        
+        copy_BaytoBay  copied_from_bay , bay
+      end
+    end
+end
+
+def self.copyLeveltoLevel level_id 
+    
+    copied_from_level = Level.find(level_id)
+    levels = Level.where(bay_id: copied_from_level.bay_id)
+   
+    levels.each do |level|
+      if level.id != level_id
+        copy_LeveltoLevel copied_from_level , level
+      end
+    end
+end
+
+def self.copy_BaytoBay copied_from_bay , copied_to_bay
+         
         #Update the level
-        update_level copied_from_bay.id, bay.id  
+        update_level copied_from_bay.id , copied_to_bay.id
         
         
         #Update the bay
-        bay.update_attributes({ 
-                           :no_of_level_bay  => copied_from_bay.no_of_level_bay,
+      
+        copied_to_bay.update_attributes({ 
+                           
                            :attribute1 => copied_from_bay.attribute1,
                            :attribute2 => copied_from_bay.attribute2, 
                            :attribute4 => copied_from_bay.attribute4,
@@ -24,39 +43,45 @@ def self.copyBaytoAisle bay_id
                            :attribute7 => copied_from_bay.attribute7,
                            :attribute8 => copied_from_bay.attribute8   
                         })                
-      end
-    end
      
 end
 
 def self.update_level copied_from_bay_id,  copied_to_bay_id  
     from_levels = Level.where(bay_id: copied_from_bay_id)
-    
     from_levels.each do |from_level|
-      to_level = Level.where("bay_id = ? AND sm_level_id = ?", copied_to_bay_id, from_level.sm_level_id).first
-               diff_position = (from_level.no_of_pos_level.nil? ? 0 : from_level.no_of_pos_level) -
-                               (to_level.no_of_pos_level.nil?   ? 0 : to_level.no_of_pos_level)
-                  
-                to_level.update_attributes({                                   
-                                     :cl_level_id => from_level.cl_level_id,
-                                     :no_of_pos_level => 0,
-                                     :description => from_level.description,
-                                     :attribute1 => from_level.attribute1,
-                                     :attribute2 => from_level.attribute2, 
-                                     :attribute3 => from_level.attribute3, 
-                                     :attribute4 => from_level.attribute4,
-                                     :attribute5 => from_level.attribute5,
-                                     :attribute6 => from_level.attribute6,
-                                     :attribute7 => from_level.attribute7,
-                                     :attribute8 => from_level.attribute8    
-            })
-               create_position to_level, diff_position 
-               to_level.update_attributes({:no_of_pos_level => from_level.no_of_pos_level})
-                                   
-               update_position from_level, to_level
-                        
-    end
+    to_level = Level.where("bay_id = ? AND sm_level_id = ?", copied_to_bay_id, from_level.sm_level_id).first
+    
+    copy_LeveltoLevel from_level , to_level
+    
+ end
+end  
+    
+def self.copy_LeveltoLevel copied_from_level , copied_to_level
   
+               diff_position = (copied_from_level.no_of_pos_level.to_i  - copied_to_level.no_of_pos_level.to_i)
+                if copied_from_level.bay_id == copied_to_level.bay_id
+                   copy_cl_level_id = copied_to_level.cl_level_id
+                 else
+                   copy_cl_level_id = copied_from_level.cl_level_id
+                end
+               copied_to_level.update_attributes({                                   
+                                     
+                                     :cl_level_id => copy_cl_level_id,
+                                     :description => copied_from_level.description,
+                                     :attribute1 => copied_from_level.attribute1,
+                                     :attribute2 => copied_from_level.attribute2, 
+                                     :attribute3 => copied_from_level.attribute3, 
+                                     :attribute4 => copied_from_level.attribute4,
+                                     :attribute5 => copied_from_level.attribute5,
+                                     :attribute6 => copied_from_level.attribute6,
+                                     :attribute7 => copied_from_level.attribute7,
+                                     :attribute8 => copied_from_level.attribute8    
+            })
+            
+               create_position copied_to_level, diff_position 
+           
+               update_position copied_from_level, copied_to_level
+
 end
 
 def self.create_position level , diff_posvalue
@@ -79,16 +104,16 @@ def self.create_position level , diff_posvalue
 
 end
 
-def self.update_position copied_from_level_id, copied_to_level_id
+def self.update_position copied_from_level, copied_to_level
   
-   from_positions = Position.where(:level_id => copied_from_level_id.id)
+   from_positions = Position.where(:level_id => copied_from_level.id)
    from_positions.each do |from_position|
      
-     to_position = Position.where("level_id = ? AND sm_pos_id = ?", copied_to_level_id.id , from_position.sm_pos_id).first
+     to_position = Position.where("level_id = ? AND sm_pos_id = ?", copied_to_level.id , from_position.sm_pos_id).first
      to_position.update_attributes({
        
                                  :cl_pos_id => from_position.cl_pos_id,
-                                 :cl_barcode => to_position.cl_zone_id + "-" + to_position.cl_aisle_id  + "-" + to_position.cl_bay_id + "-"  + to_position.cl_level_id + "-" + from_position.cl_pos_id,
+                                 :cl_barcode => to_position.cl_zone_id.to_s + "-" + to_position.cl_aisle_id.to_s  + "-" + to_position.cl_bay_id.to_s + "-"  + to_position.cl_level_id.to_s + "-" + from_position.cl_pos_id.to_s,
                                  :description => from_position.description,
                                  :attribute1 => from_position.attribute1,
                                  :attribute2 => from_position.attribute2, 

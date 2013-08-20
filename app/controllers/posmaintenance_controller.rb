@@ -21,10 +21,22 @@ class PosmaintenanceController < ApplicationController
        update_position
         
   when "add"
-        maximum_pos_add = Position.maximum("sm_pos_id").to_i + 1
-        pos= Position.new(:sm_pos_id =>  maximum_pos_add, 
+        pos = Position.find_by_id(params[:id])
+        levels = Level.find_by_id(params[:pt_level_id].to_i)
+        maximum_pos_id = Position.where(:level_id =>params[:pt_level_id]).maximum("sm_pos_id").to_i + 1
+        pos= Position.new(:sm_pos_id =>  maximum_pos_id, 
                          :cl_pos_id => params[:cl_pos_id],
-                         :level_id     => params[:level_id],
+                         :sm_level_id => levels.sm_level_id,
+                         :cl_level_id => levels.cl_level_id,
+                         :sm_bay_id => levels.sm_bay_id,
+                         :cl_bay_id => levels.cl_bay_id,
+                         :sm_aisle_id => levels.sm_aisle_id,
+                         :cl_aisle_id => levels.cl_aisle_id,
+                         :sm_zone_id => levels.sm_zone_id,
+                         :cl_zone_id => levels.cl_zone_id,
+                         :sm_warehouse_id => levels.sm_warehouse_id,
+                         :cl_warehouse_id => levels.cl_warehouse_id,
+                         :level_id     => levels.id,
                          :description  => params[:description],
                          :sm_barcode  => params[:sm_barcode],
                          :cl_barcode  => params[:cl_barcode],
@@ -39,15 +51,15 @@ class PosmaintenanceController < ApplicationController
                          
                        )
         
-         pos.save 
+         pos.save
          
-    when "del"
+        
+             
+   when "del"
                pos =  Position.destroy(params[:id].to_i)
-               level = Level.find_by_id(pos.level_id)    
-               level.update_attributes({
-                                   :no_of_pos_level => level.no_of_pos_level - 1 })
+               
               
-       end
+   end
 
     if request.xhr?
       render :json => pos

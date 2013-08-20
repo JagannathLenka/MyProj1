@@ -33,7 +33,7 @@ class WarehousemaintenanceController < ApplicationController
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :client_id => params[:client_id],
                                    :description => params[:description],
-                                   :no_of_zones => params[:no_of_zones],
+                                   :no_of_zones => 0,
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
@@ -42,8 +42,7 @@ class WarehousemaintenanceController < ApplicationController
         
          warehouse.save          
          add_zones_to_warehouse warehouse
-         
-                             
+                        
     when "del"
               Warehouse.destroy(params[:id].to_i)                               
     end
@@ -71,7 +70,7 @@ def edit_warehouse_details
        warehouse.update_attributes({
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :description => params[:description],
-                                   :no_of_zones => params[:no_of_zones],
+                                   #:no_of_zones => params[:no_of_zones],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
@@ -81,12 +80,14 @@ def edit_warehouse_details
 end
 
 def add_zones_to_warehouse warehouse
-         max_zone = Zone.where(:warehouse_id => params[:id]).maximum("sm_zone_id").to_i
+         max_zone = Zone.where(:warehouse_id => warehouse.id).maximum("sm_zone_id").to_i
          newzone = params[:no_of_zones].to_i
          existingzone = warehouse.no_of_zones.nil? ? 0 : warehouse.no_of_zones
          diff_zonevalue = newzone - existingzone
                
-               
+            logger.debug diff_zonevalue 
+            logger.debug existingzone
+            logger.debug newzone   
                (1..diff_zonevalue).each do |z| 
                
                      zones = Zone.new(
