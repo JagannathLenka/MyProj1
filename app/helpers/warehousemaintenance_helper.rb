@@ -4,6 +4,7 @@ module WarehousemaintenanceHelper
   def warehouse_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
+    
     editcheckfunc = 'function(postdata, formid) 
       {
           if (parseInt(postdata.no_of_zones) < parseInt(postdata.no_of_zones_hidden)) 

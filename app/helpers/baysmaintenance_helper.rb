@@ -55,7 +55,7 @@ module BaysmaintenanceHelper
         { :name => 'no_of_level_bay_hidden', :index => 'no_of_level_bay_hidden',   :width => 120,   :align => 'center', :hidden => true,:editable => true},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true,editrules:{required:true}},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => false ,editrules:{required:true}},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => true ,editrules:{required:true}},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},

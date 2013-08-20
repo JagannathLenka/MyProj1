@@ -14,6 +14,20 @@ module LevelmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_bay_id=' + params["id"] + '; return[true, " "]}'
+     copyrowfunc  = 'function() {
+                                var ids = $("#level_list").jqGrid("getGridParam","selarrrow");
+                                
+                                 $.post("/levelmaintenance",
+                                       {
+                                         "oper" :"cpy",
+                                         "id"   :ids[0]
+                                       },
+                                       function(data,status)
+                                       {
+                               
+                                       });
+                                 $("#level_list").trigger("reloadGrid");       
+                   }'
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -56,6 +70,7 @@ module LevelmaintenanceHelper
       :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Level Maintenance',
+      :multiselect => true,
       :onSelectRow => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#level_list').jqGrid('restoreRow',lastsel);
@@ -77,9 +92,9 @@ module LevelmaintenanceHelper
     #pager2 = [:inlineNav, "#level_pager"]
 
     
-    pager_button = [:navButtonAdd, "#level_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
+    pager_button = [:navButtonAdd, "#level_pager", {:caption => 'Copy to other level', :onClickButton => copyrowfunc.to_json_var }]
 
-    jqgrid_api 'level_list', grid, pager,  options
+    jqgrid_api 'level_list', grid, pager, pager_button, options
 
   end
 

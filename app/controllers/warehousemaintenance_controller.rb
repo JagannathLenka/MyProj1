@@ -42,9 +42,13 @@ class WarehousemaintenanceController < ApplicationController
         
          warehouse.save          
          add_zones_to_warehouse warehouse
+<<<<<<< HEAD
          warehouse.update_attributes({:no_of_zones =>  params[:no_of_zones]})
          
                              
+=======
+                        
+>>>>>>> 90d19793c700bf92f2313fbf233c14dd0e81e3cc
     when "del"
               Warehouse.destroy(params[:id].to_i)                               
     end
@@ -72,7 +76,7 @@ def edit_warehouse_details
        warehouse.update_attributes({
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
                                    :description => params[:description],
-                                   :no_of_zones => params[:no_of_zones],
+                                   #:no_of_zones => params[:no_of_zones],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
@@ -87,9 +91,15 @@ def add_zones_to_warehouse warehouse
          existingzone = warehouse.no_of_zones.nil? ? 0 : warehouse.no_of_zones
          diff_zonevalue = newzone - existingzone
                
+<<<<<<< HEAD
                logger.debug newzone
                logger.debug existingzone
                
+=======
+            logger.debug diff_zonevalue 
+            logger.debug existingzone
+            logger.debug newzone   
+>>>>>>> 90d19793c700bf92f2313fbf233c14dd0e81e3cc
                (1..diff_zonevalue).each do |z| 
                
                      zones = Zone.new(
