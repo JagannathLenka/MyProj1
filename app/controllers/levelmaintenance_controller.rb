@@ -55,18 +55,6 @@ class LevelmaintenanceController < ApplicationController
                 
            level.save 
            add_pos_to_level level 
-<<<<<<< HEAD
-           bays.update_attributes({
-                                   :no_of_level_bay => bays.no_of_level_bay + 1
-         })
-           level.update_attributes({
-                                    :no_of_pos_level => params[:no_of_pos_level]
-
-           })                     
-=======
-          
->>>>>>> 90d19793c700bf92f2313fbf233c14dd0e81e3cc
-       
            
     when "del"
                level=Level.destroy(params[:id].to_i) 

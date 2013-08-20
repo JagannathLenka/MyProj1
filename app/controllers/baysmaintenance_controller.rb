@@ -65,16 +65,6 @@ end
                bays.save
                add_levels_to_bay bays
                
-<<<<<<< HEAD
-               aisles.update_attributes({
-                                         :no_of_bays_aisle => aisles.no_of_bays_aisle + 1
-               })
-               bays.update_attributes({
-                                        :no_of_level_bay  => params[:no_of_level_bay]
-               })                      
- 
-=======
->>>>>>> 90d19793c700bf92f2313fbf233c14dd0e81e3cc
                
     when "del"
          bays = Bay.destroy(params[:id].to_i) 

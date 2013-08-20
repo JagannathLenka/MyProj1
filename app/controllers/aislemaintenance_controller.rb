@@ -68,15 +68,6 @@ class AislemaintenanceController < ApplicationController
          aisles.save 
          add_bays_to_aisle aisles
          
-<<<<<<< HEAD
-         zone.update_attributes({:no_of_aisles_zone => zone.no_of_aisles_zone + 1 })
-         aisles.update_attributes(  {:no_of_bays_aisle => params[:no_of_bays_aisle],
-                                   :no_of_levels_aisle => params[:no_of_levels_aisle]}
-                                 ) 
-
-=======
-       
->>>>>>> 90d19793c700bf92f2313fbf233c14dd0e81e3cc
   when "del"
               Aisle.destroy(params[:id].to_i)   
            
