@@ -54,7 +54,7 @@ class AislemaintenanceController < ApplicationController
                                    :zone_id => zone.id,
                                    :description  => params[:description],
                                    :no_of_bays_aisle => 0,
-                                   :no_of_levels_aisle => 0,
+                                   :no_of_levels_aisle => params[:no_of_levels_aisle],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
