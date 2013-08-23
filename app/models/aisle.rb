@@ -9,6 +9,7 @@ class Aisle < ActiveRecord::Base
   
   def update_bays
      if cl_warehouse_id_changed? or cl_zone_id_changed? or cl_aisle_id_changed?
+       bays = Bay.where(:aisle_id => self.id)
        bays.each do |bay|
          bay.update_attributes({
            :cl_warehouse_id => self.cl_warehouse_id,

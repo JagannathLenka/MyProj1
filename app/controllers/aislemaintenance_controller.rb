@@ -3,7 +3,7 @@ class AislemaintenanceController < ApplicationController
  # GET /Render the JQGrid for aisle maintenance
   def index
     
-    if params["aisleid"].blank?
+      if params["aisleid"].blank?
           #Get the header details of the zone
           get_header_details
       end
@@ -14,10 +14,10 @@ class AislemaintenanceController < ApplicationController
                   'attribute3', 'attribute1', 'attribute2' , 'attribute4',
                   'attribute5','attribute6','attribute7','attribute8']
                   
-       selectParam = params["aisleid"].blank? ? {:zone_id => params[:id]} : {:id => params["aisleid"].to_i}
+     selectParam = params["aisleid"].blank? ? {:zone_id => params[:id]} : {:id => params["aisleid"].to_i}
 
 
-       aisles = Aisle.select(" id ,sm_aisle_id , cl_aisle_id , description ,client_id , sm_zone_id ,cl_zone_id , zone_id ,
+     aisles = Aisle.select(" id ,sm_aisle_id , cl_aisle_id , description ,client_id , sm_zone_id ,cl_zone_id , zone_id ,
                     sm_warehouse_id , cl_warehouse_id,no_of_bays_aisle ,no_of_bays_aisle as no_of_bays_aisle_hidden,no_of_levels_aisle,no_of_levels_aisle as no_of_levels_aisle_hidden,
                     attribute3 , attribute1 , attribute2  , attribute4 ,
                     attribute5, attribute6 , attribute7 , attribute8 ").where(selectParam).paginate(
@@ -27,9 +27,9 @@ class AislemaintenanceController < ApplicationController
 
       
       
-    if request.xhr? and params[:lightweight] != "yes"
-      render :json => json_for_jqgrid(aisles, columns)
-    end
+     if request.xhr? and params[:lightweight] != "yes"
+       render :json => json_for_jqgrid(aisles, columns)
+     end
 
   end
 

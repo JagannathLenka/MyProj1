@@ -15,7 +15,8 @@ class PosmaintenanceController < ApplicationController
    end
 
  def create
-   
+  
+  @error = ""
   case params[:oper]
   when "edit"
        update_position
@@ -52,17 +53,23 @@ class PosmaintenanceController < ApplicationController
                        )
         
          pos.save
-         
+         @error = pos.errors.full_messages[0]
         
              
    when "del"
                pos =  Position.destroy(params[:id].to_i)
-               
+                        
               
    end
-
+    
+    
     if request.xhr?
-      render :json => pos
+      if !@error.blank?        
+        render :json => @error.to_json, status: 500
+      else
+        render :json => pos   
+      end
+        
     end
  end
 
@@ -121,9 +128,10 @@ class PosmaintenanceController < ApplicationController
                                    :attribute8 => params[:attribute8]    
                                 })
         
-        
+
                                
    end
+      @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0]
  end
 
  def get_header_details
