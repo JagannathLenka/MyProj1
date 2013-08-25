@@ -1,0 +1,19 @@
+<% content_for :head do %>
+<script>
+	var lastsel;
+</script>
+<%end%>
+<% if params[:lightweight] != "yes" %>
+
+		<%= render "shared/menu" %>
+		<div align="center"><a href="/warehousemaintenance" >
+		<h1>Warehouse: <%= @warehouse%></h1></a>
+</div>
+<div style="margin-left: 30px;">
+<%end%>
+<table id=loc_list></table>
+<div id=loc_pager></div>
+</div>
+<%= raw(loc_jqgrid) %>
+<br />
+

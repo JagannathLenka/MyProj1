@@ -39,6 +39,32 @@ module AislemaintenanceHelper
                                           win = window.open("/bay?id=' + id + '", "_blank");
                                           win.focus();
                                }'
+                               
+    aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
+    
+    selectrowfunc = "function(id) { 
+                      
+                      if(id && id!==lastsel){
+                           
+                           jQuery('#aisle_list').jqGrid('restoreRow',lastsel);
+                           
+                           jQuery('#aisle_list').jqGrid('editRow',id,{keys: true, 
+                           
+                           aftersavefunc: function(){lastsel=0;jQuery('#aisle_list').trigger('reloadGrid');},
+                           
+                           errorfunc: function(id, response){lastsel=0;
+                                      
+                                       $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
+                                       
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
+                           
+                           afterrestorefunc : function(){lastsel=0;}            
+                            
+                      });
+                      
+                     lastsel=id;
+                     } 
+                   }"                             
 
 
     grid = [{
@@ -85,14 +111,7 @@ module AislemaintenanceHelper
       :viewrecords => true,
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => "function(id) { 
-                       if(id && id!==lastsel){
-      jQuery('#aisle_list').jqGrid('restoreRow',lastsel);
-      jQuery('#aisle_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
-      lastsel=id;
-    } 
-      }".to_json_var
-    }]
+      :onSelectRow => selectrowfunc.to_json_var }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
@@ -100,7 +119,7 @@ module AislemaintenanceHelper
     #pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
     pager = [:navGrid, "#aisle_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
+                                                       {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
     #pager2 = [:inlineNav, "#aisle_pager"]
 
     

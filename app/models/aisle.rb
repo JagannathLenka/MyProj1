@@ -6,6 +6,7 @@ class Aisle < ActiveRecord::Base
    after_create :update_aisles_for_add
    
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_aisle_id, :cl_warehouse_id, :cl_zone_id, :client_id, :description, :no_of_bays_aisle, :no_of_levels_aisle, :sm_aisle_id, :sm_warehouse_id, :sm_zone_id, :zone_id
+  validates :cl_aisle_id, :uniqueness => {:scope => :zone_id , :allow_nil => true, :allow_blank => true,  :message => "Aisle Already Exists"}
   
   def update_bays
      if cl_warehouse_id_changed? or cl_zone_id_changed? or cl_aisle_id_changed?

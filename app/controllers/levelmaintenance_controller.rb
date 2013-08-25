@@ -19,6 +19,7 @@ class LevelmaintenanceController < ApplicationController
 
  def create
    
+    @error = ""
     case params[:oper]
   
     when "edit"
@@ -53,11 +54,11 @@ class LevelmaintenanceController < ApplicationController
                                        :attribute8 => params[:attribute8] 
                 ) 
                 
-           level.save 
-           add_pos_to_level level 
-          
+       level.save 
        
-           
+       @error = params[:cl_level_id]+ ' ' + level.errors.values[0][0] if level.errors.count > 0   
+       add_pos_to_level level if level.errors.count <= 0  
+        
     when "del"
                level=Level.destroy(params[:id].to_i) 
                
@@ -68,10 +69,13 @@ class LevelmaintenanceController < ApplicationController
     end
   
       
-      if request.xhr?
+   if request.xhr?
+      if !@error.blank?        
+        render :json => @error.to_json, status: 500
+       else
         render :json => level
       end
-
+    end  
  end
  
  def edit_level_details
@@ -101,6 +105,8 @@ class LevelmaintenanceController < ApplicationController
                                      :attribute8 => params[:attribute8]    
                                          
             })
+            
+      @error = params[:cl_level_id]+ ' ' + level.errors.values[0][0] if level.errors.count > 0   
              
  end
  
@@ -111,7 +117,7 @@ class LevelmaintenanceController < ApplicationController
    existingpos = level.no_of_pos_level.nil? ? 0 : level.no_of_pos_level
    diff_posvalue = newpos - existingpos
   
-    
+     
       (1..diff_posvalue).each do |p|
         pos =Position.new(:sm_pos_id => max_pos + p,
                          :sm_level_id => level.sm_level_id,

@@ -6,7 +6,21 @@ module PosmaintenanceHelper
     options = {:on_document_ready => true, :html_tags => false}
     url = "/posmaintenance?id=" + params["id"]
     addcheckfunc = 'function(postdata, formid) {postdata.pt_level_id=' + params["id"] + '; return[true, " "]}'
-    grid = [{
+    aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
+    selectrowfunc = "function(id) { 
+                      if(id && id!==lastsel){
+                           jQuery('#pos_list').jqGrid('restoreRow',lastsel);
+                           jQuery('#pos_list').jqGrid('editRow',id,{keys: true, 
+                           aftersavefunc: function(){lastsel=0;jQuery('#pos_list').trigger('reloadGrid');},
+                           errorfunc: function(id, response){lastsel=0;
+                                       $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
+                           afterrestorefunc : function(){lastsel=0;}            
+                             });
+                     lastsel=id;
+                     } 
+                   }" 
+      grid = [{
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
@@ -55,24 +69,15 @@ module PosmaintenanceHelper
       :caption => 'Position Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
-      :onSelectRow => "function(id) { 
-                       if(id && id!==lastsel){
-      jQuery('#pos_list').jqGrid('restoreRow',lastsel);
-      jQuery('#pos_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;jQuery('#pos_list').trigger('reloadGrid');},
-      errorfunc: function(response){lastsel=0;alert(response.status);}
-      });
-      lastsel=id;
-    } 
-      }".to_json_var
-    }]
+     :onSelectRow => selectrowfunc.to_json_var }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-       pager = [:navGrid, "#pos_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true }, 
-                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                                                                                                         
-
+      pager = [:navGrid, "#pos_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,:closeOnEscape => true }, 
+                                                                           {:closeAfterAdd=>true, 
+                                                                             :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, 
+                                                                           {}, {}, {}]                                                                                                                                                                                                                                                                                                                
     #pager2 = [:inlineNav, "#bays_pager"]
 
     

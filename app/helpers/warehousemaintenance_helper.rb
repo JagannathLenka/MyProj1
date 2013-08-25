@@ -4,15 +4,27 @@ module WarehousemaintenanceHelper
   def warehouse_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
-    
     editcheckfunc = 'function(postdata, formid) 
       {
           if (parseInt(postdata.no_of_zones) < parseInt(postdata.no_of_zones_hidden)) 
                    {
                       return[false, "Can not delete Zones from this screen, Please use Zone Maintenance"];
-                      
                     } 
               return[true, " "]}' 
+    aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
+    selectrowfunc = "function(id) { 
+                      if(id && id!==lastsel){
+                           jQuery('#warehouse_list').jqGrid('restoreRow',lastsel);
+                           jQuery('#warehouse_list').jqGrid('editRow',id,{keys: true, 
+                           aftersavefunc: function(){lastsel=0;jQuery('#warehouse_list').trigger('reloadGrid');},
+                           errorfunc: function(id, response){lastsel=0;
+                                       $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
+                           afterrestorefunc : function(){lastsel=0;}            
+                      });
+                     lastsel=id;
+                     } 
+                   }"       
        
     grid = [{
       :url => '/warehousemaintenance/',
@@ -49,21 +61,15 @@ module WarehousemaintenanceHelper
       :viewrecords => true,
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => "function(id) { 
-                       if(id && id!==lastsel){
-      jQuery('#warehouse_list').jqGrid('restoreRow',lastsel);
-      jQuery('#warehouse_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
-      lastsel=id;
-    } 
-      }".to_json_var
-    }]
+      :onSelectRow => selectrowfunc.to_json_var }]
+      
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
     #pager = [:navGrid, "#warehouse_pager", {edit:true,add:true,del:true}]
-    pager = [:navGrid, "#warehouse_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                       :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:closeAfterAdd=>true}, {}, {}, {}]                                                              
+    pager = [:navGrid, "#warehouse_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, 
+                                                       :closeOnEscape => true,  :beforeSubmit => editcheckfunc.to_json_var}, 
+                                                       {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {}, {}]                                                              
     #pager2 = [:inlineNav, "#warehouse_pager"]
     pager_button = [:navButtonAdd, "#warehouse_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
     

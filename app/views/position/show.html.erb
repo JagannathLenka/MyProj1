@@ -176,13 +176,12 @@ setDragnDrop: function setDragnDrop() {
 	    	  <% levelvalue.each do |pos, posvalue| %>
 	    	            
 	          			 
-			 	<div id="<%= pos %>" class="pos" 
-							title=
-							"Item			: <%= posvalue[:item] %>
-							Allocated Inv	:
-							Maximum Inv		:
-							Minimum Inv		:
-							Lock Code		:	">
+			 	<div id="<%= pos %>" class="pos" title=
+"Item				: <%= posvalue[:item] %>
+Current Inv		: <%= posvalue[:current_inventory] %>
+Maximum Inv		: <%= posvalue[:maximum_quantity] %>
+Minimum Inv		: <%= posvalue[:minimum_quantity] %>
+Lock Code		: <%= posvalue[:lock_code] %>	">
 	   	    	  
 				   	    	 <% case posvalue[:type] %>
 				   	    	 <% when "Continue"%>
