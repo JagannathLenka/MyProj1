@@ -16,7 +16,7 @@ class Position < ActiveRecord::Base
   
   def update_level_for_delete
     level = Level.find(self.level_id)
-    level.update_attributes({:no_of_pos_level => level.no_of_pos_level - 1})
+    level.update_attributes({:no_of_pos_level => level.no_of_pos_level.to_i - 1})
   end
   
   def update_level_for_add

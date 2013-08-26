@@ -22,11 +22,11 @@ class Zone < ActiveRecord::Base
   
   def update_zones_for_delete
     warehouse = Warehouse.find(self.warehouse_id)
-    warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones - 1})
+    warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones.to_i - 1})
   end
   
    def update_zones_for_add
     warehouses = Warehouse.find(self.warehouse_id)
-    warehouses.update_attributes({:no_of_zones => warehouses.no_of_zones + 1})
+    warehouses.update_attributes({:no_of_zones => warehouses.no_of_zones.to_i + 1})
   end
 end
