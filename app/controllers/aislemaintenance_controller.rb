@@ -184,7 +184,7 @@ class AislemaintenanceController < ApplicationController
  def update_bays_row aisles
 
        #When there is no change in aisle value but just change in other parameters
-             bay_set = Bay.where(:aisle_id => aisles.id)
+             bay_set = Bay.where(:aisle_id => aisles.id).order('sm_bay_id')
              counter = 0
              bay_set.each do |bays| 
                  counter = counter + 1

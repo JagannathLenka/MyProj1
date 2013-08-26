@@ -24,7 +24,7 @@ class Level < ActiveRecord::Base
   
   def update_bays_for_delete
     bay = Bay.find(self.bay_id)
-    bay.update_attributes({:no_of_level_bay => bay.no_of_level_bay - 1})
+    bay.update_attributes({:no_of_level_bay => bay.no_of_level_bay.to_i - 1})
     
   end
   

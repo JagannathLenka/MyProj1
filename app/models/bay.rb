@@ -24,11 +24,11 @@ class Bay < ActiveRecord::Base
   
   def update_aisles_for_delete
     aisle = Aisle.find(self.aisle_id)
-    aisle.update_attributes({:no_of_bays_aisle => aisle.no_of_bays_aisle - 1}) 
+    aisle.update_attributes({:no_of_bays_aisle => aisle.no_of_bays_aisle.to_i - 1}) 
   end
   
   def update_aisles_for_add
     aisles = Aisle.find(self.aisle_id)
-    aisles.update_attributes({:no_of_bays_aisle => aisles.no_of_bays_aisle + 1}) 
+    aisles.update_attributes({:no_of_bays_aisle => aisles.no_of_bays_aisle.to_i + 1}) 
   end
 end

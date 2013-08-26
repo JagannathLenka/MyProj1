@@ -24,14 +24,14 @@ class Aisle < ActiveRecord::Base
   def update_aisles_for_delete
     
     zone = Zone.find(self.zone_id)
-    zone.update_attributes({:no_of_aisles_zone => zone.no_of_aisles_zone - 1 })
+    zone.update_attributes({:no_of_aisles_zone => zone.no_of_aisles_zone.to_i - 1 })
     
   end
   
   def update_aisles_for_add
     
     zones = Zone.find(self.zone_id)
-    zones.update_attributes({:no_of_aisles_zone => zones.no_of_aisles_zone + 1 })
+    zones.update_attributes({:no_of_aisles_zone => zones.no_of_aisles_zone.to_i + 1 })
     
   end
 end
