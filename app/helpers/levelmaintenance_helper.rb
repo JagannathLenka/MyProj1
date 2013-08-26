@@ -14,7 +14,7 @@ module LevelmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_bay_id=' + params["id"] + '; return[true, " "]}'
-     copyrowfunc  = 'function() {
+    copyrowfunc  = 'function() {
                                 var ids = $("#level_list").jqGrid("getGridParam","selarrrow");
                                 
                                  $.post("/levelmaintenance",
@@ -28,6 +28,21 @@ module LevelmaintenanceHelper
                                        });
                                  $("#level_list").trigger("reloadGrid");       
                    }'
+                   
+     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
+     selectrowfunc = "function(id) { 
+                      if(id && id!==lastsel){
+                           jQuery('#level_list').jqGrid('restoreRow',lastsel);
+                           jQuery('#level_list').jqGrid('editRow',id,{keys: true, 
+                           aftersavefunc: function(){lastsel=0;jQuery('#level_list').trigger('reloadGrid');},
+                           errorfunc: function(id, response){lastsel=0;
+                                       $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
+                           afterrestorefunc : function(){lastsel=0;}            
+                             });
+                     lastsel=id;
+                     } 
+                   }" 
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -71,14 +86,7 @@ module LevelmaintenanceHelper
       :viewrecords => true,
       :caption => 'Level Maintenance',
       :multiselect => true,
-      :onSelectRow => "function(id) { 
-                       if(id && id!==lastsel){
-      jQuery('#level_list').jqGrid('restoreRow',lastsel);
-      jQuery('#level_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});
-      lastsel=id;
-    } 
-      }".to_json_var
-    }]
+      :onSelectRow => selectrowfunc.to_json_var }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
@@ -86,7 +94,7 @@ module LevelmaintenanceHelper
     #pager = [:navGrid, "#level_pager", {edit:true,add:true,del:true}]
      pager = [:navGrid, "#level_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
-                                                       {:closeAfterAdd=>true, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
+                                                       {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]                                                                        
                                                         
 
     #pager2 = [:inlineNav, "#level_pager"]

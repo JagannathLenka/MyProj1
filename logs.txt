@@ -1,0 +1,101 @@
+2013-08-20T03:26:19.065465+00:00 app[web.1]: Completed 200 OK in 106ms (Views: 0.2ms | ActiveRecord: 25.8ms)
+2013-08-20T03:26:19.065465+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
+2013-08-20T03:26:19.089866+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969155721&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=208ms status=200 bytes=3498
+2013-08-20T03:29:58.004472+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&lightweight=no host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=27ms status=200 bytes=6076
+2013-08-20T03:29:57.988276+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&lightweight=no" for 71.231.176.33 at 2013-08-20 03:29:57 +0000
+2013-08-20T03:29:58.007906+00:00 app[web.1]: Processing by BaysmaintenanceController#index as HTML
+2013-08-20T03:29:58.007906+00:00 app[web.1]:   Parameters: {"id"=>"162", "lightweight"=>"no"}
+2013-08-20T03:29:58.007906+00:00 app[web.1]: Completed 200 OK in 16ms (Views: 7.0ms | ActiveRecord: 6.3ms)
+2013-08-20T03:29:58.007906+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.1ms)
+2013-08-20T03:29:58.007906+00:00 app[web.1]:   Rendered baysmaintenance/index.html.erb within layouts/application (5.1ms)
+2013-08-20T03:29:58.149443+00:00 heroku[router]: at=info method=GET path=/assets/application-c5efa2db1b40b1cec91008ad3fe78f4a.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=13ms status=304 bytes=0
+2013-08-20T03:29:58.139635+00:00 heroku[router]: at=info method=GET path=/assets/application-0b0dbbd720ce7ce33884d6969653cf92.css host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=6ms status=304 bytes=0
+2013-08-20T03:29:58.152371+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=18ms status=404 bytes=728
+2013-08-20T03:29:58.143337+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
+2013-08-20T03:29:58.150636+00:00 app[web.1]: 
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2013-08-20T03:29:58.150636+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/assets/grid.locale-en.js"):
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `block in call'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `call'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:32:in `call_app'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/tagged_logging.rb:22:in `tagged'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/engine.rb:479:in `call'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/static.rb:63:in `call'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/log_tailer.rb:17:in `call'
+2013-08-20T03:29:58.150999+00:00 app[web.1]: 
+2013-08-20T03:29:58.153501+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/assets/jquery.jqGrid.min.js"):
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/engine.rb:479:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `block in call'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/tagged_logging.rb:22:in `tagged'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `call'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/request_id.rb:22:in `call'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/log_tailer.rb:17:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/application.rb:223:in `call'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
+2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/application.rb:223:in `call'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
+2013-08-20T03:29:58.151355+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
+2013-08-20T03:29:58.153855+00:00 app[web.1]: 
+2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+2013-08-20T03:29:58.150999+00:00 app[web.1]: 
+2013-08-20T03:29:58.153501+00:00 app[web.1]: 
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:32:in `call_app'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/static.rb:63:in `call'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+2013-08-20T03:29:58.153855+00:00 app[web.1]: 
+2013-08-20T03:29:58.148106+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=17ms status=404 bytes=728
+2013-08-20T03:29:58.463752+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969375268&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=40ms status=200 bytes=3498
+2013-08-20T03:29:58.468781+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=20ms status=304 bytes=0
+2013-08-20T03:29:58.427263+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&_search=false&nd=1376969375268&rows=30&page=1&sidx=id&sord=asc" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
+2013-08-20T03:29:58.459656+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
+2013-08-20T03:29:58.459656+00:00 app[web.1]: Completed 200 OK in 28ms (Views: 0.2ms | ActiveRecord: 11.4ms)
+2013-08-20T03:29:58.459656+00:00 app[web.1]:   Parameters: {"id"=>"162", "_search"=>"false", "nd"=>"1376969375268", "rows"=>"30", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-08-20T03:30:15.449935+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&_search=false&nd=1376969392255&rows=30&page=1&sidx=id&sord=asc" for 71.231.176.33 at 2013-08-20 03:30:15 +0000
+2013-08-20T03:30:15.545346+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969392255&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=132ms status=200 bytes=3498
+2013-08-20T03:30:15.535333+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
+2013-08-20T03:30:15.535333+00:00 app[web.1]:   Parameters: {"id"=>"162", "_search"=>"false", "nd"=>"1376969392255", "rows"=>"30", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-08-20T03:30:15.535333+00:00 app[web.1]: Completed 200 OK in 70ms (Views: 0.2ms | ActiveRecord: 16.8ms)
+2013-08-20T03:30:15.588640+00:00 heroku[router]: at=info method=POST path=/baysmaintenance host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=3ms service=180ms status=500 bytes=643
+2013-08-20T03:30:15.542099+00:00 app[web.1]: Started POST "/baysmaintenance" for 71.231.176.33 at 2013-08-20 03:30:15 +0000
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   app/controllers/baysmaintenance_controller.rb:74:in `create'
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:9:in `copyBaytoAisle'
+2013-08-20T03:30:15.580574+00:00 app[web.1]: 
+2013-08-20T03:30:15.580761+00:00 app[web.1]: 
+2013-08-20T03:30:15.580574+00:00 app[web.1]: 
+2013-08-20T03:30:15.580574+00:00 app[web.1]: NoMethodError (undefined method `no_of_pos_level' for nil:NilClass):
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:61:in `copy_LeveltoLevel'
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:54:in `block in update_level'
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:51:in `update_level'
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:31:in `copy_BaytoBay'
+2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:11:in `block in copyBaytoAisle'
+2013-08-20T03:30:15.580761+00:00 app[web.1]: Processing by BaysmaintenanceController#create as */*
+2013-08-20T03:30:15.580761+00:00 app[web.1]: Completed 500 Internal Server Error in 26ms
+2013-08-20T03:30:15.580761+00:00 app[web.1]:   Parameters: {"oper"=>"cpy", "id"=>"1452"}

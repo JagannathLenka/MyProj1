@@ -2,7 +2,7 @@ class PosmaintenanceController < ApplicationController
   # GET /maintenance
   
   def index
-    get_header_details
+    get_header_details  if !request.xhr?
     columns =  ['id','sm_pos_id','cl_pos_id','description','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','client_id','sm_aisle_id','cl_aisle_id','level_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
     pos = Position.select(" id , sm_pos_id , cl_pos_id , description , sm_level_id , cl_level_id, sm_bay_id , cl_bay_id , client_id , sm_aisle_id , cl_aisle_id , level_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:level_id => params[:id]).paginate(
       :page     => params[:page],
@@ -53,8 +53,7 @@ class PosmaintenanceController < ApplicationController
                        )
         
          pos.save
-         @error = pos.errors.full_messages[0]
-        
+           @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0] if pos.errors.count > 0
              
    when "del"
                pos =  Position.destroy(params[:id].to_i)
@@ -131,7 +130,7 @@ class PosmaintenanceController < ApplicationController
 
                                
    end
-      @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0]
+       @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0] if pos.errors.count > 0
  end
 
  def get_header_details

@@ -31,6 +31,7 @@ end
 #Update the bays and create bays and levels beased on the input from JQgrid
  def create
    
+  @error = ""
   case params[:oper]
   when "edit"
         edit_bays_details
@@ -63,7 +64,8 @@ end
                        )
         
                bays.save
-               add_levels_to_bay bays
+               @error = params[:cl_bay_id]+ ' ' + bays.errors.values[0][0] if bays.errors.count > 0 
+               add_levels_to_bay bays if bays.errors.count <= 0 
                
                
     when "del"
@@ -78,8 +80,12 @@ end
          
 
     if request.xhr?
+       if !@error.blank?        
+        render :json => @error.to_json, status: 500
+       else
       render :json => bays
     end
+  end  
  end
  
  def edit_bays_details
@@ -111,7 +117,8 @@ end
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8]    
                                 })
-
+                                
+        @error = params[:cl_bay_id]+ ' ' + bays.errors.values[0][0] if bays.errors.count > 0 
  end
  
  def add_levels_to_bay bays

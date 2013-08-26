@@ -1,4 +1,7 @@
+require 'copy_object'
 class AislemaintenanceController < ApplicationController
+  
+ include CopyObject
   
  # GET /Render the JQGrid for aisle maintenance
   def index
@@ -37,6 +40,7 @@ class AislemaintenanceController < ApplicationController
  #Update the aisles and create bays and levels beased on the input from JQgrid
  def create
   
+  @error = ""
   case params[:oper]
   when "edit"
        edit_aisle_details 
@@ -66,16 +70,26 @@ class AislemaintenanceController < ApplicationController
                           )
         
          aisles.save 
-         add_bays_to_aisle aisles
+         @error = params[:cl_aisle_id]+ ' ' + aisles.errors.values[0][0] if aisles.errors.count > 0 
+         add_bays_to_aisle aisles if aisles.errors.count <= 0 
          
   when "del"
               Aisle.destroy(params[:id].to_i)   
+              
+  when "cpy"
+             
+              CopyObject.copyAisletoZone params[:id]
            
  end        
     #If it is a Ajax then send the json details
+    
     if request.xhr?
+       if !@error.blank?        
+        render :json => @error.to_json, status: 500
+       else
       render :json => aisles
     end
+   end 
  end
  
  
@@ -118,6 +132,8 @@ class AislemaintenanceController < ApplicationController
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8]    
                                   })
+                                  
+       @error = params[:cl_aisle_id]+ ' ' + aisles.errors.values[0][0] if aisles.errors.count > 0                            
 
  end
   

@@ -1,6 +1,6 @@
 class ZonemaintenanceController < ApplicationController
    # GET /zonemaintenance
-  def index
+ def index
 
     #Get the header details of the zone
     get_header_details
@@ -21,7 +21,9 @@ class ZonemaintenanceController < ApplicationController
     
       
     if request.xhr? 
+      
       render :json => json_for_jqgrid(zone, columns)
+      
     end
 
   end
@@ -29,6 +31,7 @@ class ZonemaintenanceController < ApplicationController
 #POST Edit Zones and Add/Edit ailses 
  def create
    
+    @error = ""
     case params[:oper]
   
     when "edit"
@@ -57,7 +60,8 @@ class ZonemaintenanceController < ApplicationController
 
             )
            zone.save
-           add_aisles_to_zone zone
+           @error = params[:cl_zone_id]+ ' ' + zone.errors.values[0][0] if zone.errors.count > 0 
+           add_aisles_to_zone zone if zone.errors.count <= 0 
   
             when "del"
                zone = Zone.destroy(params[:id].to_i) 
@@ -65,9 +69,14 @@ class ZonemaintenanceController < ApplicationController
    
   
       
-      if request.xhr?
-        render :json => zone
-      end
+    if request.xhr?
+       if !@error.blank?        
+          render :json => @error.to_json, status: 500
+       else
+          render :json => zone
+       end
+     end 
+  
 end
 
 def edit_zones_details
@@ -99,6 +108,8 @@ def edit_zones_details
                                      :attribute7 => params[:attribute7],
                                      :attribute8 => params[:attribute8]    
             })  
+            
+        @error = params[:cl_zone_id]+ ' ' + zone.errors.values[0][0] if zone.errors.count > 0
 end
 
 def add_aisles_to_zone zone

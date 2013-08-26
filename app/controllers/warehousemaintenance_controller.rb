@@ -21,6 +21,7 @@ class WarehousemaintenanceController < ApplicationController
  #Creates the warehouse and the zones
  def create
    
+  @error = "" 
   case params[:oper]
   when "edit"
     edit_warehouse_details
@@ -40,17 +41,22 @@ class WarehousemaintenanceController < ApplicationController
                                    :attribute4 => params[:attribute4]
           )
         
-         warehouse.save          
-         add_zones_to_warehouse warehouse
-
+         warehouse.save 
+         @error = params[:cl_warehouse_id]+ ' ' + warehouse.errors.values[0][0] if warehouse.errors.count > 0         
+         add_zones_to_warehouse warehouse if warehouse.errors.count <= 0
+                        
     when "del"
               Warehouse.destroy(params[:id].to_i)                               
     end
     
     if request.xhr?
-      render :json => @warehouse
-    end
-end 
+       if !@error.blank?        
+          render :json => @error.to_json, status: 500
+       else
+         render :json => warehouse
+       end
+     end
+   end 
 
 def edit_warehouse_details
   warehouse = Warehouse.find_by_id(params[:id])
@@ -76,8 +82,11 @@ def edit_warehouse_details
                                    :attribute3 => params[:attribute3],
                                    :attribute4 => params[:attribute4]
                                         
-          }) 
-end
+          })
+          
+        @error = params[:cl_warehouse_id]+ ' ' + warehouse.errors.values[0][0] if warehouse.errors.count > 0
+        
+ end
 
 def add_zones_to_warehouse warehouse
          max_zone = Zone.where(:warehouse_id => warehouse.id).maximum("sm_zone_id").to_i

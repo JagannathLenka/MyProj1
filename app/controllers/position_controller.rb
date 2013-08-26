@@ -20,8 +20,23 @@ class PositionController < ApplicationController
     pos = Position.where(:level_id => levelvalue.id).order("id ASC")
    
     pos.each do |posvalue|
-      postype = posvalue.attribute1.blank?   ?  "pos_Empty"  :  posvalue.attribute1
-      poshash = poshash.merge({posvalue.id => {:customer_id => posvalue.cl_barcode, :type => postype, :item => posvalue.attribute2}})
+      location = Location.where('cl_warehouse_id =? AND cl_barcode = ?', posvalue.cl_warehouse_id, posvalue.cl_barcode).first
+      
+      #If location not found in the database
+      if location.nil?
+        postype = "pos_Empty"
+      else
+        postype = location.current_quantity.to_i==0   ?  "pos_Empty"  :  "pos"  
+      end
+       
+      poshash = poshash.merge({posvalue.id => {:customer_id => posvalue.cl_barcode, 
+                                               :pos_type => postype,
+                                               :pos_continue => posvalue.attribute1, 
+                                               :item => location.nil? ? "" :  location.current_item,
+                                               :current_inventory=> location.nil? ? "" : location.current_quantity,
+                                               :maximum_quantity => location.nil? ? "" : location.maximum_quantity,
+                                               :minimum_quantity => location.nil? ? "" : location.minimum_quantity,
+                                               :lock_code => location.nil? ? "" : location.lock_code}})
       pos_ctr = pos_ctr + 1
     end
     @levelhash = @levelhash.merge({levelvalue.cl_level_id.blank? ? levelvalue.id : levelvalue.cl_level_id => poshash})
