@@ -1,21 +1,21 @@
 <% content_for :head do %>   
 	  <style>
 	    #main             {width: 100%; height: 600px; border: 0px solid #999; padding: 0px; margin-left:20px;}
-		#content 	      { float: left;  height: 5000px; width: 100%; background: #E0E0E0; }
-        #area 	          { float: left;  height: 5000px; width: 100%; background: #E0E0E0; border: 0px solid #000; }             
-        .aisle            { float: left;  height: 20px;  width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(yellow), to(#F8F8F8));}
+		#content 	      { float: left;  height: 5000px; width: 100%; background: white; }
+        #area 	          { float: left;  margin-left:60px; margin-right:60px; height: 5000px; width: 70%; background: white; border: 0px solid #000; }             
+        .aisle            { float: left;  height: 20px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(#0033FF));}
 
 		.bay_col          { float: left;  height: 20px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
         .reserve          { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: orange;}
 		.bay_Empty        { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
-		.bay_draggedhelper{ float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
+		.bay_draggedhelper{ float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
 		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: white}
 		.aisle_Empty      { float: left;  height: 20px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
 
 body {
-	background: #E0E0E0;
+	background: white;
 	padding: 0px;
 	overflow-x: hidden; /* For Opera */
 	-webkit-box-shadow:
@@ -334,14 +334,16 @@ var indexHTML = {
 		 </tr> 
 	    <% end %>				
       
-      <% @lastaislepick = aislevalue["aisle_properties"]["aisle_pick"] %>
-      
+      <% @last_aisle_pick = aislevalue["aisle_properties"]["aisle_pick"] %>
+      <% @last_aisle_customer_id = aislevalue["aisle_properties"]["customer_id"] %>
+  	  <% @last_aisle_id = aislevalue["aisle_id"]%>
   	 <%end %>
 
 
-     <% if @lastaislepick=="L" %>
+     <% if @last_aisle_pick=="L" %>
   	 <!-- At the end check if if this is a left side pick aisle, if so put a drive path -->
-		  <tr><td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td></tr>
+		  <tr><td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>
+		  <td> <div  class="aisle" id="<%= @aisle_id %>">Aisle: <%= @last_aisle_customer_id %></div></td></tr>
 	 <%end %>	  	 			   	       			 	       
   	 
   </table>

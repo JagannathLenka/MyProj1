@@ -33,7 +33,7 @@ module WarehousemaintenanceHelper
       :height=> 350,
       :width => 1200,
       
-      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Location','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false, hidden:true},
@@ -62,19 +62,24 @@ module WarehousemaintenanceHelper
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,
       :onSelectRow => selectrowfunc.to_json_var }]
-      
-    # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
-    # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
-    #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    #pager = [:navGrid, "#warehouse_pager", {edit:true,add:true,del:true}]
     pager = [:navGrid, "#warehouse_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, 
                                                        :closeOnEscape => true,  :beforeSubmit => editcheckfunc.to_json_var}, 
                                                        {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {}, {}]                                                              
-    #pager2 = [:inlineNav, "#warehouse_pager"]
-    pager_button = [:navButtonAdd, "#warehouse_pager", {:caption => 'Add', :onClickButton => 'function() {alert("Custom button!")}'.to_json_var }]
+
+    pager_button = [:navButtonAdd, "#warehouse_pager", 
+                   {:caption => 'Show Locations', :onClickButton => 'function() {
+                                          var grid = $("#warehouse_list");
+                                          selectedRowId= grid.jqGrid ("getGridParam","selrow");                                          
+                                          if (selectedRowId == null){
+                                              alert("Please select a zone to see the layout");
+                                             return;
+                                          }                
+                                          window.location.href = "/locationmaintenance?warehouse_id=" + selectedRowId                                                
+                                          }'.to_json_var }]
+                                          
     
     
-    jqgrid_api 'warehouse_list', grid, pager , options
+    jqgrid_api 'warehouse_list', grid, pager , pager_button, options
 
   end
 

@@ -34,38 +34,40 @@ module AislemaintenanceHelper
                    } 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_zone_id=' + id + '; return[true, " "]}'
-     
     showLayout   = 'function() {          
                                           win = window.open("/bay?id=' + id + '", "_blank");
                                           win.focus();
-                               }'
-                               
+                               }'                               
     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
-    
     selectrowfunc = "function(id) { 
-                      
                       if(id && id!==lastsel){
-                           
                            jQuery('#aisle_list').jqGrid('restoreRow',lastsel);
-                           
                            jQuery('#aisle_list').jqGrid('editRow',id,{keys: true, 
-                           
                            aftersavefunc: function(){lastsel=0;jQuery('#aisle_list').trigger('reloadGrid');},
-                           
                            errorfunc: function(id, response){lastsel=0;
-                                      
                                        $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
-                                       
-                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
-                           
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});}, 
                            afterrestorefunc : function(){lastsel=0;}            
-                            
                       });
-                      
                      lastsel=id;
                      } 
-                   }"                             
-
+                   }"   
+                      
+       copyrowfunc  = 'function() {
+                                var ids = $("#aisle_list").jqGrid("getGridParam","selarrrow");
+                                
+                                 $.post("/aislemaintenance",
+                                       {
+                                         "oper" :"cpy",
+                                         "id"   :ids[0]
+                                       },
+                                       function(data,status)
+                                       {
+                               
+                                       });
+                                 $("#aisle_list").trigger("reloadGrid");       
+                   }'
+                                       
 
     grid = [{
       :url => url,
@@ -111,23 +113,18 @@ module AislemaintenanceHelper
       :viewrecords => true,
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
+      :multiselect => true,
       :onSelectRow => selectrowfunc.to_json_var }]
 
-    # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
-    # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
-    #pager = [:navGrid, "#aisle_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
-    #pager = [:navGrid, "#aisle_pager", {edit:true,add:true,del:true}]
     pager = [:navGrid, "#aisle_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
                                                        {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
-    #pager2 = [:inlineNav, "#aisle_pager"]
-
-    
     pager_button = [:navButtonAdd, "#aisle_pager", 
                    {:caption => 'Show Layout', :onClickButton => showLayout.to_json_var }]
+                   
+    copy_button = [:navButtonAdd, "#aisle_pager", {:caption => 'Copy to other aisle', :onClickButton => copyrowfunc.to_json_var }]               
 
-
-    jqgrid_api 'aisle_list', grid, pager, pager_button,  options
+    jqgrid_api 'aisle_list', grid, pager, pager_button, copy_button, options
 
   end
 

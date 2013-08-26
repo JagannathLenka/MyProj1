@@ -64,7 +64,7 @@ class LevelmaintenanceController < ApplicationController
                
     when "cpy"
              
-             CopyObject.copyLeveltoLevel params[:id]           
+             CopyObject.copyLeveltoBay params[:id]           
               
     end
   

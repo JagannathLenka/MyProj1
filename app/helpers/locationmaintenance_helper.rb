@@ -18,8 +18,10 @@ module LocationmaintenanceHelper
                      lastsel=id;
                      } 
                    }" 
+      url = '/locationmaintenance?warehouse_id=' + params[:warehouse_id]              
+      
       grid = [{
-      :url => '/locationmaintenance/', 
+      :url => url,
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,
@@ -78,7 +80,7 @@ module LocationmaintenanceHelper
 
       pager = [:navGrid, "#loc_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                          :closeOnEscape => true}, 
-                                                         {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var}, {}, {}, {}]   
+                                                         {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]   
       
       #pager_button = [:navButtonAdd, "#loc_pager", {:caption => 'Copy to other bay', :onClickButton => copyrowfunc.to_json_var }]
   

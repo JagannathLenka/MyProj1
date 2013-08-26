@@ -16,30 +16,19 @@ module ZonemaintenanceHelper
     
     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     
-    selectrowfunc = "function(id) { 
-                      
-                      if(id && id!==lastsel){
-                           
+    selectrowfunc = "function(id) {                       
+                      if(id && id!==lastsel){                           
                            jQuery('#zone_list').jqGrid('restoreRow',lastsel);
-                           
                            jQuery('#zone_list').jqGrid('editRow',id,{keys: true, 
-                           
                            aftersavefunc: function(){lastsel=0;jQuery('#zone_list').trigger('reloadGrid');},
-                           
                            errorfunc: function(id, response){lastsel=0;
-                                      
                                        $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
-                                       
-                                       $.jgrid.edit.bClose,{buttonalign:'right'});},
-                           
+                                       $.jgrid.edit.bClose,{buttonalign:'right'});},                         
                            afterrestorefunc : function(){lastsel=0;}            
-                            
                       });
-                      
                      lastsel=id;
                      } 
                    }"                             
-
 
     grid = [{
       :url => url ,
@@ -86,20 +75,15 @@ module ZonemaintenanceHelper
       :onSelectRow => selectrowfunc.to_json_var }]
     
 
-    # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
-    # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
     pager = [:navGrid, "#zone_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
                                                        {:closeAfterAdd=>true,:errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
                                                                                  
-    #pager = [:navGrid, "#zone_pager", {edit:true,add:true,del:true}]
-   # pager2 = [:inlineNav, "#zone_pager"]
 
     pager_button = [:navButtonAdd, "#zone_pager", 
                    {:caption => 'Show Layout', :onClickButton => 'function() {
                                           var grid = $("#zone_list");
-                                          selectedRowId= grid.jqGrid ("getGridParam","selrow");
-                                          
+                                          selectedRowId= grid.jqGrid ("getGridParam","selrow");                                          
                                           if (selectedRowId == null){
                                               alert("Please select a zone to see the layout");
                                              return;

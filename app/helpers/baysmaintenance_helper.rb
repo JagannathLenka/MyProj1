@@ -1,6 +1,6 @@
 module BaysmaintenanceHelper
     
-    include JqgridsHelper
+  include JqgridsHelper
 
   def bays_jqgrid
     
@@ -26,10 +26,11 @@ module BaysmaintenanceHelper
                                        },
                                        function(data,status)
                                        {
-                               
+                                        alert(data);
                                        });
                                  $("#bays_list").trigger("reloadGrid");       
                    }'
+
      aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
      selectrowfunc = "function(id) { 
                       if(id && id!==lastsel){
@@ -55,7 +56,7 @@ module BaysmaintenanceHelper
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'center', :editable => true, :hidden => true},
-        {:name => 'cl_bay_id', :index => 'cl_bay_id',  :width => 80, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
+        { :name => 'cl_bay_id', :index => 'cl_bay_id',  :width => 80, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'}},
         { :name => 'description', :index => 'description', :width => 120,  :align => 'left', :editable => true },
         { :name => 'client_id',:index => 'client_id',     :width => 55,  :align => 'center', :editable => false, :hidden => true},
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id', :width => 150,  :align => 'center', :editable => false,:hidden => true },
@@ -68,13 +69,13 @@ module BaysmaintenanceHelper
         { :name => 'no_of_level_bay', :index => 'no_of_level_bay',   :width => 120,   :align => 'center', :editable => true,editrules:{required:true,number:true}},
         { :name => 'no_of_level_bay_hidden', :index => 'no_of_level_bay_hidden',   :width => 120,   :align => 'center', :hidden => true,:editable => true},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 120,   :align => 'center', :editable => true},
-        { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true,editrules:{required:true}},
+        { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => true ,editrules:{required:true}},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
-        { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true,:hidden => true},
-        { :name => 'attribute8',   :index => 'attribute8',   :width => 120 ,   :align => 'center', :editable => true, :hidden => true}
+        { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
+        { :name => 'attribute8',   :index => 'attribute8',   :width => 120 ,  :align => 'center', :editable => true, :hidden => true}
         
       ],
       :editurl => '/baysmaintenance',

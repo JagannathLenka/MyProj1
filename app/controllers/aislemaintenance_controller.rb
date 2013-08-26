@@ -1,4 +1,7 @@
+require 'copy_object'
 class AislemaintenanceController < ApplicationController
+  
+ include CopyObject
   
  # GET /Render the JQGrid for aisle maintenance
   def index
@@ -73,6 +76,10 @@ class AislemaintenanceController < ApplicationController
        
   when "del"
               Aisle.destroy(params[:id].to_i)   
+              
+  when "cpy"
+             
+              CopyObject.copyAisletoZone params[:id]
            
  end        
     #If it is a Ajax then send the json details
