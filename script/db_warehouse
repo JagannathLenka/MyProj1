@@ -17,4 +17,6 @@
 #rails generate migration add_fieldname_to_users contact_phone2:integer attribute9:string attribute10:string attribute11:string attribute12:string attribute13:string attribute14:string attribute15:string attribute16:string attribute17:string attribute18:string attribute19:string attribute20:string
 #rails generate model location client_id:string sm_loc_id:integer sm_pos_id:integer sm_level_id:integer sm_bay_id:integer sm_aisle_id:integer sm_zone_id:integer sm_warehouse_id:integer sm_barcode:string  level_id:integer cl_loc_id:string cl_pos_id:string cl_level_id:string cl_bay_id:string cl_aisle_id:string cl_zone_id:string cl_warehouse_id:string cl_barcode:string current_item:string current_quantity:integer  minimum_quantity:integer maximum_quantity:integer status:string life_time_total_picks:integer lock_code:integer  attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string attribute9:string attribute10:string attribute11:string attribute12:string attribute13:string attribute14:string attribute15:string attribute16:string
 #rails generate migration remove_fieldname_from_locations level_id:string lock_code:integer
-rails generate migration add_fieldname_to_locations lock_code:string
+#rails generate migration add_fieldname_to_locations lock_code:string
+#rails generate migration add_index_to_positions
+rails generate migration add_index_to_levels
