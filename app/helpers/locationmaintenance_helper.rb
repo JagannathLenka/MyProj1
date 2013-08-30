@@ -4,6 +4,20 @@ module LocationmaintenanceHelper
   def loc_jqgrid
     
     options = {:on_document_ready => true, :html_tags => false}
+    url = '/locationmaintenance?warehouse_id=' + params[:warehouse_id]   
+    editcheckfunc = 'function(postdata, formid) 
+              {
+               
+                if (parseInt(postdata.current_quantity) < parseInt(postdata.minimum_quantity)) 
+                   {
+                     return[false, "Can not have less quantity than Minimum quantity"];
+                   } 
+                 if (parseInt(postdata.current_quantity) > parseInt(postdata.maximum_quantity)) 
+                 {
+                   return[false, "Can not have more quantity than Maximum quantity"];
+                 } 
+
+              return[true, " "]}'    
     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     selectrowfunc = "function(id) { 
                       if(id && id!==lastsel){
@@ -18,7 +32,7 @@ module LocationmaintenanceHelper
                      lastsel=id;
                      } 
                    }" 
-      url = '/locationmaintenance?warehouse_id=' + params[:warehouse_id]              
+             
       
       grid = [{
       :url => url,
@@ -79,7 +93,7 @@ module LocationmaintenanceHelper
       :onSelectRow => selectrowfunc.to_json_var }]
 
       pager = [:navGrid, "#loc_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
-                                                         :closeOnEscape => true}, 
+                                                         :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
                                                          {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]   
       
       #pager_button = [:navButtonAdd, "#loc_pager", {:caption => 'Copy to other bay', :onClickButton => copyrowfunc.to_json_var }]

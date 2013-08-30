@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823010937) do
+ActiveRecord::Schema.define(:version => 20130830055733) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20130823010937) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "levels", ["bay_id"], :name => "index_levels_on_bay_id"
+
   create_table "locations", :force => true do |t|
     t.string   "client_id"
     t.integer  "sm_loc_id"
@@ -197,6 +199,8 @@ ActiveRecord::Schema.define(:version => 20130823010937) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
 
   create_table "users", :force => true do |t|
     t.string   "client_id"
