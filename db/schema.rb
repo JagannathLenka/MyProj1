@@ -270,8 +270,6 @@ ActiveRecord::Schema.define(:version => 20130830203908) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
-
   create_table "users", :force => true do |t|
     t.string   "client_id"
     t.integer  "contact_phone"
