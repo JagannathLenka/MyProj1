@@ -1,3 +1,4 @@
+require 'csv'
 class LocationmaintenanceController < ApplicationController
   # GET /maintenance
   
@@ -25,6 +26,90 @@ class LocationmaintenanceController < ApplicationController
      if request.xhr?
         render :json => json_for_jqgrid(loc, columns)
      end
+   end
+   
+ def upload
+   file = params[:file].read
+   CSV.parse(file) do |row|
+   row_array = row
+   error = is_row_valid row_array
+   if error.blank?
+      existloc = Location.where("cl_barcode = ? and  cl_warehouse_id = ?" , row_array[1], row_array[0]).first
+      if existloc.nil?
+      loc = Location.new(
+                                  
+                                   :cl_warehouse_id   => (row_array[0].encode! 'utf-8'),
+                                   :cl_barcode  =>(row_array[1].encode! 'utf-8'),
+                                   :current_item => (row_array[2].encode! 'utf-8'),
+                                   :current_quantity => (row_array[3].encode! 'utf-8'),
+                                   :life_time_total_picks  => (row_array[4].encode! 'utf-8'),
+                                   :lock_code => (row_array[5].encode! 'utf-8'),
+                                   :maximum_quantity =>(row_array[6].encode! 'utf-8'),
+                                   :minimum_quantity => (row_array[7].encode! 'utf-8'),
+                                   :status => (row_array[8].encode! 'utf-8')
+                            
+                       )
+        
+         loc.save
+       else
+        existloc.update_attributes({
+                                          
+                                           :cl_warehouse_id   => (row_array[0].encode! 'utf-8'),
+                                           :cl_barcode  => (row_array[1].encode! 'utf-8'),
+                                           :current_item => (row_array[2].encode! 'utf-8'),
+                                           :current_quantity => (row_array[3].encode! 'utf-8'),
+                                           :life_time_total_picks  => (row_array[4].encode! 'utf-8'),
+                                           :lock_code => (row_array[5].encode! 'utf-8'),
+                                           :maximum_quantity => (row_array[6].encode! 'utf-8'),
+                                           :minimum_quantity => (row_array[7].encode! 'utf-8'),
+                                           :status => (row_array[8].encode! 'utf-8')
+                                       })
+                                       
+       end
+         
+      else
+
+        locationerror = Locationerror.new(
+        
+                                                 :file_name => params[:file].original_filename + Time.now.to_s,
+                                                 :error_description => error,
+                                                 :attribute1 => (row_array[0].encode! 'utf-8'),
+                                                 :attribute2 => (row_array[1].encode! 'utf-8'), 
+                                                 :attribute3 => (row_array[2].encode! 'utf-8'),
+                                                 :attribute4 => (row_array[3].encode! 'utf-8'),
+                                                 :attribute5 => (row_array[4].encode! 'utf-8'),
+                                                 :attribute6 => (row_array[5].encode! 'utf-8'),
+                                                 :attribute7 => (row_array[6].encode! 'utf-8'),
+                                                 :attribute8 => (row_array[7].encode! 'utf-8'),
+                                                 :attribute9 => (row_array[8].encode! 'utf-8')
+                                                   
+                                          )
+                                          
+            locationerror.save
+         
+     end
+  end 
+   redirect_to :back 
+ end
+ def is_row_valid rowOfcsv
+    error = ""
+   #warehouse validation
+   if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[0]).first.nil?
+     error = "Warehouse not found"
+     
+   end  
+   #Barcode validation  
+   if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[1], rowOfcsv[0]).first.nil?
+     error = "Barcode not found"
+      
+   end
+   
+   #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
+   if rowOfcsv[3].to_i >= rowOfcsv[6].to_i and rowOfcsv[3].to_i <= rowOfcsv[7].to_i
+      error = "Current quantity not correct"
+      
+   end
+     return error
    end
 
  def create
@@ -55,7 +140,8 @@ class LocationmaintenanceController < ApplicationController
                                    :attribute5 => params[:attribute5],
                                    :attribute6 => params[:attribute6],
                                    :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]  
+                                   :attribute8 => params[:attribute8],
+                                   :attribute9 => params[:attribute9]  
                          
                        )
         
@@ -95,7 +181,8 @@ class LocationmaintenanceController < ApplicationController
                                    :attribute5 => params[:attribute5],
                                    :attribute6 => params[:attribute6],
                                    :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
+                                   :attribute8 => params[:attribute8],
+                                   :attribute8 => params[:attribute9]    
                                 })
     
                                

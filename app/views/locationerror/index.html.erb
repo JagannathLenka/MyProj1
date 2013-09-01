@@ -1,0 +1,18 @@
+<% content_for :head do %>
+<script>
+	var lastsel;
+</script>
+<%end%>
+<% if params[:lightweight] != "yes" %>
+
+		<%= render "shared/menu" %>
+		<div align="center"> 
+		<h1>Location Error</h1></a>
+</div>
+<div style="margin-left: 30px;">
+<%end%>
+<table id=locationerror_list></table>
+<div id=locationerror_pager></div>
+</div>
+<%= raw(locationerror_jqgrid) %>
+<br />

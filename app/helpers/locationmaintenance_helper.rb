@@ -96,9 +96,13 @@ module LocationmaintenanceHelper
                                                          :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 
                                                          {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]   
       
-      #pager_button = [:navButtonAdd, "#loc_pager", {:caption => 'Copy to other bay', :onClickButton => copyrowfunc.to_json_var }]
+      pager_button = [:navButtonAdd, "#loc_pager", 
+                   {:caption => 'Show Errors', :onClickButton => 'function() {
+                                          win = window.open("/locationerror", "_blank");
+                                          win.focus();
+                                          }'.to_json_var }]
   
-      jqgrid_api 'loc_list', grid, pager, options
+      jqgrid_api 'loc_list', grid, pager,  pager_button, options
 
   end
 
