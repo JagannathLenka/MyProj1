@@ -17,3 +17,13 @@
 <%= raw(loc_jqgrid) %>
 <br />
 
+<div style="margin-left: 30px;">
+<div>
+  <%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag 'Upload File'%>
+<% end %>
+</div>
+<div>
+
+</div>

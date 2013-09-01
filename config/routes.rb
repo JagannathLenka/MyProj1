@@ -1,6 +1,6 @@
 MyProj1::Application.routes.draw do
-  resources :warehouse, :bay, :position, :login, :locationmaintenance, :usermaintenance, :userregister, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance, :zonemaintenance, :warehousemaintenance 
-  
+  resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance, :zonemaintenance, :warehousemaintenance 
+  post 'locationmaintenance/upload/' => 'locationmaintenance#upload'
     
   # Custom route due to jqgrid non RESTful behaviour to allow editing the amount
   #post 'maintenance/update/' => 'maintenance#update'
