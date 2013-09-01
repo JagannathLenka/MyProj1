@@ -38,15 +38,15 @@ class LocationmaintenanceController < ApplicationController
       if existloc.nil?
       loc = Location.new(
                                   
-                                   :cl_warehouse_id   => (row_array[0].encode! 'utf-8'),
-                                   :cl_barcode  =>(row_array[1].encode! 'utf-8'),
-                                   :current_item => (row_array[2].encode! 'utf-8'),
-                                   :current_quantity => (row_array[3].encode! 'utf-8'),
-                                   :life_time_total_picks  => (row_array[4].encode! 'utf-8'),
-                                   :lock_code => (row_array[5].encode! 'utf-8'),
-                                   :maximum_quantity =>(row_array[6].encode! 'utf-8'),
-                                   :minimum_quantity => (row_array[7].encode! 'utf-8'),
-                                   :status => (row_array[8].encode! 'utf-8')
+                                   :cl_warehouse_id   => (row_array[0].to_s.encode! 'utf-8'),
+                                   :cl_barcode  =>(row_array[1].to_s.encode! 'utf-8'),
+                                   :current_item => (row_array[2].to_s.encode! 'utf-8'),
+                                   :current_quantity => (row_array[3].to_s.encode! 'utf-8'),
+                                   :life_time_total_picks  => (row_array[4].to_s.encode! 'utf-8'),
+                                   :lock_code => (row_array[5].to_s.encode! 'utf-8'),
+                                   :maximum_quantity =>(row_array[6].to_s.encode! 'utf-8'),
+                                   :minimum_quantity => (row_array[7].to_s.encode! 'utf-8'),
+                                   :status => (row_array[8].to_s.encode! 'utf-8')
                             
                        )
         
@@ -54,15 +54,15 @@ class LocationmaintenanceController < ApplicationController
        else
         existloc.update_attributes({
                                           
-                                           :cl_warehouse_id   => (row_array[0].encode! 'utf-8'),
-                                           :cl_barcode  => (row_array[1].encode! 'utf-8'),
-                                           :current_item => (row_array[2].encode! 'utf-8'),
-                                           :current_quantity => (row_array[3].encode! 'utf-8'),
-                                           :life_time_total_picks  => (row_array[4].encode! 'utf-8'),
-                                           :lock_code => (row_array[5].encode! 'utf-8'),
-                                           :maximum_quantity => (row_array[6].encode! 'utf-8'),
-                                           :minimum_quantity => (row_array[7].encode! 'utf-8'),
-                                           :status => (row_array[8].encode! 'utf-8')
+                                           :cl_warehouse_id   => (row_array[0].to_s.encode! 'utf-8'),
+                                           :cl_barcode  => (row_array[1].to_s.encode! 'utf-8'),
+                                           :current_item => (row_array[2].to_s.encode! 'utf-8'),
+                                           :current_quantity => (row_array[3].to_s.encode! 'utf-8'),
+                                           :life_time_total_picks  => (row_array[4].to_s.encode! 'utf-8'),
+                                           :lock_code => (row_array[5].to_s.encode! 'utf-8'),
+                                           :maximum_quantity => (row_array[6].to_s.encode! 'utf-8'),
+                                           :minimum_quantity => (row_array[7].to_s.encode! 'utf-8'),
+                                           :status => (row_array[8].to_s.encode! 'utf-8')
                                        })
                                        
        end
@@ -73,15 +73,15 @@ class LocationmaintenanceController < ApplicationController
         
                                                  :file_name => params[:file].original_filename + Time.now.to_s,
                                                  :error_description => error,
-                                                 :attribute1 => (row_array[0].encode! 'utf-8'),
-                                                 :attribute2 => (row_array[1].encode! 'utf-8'), 
-                                                 :attribute3 => (row_array[2].encode! 'utf-8'),
-                                                 :attribute4 => (row_array[3].encode! 'utf-8'),
-                                                 :attribute5 => (row_array[4].encode! 'utf-8'),
-                                                 :attribute6 => (row_array[5].encode! 'utf-8'),
-                                                 :attribute7 => (row_array[6].encode! 'utf-8'),
-                                                 :attribute8 => (row_array[7].encode! 'utf-8'),
-                                                 :attribute9 => (row_array[8].encode! 'utf-8')
+                                                 :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
+                                                 :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
+                                                 :attribute3 => (row_array[2].to_s.encode! 'utf-8'),
+                                                 :attribute4 => (row_array[3].to_s.encode! 'utf-8'),
+                                                 :attribute5 => (row_array[4].to_s.encode! 'utf-8'),
+                                                 :attribute6 => (row_array[5].to_s.encode! 'utf-8'),
+                                                 :attribute7 => (row_array[6].to_s.encode! 'utf-8'),
+                                                 :attribute8 => (row_array[7].to_s.encode! 'utf-8'),
+                                                 :attribute9 => (row_array[8].to_s.encode! 'utf-8')
                                                    
                                           )
                                           
