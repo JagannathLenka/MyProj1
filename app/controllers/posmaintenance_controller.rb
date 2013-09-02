@@ -95,6 +95,8 @@ class PosmaintenanceController < ApplicationController
                                 
       when "Continue"
         previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first
+        previous_pos =  Position.where("level_id = ?" , pos.level_id-1 ).last if previous_pos.nil? 
+        
         pos.update_attributes({ 
                                    :cl_pos_id   => params[:cl_pos_id],
                                    :description => params[:description],
@@ -112,6 +114,8 @@ class PosmaintenanceController < ApplicationController
                                 
        when "Break"
         previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first        
+        previous_pos =  Position.where("level_id = ?" , pos.level_id-1 ).last if previous_pos.nil?
+        
         pos.update_attributes({ 
                                    :cl_pos_id   => params[:cl_pos_id],
                                    :description => params[:description],
