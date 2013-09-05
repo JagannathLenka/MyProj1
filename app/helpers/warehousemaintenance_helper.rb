@@ -67,15 +67,16 @@ module WarehousemaintenanceHelper
                                                        {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {}, {}]                                                              
 
     pager_button = [:navButtonAdd, "#warehouse_pager", 
-                   {:caption => 'Show Locations', :onClickButton => 'function() {
-                                          var grid = $("#warehouse_list");
-                                          selectedRowId= grid.jqGrid ("getGridParam","selrow");                                          
+                   {:caption => "Show Locations", :onClickButton => "function() {
+                                          var grid = $('#warehouse_list');
+                                          selectedRowId= grid.jqGrid ('getGridParam','selrow');                                          
                                           if (selectedRowId == null){
-                                              alert("Please select a zone to see the layout");
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Select warehouse for location' +'</div>', 
+                                          $.jgrid.edit.bClose,{buttonalign:'right'});  
                                              return;
                                           }                
-                                          window.location.href = "/locationmaintenance?warehouse_id=" + selectedRowId                                                
-                                          }'.to_json_var }]
+                                          window.location.href = '/locationmaintenance?warehouse_id=' + selectedRowId                                                
+                                          }".to_json_var }]
                                           
     
     

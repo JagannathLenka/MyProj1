@@ -20,20 +20,29 @@ module LocationerrorHelper
                      } 
                    }" 
                    
-     reprocessfunc  = 'function() {
-                                var ids = $("#locationerror_list").jqGrid("getGridParam","selarrrow");
+     reprocessfunc  = "function() {
+                                var ids = $('#locationerror_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/locationerror",
+                                 $.post('/locationerror',
                                        {
-                                         "oper" :"proc",
-                                         "id"   :ids
+                                         'oper' :'proc',
+                                         'id'  :ids
                                        },
                                        function(data,status)
                                        {
-                               
-                                       });
-                                 $("#locationerror_list").trigger("reloadGrid");       
-                   }'      
+
+                                       })
+                                       .done(function()   { 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' +'</div>', 
+                                          $.jgrid.edit.bClose,{buttonalign:'right'});  
+                                          })
+                                       .fail(function(xhr, textStatus, errorThrown)   { 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +'</div>', 
+                                          $.jgrid.edit.bClose,{buttonalign:'right'});  
+                                         })
+ 
+                                 $('#locationerror_list').trigger('reloadGrid');       
+                   }"
        
     grid = [{
       :url => '/locationerror/',
@@ -45,13 +54,13 @@ module LocationerrorHelper
       :colNames => ['Id','FileName', 'TransactionId','SequenceNo','ErrorCode', 'ErrorDescription', 'Warehouse','Barcode','CurrentItem','CurrentQuantity','Totalpics','LockCode','Maximum Quantity','Minimum Quantity','Status'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
-        { :name => 'file_name',   :index => 'file_name',:width => 100,:align => 'center',:editable => false},
+        { :name => 'file_name',   :index => 'file_name',:width => 350,:align => 'center',:editable => false},
         { :name => 'transaction_id',   :index => 'transaction_id',    :width => 60, :align => 'center', :editable => false},
         { :name => 'sequence_no',   :index => 'sequence_no',    :width => 60, :align => 'center', :editable => false},
         { :name => 'error_code',  :index => 'error_code',  :width => 60, :align => 'left', :editable => false},
         { :name => 'error_description' ,   :index => 'error_description',     :width => 180,  :align => 'center', :editable => false},
-        { :name => 'attribute1',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true},
-        { :name => 'attribute2',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},
+        { :name => 'attribute1',  :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
+        { :name => 'attribute2',  :index => 'attribute2',   :width => 180,   :align => 'center', :editable => true},
         { :name => 'attribute3',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute4',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute5',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true,hidden:false},
@@ -63,10 +72,10 @@ module LocationerrorHelper
      ],
       :editurl => '/locationerror',
       :pager => '#locationerror_pager',
-      :rowNum => 10,
-      :rowList => [10, 20, 30],
-      :sortname => 'id',
-      :sortorder => 'asc',
+      :rowNum => 50,
+      :rowList => [100, 200, 300],
+      :sortname => 'file_name',
+      :sortorder => 'desc',
       :viewrecords => true,
       :caption => 'LocationError',
       :reloadAfterEdit => true,
@@ -74,7 +83,7 @@ module LocationerrorHelper
       :onSelectRow => selectrowfunc.to_json_var }]
       pager = [:navGrid, "#locationerror_pager", {edit:false, add:false, del: true}, {:closeAfterEdit => true, :closeOnEscape => true}, 
                                                        
-                                                       {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {}, {}]                                                              
+                                                       {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]                                                              
 
    
                                           

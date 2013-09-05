@@ -2,8 +2,10 @@ class LocationerrorController < ApplicationController
   
    # GET /maintenance
   def index
+    
+ 
    columns =  ['id','file_name', 'transaction_id','sequence_no','error_code', 'error_description', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8','attribute9' ]
-   locationerror = Locationerror.select(" id ,file_name , transaction_id ,sequence_no , error_code , error_description ,  attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 , attribute9").paginate(
+   locationerror = Locationerror.select(" id ,file_name , transaction_id ,sequence_no , error_code , error_description ,  attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 , attribute9").where(get_searchstring).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -11,9 +13,21 @@ class LocationerrorController < ApplicationController
     if request.xhr? 
     render :json => json_for_jqgrid(locationerror, columns)
     end
-   
+    
   end
   
+  def get_searchstring 
+     search_string = '1 = 1'
+     if params[:_search] == "true"
+      case params[:searchOper]
+      when 'eq'
+        search_string = params[:searchField] + " = '" +  params[:searchString] + "'"
+      when 'bw'
+        search_string = params[:searchField] + " like '" +  params[:searchString] + "%'"
+      end 
+     end
+     return search_string
+  end
   
  def create
   
