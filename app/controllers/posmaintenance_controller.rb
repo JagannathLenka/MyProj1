@@ -94,8 +94,7 @@ class PosmaintenanceController < ApplicationController
                                 })
                                 
       when "Continue"
-        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first
-        previous_pos =  Position.where("level_id = ?" , pos.level_id-1 ).last if previous_pos.nil? 
+        previous_pos = getprevious_position pos
         
         pos.update_attributes({ 
                                    :cl_pos_id   => params[:cl_pos_id],
@@ -113,9 +112,7 @@ class PosmaintenanceController < ApplicationController
                                 })
                                 
        when "Break"
-        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , pos.level_id ,( pos.sm_pos_id - 1)).first        
-        previous_pos =  Position.where("level_id = ?" , pos.level_id-1 ).last if previous_pos.nil?
-        
+        previous_pos = getprevious_position pos
         pos.update_attributes({ 
                                    :cl_pos_id   => params[:cl_pos_id],
                                    :description => params[:description],
@@ -135,6 +132,14 @@ class PosmaintenanceController < ApplicationController
                                
    end
        @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0] if pos.errors.count > 0
+ end
+ 
+ def getprevious_position position
+   
+        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , position.level_id ,( position.sm_pos_id - 1)).first
+        previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id=? AND sm_level_id=?" , position.sm_warehouse_id ,position.sm_zone_id, position.sm_aisle_id, position.sm_bay_id, (position.sm_level_id-1)).last if previous_pos.nil?
+        previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND  sm_bay_id=?" , position.sm_warehouse_id ,position.sm_zone_id, position.sm_aisle_id, (position.sm_bay_id-1)).last if previous_pos.nil?
+        return previous_pos
  end
 
  def get_header_details

@@ -1,3 +1,4 @@
+<% provide(:title, 'Location Maintenance') %>
 <% content_for :head do %>
 <script>
 	var lastsel;
@@ -18,7 +19,7 @@
 <br />
 
 <div style="margin-left: 30px;">
-<div>
+<div style="float: left">
   <%= form_tag({action: :upload}, multipart: true) do %>
   <%= file_field_tag 'file' %>
   <%= submit_tag 'Upload File'%>
