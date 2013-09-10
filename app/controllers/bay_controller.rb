@@ -47,7 +47,7 @@ def index
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
-         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id})
+         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
    
       end
      

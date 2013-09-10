@@ -7,7 +7,7 @@
         .aisle            { float: left;  height: 20px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(#0033FF));}
 
 		.bay_col          { float: left;  height: 20px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
+        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000;}
         .reserve          { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: orange;}
 		.bay_Empty        { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
 		.bay_draggedhelper{ float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
@@ -310,7 +310,8 @@ var indexHTML = {
 	    	  <% aislevalue["row"]["L"].to_a.each do |bay,bayvalue| %>
 	
 					<td class="bay_col">
-		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
+		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
+		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "yellow" : "#FFCC66" %>" >	   	    	  
 			   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 			   	    </div>
 			   	   </td>
@@ -327,7 +328,8 @@ var indexHTML = {
     	  <% aislevalue["row"]["R"].to_a.each do |bay,bayvalue| %>
 
 				<td class="bay_col">
-	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" >	   	    	  
+	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
+	 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "yellow" : "#FFCC66" %>" >	   	    	  
 		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>

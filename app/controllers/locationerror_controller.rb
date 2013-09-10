@@ -4,7 +4,7 @@ class LocationerrorController < ApplicationController
   def index
     
  
-   columns =  ['id','file_name', 'transaction_id','sequence_no','error_code', 'error_description', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8','attribute9' ]
+   columns =  ['id','file_name', 'transaction_id','sequence_no','error_code', 'error_description', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8','attribute9']
    locationerror = Locationerror.select(" id ,file_name , transaction_id ,sequence_no , error_code , error_description ,  attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 , attribute9").where(get_searchstring).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -114,7 +114,7 @@ class LocationerrorController < ApplicationController
 
           locationerror.update_attributes({
                                           
-                                      :error_description => error,
+                                      :error_description => error
                                        
                                    })
        end
@@ -124,19 +124,20 @@ class LocationerrorController < ApplicationController
  def is_row_valid loc
     error = ""
    #warehouse validation
+   
    if warehouse = Warehouse.where(cl_warehouse_id: loc.attribute1).first.nil?
      error = "Warehouse not found"
      
    end  
    #Barcode validation  
    if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , loc.attribute2, loc.attribute1).first.nil?
-     error = "Barcode not found"
+     error = error + "," +  "Barcode not found"
       
    end
    
    #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
    if loc.attribute4.to_i >= loc.attribute7.to_i and loc.attribute4.to_i <= loc.attribute8.to_i
-      error = "Current quantity not correct"
+      error = error + "," + "Current quantity not correct"
       
    end
      return error

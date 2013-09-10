@@ -36,8 +36,10 @@ class LocationmaintenanceController < ApplicationController
    file = params[:file].read
    CSV.parse(file) do |row|
    row_array = row
+
    error = is_row_valid row_array
    if error.blank?
+
       existloc = Location.where("cl_barcode = ? and  cl_warehouse_id = ?" , row_array[1], row_array[0]).first
       if existloc.nil?
       loc = Location.new(
@@ -72,7 +74,7 @@ class LocationmaintenanceController < ApplicationController
        end
          
       else
-
+      
         locationerror = Locationerror.new(
         
                                                  :file_name => params[:file].original_filename + Time.now.to_s,
@@ -93,9 +95,11 @@ class LocationmaintenanceController < ApplicationController
          
      end
   end 
+   
    redirect_to :back 
  end
  def is_row_valid rowOfcsv
+   
     error = ""
    #warehouse validation
    if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[0]).first.nil?
@@ -104,15 +108,19 @@ class LocationmaintenanceController < ApplicationController
    end  
    #Barcode validation  
    if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[1], rowOfcsv[0]).first.nil?
-     error = "Barcode not found"
+     error = error + "," + "Barcode not found"
       
    end
    
    #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
-   if rowOfcsv[3].to_i >= rowOfcsv[6].to_i and rowOfcsv[3].to_i <= rowOfcsv[7].to_i
-      error = "Current quantity not correct"
-      
+   if rowOfcsv[3].to_i > rowOfcsv[6].to_i 
+     error = error + "," + "Current quantity more than maximum quantity"
+   end  
+   
+   if rowOfcsv[3].to_i < rowOfcsv[7].to_i 
+      error = error + "," + "Current quantity less than the minimum quantity"      
    end
+   
      return error
    end
 

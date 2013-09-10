@@ -14,6 +14,7 @@ class PositionController < ApplicationController
     poshash = Hash.new
     level = Level.where(:bay_id => params[:id]).order("id ASC")
     level.each do |levelvalue|
+    level_properties = {"customer_id" => (levelvalue.cl_level_id.blank? ? levelvalue.sm_level_id : levelvalue.cl_level_id), "priority_level" => levelvalue.attribute4.nil? ? 'No' : levelvalue.attribute4}
     @cl_bay_id = levelvalue.cl_bay_id
     @bay_id    = levelvalue.bay_id
     
@@ -39,7 +40,7 @@ class PositionController < ApplicationController
                                                :lock_code => location.nil? ? "" : location.lock_code}})
       pos_ctr = pos_ctr + 1
     end
-    @levelhash = @levelhash.merge({levelvalue.cl_level_id.blank? ? levelvalue.id : levelvalue.cl_level_id => poshash})
+    @levelhash = @levelhash.merge(levelvalue.id.to_s => {"level_properties" => level_properties ,  "pos" => poshash})
     poshash = Hash.new
     max_pos = max_pos > pos_ctr ? max_pos : pos_ctr
     pos_ctr = 0
