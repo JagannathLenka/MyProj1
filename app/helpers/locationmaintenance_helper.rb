@@ -43,7 +43,7 @@ module LocationmaintenanceHelper
       :colNames => ['Id','Sequence','Location','sm_pos_id', 'Position', 'sm_level_id','Level','sm_bay_id', 'Bay',
                     'sm_aisle_id','Aisle','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode','Client Id',
                     'Current Item','Current Quantity','Lifetime TotalPicks','Lock Code', 'Maximum Quantity','Minimum Quantity','Status',
-                    'Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+                    'Location Type','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         {:name => 'sm_loc_id', :index => 'sm_loc_id',  :width => 120, :align => 'center', :editable => true, :hidden => true},

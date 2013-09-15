@@ -11,7 +11,8 @@ class LocationmaintenanceController < ApplicationController
     if params[:_search] == "true"
       case params[:searchOper]
       when 'eq'
-        search_string = params[:searchField] + " = '" +  params[:searchString] + "'"
+        search_string = params[
+          :searchField] + " = '" +  params[:searchString] + "'"
         logger.debug search_string
       when 'bw'
         search_string = params[:searchField] + " like '" +  params[:searchString] + "%'"

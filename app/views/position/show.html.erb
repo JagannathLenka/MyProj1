@@ -32,7 +32,7 @@ table tr td {
 <script type="text/javascript">	
 
 //global variable
-    bay_html_map = {}	          
+    pos_html_map = {}	          
 	$( init );
  
  $(document).ready(function(){  
@@ -57,7 +57,7 @@ table tr td {
 //To swap the position of two items
 function init() { 
  
- 	bayHTML.setDragnDrop()
+ posHTML.setDragnDrop()
  //Tooltip
    $(function() {
     $( document ).tooltip({
@@ -79,31 +79,26 @@ function init() {
 }
 
 
-var bayHTML = {
+var posHTML = {
 	
 setDragnDrop: function setDragnDrop() { 
  
 	  $('.pos').draggable(
 	     {
-	     //containment: '#position',
-	      //cursor: 'move',
-	      //snap: '#position',
 	      revert: true, 
 	      helper: helpermethod,
 	      
 	      start: function(event, ui) {
 					 var offset = $(this).offset(); 
 					 
-					 bay_html_map.pos= $(this).attr('id');
-					 bay_html_map.title= $(this).attr('title');
-					 bay_html_map.content= $(this).attr('class') ;
-					 
+					 pos_html_map.pos= $(this).attr('id');
+					 pos_html_map.title= $(this).attr('title');
+					 pos_html_map.content= $(this).attr('class') ;					 
 	 	   }
 	  });
 
 	function helpermethod( event ) {
   	
-		  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 60, :height => 60) %>' 	
   		   newdiv = '<div id ="pos_draggedhelper" class="pos_draggedhelper">' +  $(this).attr('title') + '</div>'
   		   return newdiv;
 	}
@@ -117,38 +112,42 @@ setDragnDrop: function setDragnDrop() {
    
 	function handleDropEvent( event, ui ) {
 
-		  ui.draggable.element = $(this); 		  
-		  oldTitle = $(this).attr('title');
-		  oldClass = $(this).attr('class');
-		  $(this).removeClass('ui-draggable ui-droppable')
-		  
-		  $(this).attr('title', bay_html_map.title);
-		  $(this).attr('class', bay_html_map.content);
+			  oldTitle = $(this).attr('title');
+			  oldid = $(this).attr('id');
 
-		 $('#pos_draggedhelper').html("");			  
-		 $('#pos_draggedhelper').attr('class', 'pos_Empty');	
-		  pos = bay_html_map.pos;
-		  $("#"+pos).attr('title', oldTitle);
-		  $("#"+pos).attr('class', oldClass);
-		  $(this).removeClass('ui-draggable ui-droppable')
-		  
-		  ui.draggable.draggable( 'disable' );
-		  bayHTML.setDragnDrop();
+			  $(this).removeClass('ui-draggable ui-droppable')
+			  oldClass = $(this).attr('class');
+	
+
+
+			  //this code is written because ui-droppable is always appeneded after the JQuery			  
+			  $('#pos_draggedhelper').html(oldTitle);
+			  $('#pos_draggedhelper').attr(oldClass);
+
+
+			  $(this).attr('title', pos_html_map.title);
+			  $(this).attr('class', pos_html_map.content);
+			  $(this).removeClass('ui-draggable ui-droppable')
+
+			  pos = pos_html_map.pos;
+
+			  $("#"+pos).attr('title', oldTitle);
+			  $("#"+pos).attr('class',  oldClass);
+
 		  $.post("/position",
 		  				{
 		  					"position[event]": "update_posclass",
 		  					"position[dragpos_id]": pos,
-		  					"Position[bay_id]": "<%=@bay_id%>",
-		  					"position[dragpos_class]": oldClass,
-		  					"position[dragpos_title]" :oldTitle.substring(6),
-		  					"position[droppos_id]": $(this).attr('id'),
-		  					"position[droppos_class]":bay_html_map.content,
-		  					"position[droppos_title]" :bay_html_map.title.substring(6)
-		  					
+		  					"position[droppos_id]": $(this).attr('id')	 
 		  				},
 		  				function(data,status)
 		  				{
-		  					
+		  					//window.location.reload();
+		  					if (data=='false')
+		  						{alert('Can not move Item due to preference mismatch');}
+							
+							$('#position').load('/position/'+ <%= @bay_id %>);
+		  								
           				});
           	
 		} 
@@ -160,8 +159,10 @@ setDragnDrop: function setDragnDrop() {
 
  <% end %>
  
+ 
+ 
 
-<div id="position" class="position" ">
+<div id="position" class="position">
 
    <div align="center" class="bay"> Bay: <%= @cl_bay_id %> </div>
    
@@ -211,11 +212,6 @@ Lock Code		: <%= posvalue[:lock_code] %>	">
 </table>
 </div>
 
-<% if @zoom != "yes"%>
-<div style="float: left; border: 1px solid #000;"><%= image_tag("zoom.jpg", alt: "", :width => 40, :height => 40, :id => "zoom")%></div>
-<% end %>
-</div>
-<div id="location2"></div>
 
 <%= yield %>
 

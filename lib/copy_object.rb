@@ -100,13 +100,14 @@ def self.copy_BaytoBay copied_from_bay , copied_to_bay
                      copied_to_bay.cl_bay_id: copied_from_bay.cl_bay_id  
         copy_attribute3 = copied_from_bay.aisle_id == copied_to_bay.aisle_id ? 
                      copied_to_bay.attribute3: copied_from_bay.attribute3  
-                           
+        
+        priority_bay = copied_from_bay.aisle_id == copied_to_bay.aisle_id ? copied_to_bay.attribute4  : copied_from_bay.attribute4                  
         copied_to_bay.update_attributes({ 
                            :cl_bay_id  => copy_cl_bay_id,
                            :attribute1 => copied_from_bay.attribute1,
                            :attribute2 => copied_from_bay.attribute2, 
                            :attribute3 => copy_attribute3,
-                           :attribute4 => copied_from_bay.attribute4,
+                           :attribute4 => priority_bay,
                            :attribute5 => copied_from_bay.attribute5,
                            :attribute6 => copied_from_bay.attribute6,
                            :attribute7 => copied_from_bay.attribute7,
@@ -171,6 +172,7 @@ def self.copy_LeveltoLevel copied_from_level , copied_to_level
                  else
                    copy_cl_level_id = copied_from_level.cl_level_id
                 end
+               priority_level = copied_from_level.bay_id == copied_to_level.bay_id ? copied_to_level.attribute4  : copied_from_level.attribute4             
                copied_to_level.update_attributes({                                   
                                      
                                      :cl_level_id => copy_cl_level_id,
@@ -178,7 +180,7 @@ def self.copy_LeveltoLevel copied_from_level , copied_to_level
                                      :attribute1 => copied_from_level.attribute1,
                                      :attribute2 => copied_from_level.attribute2, 
                                      :attribute3 => copied_from_level.attribute3, 
-                                     :attribute4 => copied_from_level.attribute4,
+                                     :attribute4 => priority_level,
                                      :attribute5 => copied_from_level.attribute5,
                                      :attribute6 => copied_from_level.attribute6,
                                      :attribute7 => copied_from_level.attribute7,

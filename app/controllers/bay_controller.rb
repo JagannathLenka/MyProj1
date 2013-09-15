@@ -1,3 +1,4 @@
+require 'location_move'
 class BayController < ApplicationController
   
 #Dynamically arranging bays in the aisle 
@@ -46,7 +47,7 @@ def index
 
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
-         baytype = bayvalue.attribute1.blank?  ?  "bay_Empty"  :  bayvalue.attribute1
+         baytype = check_baytype bayvalue.id
          @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
    
       end
@@ -73,6 +74,30 @@ def index
         
 end
 
+def check_baytype bay_id
+
+  
+  levels = Level.where(:bay_id => bay_id) 
+  levels.each do |level|
+    positions = Position.where(:level_id => level.id)
+    positions.each do |position|
+      locations = Location.where("cl_warehouse_id = ? AND cl_barcode = ? " , position.cl_warehouse_id , position.cl_barcode).first
+      unless locations.nil?
+        return 'bay' if locations.current_quantity.to_i > 0
+      end
+    end
+  end
+return 'bay_Empty'
+
+=begin
+  bay=Bay.find(bay_id)
+  barcode = bay.cl_zone_id + '-' + bay.cl_aisle_id + '-' + bay.cl_bay_id 
+ 
+  locations=Location.where("cl_warehouse_id = ? AND cl_barcode LIKE ? and current_quantity > ?" , bay.cl_warehouse_id, barcode + '%', 0).first
+  return locations.nil? ? 'bay_Empty' : 'bay'
+=end  
+end
+
 def create
   
 #Update the customer id for a bay  
@@ -87,15 +112,9 @@ def create
  
  
    when "update_class"
-
-        dragbay=Bay.where("id = ?" , params[:bay][:dragbay_id]).first
-        dragbay.attribute1 = params[:bay][:dragbay_class]
-        dragbay.attribute2 = params[:bay][:dragbay_title]
-        dragbay.save
-        dropbay=Bay.where("id = ?" , params[:bay][:dropbay_id]).first
-        dropbay.attribute1 = params[:bay][:dropbay_class]
-        dropbay.attribute2 = params[:bay][:dropbay_title]
-        dropbay.save
+     
+        loc = LocationMovement.new
+        loc.exchange_bay(params[:bay][:dragbay_id].to_i , params[:bay][:dropbay_id].to_i)
         render text: 'ok'        
    end    
        
