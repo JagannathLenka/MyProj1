@@ -35,10 +35,12 @@ module LocationerrorHelper
                                        .done(function()   { 
                                           $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
+                                          lastsel=0;
                                           })
                                        .fail(function(xhr, textStatus, errorThrown)   { 
                                           $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
+                                          lastsel=0;
                                          })
  
                                  $('#locationerror_list').trigger('reloadGrid');       

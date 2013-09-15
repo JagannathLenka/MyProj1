@@ -1,3 +1,4 @@
+require 'location_move'
 class PositionController < ApplicationController
   def show
     #zoom functionality
@@ -59,20 +60,13 @@ class PositionController < ApplicationController
    case params[:position][:event]
         
         
- #updating class and title of positions
+   #updating class and title of positions
    when "update_posclass"
-        dragpos=Position.find_by_id(params[:position][:dragpos_id].to_i)
-        dragpos.attribute1 = params[:position][:dragpos_class]
-        dragpos.attribute2 = params[:position][:dragpos_title]
-        dragpos.save
-        
-        droppos=Position.find_by_id(params[:position][:droppos_id].to_i)
-        droppos.attribute1 = params[:position][:droppos_class]
-        droppos.attribute2 = params[:position][:droppos_title]
-        droppos.save      
+       loc = LocationMovement.new
+       result = loc.exchange_location(params[:position][:dragpos_id].to_i , params[:position][:droppos_id].to_i) 
    end    
-       render text: "ok"
-   #b= Posts.where("text = ?", params[:post][:text]).first
+       render text: result.to_s
+      #b= Posts.where("text = ?", params[:post][:text]).first
    
 end
 

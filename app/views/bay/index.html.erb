@@ -7,9 +7,16 @@
         .aisle            { float: left;  height: 20px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(#0033FF));}
 
 		.bay_col          { float: left;  height: 20px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+        .bay              { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000;
+        		background-color: white;
+				background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), 
+		   		linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+				background-size:2px 2px;
+				background-position: 0 0, 1px 1px;
+        }
         .reserve          { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: orange;}
-		.bay_Empty        { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
+		.bay_Empty        { float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;
+		;}
 		.bay_draggedhelper{ float: left;  height: 20px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
 		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: white}
@@ -54,10 +61,8 @@ var indexHTML = {
 
 	setDragnDrop: function setDragnDrop() { 
 
-		  $('.bay').draggable(
+		  $('.bay, .bay_Empty').draggable(
 		     {containment: '#content',
-		      //cursor: 'move',
-		      //snap: '#area',
 		      revert: true, 
 		      helper: helpermethod,
 
@@ -75,7 +80,6 @@ var indexHTML = {
 
 		function helpermethod( event ) {
 
-			  //image = '<%= image_tag("pallet.jpg", alt: "", :width => 80, :height => 80) %>' 	
 	  		   newdiv = '<div id="bay_draggedhelper" class="bay_draggedhelper">' +  ($(this).attr('title')).substring(14) + '</div>'
 	  		   return newdiv;
 		}
@@ -130,12 +134,7 @@ var indexHTML = {
 				{
 					"bay[event]": "update_class",
 					"bay[dragbay_id]": bay,
-					"bay[dragbay_class]": oldClass,
-					"bay[dragbay_title]" : oldTitle.substring(14),
 					"bay[dropbay_id]":     $(this).attr('id'),
-					"bay[dropbay_class]":  $(this).attr('class'),
-					"bay[dropbay_title]" :  ($(this).attr('title')).substring(14)
-
 				},
 				function(data,status)
 				{
@@ -311,7 +310,7 @@ var indexHTML = {
 	
 					<td class="bay_col">
 		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
-		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "yellow" : "#FFCC66" %>" >	   	    	  
+		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >	   	    	  
 			   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 			   	    </div>
 			   	   </td>
@@ -329,7 +328,7 @@ var indexHTML = {
 
 				<td class="bay_col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
-	 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "yellow" : "#FFCC66" %>" >	   	    	  
+	 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >	   	    	  
 		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>
