@@ -76,7 +76,7 @@ end
 
 def check_baytype bay_id
 
-  
+=begin  
   levels = Level.where(:bay_id => bay_id) 
   levels.each do |level|
     positions = Position.where(:level_id => level.id)
@@ -88,14 +88,14 @@ def check_baytype bay_id
     end
   end
 return 'bay_Empty'
+=end
 
-=begin
   bay=Bay.find(bay_id)
   barcode = bay.cl_zone_id + '-' + bay.cl_aisle_id + '-' + bay.cl_bay_id 
  
   locations=Location.where("cl_warehouse_id = ? AND cl_barcode LIKE ? and current_quantity > ?" , bay.cl_warehouse_id, barcode + '%', 0).first
   return locations.nil? ? 'bay_Empty' : 'bay'
-=end  
+ 
 end
 
 def create
