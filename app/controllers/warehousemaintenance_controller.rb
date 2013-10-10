@@ -3,14 +3,18 @@ class WarehousemaintenanceController < ApplicationController
   
    # GET /maintenance
   def index
-   columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
-    warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ").paginate(
+    
+    authorize = cookies[:client_id].strip == 'SM'?  "" : 'client_id = "' + cookies[:client_id].strip + '"'
+    
+    columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
+    warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ")
+    .where(authorize).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
     if request.xhr? and params[:lightweight] !="yes"
-      #@invoices = 'ok'
+      
       render :json => json_for_jqgrid(warehouse, columns)
     end
    
@@ -29,10 +33,11 @@ class WarehousemaintenanceController < ApplicationController
 
        #When warehouse is added, create the respective zones also
   when "add"
+        logger.debug 'client id' +  cookies[:client_id] 
         maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i 
         warehouse= Warehouse.new(  :sm_warehouse_id => maximum_warehouse_id + 1 ,
                                    :cl_warehouse_id => params[:cl_warehouse_id], 
-                                   :client_id => params[:client_id],
+                                   :client_id => cookies[:client_id].strip ,
                                    :description => params[:description],
                                    :no_of_zones => 0,
                                    :attribute1 => params[:attribute1],
@@ -81,7 +86,6 @@ def edit_warehouse_details
                                    :attribute2 => params[:attribute2], 
                                    :attribute3 => params[:attribute3],
                                    :attribute4 => params[:attribute4]
-                                        
           })
           
         @error = params[:cl_warehouse_id]+ ' ' + warehouse.errors.values[0][0] if warehouse.errors.count > 0
@@ -94,9 +98,6 @@ def add_zones_to_warehouse warehouse
          existingzone = warehouse.no_of_zones.nil? ? 0 : warehouse.no_of_zones
          diff_zonevalue = newzone - existingzone
                
-            logger.debug diff_zonevalue 
-            logger.debug existingzone
-            logger.debug newzone   
                (1..diff_zonevalue).each do |z| 
                
                      zones = Zone.new(
@@ -106,9 +107,7 @@ def add_zones_to_warehouse warehouse
                                         :warehouse_id => warehouse.id,
                                         :cl_warehouse_id => params[:cl_warehouse_id],
                                         :no_of_aisles_zone => 0,
-                                        
-                                        
-                                     )
+                                    )
                       zones.save
                                 
                 end 

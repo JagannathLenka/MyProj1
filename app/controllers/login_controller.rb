@@ -22,9 +22,14 @@ class LoginController < ApplicationController
               newuser.save
               cookies[:userid] = {
                                   value: newuser.user_id,
-                                  expires: 1.year.from_now
+                                  expires: 1.hour.from_now
                                   
                                 }
+             cookies[:client_id] = {
+                    value: newuser.client_id,
+                    expires: 1.hour.from_now
+                    
+                  }
              render :text => "Success"
      else
        #flash[:notice] = "Incorrect Password"

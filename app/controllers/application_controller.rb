@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
                redirect_to "/login"
     else
       @userid = cookies[:userid]
+      @client_id=cookies[:client_id]
     end
     
   end
