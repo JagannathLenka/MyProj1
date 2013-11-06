@@ -4,8 +4,24 @@ module BaysmaintenanceHelper
 
   def bays_jqgrid
     
+    if params[:lightweight] == "yes"
+      lightweight = "yes"   
+      bays = Bay.find_by_id(params["bayid"].to_i)
+      id =  bays.aisle_id.to_s
+      height = 80
+      width = 900
+      url = "/baysmaintenance?id=" +  id + "&bayid=" + params["bayid"]
+    else
+      lightweight = "no"
+      id  = params["id"]
+      url = "/baysmaintenance?id=" +  id
+      height = 300 
+      width = 1100   
+   end 
+    
+    
+    
     options = {:on_document_ready => true, :html_tags => false}
-    url = "/baysmaintenance?id=" + params["id"]
     editcheckfunc = 'function(postdata, formid) 
               {
                
@@ -15,7 +31,7 @@ module BaysmaintenanceHelper
                    } 
 
               return[true, " "]}'
-    addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + params["id"] + '; return[true, " "]}'
+    addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + id + '; return[true, " "]}'
     copyrowfunc  = 'function() {
                                 var ids = $("#bays_list").jqGrid("getGridParam","selarrrow");
                                 
@@ -52,7 +68,7 @@ module BaysmaintenanceHelper
       :height=> 350,
       
      
-      :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','PriorityBay','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','PriorityBay','Sequence No.','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'center', :editable => true, :hidden => true},
@@ -71,8 +87,8 @@ module BaysmaintenanceHelper
         { :name => 'attribute1',   :index => 'attribute1',   :width => 120,   :align => 'center', :editable => true,:hidden => true },
         { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => true ,editrules:{required:true}},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Yes:Yes;No:No" }},
-        { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute8',   :index => 'attribute8',   :width => 120 ,  :align => 'center', :editable => true, :hidden => true}

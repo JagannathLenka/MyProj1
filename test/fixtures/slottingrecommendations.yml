@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  client_id: MyString
+  item_number: MyString
+  quanttity_to_be_slotted: 1
+  prffered_warehouse: MyString
+  preffered_zone: MyString
+  preffered_aisle: MyString
+  preffered_bay: MyString
+  preffered_level: MyString
+  preffered_position: MyString
+  partial_slotting: MyString
+  preffered_slotting_rules: MyString
+  location_recommended: MyString
+  slotting_status: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+
+two:
+  client_id: MyString
+  item_number: MyString
+  quanttity_to_be_slotted: 1
+  prffered_warehouse: MyString
+  preffered_zone: MyString
+  preffered_aisle: MyString
+  preffered_bay: MyString
+  preffered_level: MyString
+  preffered_position: MyString
+  partial_slotting: MyString
+  preffered_slotting_rules: MyString
+  location_recommended: MyString
+  slotting_status: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
