@@ -47,7 +47,7 @@ def index
 
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
-         baytype = check_baytype bayvalue.id
+         baytype = check_baytype bayvalue
          @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
    
       end
@@ -74,29 +74,15 @@ def index
         
 end
 
-def check_baytype bay_id
-
-=begin  
-  levels = Level.where(:bay_id => bay_id) 
-  levels.each do |level|
-    positions = Position.where(:level_id => level.id)
-    positions.each do |position|
-      locations = Location.where("cl_warehouse_id = ? AND cl_barcode = ? " , position.cl_warehouse_id , position.cl_barcode).first
-      unless locations.nil?
-        return 'bay' if locations.current_quantity.to_i > 0
-      end
-    end
-  end
-return 'bay_Empty'
-=end
-
-  bay=Bay.find(bay_id)
-  barcode = bay.cl_zone_id + '-' + bay.cl_aisle_id + '-' + bay.cl_bay_id 
+def check_baytype bayvalue
+        
+      locations = Location.where("cl_warehouse_id = ? AND cl_zone_id =? AND cl_aisle_id = ? AND cl_bay_id=? AND current_quantity > ?" , 
+                                 bayvalue.cl_warehouse_id, bayvalue.cl_zone_id , bayvalue.cl_aisle_id, bayvalue.cl_bay_id, 0).first
+        return (locations.nil? ? 'bay_Empty' : 'bay')
  
-  locations=Location.where("cl_warehouse_id = ? AND cl_barcode LIKE ? and current_quantity > ?" , bay.cl_warehouse_id, barcode + '%', 0).first
-  return locations.nil? ? 'bay_Empty' : 'bay'
- 
+
 end
+
 
 def create
   

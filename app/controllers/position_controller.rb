@@ -15,7 +15,7 @@ class PositionController < ApplicationController
     poshash = Hash.new
     level = Level.where(:bay_id => params[:id]).order("id ASC")
     level.each do |levelvalue|
-    level_properties = {"customer_id" => (levelvalue.cl_level_id.blank? ? levelvalue.sm_level_id : levelvalue.cl_level_id), "priority_level" => levelvalue.attribute4.nil? ? 'No' : levelvalue.attribute4}
+    level_properties = {"customer_id" => (levelvalue.cl_level_id.blank? ? levelvalue.sm_level_id : levelvalue.cl_level_id), "priority_level" => levelvalue.attribute4=="High" ? "Yes" : "No"}
     @cl_bay_id = levelvalue.cl_bay_id
     @bay_id    = levelvalue.bay_id
     

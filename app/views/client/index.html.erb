@@ -1,0 +1,33 @@
+<!--
+	**Purpose: Maintain Client
+	**Functionalities:
+	               1. Add Ailse
+	               2. Edit Aisle Attributes
+	               3. Create Bays for Aisle
+	               4. Create Levels for Aisle 
+	               5. Call method to show layout of aisle
+	               6. Call method to copy bay, level, position from one aisle to other	                  
+	**Author : Mitali Madhuchhanda Swain
+-->
+
+<% provide(:title, 'Client Details') %>
+<% content_for :head do %>
+<script>
+	var lastsel;
+</script>
+<%end%>
+<% if params[:lightweight] != "yes" %>
+
+		<%= render "shared/menu" %>
+		<div align="center"><a href="/warehousemaintenance" >
+		<h1>Warehouse: <%= @warehouse%></h1></a>
+</div>
+<div style="margin-left: 30px;">
+<h2>Client Deatils:  <%= render_breadcrumbs %></h2><br>
+
+<%end%>
+<table id=client_list></table>
+<div id=client_pager></div>
+</div>
+<%= raw(client_jqgrid) %>
+<br />

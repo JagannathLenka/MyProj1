@@ -11,12 +11,14 @@ class BaysmaintenanceController < ApplicationController
                 'aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','no_of_level_bay',
                 'no_of_level_bay_hidden','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5',
                 'attribute6', 'attribute7','attribute8']
-      
+                
+    selectParam = params["bayid"].blank? ? {:aisle_id => params[:id]} : {:id => params["bayid"].to_i}
+       
     bays = Bay.select(" id , sm_bay_id , cl_bay_id ,description, client_id , sm_aisle_id ,
                        cl_aisle_id , aisle_id , sm_zone_id , cl_zone_id ,sm_warehouse_id , 
                        cl_warehouse_id , no_of_level_bay , no_of_level_bay as no_of_level_bay_hidden,
                        attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 ,
-                        attribute7 , attribute8 ").where(:aisle_id => params[:id]).paginate(
+                        attribute7 , attribute8 ").where(selectParam).paginate(
                                                          :page     => params[:page],
                                                          :per_page => params[:rows],
                                                          :order    => order_by_from_params(params))

@@ -172,17 +172,14 @@ var indexHTML = {
 	});
 
 		    $(function() {
-		   
-	        $('.bay, .aisle').contextPopup({
+
+
+	        $('.aisle').contextPopup({
 	          title: 'Bay Update',
 	          items: [
-	            {label:'Edit bay',                  action:function() {showdata($(this).attr('id')); 
-	            									   } },
-	            {label:'Empty bay',                    action:function() { alert('clicked 2') } },
-	            {label:'Delete bay',                   action:function() { alert('clicked 3') } },
+	            {label:'Edit aisle',                     action:function() {showdata($(this).attr('id'), "aisle");} },
 	            null, // divider
 	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
-	            {label:'Edit bay',                     action:function() { alert('clicked 5') } },
 	            {label:'Merge bay',         		   action:function() { alert('clicked 6') } },
 	            null, // divider
 	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
@@ -190,7 +187,19 @@ var indexHTML = {
 	          ]
 	        });
 	        
-	       function showdata(id){
+	        $('.bay, .bay_Empty').contextPopup({
+	          title: 'Bay Update',
+	          items: [
+	            {label:'Edit bay',                     action:function() {showdata($(this).attr('id'), "bay");} },
+	            null, // divider
+	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
+	            null, // divider
+	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
+	            {label:'Close',                        action:function() { alert('clicked 8') } }
+	          ]
+	        });	        
+	       function showdata(id, type){
+	       		
 					// calc good width
 					var ww=$(window).width()*.95;
 					var wh=$(window).height()*.95;
@@ -198,15 +207,20 @@ var indexHTML = {
 					//size iframe nice like
 					$("#showdataframe").width(ww-10);
 					$("#showdataframe").height(wh-10);
-
-				    $('#showdataframe').attr('src',"/aislemaintenance?lightweight=yes&aisleid=" + id);
-				    $('#showdataspace').dialog({
-		    	  	height: 300,
-		      		width: 1000,
-		      		modal: true,
-		      		close: function() {
-      					   window.parent.document.location.reload(true);
-      				}
+					if (type == 'bay' || type == 'bay_Empty') {
+						$('#showdataframe').attr('src',"/baysmaintenance?lightweight=yes&bayid=" + id);
+					}else
+					
+					{
+					    $('#showdataframe').attr('src',"/aislemaintenance?lightweight=yes&aisleid=" + id);
+					}
+					    $('#showdataspace').dialog({
+			    	  	height: 300,
+			      		width: 1000,
+			      		modal: true,
+			      		close: function() {
+	      					   window.parent.document.location.reload(true);
+	      				}
 				 })
 	       }
 	     });
@@ -310,7 +324,8 @@ var indexHTML = {
 	
 					<td class="bay_col">
 		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
-		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >	   	    	  
+		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >
+		 	 		     <%= selected_bay(bayvalue) %>		   	    	  
 			   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 			   	    </div>
 			   	   </td>
@@ -329,6 +344,7 @@ var indexHTML = {
 				<td class="bay_col">
 	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
 	 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >	   	    	  
+		   	    	 <%= selected_bay(bayvalue) %> 
 		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
 		   	    </div>
 		   	    </td>

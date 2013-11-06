@@ -21,9 +21,9 @@ class LocationmaintenanceController < ApplicationController
     end
     
     
-    columns =  ['id','sm_loc_id','cl_loc_id','sm_pos_id','cl_pos_id','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','sm_aisle_id','cl_aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','client_id','current_item', 'current_quantity','life_time_total_picks', 'lock_code', 'maximum_quantity', 'minimum_quantity','status','attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
+    columns =  ['id','sm_loc_id','cl_loc_id','sm_pos_id','cl_pos_id','sm_level_id','cl_level_id','sm_bay_id', 'cl_bay_id','sm_aisle_id','cl_aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id','cl_warehouse_id','sm_barcode','cl_barcode','client_id','current_item', 'current_quantity','life_time_total_picks', 'lock_code', 'maximum_quantity', 'minimum_quantity','status', 'location_priority', 'attribute1', 'attribute2', 'attribute3', 'attribute4','attribute5','attribute6', 'attribute7','attribute8']
     loc = Location.select("id , sm_loc_id , cl_loc_id , sm_pos_id , cl_pos_id , sm_level_id , cl_level_id , sm_bay_id , cl_bay_id , sm_aisle_id , cl_aisle_id , sm_zone_id , cl_zone_id , sm_warehouse_id , cl_warehouse_id , sm_barcode , cl_barcode , client_id , 
-                            current_item , current_quantity , life_time_total_picks , lock_code , maximum_quantity , minimum_quantity , status , attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:cl_warehouse_id => warehouse.cl_warehouse_id).where(search_string).paginate(
+                            current_item , current_quantity , life_time_total_picks , lock_code , location_priority, maximum_quantity , minimum_quantity , status , location_priority, attribute1 , attribute2 , attribute3 , attribute4 , attribute5 , attribute6 , attribute7 , attribute8 ").where(:cl_warehouse_id => warehouse.cl_warehouse_id).where(search_string).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
@@ -54,6 +54,7 @@ class LocationmaintenanceController < ApplicationController
                                    :maximum_quantity =>(row_array[6].to_s.encode! 'utf-8'),
                                    :minimum_quantity => (row_array[7].to_s.encode! 'utf-8'),
                                    :status => (row_array[8].to_s.encode! 'utf-8')
+                                   
                             
                        )
         
@@ -132,9 +133,9 @@ class LocationmaintenanceController < ApplicationController
        update_location
         
   when "add"
-         loc = Location.find_by_id(params[:id])
+         
         
-        loc= Location.new(
+         loc= Location.new(
                                    :cl_loc_id   => params[:cl_loc_id],
                                    :cl_warehouse_id   => params[:cl_warehouse_id],
                                    :current_item => params[:current_item],
@@ -159,6 +160,20 @@ class LocationmaintenanceController < ApplicationController
                        )
         
          loc.save
+         pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', params[:cl_warehouse_id], params[:cl_barcode]).first
+         location.update_attributes({
+        
+                :sm_zone_id => pos.sm_zone_id,
+                :cl_zone_id => pos.cl_zone_id,
+                :sm_aisle_id => pos.sm_aisle_id,
+                :cl_aisle_id => pos.cl_aisle_id,
+                :sm_bay_id => pos.sm_bay_id,
+                :cl_bay_id => pos.cl_bay_id, 
+                :sm_level_id => pos.sm_level_id,
+                :cl_level_id => pos.cl_level_id, 
+                :sm_pos_id => pos.sm_pos_id,
+                :cl_pos_id => pos.cl_pos_id
+             }) unless pos.nil?
            
              
    when "del"
@@ -195,8 +210,24 @@ class LocationmaintenanceController < ApplicationController
                                    :attribute6 => params[:attribute6],
                                    :attribute7 => params[:attribute7],
                                    :attribute8 => params[:attribute8],
-                                   :attribute8 => params[:attribute9]    
+                                   :attribute8 => params[:attribute9],
+                                   :location_priority => params[:location_priority]    
                                 })
+                                
+          pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', params[:cl_warehouse_id], params[:cl_barcode]).first
+          loc.update_attributes({
+        
+                :sm_zone_id => pos.sm_zone_id,
+                :cl_zone_id => pos.cl_zone_id,
+                :sm_aisle_id => pos.sm_aisle_id,
+                :cl_aisle_id => pos.cl_aisle_id,
+                :sm_bay_id => pos.sm_bay_id,
+                :cl_bay_id => pos.cl_bay_id, 
+                :sm_level_id => pos.sm_level_id,
+                :cl_level_id => pos.cl_level_id, 
+                :sm_pos_id => pos.sm_pos_id,
+                :cl_pos_id => pos.cl_pos_id
+             }) unless pos.nil?
     
                                
    end

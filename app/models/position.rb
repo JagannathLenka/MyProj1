@@ -1,6 +1,7 @@
 class Position < ActiveRecord::Base
   
   before_save   :update_positions
+  after_save :update_location_rating
   after_destroy :update_level_for_delete
   after_create  :update_level_for_add
   
@@ -13,6 +14,42 @@ class Position < ActiveRecord::Base
     self.cl_barcode = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s
     end
   end
+  
+  def get_rating (priority)
+    
+     location_rating = 0
+      
+      case priority 
+          when "Default"
+            location_rating = 0
+          when "High"
+             location_rating = 9
+          when "Medium"
+             location_rating = 5
+          when "Low"
+             location_rating = 2
+          else
+             location_rating = 0
+      end
+     return location_rating
+     
+  end
+  
+  def update_location_rating
+  
+    if attribute4_changed?
+    selected_locations = Location.where('cl_pos_id = ? and cl_level_id = ? and cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_pos_id , self.cl_level_id ,  self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
+      selected_locations.each do |selected_location|
+        
+          selected_location.update_attributes({
+          :location_priority => (selected_location.location_priority.to_i) - (get_rating(self.attribute4_was) * 10) + (get_rating(self.attribute4) * 10) 
+          
+           })
+          end
+        
+    end
+  end
+  
   
   def update_level_for_delete
     level = Level.find(self.level_id)

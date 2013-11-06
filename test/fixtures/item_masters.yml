@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  client_id: MyString
+  item_number: 1
+  description: MyString
+  velocity: MyString
+  case_quantity: 1
+  case_split_allowed: MyString
+  daily_avg_sales: 1
+  weekly_avg_sales: 1
+  monthly_avg_sales: 1
+  daily_forecast: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+
+two:
+  client_id: MyString
+  item_number: 1
+  description: MyString
+  velocity: MyString
+  case_quantity: 1
+  case_split_allowed: MyString
+  daily_avg_sales: 1
+  weekly_avg_sales: 1
+  monthly_avg_sales: 1
+  daily_forecast: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString

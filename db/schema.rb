@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830203908) do
+ActiveRecord::Schema.define(:version => 20131101021522) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -86,6 +86,29 @@ ActiveRecord::Schema.define(:version => 20130830203908) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "lastname_of_person"
+  end
+
+  create_table "itemmasters", :force => true do |t|
+    t.string   "client_id"
+    t.string   "item_number"
+    t.string   "description"
+    t.string   "velocity"
+    t.integer  "case_quantity"
+    t.string   "case_split_allowed"
+    t.integer  "daily_avg_sales"
+    t.integer  "weekly_avg_sales"
+    t.integer  "monthly_avg_sales"
+    t.string   "daily_forecast"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "levels", :force => true do |t|
@@ -230,6 +253,7 @@ ActiveRecord::Schema.define(:version => 20130830203908) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.string   "lock_code"
+    t.string   "location_priority"
   end
 
   create_table "positions", :force => true do |t|
@@ -270,6 +294,37 @@ ActiveRecord::Schema.define(:version => 20130830203908) do
     t.datetime "updated_at",      :null => false
   end
 
+<<<<<<< HEAD
+=======
+  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
+
+  create_table "slottingrecommendations", :force => true do |t|
+    t.string   "client_id"
+    t.string   "item_number"
+    t.string   "preffered_zone"
+    t.string   "preffered_aisle"
+    t.string   "preffered_bay"
+    t.string   "preffered_level"
+    t.string   "preffered_position"
+    t.string   "partial_slotting"
+    t.string   "preffered_slotting_rules"
+    t.string   "location_recommended"
+    t.string   "slotting_status"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "preffered_warehouse"
+    t.integer  "quantity_to_be_slotted"
+  end
+
+>>>>>>> a2e5fa2e402028cc5a63e2f52cdc4303d4bcd3e1
   create_table "users", :force => true do |t|
     t.string   "client_id"
     t.integer  "contact_phone"

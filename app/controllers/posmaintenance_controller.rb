@@ -43,7 +43,7 @@ class PosmaintenanceController < ApplicationController
                          :cl_barcode  => params[:cl_barcode],
                          :attribute1 => params[:attribute1],
                          :attribute2 => params[:attribute2], 
-                         :attribute3 => params[:attribute3],
+                         :attribute3 => levels.attribute4,
                          :attribute4 => params[:attribute4],
                          :attribute5 => params[:attribute5],
                          :attribute6 => params[:attribute6],

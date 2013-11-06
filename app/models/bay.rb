@@ -1,7 +1,9 @@
 class Bay < ActiveRecord::Base
   has_many :levels, :dependent => :destroy
   
-  after_save :update_levels
+  after_save :update_levels 
+  after_save :update_location_rating
+  after_save :update_seqno
   after_destroy :update_aisles_for_delete
   after_create :update_aisles_for_add
   
@@ -20,6 +22,56 @@ class Bay < ActiveRecord::Base
            })
      end
      end
+  end
+  
+  def update_seqno
+    selected_locations = Location.where('cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
+     selected_locations.each do |selected_location|
+        
+        selected_location.attribute2 = '00-00-00-00-00' if  selected_location.attribute2.blank?
+        selected_location.attribute2 =  selected_location.attribute2[0,6]  + self.attribute5 +  selected_location.attribute2[8,6]
+         selected_location.save
+         
+      end  
+   
+  end
+  
+   def get_rating (priority)
+    
+     location_rating = '00'
+      
+      case priority 
+          when "Default"
+            location_rating = '00'
+          when "High"
+             location_rating = '09'
+          when "Medium"
+             location_rating = '05'
+          when "Low"
+             location_rating = '02'
+          else
+             location_rating = '00'
+      end
+     return location_rating
+     
+  end
+  
+  def update_location_rating
+  
+    if attribute4_changed?
+     
+      selected_locations = Location.where('cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
+      selected_locations.each do |selected_location|
+        
+         selected_location.location_priority = '00-00-00-00-00' if selected_location.location_priority.blank?
+         selected_location.location_priority =  selected_location.location_priority[0,6]  + get_rating(self.attribute4).strip +  selected_location.location_priority[8,6]
+         #selected_location.location_priority = ""
+         selected_location.save
+             
+        end
+          
+        
+    end
   end
   
   def update_aisles_for_delete
