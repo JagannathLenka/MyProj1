@@ -14,7 +14,7 @@ class AislemaintenanceController < ApplicationController
 
      columns =  ['id','sm_aisle_id', 'cl_aisle_id','description','client_id', 'sm_zone_id','cl_zone_id','zone_id',
                   'sm_warehouse_id' ,'cl_warehouse_id', 'no_of_bays_aisle', 'no_of_bays_aisle_hidden','no_of_levels_aisle','no_of_levels_aisle_hidden',
-                  'attribute3', 'attribute1', 'attribute2' , 'attribute4',
+                  'attribute3','attribute4', 'attribute1', 'attribute2' , 
                   'attribute5','attribute6','attribute7','attribute8']
                   
      selectParam = params["aisleid"].blank? ? {:zone_id => params[:id]} : {:id => params["aisleid"].to_i}
@@ -22,7 +22,7 @@ class AislemaintenanceController < ApplicationController
 
      aisles = Aisle.select(" id ,sm_aisle_id , cl_aisle_id , description ,client_id , sm_zone_id ,cl_zone_id , zone_id ,
                     sm_warehouse_id , cl_warehouse_id,no_of_bays_aisle ,no_of_bays_aisle as no_of_bays_aisle_hidden,no_of_levels_aisle,no_of_levels_aisle as no_of_levels_aisle_hidden,
-                    attribute3 , attribute1 , attribute2  , attribute4 ,
+                    attribute3 , attribute4 , attribute1 , attribute2 ,
                     attribute5, attribute6 , attribute7 , attribute8 ").where(selectParam).paginate(
                      :page     => params[:page],
                      :per_page => params[:rows],

@@ -122,13 +122,14 @@ def add_aisles_to_zone zone
            
            (1..diff_aislevalue).each do |a|
             aisles  = Aisle.new(:sm_aisle_id       => max_aisle + a,
-                              :sm_zone_id         => zone.sm_zone_id,
-                              :sm_warehouse_id    => zone.sm_warehouse_id,
-                              :zone_id            => zone.id,
-                              :cl_aisle_id        => "",
-                              :cl_zone_id         => zone.cl_zone_id,
-                              :cl_warehouse_id    => zone.cl_warehouse_id,
-                              :no_of_bays_aisle   => 0,
+                                :attribute1        => "%03d" % (max_aisle + a),
+                                :sm_zone_id         => zone.sm_zone_id,
+                                :sm_warehouse_id    => zone.sm_warehouse_id,
+                                :zone_id            => zone.id,
+                                :cl_aisle_id        => "",
+                                :cl_zone_id         => zone.cl_zone_id,
+                                :cl_warehouse_id    => zone.cl_warehouse_id,
+                                :no_of_bays_aisle   => 0,
                               
                           )
              aisles.save
