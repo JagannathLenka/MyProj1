@@ -8,7 +8,7 @@ def index
   @aislehash=Hash.new
   @bayhash = Hash.new
   @rowhash = Hash.new
-  @bay_width = 120
+  @bay_width = 180
   max_bay = 0
    
   aisle = Aisle.where(zone_id: params[:id]).order("id ASC")
@@ -48,7 +48,7 @@ def index
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = check_baytype bayvalue
-         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute2, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
+         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute5, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
    
       end
      
@@ -67,10 +67,10 @@ def index
     
     #render :json => @aislehash
     #Get the maximum size of the bay divider    
-    while (max_bay) * (@bay_width +2) >= 1000
+    while (max_bay) * (@bay_width +2) >= 4000
        @bay_width = @bay_width - 5
     end
-        @aisle_width = max_bay.zero? ? 1000:(max_bay) * (@bay_width)
+        @aisle_width = max_bay.zero? ? 4000:(max_bay) * (@bay_width)
         
 end
 

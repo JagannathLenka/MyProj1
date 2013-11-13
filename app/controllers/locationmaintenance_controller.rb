@@ -160,8 +160,9 @@ class LocationmaintenanceController < ApplicationController
                        )
         
          loc.save
+         
          pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', params[:cl_warehouse_id], params[:cl_barcode]).first
-         location.update_attributes({
+         loc.update_attributes({
         
                 :sm_zone_id => pos.sm_zone_id,
                 :cl_zone_id => pos.cl_zone_id,

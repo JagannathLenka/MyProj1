@@ -78,7 +78,7 @@ module AislemaintenanceHelper
       
       :colNames => ['Id','Sequence', 'Aisle','Description','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
         'Warehouse','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden',
-        'Types of Aisle','Attribute1','Attribute2','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
+        'Types of Aisle','Priority Aisle','Sequence No.','Attribute2','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'sm_aisle_id', :index => 'sm_aisle_id',  :width => 80, :align => 'center', :editable => true, :hidden =>true},
@@ -95,9 +95,9 @@ module AislemaintenanceHelper
         { :name => 'no_of_levels_aisle',:index => 'no_of_levels_aisle',     :width => 80,  :align => 'center', :editable => true , editrules:{required:true,number:true}},
         { :name => 'no_of_levels_aisle_hidden',:index => 'no_of_levels_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
         { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "LR:LR-Double Side Pick Aisle;R:R-Right Side Pick Aisle- Right;L:L-Left Side Aisle- Left" }},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute6',   :index => 'attribute6',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
         { :name => 'attribute7',   :index => 'attribute7',   :width => 60,   :align => 'center', :editable => true, :hidden => true },
