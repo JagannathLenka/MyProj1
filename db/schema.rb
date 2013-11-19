@@ -88,6 +88,22 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.string   "lastname_of_person"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "itemmasters", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
@@ -294,11 +310,10 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
-
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
+    t.string   "prffered_warehouse"
     t.string   "preffered_zone"
     t.string   "preffered_aisle"
     t.string   "preffered_bay"
@@ -318,7 +333,6 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.string   "attribute8"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.string   "preffered_warehouse"
     t.integer  "quantity_to_be_slotted"
   end
 

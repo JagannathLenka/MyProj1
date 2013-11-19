@@ -1,4 +1,4 @@
-class RemoveFieldnameFromLocations < ActiveRecord::Migration
+class RemoveFieldnameFromLocationsTable < ActiveRecord::Migration
   def up
     remove_column :locations, :location_priority
   end
