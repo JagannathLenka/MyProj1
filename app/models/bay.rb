@@ -2,6 +2,7 @@ class Bay < ActiveRecord::Base
   has_many :levels, :dependent => :destroy
   
   after_save :update_levels 
+  after_save :update_seqno_level
   after_save :update_location_rating
   after_save :update_seqno_loc
   after_destroy :update_aisles_for_delete
@@ -24,6 +25,14 @@ class Bay < ActiveRecord::Base
      end
   end
   
+  def update_seqno_level
+    levels = Level.where('sm_bay_id = ? and sm_aisle_id = ? and sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_bay_id , self.sm_aisle_id , self.sm_zone_id , self.sm_warehouse_id).order(:sm_level_id)
+    levels.each_with_index do |level, i|
+      level.attribute1 = "%03d" % level.sm_level_id
+      level.save
+    end
+  end
+  
   def update_seqno_loc
     
      selected_locations = Location.where('cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
@@ -37,7 +46,10 @@ class Bay < ActiveRecord::Base
    
   end
   
-   def get_rating (priority)
+  #
+  # Get the priority for the rating
+  #
+  def get_rating (priority)
     
      location_rating = '00'
       

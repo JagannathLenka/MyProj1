@@ -2,6 +2,7 @@ class Level < ActiveRecord::Base
   has_many :positions, :dependent => :destroy
   
   after_save :update_positions
+  after_save :update_seqno_pos
   after_save :update_location_rating
   after_destroy :update_bays_for_delete
   after_create  :update_bays_for_add
@@ -22,6 +23,15 @@ class Level < ActiveRecord::Base
                })
        end        
      end
+  end
+  
+  
+  def update_seqno_pos
+    positions = Position.where('sm_level_id = ? and sm_bay_id = ? and sm_aisle_id = ? and sm_zone_id = ? and sm_warehouse_id = ? ' , self.sm_level_id ,  self.sm_bay_id , self.sm_aisle_id , self.sm_zone_id , self.sm_warehouse_id).order(:sm_level_id)
+    positions.each_with_index do |pos, i|
+      pos.attribute3= "%03d" % pos.sm_pos_id
+      pos.save
+    end
   end
   
   def get_rating (priority)

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
    
     if cookies[:userid].nil? 
+               cookies[:last_url] = request.url
                redirect_to "/login"
     else
       @userid = cookies[:userid]

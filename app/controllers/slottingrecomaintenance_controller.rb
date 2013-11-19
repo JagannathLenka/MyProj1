@@ -163,7 +163,7 @@ def sort_items(item_ids)
                     .where( position_requirement)
                     .where( location_requirement)
                     .where( selected_location + ")" )
-                    .order('locations.location_priority desc')
+                    .order('locations.location_priority desc, locations.attribute2 asc')
                     .first
                               
             return slotting_item

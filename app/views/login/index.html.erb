@@ -9,7 +9,33 @@
 		      		modal: true
 				 })
 	       }
-	       function login() {
+	       
+          function getCookie(c_name)
+					{
+					var c_value = document.cookie;
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1)
+					  {
+					  c_start = c_value.indexOf(c_name + "=");
+					  }
+					if (c_start == -1)
+					  {
+					  c_value = null;
+					  }
+					else
+					  {
+					  c_start = c_value.indexOf("=", c_start) + 1;
+					  var c_end = c_value.indexOf(";", c_start);
+					  if (c_end == -1)
+					  {
+					c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+					return c_value;
+					}
+
+	        function login() {
                                 
                                  $.post("/login",
                                        {
@@ -21,11 +47,15 @@
                                				if (data.substring(0,5) == "Error")
                                						$("#Error").html(data.substring(6));	
                                				else
-                               					window.location.href='/warehousemaintenance';
+                               					redirect_url = getCookie("last_url")
+                               					if (redirect_url == null) {
+                               						redirect_url = "/warehousemaintenance"
+                               					}
+                               					window.location.href=redirect_url;
                                							
-                                       });
-                                   
+                                       });                                   
                    }
+                   
                    
           jQuery(function(){
 			  jQuery(window).keyup( function(e){ 
@@ -47,7 +77,7 @@
 
 <div><a href="/userregister" >New User? Please SignUp.</a></div>
 <div  style=" float: right;font-size: 150%; border-width: 1px; height: 200px;  width: 100%;  
-border-style: solid; border-color: grey;background-color: #f1f1f1; margin: 20px">
+border-style: solid; border-color: grey;background-color: #F8F8FF; margin: 20px">
 <div style="background: blue; float: left; height: 20px; width: 100%;font-weight:bold; color: white">Login</div>
 
 <table align="right" width="100%">

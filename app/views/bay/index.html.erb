@@ -7,19 +7,12 @@
         .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(#0033FF));}
 
 		.bay_col          { float: left;  height: 40px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000;
-        		background-color: white;
-				background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), 
-		   		linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
-				background-size:2px 2px;
-				background-position: 0 0, 1px 1px;
-        }
-        .reserve          { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000; background: orange;}
-		.bay_Empty        { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;
-		;}
+        .bay              { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+        .reserve          { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+		.bay_Empty        { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
 		.bay_draggedhelper{ float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
-		.aisle_drivepath  { float: left;  height: 5px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: white}
+		.aisle_drivepath  { float: left;  height: 19px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: #CCCCCC}
 		.aisle_Empty      { float: left;  height: 40px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
 
 body {
@@ -32,7 +25,7 @@ body {
 
 table tr td { 
   font-size: 10px;
-  background: #DDD;
+  background: white;
   color: #47433F;
   border-top: 0px solid #FFF;
   
@@ -300,68 +293,8 @@ var indexHTML = {
    	<table border="0" id ="bayTable" style="border-collapse:collapse;">
    	<% @aislehash.each do |aisle, aislevalue| %>
 		  
-          <tr> 
-
-
-		  <% if aislevalue["row"].empty? %>
-          <!-- Empty Aisle --> 			
-          
-				<td><div  class="aisle_Empty"></div></td> 
-	    	   		<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aislevalue["aisle_properties"]["customer_id"] %></div></td>
-	    	   	</tr> 	    	             
-		  <%end %>
-		  	
-		  <% if !aislevalue["row"]["L"].nil? %>
-          <!-- Left side Aisle --> 			
-
-					<td> 
- 						<div  class="aisle_divider"> </div>   	       
-          			</td>
-          			</tr><tr>
-          				
-
-	    	  <% aislevalue["row"]["L"].to_a.each do |bay,bayvalue| %>
-	
-					<td class="bay_col">
-		 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
-		 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >
-		 	 		     <%= selected_bay(bayvalue) %>		   	    	  
-			   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
-			   	    </div>
-			   	   </td>
-	          <% end %>
-	          </tr>
-          <% end %>
-          
-          <% if !aislevalue["row"]["R"].nil? %>
-          <!-- Right side Aisle --> 
-		  	 		<td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>	   	       			 	       
-         			<td> <div  class="aisle" id="<%= aisle %>">Aisle: <%= aislevalue["aisle_properties"]["customer_id"] %></div></td>
-          			</tr><tr>
-
-    	  <% aislevalue["row"]["R"].to_a.each do |bay,bayvalue| %>
-
-				<td class="bay_col">
-	 	 		     <div id="<%= bay %>" class="<%= bayvalue[:type] %>" title=" Product Type: <%= bayvalue[:item] %>" 
-	 	 		     	style="background-color: <%=bayvalue[:priority_bay]=='Yes' ? "#FFFF99" : "white" %>" >	   	    	  
-		   	    	 <%= selected_bay(bayvalue) %> 
-		   	    	 <label id="<%= bay%>_label" style="align:center"> <%= bayvalue[:customerid] %> </label> 	   	    	
-		   	    </div>
-		   	    </td>
-           <% end %>
-		 </tr> 
-	    <% end %>				
-      
-      <% @last_aisle_pick = aislevalue["aisle_properties"]["aisle_pick"] %>
-      <% @last_aisle_customer_id = aislevalue["aisle_properties"]["customer_id"] %>
-  	  <% @last_aisle_id = aislevalue["aisle_id"]%>
-  	 <%end %>
-
-
-     <% if @last_aisle_pick=="L" %>
-  	 <!-- At the end check if if this is a left side pick aisle, if so put a drive path -->
-		  <tr><td><hr style="width: <%= @aisle_width %>px; float: left" color="blue"></td>
-		  <td> <div  class="aisle" id="<%= @aisle_id %>">Aisle: <%= @last_aisle_customer_id %></div></td></tr>
+  		<%= raw(aisle_render aisle, aislevalue) %>
+  
 	 <%end %>	  	 			   	       			 	       
   	 
   </table>
