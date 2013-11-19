@@ -294,8 +294,6 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.datetime "updated_at",      :null => false
   end
 
-<<<<<<< HEAD
-=======
   add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
 
   create_table "slottingrecommendations", :force => true do |t|
@@ -324,7 +322,6 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.integer  "quantity_to_be_slotted"
   end
 
->>>>>>> a2e5fa2e402028cc5a63e2f52cdc4303d4bcd3e1
   create_table "users", :force => true do |t|
     t.string   "client_id"
     t.integer  "contact_phone"
