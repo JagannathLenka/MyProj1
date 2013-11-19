@@ -37,7 +37,7 @@ module ZonemaintenanceHelper
       :height=> 350,
       :width => 1100,
                    
-      :colNames => ['Id','Sequence','Zone','Description','Client Id','sm_warehouse_id','Warehouse','warehouse_id', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Sequence Type', 'Attribute2', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
+      :colNames => ['Id','Sequence','Zone','Description','Client Id','sm_warehouse_id','Warehouse','warehouse_id', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Sequence Type', 'Sequence No.', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 100, :align => 'center',:editable => false,:hidden => true, :editable => true},

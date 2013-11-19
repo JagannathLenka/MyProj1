@@ -2,13 +2,16 @@ class Zone < ActiveRecord::Base
   has_many :aisles, :dependent => :destroy
   
   after_save :update_aisles
+  after_save :update_seqno_aisle
   after_save :update_seqno_bay
   after_destroy :update_zones_for_delete
   after_create  :update_zones_for_add
   
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_warehouse_id, :cl_zone_id, :client_id, :description, :no_of_aisles_zone, :no_of_bays_aisle, :no_of_levels_aisle, :sm_warehouse_id, :sm_zone_id, :warehouse_id
   validates :cl_zone_id, :uniqueness => {:scope => :warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Zone Already Exists"}
-  
+#
+# Update zone client id in all aisle
+#  
  def update_aisles
   if cl_warehouse_id_changed? or cl_zone_id_changed?
      aisles = Aisle.where(:zone_id => self.id)
@@ -20,8 +23,21 @@ class Zone < ActiveRecord::Base
      end
     end
   end
-  
+
+#
+#update seq no for aisle
+#
+def update_seqno_aisle
+  aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:sm_aisle_id)
+    aisles.each_with_index do |aisle, i|
+      aisle.attribute1 = "%03d" % aisle.sm_aisle_id
+      aisle.save
+    end
+end
+
+#  
 #Update the sequence for the bay
+#
 def update_seqno_bay
     case self.attribute1
       
@@ -37,18 +53,22 @@ def update_seqno_bay
      end   
  end 
 
+#
 #Provide seuqence for the loop
+#
 def loop_sequence
-    bays = Bay.where('cl_zone_id = ? and cl_warehouse_id = ? ' ,  self.cl_zone_id , self.cl_warehouse_id).order(:sm_bay_id)
+    bays = Bay.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:sm_bay_id)
     bays.each_with_index do |bay, i|
       bay.attribute5 = "%03d" % bay.sm_bay_id
       bay.save
     end
 end
 
+#
 #Provide seuqence for oneway  
+#
 def oneway_sequence
-      aisles = Aisle.where('cl_zone_id = ? and cl_warehouse_id = ? ' ,  self.cl_zone_id , self.cl_warehouse_id)
+      aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
       aisles.each do |aisle|
           if aisle.attribute3 == 'LR'
               bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
@@ -70,14 +90,16 @@ def oneway_sequence
       end   
 end 
 
+#
+#Zigzag logic for Front-Adjacent-Front logic
+#
 def  zigzag_sequence
   
      @aisle_step = 1  
-     aisles = Aisle.where('cl_zone_id = ? and cl_warehouse_id = ? ' ,  self.cl_zone_id , self.cl_warehouse_id)
+     aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
      aisles.each do |aisle|
           if aisle.attribute3 == 'LR'
-            
-             
+                         
              if @aisle_step == 1
                 bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
                 @aisle_step = 2
@@ -88,7 +110,7 @@ def  zigzag_sequence
               
              bay_array = Array.new
              bays.each_with_index do |bay,i|
-               bay_array[i] = {:id => bay.sm_bay_id.to_s,  :side => bay.attribute3, :seq => ""}
+             bay_array[i] = {:id => bay.sm_bay_id.to_s,  :side => bay.attribute3, :seq => ""}
                
              end
              
@@ -138,8 +160,9 @@ def  zigzag_sequence
   
 end
 
-
+#
 #update no.of zones in warehouse after deleting  
+#
   def update_zones_for_delete
     warehouse = Warehouse.find(self.warehouse_id)
     warehouse.update_attributes({:no_of_zones => warehouse.no_of_zones.to_i - 1})

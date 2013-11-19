@@ -49,7 +49,7 @@ module LevelmaintenanceHelper
       :mtype => 'GET',
       :height=> 350,
       
-      :colNames => ['Id','Sequence','Level','Description','Clent Id','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Attribute1','Attribute2','Attribute3','PriorityLevel','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence','Level','Description','Clent Id','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Sequence No','Attribute2','Attribute3','PriorityLevel','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_level_id',    :index => 'sm_level_id',     :width => 55,  :align => 'center', :editable => true,:hidden => true },
@@ -68,8 +68,8 @@ module LevelmaintenanceHelper
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',    :width => 120,   :align => 'center', :editable => false, :hidden => true},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100,   :align => 'center', :editable => false, :hidden => false},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
-        { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true },
+        { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true,:hidden => true},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true,:hidden => true },
         { :name => 'attribute4',   :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},

@@ -29,7 +29,7 @@ module PosmaintenanceHelper
       :colNames => ['Id','Sequence', 'Position','Description','sm_level_id','Level','sm_bay_id', 'Bay',
         'Client Id','sm_aisle_id','Aisle','level_id','sm_zone_id','Zone', 
         'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode',
-        'Position Type','Items','Attribute3','Priority Position','Attribute5','Attribute6','Attribute7','Attribute8'],
+        'Position Type','Items','Sequence No','Priority Position','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_pos_id',  :index => 'sm_pos_id',  :width => 120, :align => 'center', :hidden => true, :editable => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/posmaintenance'}},
@@ -51,7 +51,7 @@ module PosmaintenanceHelper
         { :name => 'cl_barcode',   :index => 'cl_barcode',   :width => 100,   :align => 'center', :editable => false},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;Continue:Continuous from previous;Break:Break" }},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true , :hidden => true},
+        { :name => 'attribute3',   :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true , edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 80,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 80,   :align => 'center', :editable => true, :hidden => true},
