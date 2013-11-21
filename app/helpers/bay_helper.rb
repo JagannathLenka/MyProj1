@@ -8,12 +8,15 @@ module BayHelper
     
     case 
       
-    when bayvalue[:type] == 'bay'
-      return image_tag("low_priority_bay.jpg", :size => "100x35")
-   
-    when bayvalue[:type] == 'bay_Empty'
-      return image_tag("low_priority_empty_bay.jpg", :size => "100x35")
-     
+   when bayvalue[:type] == 'bay'
+     return image_tag("low_priority_bay.jpg", :size => "100x35")
+  
+   when bayvalue[:type] == 'bay_Empty' && bayvalue[:priority_bay] != "High"
+     return image_tag("low_priority_empty_bay.jpg", :size => "100x35")
+    
+   when bayvalue[:type] == 'bay_Empty' && bayvalue[:priority_bay] = "High"
+     return image_tag("high_priority_empty_bay.gif", :size => "100x35")
+    
    end 
   end
 
@@ -43,7 +46,7 @@ module BayHelper
 
         output='</tr><tr>
                     <td> 
-                       <div  class="aisle" id="' + aisle.to_s + '"> Aisle: '+ aislevalue["aisle_properties"]["customer_id"].to_s + '</div> 
+                       <div  class="aisle ui-corner-all" id="' + aisle.to_s + '"> Aisle: '+ aislevalue["aisle_properties"]["customer_id"].to_s + '</div> 
                    </td>'
        return output               
   end
@@ -93,7 +96,7 @@ module BayHelper
        output ='<tr>                 
                   <td>
                     
-                    <div  class="aisle" id="' + aisle.to_s + '"> Aisle: '+ aislevalue["aisle_properties"]["customer_id"].to_s + '</div>  
+                    <div  class="aisle ui-corner-all" id="' + aisle.to_s + '"> Aisle: '+ aislevalue["aisle_properties"]["customer_id"].to_s + '</div>  
                   </td>                  
                   <td>
                      <table> 
@@ -131,7 +134,7 @@ module BayHelper
                      '<div id="' + bay.to_s + '"' + 
                          ' class="' + bayvalue[:type].to_s + '"' + 
                          ' title=" Product Type:' +  bayvalue[:item].to_s + '"' +  
-                         ' style="background-color:'  + (bayvalue[:priority_bay]=='High' ? "#FFFF99" : "white").to_s + '" >' + 
+                         ' style="background-color:'  + (bayvalue[:priority_bay]=='Highx' ? "#FFFF99" : "white").to_s + '" >' + 
                                 selected_bay(bayvalue).to_s  +    
                                 bay_type(bayvalue).to_s +            
                          '<label id="'+ bay.to_s + '_label" ' +
