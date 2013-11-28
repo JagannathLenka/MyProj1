@@ -1,19 +1,19 @@
 <% provide(:title, 'Show Zone Layout') %>
 <% content_for :head do %>   
 	  <style>
-	    .main             {width: 100%; height: 600px; border: 0px solid #999; padding: 0px; margin-left:20px;}
-		.content 	      { overflow: auto;float: left;  height: 500px; width: 100%; background: white; margin-left:60px;}
-        .area 	          { float: left;  margin-left:60px; margin-right:60px; height: 500px; width: 70%; background: white; border: 0px solid #000; }             
+	    .main             {width: 98%;  border: 0px solid #999; padding: 0px; margin-left:10px;}
+		.content 	      { float: left;   background: white; margin-left:10px;}
+        .area 	          { float: left;    background: white; border: 0px solid #000; }             
         .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(lightblue));}
 
-		.bay_col          { float: left;  height: 40px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000;}
-        .reserve          { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000;}
-		.bay_Empty        { float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
-		.bay_draggedhelper{ float: left;  height: 40px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
+		.bay_col          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px;}
+        .bay              { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+        .reserve          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+		.bay_Empty        { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
+		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
-		.aisle_drivepath  { float: left;  height: 19px;   width: <%= @aisle_width %>px; border: 1px solid #999; background: #CCCCCC}
-		.aisle_Empty      { float: left;  height: 40px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
+		.aisle_drivepath  { float: left;  height: 19px;   width: <%= @aisle_width %>px; border: 0px solid #999; background: #CCCCCC}
+		.aisle_Empty      { float: left;  height: <%= @bay_height %>px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
 
 body {
 	background: white;
@@ -28,7 +28,7 @@ table tr td {
   background: white;
   color: #47433F;
   border-top: 0px solid #FFF;
-  
+  padding: 0px;
 }
 
     </style>	
@@ -38,6 +38,14 @@ table tr td {
       //global variable and call initialize function.
       index_html_map = {}	    
 	  $( init );
+
+	  $(document).ready(function(){
+	        var rightdivPos = $("#aisle_details").position();
+	        $("#aisle_header").css("position","absolute").css("top",rightdivPos.top).show();
+	        $("#aisle_details").scroll(function(){
+	            $("#aisle_header").scrollTop($("#aisle_details").scrollTop());
+	        });
+	  });
 
 
 	//To swap the position of two items
@@ -286,19 +294,32 @@ var indexHTML = {
 		
 		<br>
 	</div>
+	
 
 <div id="content" class="content">
    <div id="area" class="area"> 
 
-   	<table border="0" id ="bayTable" style="border-collapse:collapse;">
-   	<% @aislehash.each do |aisle, aislevalue| %>
-		  
-  		<%= raw(aisle_render aisle, aislevalue) %>
-  
-	 <%end %>	  	 			   	       			 	       
-  	 
-  </table>
-  
+    	<%= raw(aisle_render) %>
+    	<table border="0"> 
+    		<tr>
+    			<td>
+					<div id="aisle_header" style="overflow:hidden; float: left; width: 80px; height: 400px">
+    					<table>
+    						<%=raw(BayHelper.output_aisle)%>
+    				 	</table>	
+    				</div> 	
+	    		</td>   	 
+    	
+    			<td> 
+					<div id="aisle_details" style="overflow: auto; width: 1200px; height: 400px"> 
+						<table>
+							<%=raw(BayHelper.output_bay)%>
+					 	</table>	
+					 </div>
+			  	</td>
+			 </tr> 
+  		</table>
+	
  </div>
    
   
@@ -306,6 +327,8 @@ var indexHTML = {
 </div>
  
 </div>
+
+
 
  <div id="positionspace" class= "positionspace"> 
  	<iframe id="positionframe" frameborder="no"></iframe>

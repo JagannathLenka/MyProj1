@@ -18,12 +18,13 @@ def index
 
   aisle_properties = {"customer_id"=> (aislevalue.cl_aisle_id.blank? ? aislevalue.sm_aisle_id: aislevalue.cl_aisle_id), "aisle_pick" => aislevalue.attribute3} 
 
-      @bay= Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
-      @warehouse = aislevalue.cl_warehouse_id
+      @bay = Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
       @zone      = aislevalue.cl_zone_id
+      @warehouse = aislevalue.cl_warehouse_id
       
-      if !@bay[1].nil? 
-         save_attribute3 = @bay[1].attribute3
+      
+      if !@bay[0].nil? 
+         save_attribute3 = @bay[0].attribute3
       end
       
       
