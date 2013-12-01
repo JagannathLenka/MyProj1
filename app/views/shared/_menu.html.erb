@@ -8,8 +8,8 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav pull-right">
-      <li class="active"><a href="/login">Home</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li class="active"><a href="/login"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Contact Us</a></li>
       <li><a href="/login/aboutus/">About Us</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
@@ -19,9 +19,20 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav pull-right">
-      <li class="active"><a href="/warehousemaintenance">Home</a></li>
+      <li class="active"><a href="/warehousemaintenance"><span class="glyphicon glyphicon-home"></span>Home</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome <%= @userid %> <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-th"></span> Utilities <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="/itemmastermaintenance">Item Master</a></li> 	
+          <li class="divider"></li>
+          <li><a href="/slottingrecomaintenance">Slotting Reco</a></li>
+          <li class="divider"></li>
+          <li><a href="/usermaintenance">User Maintenance</a></li>
+          <li class="divider"></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-leaf"></span> Welcome <%= @userid %> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="/login?logout=yes">Log out</a></li> 	
           <li class="divider"></li>
