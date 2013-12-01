@@ -9,9 +9,9 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg'
-end
+#group :production do
+ # gem 'pg'
+#end
 
 #gem 'jqgrid_for_rails', git: 'git://github.com/Juanmcuello/jqgrid_for_rails.git'
 gem "jqgrid_for_rails", "~> 1.0.2"

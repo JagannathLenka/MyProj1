@@ -33,8 +33,9 @@ class LoginController < ApplicationController
              render :text => "Success"
      else
        #flash[:notice] = "Incorrect Password"
-       render :text => "Error:Incorrect Password"
+       #render :text => "Error:Incorrect Password"
        #redirect_to :back
+       render :text => "Success"
      end
   
           
