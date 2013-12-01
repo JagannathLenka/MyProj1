@@ -7,6 +7,7 @@ class LoginController < ApplicationController
       
     end
   end
+  
   def create
  
    newuser = User.where(user_id:params[:txtuid]).first
@@ -40,4 +41,9 @@ class LoginController < ApplicationController
           
           
  end
+
+ def aboutus
+   
+ end
+ 
 end

@@ -163,6 +163,7 @@ class PosmaintenanceController < ApplicationController
    add_breadcrumb "Bay:" + (bay.cl_bay_id.blank? ? bay.sm_bay_id.to_s : bay.cl_bay_id), "/levelmaintenance?id="+ bay.id.to_s
    add_breadcrumb "Level:" + (level.cl_level_id.blank? ? level.sm_level_id.to_s : level.cl_level_id), "/posmaintenance?id="+ level.id.to_s
    @warehouse = warehouse.cl_warehouse_id
+   @warehouse_description = warehouse.description
   end   
  
  end

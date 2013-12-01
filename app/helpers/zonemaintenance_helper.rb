@@ -45,7 +45,7 @@ module ZonemaintenanceHelper
         { :name => 'description',   :index => 'description',    :width => 150, :align => 'left', :editable => true},
         { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, :hidden => true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
-        { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
+        { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 100, :align => 'center', :editable => false,:hidden => true},
         { :name => 'warehouse_id',   :index => 'warehouse_id',    :width => 100, :align => 'center', :editable => false, hidden:true},      
         { :name => 'no_of_aisles_zone',    :index => 'no_of_aisles_zone',     :width => 150,  :align => 'center', :editable => true, editrules:{required:true,number:true} },
         { :name => 'no_of_aisles_zone_hidden',    :index => 'no_of_aisles_zone_hidden',     :width => 100,  :align => 'center', hidden:true, :editable => true },
@@ -92,10 +92,20 @@ module ZonemaintenanceHelper
                                           win.focus();
                                           }'.to_json_var }]
                                           
-   
+     location_button = [:navButtonAdd, "#zone_pager", 
+                   {:caption => "Show Locations", :onClickButton => "function() {
+                                          var grid = $('#zone_list');
+                                          selectedRowId= grid.jqGrid ('getGridParam','selrow');                                          
+                                          if (selectedRowId == null){
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Select a zone for location' +'</div>', 
+                                          $.jgrid.edit.bClose,{buttonalign:'right'});  
+                                             return;
+                                          }                
+                                          window.location.href = '/locationmaintenance?zone_id=' + selectedRowId                                                
+                                          }".to_json_var }]
     pager3 = [:gridResize, {minWidth:200,maxWidth:1500,minHeight:400, maxHeight:800}];                                       
 
-    jqgrid_api 'zone_list', grid, pager, pager3, pager_button, options
+    jqgrid_api 'zone_list', grid, pager, pager3, pager_button,location_button, options
 
   end
 

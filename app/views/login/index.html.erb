@@ -1,13 +1,13 @@
+
 <% provide(:title, 'Login') %>
 <% content_for :head do %>
 <script>
-           $(function() {
-                           $( "input[type=button], button" )
-                             .button()
-                             .click(function( event ) {
-                               event.preventDefault();
-                             });
-                         });
+           
+         $(document).ready(function() {
+			  $('.carousel').carousel({
+ 			  interval: 2000
+			 })
+		 });
      
 	       function register(){
 					$('#register').load("/userregister"); 
@@ -79,59 +79,85 @@
 <%end%>
 
 <%= render "shared/menu" %>
-<div style="float: left; height:600px; width:100%">
-<div  class = "c1" style="float: left; height:600px; width:70% ; margin: 20px"><%= image_tag("Slot2.jpg", alt: "", :width => 400, :height => 200) %></div>
-<div style="float: left; height:600px; width:25%;">
 
-<div><a href="/userregister" >New User? Please SignUp.</a></div>
-<div class="ui-corner-all" style=" float: right;font-size: 150%; border-width: 1px; height: 200px;  width: 100%;  
-border-style: solid; border-color: grey;background-color: #F8F8FF; margin: 20px">
-<div style="background: blue; float: left; height: 20px; width: 100%;font-weight:bold; color: white">Login</div>
-<div id="login" style="margin-top: 40px">
-<table align="right" width="100%">
-  <%= form_tag("/login", method: "post") do %>  
-  <tr>
-  	<td>
-      <%= label_tag(:lbluid, "User Id:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:txtuid) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblpswd, "Password:") %>
-    </td>
-    <td>
-      <%= password_field_tag(:txtpswd) %>
-    </td>
-  </tr>
-<tr>
-  	<td colspan="1">
-      <%= button_to_function("Login", "login()") %>
-   </td>
-   <td>
-   	<input type="button" value="Sign Up" onclick="window.location.href='/userregister'">
-   	</td>
-  
-  </tr>
-  </br>
-   <tr>
-  
-   <td colspan="3">
-        <div id="Error" style="color: red"></div>
-		<% flash.each do |key, value| %>
-		  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
-		<% end %>
-   </td>
-  </tr>
-<% end %>
-</table>
+<div id="container" style="float: left; height:220px; width:100%">
+	
+<div  id="left_image" style="float: left; height:220px; width:70% ; margin: 20px">
+    <div class="bs-example" style="height:100%; width: 400px">
+      <div id="carousel-example-generic" style="height:100%; width: 400px;" class="carousel slide" data-ride="carousel">
+        
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        
+        <div class="carousel-inner">
+          <div class="item active">
+             <img src="/assets/Slot2.jpg" style="height: 220px; width: 400px" alt="First slide">
+          </div>
+          <div class="item">
+            <img src="/assets/Slot4.jpg" style="height:  220px; width: 100%"  alt="Third slide">
+          </div>
+          <div class="item">
+            <img src="/assets/Slot5.jpg" style="height:  220px; width: 100%"  alt="Second slide">
+          </div>
+          <div class="item">
+            <img src="/assets/Slot6.jpg" style="height:  220px; width: 100%"  alt="Second slide">
+          </div>
+          <div class="item">
+            <img src="/assets/Slot7.jpg" style="height:  220px; width: 100%"  alt="Second slide">
+          </div>
+        </div>
+        
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+				
+				
 </div>
+	
+	<div id="right_login" style="float: left; height:600px; width:25%;">
+		
+		<div id="login_div" class="ui-corner-all" style="margin-top: 25px; border-width: 1px; height: 220px;  width: 100%; border-style: solid; border-color: grey;background-color: #F8F8FF;">
+			<div class="btn-primary" style="float: left; height: 40px; width: 100%; color: white">Sign in</div>
+				<div id="login" style="float:left; margin: 25px; width: 80%">
+				<table width="100%">
+				  <%= form_tag("/login", method: "post") do %>  
+				  <tr>
+				  	<td>
+				      <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"width:100%" ) %>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>
+				      <%= password_field_tag(:txtpswd, nil, :placeholder=>"Password" , :class=>"form-control", :style=>"width:100%") %>
+				    </td>
+				  </tr>
+				<tr>
+				  	<td>
+				      <%= button_to_function("Login", "login()", :class=>"btn btn-lg btn-primary btn-block", :style=>"width:100%") %>
+				   </td>
+				   </tr>
+				   <tr>		  
+				   <td colspan="3">
+				        <div id="Error" style="color: red"></div>
+						<% flash.each do |key, value| %>
+						  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
+						<% end %>
+				   </td>
+				  </tr>
+				<% end %>
+				</table>
+			</div>
+			
+			</div>
+			<div id="register" style="margin-top:20px "><a href="/userregister" >New User? Join our Beta</a></div>
+	</div>
 </div>
-
-</div>
-</div>
-
- <div id="register"> </div>
-
+	

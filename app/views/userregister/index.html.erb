@@ -2,13 +2,53 @@
 
 <% end %>
 <%= render "shared/menu" %>
-<div align="center">
-	<h1>Register Below</h1>
-	
+<div align="center form-control" style="margin: 40px">
+	<h2><span class="label label-primary">Register Below</span></h2>
+</div>
+<div style="float:left; margin-left: 40px">	
  <table align="center" class="register" id="register">
   <%= form_tag("/userregister", method: "post") do %>
-
   <tr>
+  	<td>
+      <%= label_tag(:lblname, "First Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:name_of_person) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblname, "Last Name:") %>
+    </td>
+    <td>
+      <%= text_field_tag(:lastname_of_person) %>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+      <%= label_tag(:lblmail, "EmailId:") %>
+    </td>
+    <td>
+      <%= email_field_tag(:email_id) %>
+    </td>
+  </tr>
+  	<tr>
+  	<td>
+      <%= label_tag(:lblph2, "Phone(Mobile):") %>
+    </td>
+    <td>
+      <%= telephone_field_tag(:phone_no2) %>
+    </td>
+    </tr>
+    <tr>
+  	<td>
+      <%= label_tag(:lblph1, "Phone(Work):") %>
+    </td>
+    <td>
+      <%= telephone_field_tag(:phone_no1) %>
+    </td>
+  </tr>
+  </tr>
   	<td>
       <%= label_tag(:lblorg, "Organization Name:") %>
     </td>
@@ -56,46 +96,8 @@
       <%= text_field_tag(:country) %>
     </td>
   </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblph1, "Phone(Work):") %>
-    </td>
-    <td>
-      <%= telephone_field_tag(:phone_no1) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblph2, "Phone(Mobile):") %>
-    </td>
-    <td>
-      <%= telephone_field_tag(:phone_no2) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblmail, "EmailId:") %>
-    </td>
-    <td>
-      <%= email_field_tag(:email_id) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblname, "First Name:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:name_of_person) %>
-    </td>
-  </tr>
-  <tr>
-  	<td>
-      <%= label_tag(:lblname, "Last Name:") %>
-    </td>
-    <td>
-      <%= text_field_tag(:lastname_of_person) %>
-    </td>
-  </tr>
+  
+  
   <tr>
   	<td>
       <%= label_tag(:lbllicense, "No of Users") %>
@@ -108,7 +110,10 @@
   
   <tr>
   	<td>
-      <%= submit_tag( "Save") %>
+      <%= submit_tag( "Submit", :class=>"btn btn-success") %>
+  	     <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-star"></span> Star
+</button>	
    </td>
    
    <td>

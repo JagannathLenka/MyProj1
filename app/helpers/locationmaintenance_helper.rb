@@ -4,7 +4,13 @@ module LocationmaintenanceHelper
   def loc_jqgrid
     
     options = {:on_document_ready => true, :html_tags => false}
-    url = '/locationmaintenance?warehouse_id=' + params[:warehouse_id]   
+    
+    if ! params[:warehouse_id].nil?
+        url = '/locationmaintenance?warehouse_id=' + params[:warehouse_id]   
+    else
+       url = '/locationmaintenance?zone_id=' + params[:zone_id] 
+    end
+       
     editcheckfunc = 'function(postdata, formid) 
               {
                

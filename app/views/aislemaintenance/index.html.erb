@@ -18,13 +18,10 @@
 <%end%>
 <% if params[:lightweight] != "yes" %>
 
-		<%= render "shared/menu" %>
-		<div align="center"><a href="/warehousemaintenance" >
-		<h1>Warehouse: <%= @warehouse%></h1></a>
-</div>
+<%= render "shared/menu" %>
 <div style="margin-left: 30px;">
-<h2>Listing Aisles For:  <%= render_breadcrumbs %></h2><br>
-
+<h3><div class="label label-primary">Warehouse: <%= @warehouse %></div></h3>
+Listing Aisles For:  <%= render_breadcrumbs %>
 <%end%>
 <table id=aisle_list></table>
 <div id=aisle_pager></div>
