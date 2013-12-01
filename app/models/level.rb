@@ -2,6 +2,7 @@ class Level < ActiveRecord::Base
   has_many :positions, :dependent => :destroy
   
   after_save :update_positions
+  after_save :update_seqno_pos
   after_save :update_location_rating
   after_destroy :update_bays_for_delete
   after_create  :update_bays_for_add
@@ -24,21 +25,30 @@ class Level < ActiveRecord::Base
      end
   end
   
+  
+  def update_seqno_pos
+    positions = Position.where('sm_level_id = ? and sm_bay_id = ? and sm_aisle_id = ? and sm_zone_id = ? and sm_warehouse_id = ? ' , self.sm_level_id ,  self.sm_bay_id , self.sm_aisle_id , self.sm_zone_id , self.sm_warehouse_id).order(:sm_level_id)
+    positions.each_with_index do |pos, i|
+      pos.attribute3= "%03d" % pos.sm_pos_id
+      pos.save
+    end
+  end
+  
   def get_rating (priority)
     
-     location_rating = 0
+     location_rating = '00'
       
       case priority 
           when "Default"
-            location_rating = 0
+            location_rating = '00'
           when "High"
-             location_rating = 9
+             location_rating = '09'
           when "Medium"
-             location_rating = 5
+             location_rating = '05'
           when "Low"
-             location_rating = 2
+             location_rating = '02'
           else
-             location_rating = 0
+             location_rating = '00'
       end
      return location_rating
      
@@ -50,11 +60,12 @@ class Level < ActiveRecord::Base
     selected_locations = Location.where('cl_level_id = ? and cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_level_id ,  self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
       selected_locations.each do |selected_location|
         
-          selected_location.update_attributes({
-          :location_priority => (selected_location.location_priority.to_i) - (get_rating(self.attribute4_was) * 100) + (get_rating(self.attribute4) * 100) 
-          
-           })
-          end
+         selected_location.location_priority = '00-00-00-00-00' if selected_location.location_priority.blank?
+         selected_location.location_priority =  selected_location.location_priority[0,9]  + get_rating(self.attribute4).strip +  selected_location.location_priority[11,3]
+         #selected_location.location_priority = ""
+         selected_location.save
+             
+        end
         
     end
   end

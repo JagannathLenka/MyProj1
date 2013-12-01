@@ -37,7 +37,7 @@ module ZonemaintenanceHelper
       :height=> 350,
       :width => 1100,
                    
-      :colNames => ['Id','Sequence','Zone','Description','Client Id','sm_warehouse_id','Warehouse','warehouse_id', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Attribute1', 'Attribute2', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
+      :colNames => ['Id','Sequence','Zone','Description','Client Id','sm_warehouse_id','Warehouse','warehouse_id', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Sequence Type', 'Sequence No.', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 50, :align => 'center',hidden:true},
         { :name => 'sm_zone_id',   :index => 'sm_zone_id',    :width => 100, :align => 'center',:editable => false,:hidden => true, :editable => true},
@@ -51,14 +51,14 @@ module ZonemaintenanceHelper
         { :name => 'no_of_aisles_zone_hidden',    :index => 'no_of_aisles_zone_hidden',     :width => 100,  :align => 'center', hidden:true, :editable => true },
         { :name => 'no_of_bays_aisle',    :index => 'no_of_bays_aisle',     :width => 150,  :align => 'center', :editable => true, :hidden => true },
         { :name => 'no_of_levels_aisle',    :index => 'no_of_levels_aisle',     :width => 100,  :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/levelmaintenance'},:hidden => true},
-        { :name => 'attribute1',  :index => 'attribute1',   :width => 150,   :align => 'center', :editable => true},
-        { :name => 'attribute2',     :index => 'attribute2',      :width => 150,   :align => 'left', :editable => true},
-        { :name => 'attribute3',   :index => 'attribute3',    :width => 100,   :align => 'left', :editable => true },
-        { :name => 'attribute4',   :index => 'attribute4',    :width => 100,   :align => 'left', :editable => true },
-        { :name => 'attribute5',   :index => 'attribute5',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute6',   :index => 'attribute6',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute7',   :index => 'attribute7',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
-        { :name => 'attribute8',   :index => 'attribute8',    :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute1',  :index => 'attribute1',   :width => 150,   :align => 'center',:editable => true,edittype:"select", editoptions: {value: "Loop:Loop;OneWay:OneWay;ZigZag:ZigZag" }},
+        { :name => 'attribute2',     :index => 'attribute2',:width => 150,   :align => 'left', :editable => true},
+        { :name => 'attribute3',   :index => 'attribute3',  :width => 100,   :align => 'left', :editable => true },
+        { :name => 'attribute4',   :index => 'attribute4',  :width => 100,   :align => 'left', :editable => true },
+        { :name => 'attribute5',   :index => 'attribute5',  :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute6',   :index => 'attribute6',  :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute7',   :index => 'attribute7',  :width => 100,   :align => 'left', :editable => true,  :hidden => true },
+        { :name => 'attribute8',   :index => 'attribute8',  :width => 100,   :align => 'left', :editable => true,  :hidden => true },
 
         
         

@@ -2,6 +2,7 @@ class Aisle < ActiveRecord::Base
   has_many :bays, :dependent => :destroy
   
    after_save :update_bays
+   after_save :update_location_rating
    after_destroy :update_aisles_for_delete
    after_create :update_aisles_for_add
    
@@ -20,7 +21,45 @@ class Aisle < ActiveRecord::Base
       end
     end
   end
+ 
+   def get_rating (priority)
+    
+     location_rating = '00'
+      
+      case priority 
+          when "Default"
+            location_rating = '00'
+          when "High"
+             location_rating = '09'
+          when "Medium"
+             location_rating = '05'
+          when "Low"
+             location_rating = '02'
+          else
+             location_rating = '00'
+      end
+     return location_rating
+     
+  end
   
+  def update_location_rating
+  
+    if attribute4_changed?
+     
+      selected_locations = Location.where('cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
+      selected_locations.each do |selected_location|
+        
+         selected_location.location_priority = '00-00-00-00-00' if selected_location.location_priority.blank?
+         selected_location.location_priority =  selected_location.location_priority[0,3]  + get_rating(self.attribute4).strip +  selected_location.location_priority[5,9]
+         #selected_location.location_priority = ""
+         selected_location.save
+             
+        end
+          
+        
+    end
+  end
+ 
   def update_aisles_for_delete
     
     zone = Zone.find(self.zone_id)

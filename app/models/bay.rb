@@ -2,8 +2,9 @@ class Bay < ActiveRecord::Base
   has_many :levels, :dependent => :destroy
   
   after_save :update_levels 
+  after_save :update_seqno_level
   after_save :update_location_rating
-  after_save :update_seqno
+  after_save :update_seqno_loc
   after_destroy :update_aisles_for_delete
   after_create :update_aisles_for_add
   
@@ -24,19 +25,31 @@ class Bay < ActiveRecord::Base
      end
   end
   
-  def update_seqno
-    selected_locations = Location.where('cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
+  def update_seqno_level
+    levels = Level.where('sm_bay_id = ? and sm_aisle_id = ? and sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_bay_id , self.sm_aisle_id , self.sm_zone_id , self.sm_warehouse_id).order(:sm_level_id)
+    levels.each_with_index do |level, i|
+      level.attribute1 = "%03d" % level.sm_level_id
+      level.save
+    end
+  end
+  
+  def update_seqno_loc
+    
+     selected_locations = Location.where('cl_bay_id = ? and cl_aisle_id = ? and cl_zone_id = ? and cl_warehouse_id = ? ' , self.cl_bay_id , self.cl_aisle_id , self.cl_zone_id , self.cl_warehouse_id)
      selected_locations.each do |selected_location|
         
-        selected_location.attribute2 = '00-00-00-00-00' if  selected_location.attribute2.blank?
-        selected_location.attribute2 =  selected_location.attribute2[0,6]  + self.attribute5 +  selected_location.attribute2[8,6]
-         selected_location.save
+        selected_location.attribute2 = '000-000-000-000-000' if (selected_location.attribute2.blank? or selected_location.attribute2.nil?)
+        selected_location.attribute2 =  selected_location.attribute2[0,8]  + self.attribute5 +  selected_location.attribute2[11,8]
+        selected_location.save
          
       end  
    
   end
   
-   def get_rating (priority)
+  #
+  # Get the priority for the rating
+  #
+  def get_rating (priority)
     
      location_rating = '00'
       
