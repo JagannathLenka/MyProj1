@@ -194,17 +194,23 @@ border-style: solid; border-color: grey;background-color: #F8F8FF; margin: 20px"
 				  <%= form_tag("/login", method: "post") do %>  
 				  <tr>
 				  	<td>
-				      <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"width:100%" ) %>
+				  	  <div style="margin-top:5px">	
+				     	 <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"width:100%" ) %>
+				      </div>	
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>
+				    <div style="margin-top:5px">	
 				      <%= password_field_tag(:txtpswd, nil, :placeholder=>"Password" , :class=>"form-control", :style=>"width:100%") %>
+				    </div>	
 				    </td>
 				  </tr>
 				<tr>
 				  	<td>
+				  	<div style="margin-top:5px">	
 				      <%= button_to_function("Login", "login()", :class=>"btn btn-lg btn-primary btn-block", :style=>"width:100%") %>
+				   	</div>	
 				   </td>
 				   </tr>
 				   <tr>		  
