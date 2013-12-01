@@ -151,7 +151,7 @@ module BayHelper
   def left_open aisle, aislevalue
 
        
-       BayHelper.output_aisle +=  (aisle_header aisle, aislevalue ) 
+       BayHelper.output_aisle +=  aisle_header aisle, aislevalue  
        BayHelper.output_bay   +=   drive_path 
 
        BayHelper.output_aisle +=  aisle_placeholder

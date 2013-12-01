@@ -9,7 +9,11 @@
 		.bay_col          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px;}
         .bay              { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000;}
         .reserve          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000;}
+<<<<<<< HEAD
 		.bay_Empty        { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #999; background: white;}
+=======
+		.bay_Empty        { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000; background: white;}
+>>>>>>> 688bd9afd46f04ee3b83921097d58523313ac3f7
 		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
 		.aisle_drivepath  { float: left;  height: 19px;   width: <%= @aisle_width %>px; border: 0px solid #999; background: #CCCCCC}
@@ -290,8 +294,7 @@ var indexHTML = {
 	<div id="navingation" style="float: left; width: 100%; height: 80px; border: 0px solid #999" >
 		
 		<div style="float: left"><%= link_to image_tag("compass.jpg", alt: "direction", :width => "80px", :height => "80px"), '' %></div>
-		<div style="float: left"><h2>Warehouse: <%=@warehouse%></h2> <h3>Zone: <%=@zone%></h3></div>
-		
+		<h3><div class="label label-primary">Warehouse: <%= @warehouse %></div> <div class="label label-warning">Zone: <%= @zone %></div> </h3>
 		<br>
 	</div>
 	
@@ -302,7 +305,11 @@ var indexHTML = {
     	<%= raw(aisle_render) %>
     	<table border="0"> 
     		<tr>
+<<<<<<< HEAD
     			<td>
+=======
+    			<td style="80px">
+>>>>>>> 688bd9afd46f04ee3b83921097d58523313ac3f7
 					<div id="aisle_header" style="overflow:hidden; float: left; width: 80px; height: 400px">
     					<table>
     						<%=raw(BayHelper.output_aisle)%>
