@@ -38,7 +38,7 @@ module WarehousemaintenanceHelper
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false, hidden:true},
         { :name => 'cl_warehouse_id',   :index => 'cl_warehouse_id',    :width => 150, :align => 'center', :editable => true, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/zonemaintenance'}},
-        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:true},
+        { :name => 'client_id',   :index => 'client_id',    :width => 100, :align => 'center', :editable => false, hidden:false},
         { :name => 'description',  :index => 'description',  :width => 150, :align => 'left', :editable => true},
         { :name => 'no_of_zones' ,   :index => 'no_of_zones',     :width => 80,  :align => 'center', :editable => true, editrules:{required:true,number:true} },
         { :name => 'no_of_zones_hidden' ,   :index => 'no_of_zones_hidden',     :width => 60,  :align => 'left',hidden:true, :editable => true },

@@ -170,5 +170,6 @@ end
    add_breadcrumb "Zone:" + (zone.cl_zone_id.blank? ? zone.sm_zone_id.to_s : zone.cl_zone_id.to_s), "/aislemaintenance?id="+ zone.id.to_s
    add_breadcrumb "Aisle:" + (aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id.to_s: aisle.cl_aisle_id), "/baysmaintenance?id="+ aisle.id.to_s 
    @warehouse = warehouse.cl_warehouse_id 
+   @warehouse_description = warehouse.description
 end 
 end

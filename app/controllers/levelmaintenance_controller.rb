@@ -163,6 +163,7 @@ class LevelmaintenanceController < ApplicationController
    add_breadcrumb "Aisle:" + (aisle.cl_aisle_id.blank? ?aisle.sm_aisle_id.to_s: aisle.cl_aisle_id), "/baysmaintenance?id="+ aisle.id.to_s
    add_breadcrumb "Bay:" + (bay.cl_bay_id.blank? ?bay.sm_bay_id.to_s: bay.cl_bay_id), "/levelmaintenance?id="+ bay.id.to_s
    @warehouse = warehouse.cl_warehouse_id
+   @warehouse_description = warehouse.description
   end   
 
 end

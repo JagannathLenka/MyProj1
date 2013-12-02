@@ -278,7 +278,7 @@ class AislemaintenanceController < ApplicationController
    zone  = Zone.find_by_id(params["id"].to_i)
    warehouse = Warehouse.find_by_id(zone.warehouse_id)
    @warehouse = warehouse.cl_warehouse_id
-
+   @warehouse_description = warehouse.description
    add_breadcrumb warehouse.cl_warehouse_id, "/zonemaintenance?id="+ warehouse.id.to_s
    add_breadcrumb zone.cl_zone_id.blank? ? zone.sm_zone_id: zone.cl_zone_id, "/aislemaintenance?id="+ zone.id.to_s
 end 

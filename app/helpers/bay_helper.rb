@@ -67,11 +67,23 @@ module BayHelper
 
         output=     '</tr><tr>                      
                      <td> 
-                       <div  style="width:80px; height:43px; float:left"> </div> 
+                       <div  style="width:80px; height:38px; float:left"> </div> 
                    </td>'
        return output               
   end
 
+ def aisle_divider_placeholder
+
+       output = '</tr>
+                    <td>              
+                     <div  style="width:80px; height:4px; float:left"> </div>            
+                  </td>
+                 </tr>
+                <tr> '
+       
+       return output
+   
+ end
   
 
  def aisle_divider
@@ -109,7 +121,7 @@ module BayHelper
                        </tr>
                        <tr>  
                           <td>
-                            <div> <hr color="yellow" style="margin:0px; height:1px"></div>   
+                            <div> <hr color="yellow" style="margin:0px; height:2px; border:0px"></div>   
                           </td>
                        </tr>  
                        <tr>
@@ -138,8 +150,8 @@ module BayHelper
                          ' style="background-color:'  + (bayvalue[:priority_bay]=='Highx' ? "#FFFF99" : "white").to_s + '" >' + 
                                 selected_bay(bayvalue).to_s  +    
                                 bay_type(bayvalue).to_s +            
-                         '<label id="'+ bay.to_s + '_label" ' +
-                                 'style="align:center">' + bayvalue[:customerid].to_s + '</label>' +           
+                         '<span id="'+ bay.to_s + '_label" ' +
+                                 'class="label label-info pull-right"><h6>' + bayvalue[:customerid].to_s + '</h6></span>' +           
                      '</div>
                   </td>'    
        return output  
@@ -151,7 +163,7 @@ module BayHelper
   def left_open aisle, aislevalue
 
        
-       BayHelper.output_aisle +=  (aisle_header aisle, aislevalue ) 
+       BayHelper.output_aisle +=  aisle_header aisle, aislevalue  
        BayHelper.output_bay   +=   drive_path 
 
        BayHelper.output_aisle +=  aisle_placeholder
@@ -169,6 +181,8 @@ module BayHelper
     
        output = ''
 
+           BayHelper.output_aisle += aisle_divider_placeholder
+           
            #Aisle Divider      
            BayHelper.output_bay += aisle_divider       
             
@@ -191,20 +205,21 @@ module BayHelper
 
        #Aisle Divider
       
+           BayHelper.output_aisle += aisle_divider_placeholder
            BayHelper.output_bay += aisle_divider       
            BayHelper.output_aisle += aisle_placeholder 
  
            aislevalue["row"]["L"].to_a.each do |bay,bayvalue|         
-               BayHelper.output_bay += (bay_details bay, bayvalue)              
+               BayHelper.output_bay += bay_details bay, bayvalue              
            end          
 
-           BayHelper.output_aisle+= (aisle_header aisle, aislevalue)  
+           BayHelper.output_aisle+= aisle_header aisle, aislevalue  
            BayHelper.output_bay+=   drive_path 
            BayHelper.output_aisle += aisle_placeholder
    
            #Aisle details
            aislevalue["row"]["R"].to_a.each do |bay,bayvalue|        
-             BayHelper.output_bay += (bay_details bay, bayvalue)       
+             BayHelper.output_bay += bay_details bay, bayvalue      
            end          
          return 
        end        
