@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
   add_index "levels", ["bay_id"], :name => "index_levels_on_bay_id"
 
   create_table "locationerrors", :force => true do |t|
+    t.string   "client_id"
     t.integer  "transaction_id"
     t.integer  "sequence_no"
     t.string   "file_name"
