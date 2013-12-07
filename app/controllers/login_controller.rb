@@ -10,7 +10,7 @@ class LoginController < ApplicationController
   
   def create
  
-   newuser = User.where(user_id:params[:txtuid]).first
+   newuser = User.where(user_id: params[:txtuid]).first
       if newuser.nil?
            
            #flash[:notice] = "Incorrect User"
