@@ -267,10 +267,10 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
     t.string   "lock_code"
     t.string   "location_priority"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "positions", :force => true do |t|
