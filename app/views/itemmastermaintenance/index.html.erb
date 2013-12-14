@@ -16,18 +16,20 @@
 	var lastsel;
 </script>
 <%end%>
-<% if params[:lightweight] != "yes" %>
+	<%= render "shared/menu" %>
+	<h3><div class="label label-primary">Item Master</h3>
 
-		<%= render "shared/menu" %>
-		<div align="center"><a href="/warehousemaintenance" >
-		<h1>Warehouse: <%= @warehouse%></h1></a>
+<div>
+	<table id=item_list></table>
+	<div id=item_pager></div>
+	<%= raw(item_jqgrid) %>
 </div>
-<div style="margin-left: 30px;">
-<h2>Items to be Slotted:  <%= render_breadcrumbs %></h2><br>
 
-<%end%>
-<table id=item_list></table>
-<div id=item_pager></div>
+<div style="float: left">
+<span>
+  <%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'file' %>
+  <%= submit_tag 'Upload File'%>
+<% end %>
 </div>
-<%= raw(item_jqgrid) %>
-<br />
+</span>

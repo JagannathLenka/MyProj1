@@ -10,8 +10,8 @@ include JqgridsHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
-      :width =>1200,
+      :height=> 'auto',
+      :width => 'auto',
       
     
       :colNames => ['Id','Client Id','UserId','Name','Password','Email Id','Phone(work)','Phone(mobile)','Status','Last Login','Attribute1','Attribute2','Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'],
@@ -42,6 +42,8 @@ include JqgridsHelper
       :rowList => [10, 20, 30],
       :sortname => 'client_id',
       :sortorder => 'asc',
+      :shrinkToFit => true,
+      :autowidth => true,
       :viewrecords => true,
       :caption => 'User Maintenance',
       :closeAfterEdit => true,

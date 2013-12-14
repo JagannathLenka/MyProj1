@@ -31,7 +31,7 @@ module WarehousemaintenanceHelper
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 'auto',
-      :width => 1200,
+      :width => 'auto',
       
       :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Location','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [

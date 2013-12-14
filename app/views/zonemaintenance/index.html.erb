@@ -5,12 +5,13 @@
 </script>
 <%end%>
 <%= render "shared/menu" %>
-<div style="margin-left: 30px;">
-<%= render"shared/header" %>
-Listing Zones For: <%= render_breadcrumbs %>
-<table id=zone_list></table>
-<div id=zone_pager></div>
+<div>
+	<%= render"shared/header" %>
+	<p>Listing Zones For: <%= render_breadcrumbs %></p>
+	<table id=zone_list></table>
+	<div id=zone_pager></div>
+	<%= raw(zone_jqgrid) %>
 </div>
-<%= raw(zone_jqgrid) %>
+
 <br />
 

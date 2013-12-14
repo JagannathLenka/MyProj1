@@ -5,12 +5,17 @@ class LocationmaintenanceController < ApplicationController
   def index
     get_header_details  if !request.xhr?
     search_string = '1 = 1'
+    
     if !params[:warehouse_id].nil? 
       warehouse = Warehouse.find(params[:warehouse_id])
       @warehouse = warehouse.cl_warehouse_id
+     @warehouse_description = warehouse.description
     else
       zone = Zone.find(params[:zone_id])
+      warehouse = Warehouse.find(zone.warehouse_id)
+      @warehouse_description = warehouse.description
       @warehouse = zone.cl_warehouse_id
+     
       search_string = "cl_zone_id = '" +  zone.cl_zone_id + "'"
     end
     

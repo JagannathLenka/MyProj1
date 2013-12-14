@@ -18,8 +18,8 @@ module AislemaintenanceHelper
       lightweight = "no"
       id  = params["id"]
       url = "/aislemaintenance?id=" +  id
-      height = 300 
-      width = 1100   
+      height = 'auto' 
+      width =  'auto' 
    end 
     editcheckfunc = 'function(postdata, formid) 
               {
@@ -70,11 +70,11 @@ module AislemaintenanceHelper
                                        
 
     grid = [{
-      :url => url,
+      :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> height,
-      :width => width,
+      :height=> 'auto',
+      :width => 'auto',
       
       :colNames => ['Id','Sequence', 'Aisle','Description','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
         'Warehouse','Bays/Aisle','no_of_bays_aisle_hidden','Levels/Aisle','no_of_levels_aisle_hidden',
@@ -110,6 +110,8 @@ module AislemaintenanceHelper
       :rowList => [10, 20, 30],
       :sortname => 'sm_aisle_id',
       :sortorder => 'asc',
+      :shrinkToFit => true,
+      :autowidth => true,
       :viewrecords => true,
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
@@ -122,7 +124,7 @@ module AislemaintenanceHelper
     pager_button = [:navButtonAdd, "#aisle_pager", 
                    {:caption => 'Show Layout', :onClickButton => showLayout.to_json_var }]
                    
-    copy_button = [:navButtonAdd, "#aisle_pager", {:caption => 'Copy to other aisle', :onClickButton => copyrowfunc.to_json_var }]               
+    copy_button = [:navButtonAdd, "#aisle_pager", {:caption => 'Copy aisle', :onClickButton => copyrowfunc.to_json_var }]               
 
     jqgrid_api 'aisle_list', grid, pager, pager_button, copy_button, options
 

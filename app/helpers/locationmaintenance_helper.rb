@@ -44,7 +44,8 @@ module LocationmaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> 'auto',
+      :width=> 'auto',
       
       :colNames => ['Id','Sequence','Location','sm_pos_id', 'Position', 'sm_level_id','Level','sm_bay_id', 'Bay',
                     'sm_aisle_id','Aisle','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode','Client Id',
@@ -94,6 +95,8 @@ module LocationmaintenanceHelper
       :sortname => 'sm_loc_id',
       :sortorder => 'asc',
       :viewrecords => true,
+      :shrinkToFit => true,
+      :autowidth => true,
       :caption => 'Location Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,

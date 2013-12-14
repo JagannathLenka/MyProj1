@@ -16,15 +16,15 @@
 	var lastsel;
 </script>
 <%end%>
-<% if params[:lightweight] != "yes" %>
 
-<%= render "shared/menu" %>
-<div style="margin-left: 30px;">
-<%= render"shared/header" %>
-Listing Aisles For:  <%= render_breadcrumbs %>
+<% if params[:lightweight] != "yes" %>
+	<%= render "shared/menu" %>
+	<%= render"shared/header" %>
+	<p>Listing Aisles For:  <%= render_breadcrumbs %></p>
 <%end%>
-<table id=aisle_list></table>
-<div id=aisle_pager></div>
+<div>	
+	<table id=aisle_list></table>
+	<div id=aisle_pager></div>
+	<%= raw(aisle_jqgrid) %>
 </div>
-<%= raw(aisle_jqgrid) %>
 <br />

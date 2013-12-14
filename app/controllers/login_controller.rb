@@ -4,7 +4,8 @@ class LoginController < ApplicationController
    def index
     if params["logout"] == "yes"
       cookies.delete :userid
-      
+      cookies.delete :client_id
+      cookies.delete :last_url
     end
   end
   
