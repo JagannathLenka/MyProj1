@@ -58,6 +58,8 @@ module WarehousemaintenanceHelper
       :rowList => [10, 20, 30],
       :sortname => 'id',
       :sortorder => 'asc',
+      :shrinkToFit => true,
+      :autowidth => true,
       :viewrecords => true,
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,
