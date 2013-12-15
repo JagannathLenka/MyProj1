@@ -15,8 +15,8 @@ module BaysmaintenanceHelper
       lightweight = "no"
       id  = params["id"]
       url = "/baysmaintenance?id=" +  id
-      height = 300 
-      width = 1100   
+      height = 'auto' 
+      width = 'auto' 
    end 
     
     
@@ -65,7 +65,8 @@ module BaysmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> height,
+      :width=> width,
       
      
       :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','PriorityBay','Sequence No.','Attribute6','Attribute7','Attribute8'],
@@ -101,6 +102,8 @@ module BaysmaintenanceHelper
       :sortname => 'id',
       :sortorder => 'asc',
       :viewrecords => true,
+      :shrinkToFit => true,
+      :autowidth => true,
       :caption => 'Bay Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,

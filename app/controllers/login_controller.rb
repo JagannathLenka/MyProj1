@@ -4,13 +4,14 @@ class LoginController < ApplicationController
    def index
     if params["logout"] == "yes"
       cookies.delete :userid
-      
+      cookies.delete :client_id
+      cookies.delete :last_url
     end
   end
   
   def create
  
-   newuser = User.where(user_id:params[:txtuid]).first
+   newuser = User.where(user_id: params[:txtuid]).first
       if newuser.nil?
            
            #flash[:notice] = "Incorrect User"

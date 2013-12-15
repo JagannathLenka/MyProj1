@@ -31,11 +31,13 @@ module ZonemaintenanceHelper
                    }"                             
 
     grid = [{
+      
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
-      :width => 1100,
+      :height=> 'auto',
+      :width => 'auto',
+      :shrinkToFit => false,
                    
       :colNames => ['Id','Sequence','Zone','Description','Client Id','sm_warehouse_id','Warehouse','warehouse_id', 'Aisles/Zone', 'no_of_aisles_zone_hidden',  'Bays/Aisle','Levels/Aisle', 'Sequence Type', 'Sequence No.', 'Attribute3','Attribute4','Attribute5','Attribute6','Attribute7','Attribute8'], 
       :colModel  => [
@@ -70,6 +72,8 @@ module ZonemaintenanceHelper
       :sortname => 'sm_zone_id',
       :sortorder => 'asc',
       :viewrecords => true,
+      :shrinkToFit => true,
+      :autowidth => true,
       :caption => 'Zone Maintenance',
       :reloadAfterEdit => true,
       :onSelectRow => selectrowfunc.to_json_var }]

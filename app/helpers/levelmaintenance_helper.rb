@@ -47,7 +47,8 @@ module LevelmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> 'auto',
+      :width=> 'auto',
       
       :colNames => ['Id','Sequence','Level','Description','Clent Id','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Sequence No','Attribute2','Attribute3','PriorityLevel','Attribute5','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
@@ -83,6 +84,8 @@ module LevelmaintenanceHelper
       :rowList => [10, 20, 30],
       :sortname => 'sm_level_id',
       :sortorder => 'asc',
+      :shrinkToFit => true,
+      :autowidth => true,
       :viewrecords => true,
       :caption => 'Level Maintenance',
       :multiselect => true,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131101021522) do
+ActiveRecord::Schema.define(:version => 20131207010259) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -88,6 +88,22 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.string   "lastname_of_person"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "itemmasters", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
@@ -141,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
   add_index "levels", ["bay_id"], :name => "index_levels_on_bay_id"
 
   create_table "locationerrors", :force => true do |t|
+    t.string   "client_id"
     t.integer  "transaction_id"
     t.integer  "sequence_no"
     t.string   "file_name"
@@ -250,10 +267,10 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
     t.string   "lock_code"
     t.string   "location_priority"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "positions", :force => true do |t|
@@ -294,11 +311,10 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
-
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
+    t.string   "prffered_warehouse"
     t.string   "preffered_zone"
     t.string   "preffered_aisle"
     t.string   "preffered_bay"
@@ -318,7 +334,6 @@ ActiveRecord::Schema.define(:version => 20131101021522) do
     t.string   "attribute8"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.string   "preffered_warehouse"
     t.integer  "quantity_to_be_slotted"
   end
 

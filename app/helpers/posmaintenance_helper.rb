@@ -24,7 +24,8 @@ module PosmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> 'auto',
+      :width=>'auto',
       
       :colNames => ['Id','Sequence', 'Position','Description','sm_level_id','Level','sm_bay_id', 'Bay',
         'Client Id','sm_aisle_id','Aisle','level_id','sm_zone_id','Zone', 
@@ -66,6 +67,8 @@ module PosmaintenanceHelper
       :sortname => 'sm_pos_id',
       :sortorder => 'asc',
       :viewrecords => true,
+      :shrinkToFit => true,
+      :autowidth => true,
       :caption => 'Position Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,

@@ -4,15 +4,14 @@
 	var lastsel;
 </script>
 <%end%>
-<%= render "shared/menu" %>
-<div style="margin-left: 20px;">
-<%= render"shared/header" %>
-Listing Levels - <%= render_breadcrumbs %>
-<table id=level_list></table>
-<div id=level_pager></div>
+	<%= render "shared/menu" %>
+	<%= render"shared/header" %>
+<div>
+	<p>Listing Levels for: <%= render_breadcrumbs %> </p>
+	<table id=level_list></table>
+	<div id=level_pager></div>
+	<%= raw(level_jqgrid) %>
 </div>
-
-<%= raw(level_jqgrid) %>
 
 <br />
 

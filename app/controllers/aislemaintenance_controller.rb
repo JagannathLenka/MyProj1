@@ -73,7 +73,6 @@ class AislemaintenanceController < ApplicationController
          @error = params[:cl_aisle_id]+ ' ' + aisles.errors.values[0][0] if aisles.errors.count > 0 
          add_bays_to_aisle aisles if aisles.errors.count <= 0 
          
-       
   when "del"
               Aisle.destroy(params[:id].to_i)   
               

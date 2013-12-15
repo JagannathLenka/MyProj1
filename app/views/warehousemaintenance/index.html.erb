@@ -1,18 +1,19 @@
 <% provide(:title, 'Warehouse Maintenance') %>
 <% content_for :head do %>
 <script>
-	var lastsel;
-	   	 		 
+	var lastsel;	   	 		 
 </script>
+
 <%end%>
 <%= render "shared/menu" %>
-<div style="margin-left: 20px;">
-
-<table id=warehouse_list></table>
-<div id=warehouse_pager ></div>
+<h3><div class="label label-primary"> List of Warehouse</div></h3>
+<div>
+	<table id=warehouse_list></table>
+	<div id=warehouse_pager ></div>
+	<%= raw(warehouse_jqgrid) %>
 </div>
 
-<%= raw(warehouse_jqgrid) %>
+
 
 <br />
 

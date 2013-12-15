@@ -81,6 +81,7 @@ def check_baytype bayvalue
                                  bayvalue.cl_warehouse_id, bayvalue.cl_zone_id , bayvalue.cl_aisle_id, bayvalue.cl_bay_id, 0).first
         return (locations.nil? ? 'bay_Empty' : 'bay')
  
+
 end
 
 

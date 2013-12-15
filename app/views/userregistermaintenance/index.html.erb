@@ -1,0 +1,15 @@
+<% provide(:title, 'Userregister Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;
+	   	 		 
+</script>
+<%end%>
+<%= render "shared/menu" %>
+<div>
+	<table id=userregister_list></table>
+	<div id=userregister_pager ></div>
+	<%= raw(userregister_jqgrid) %>
+</div>
+<br />
+

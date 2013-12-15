@@ -62,7 +62,6 @@ class ZonemaintenanceController < ApplicationController
            zone.save
            @error = params[:cl_zone_id]+ ' ' + zone.errors.values[0][0] if zone.errors.count > 0 
            add_aisles_to_zone zone if zone.errors.count <= 0 
-           
   
             when "del"
                zone = Zone.destroy(params[:id].to_i) 

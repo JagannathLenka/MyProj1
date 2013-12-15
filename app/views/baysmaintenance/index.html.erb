@@ -6,18 +6,16 @@
 <%end%>
 
 <% if params[:lightweight] != "yes" %>
-<%= render "shared/menu" %>
-<div style="margin-left: 20px;">
- <%= render"shared/header" %>
-Listing bays For:  <%= render_breadcrumbs %><br>
+	<%= render "shared/menu" %>
+ 	<%= render"shared/header" %>
+	<p>Listing bays For:  <%= render_breadcrumbs %></p>
 <% end %>
 
-<table id=bays_list></table>
-<div id=bays_pager></div>
+<div>
+	<table id=bays_list></table>
+	<div id=bays_pager></div>
+	<%= raw(bays_jqgrid) %>
 </div>
-
-<%= raw(bays_jqgrid) %>
-
 <br />
 
 

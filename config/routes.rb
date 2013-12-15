@@ -1,7 +1,11 @@
 MyProj1::Application.routes.draw do
   get  'login/aboutus'  => 'login#aboutus' 
+  get  'login/contactus' => 'login#contactus'
+  get  'userregister/thanks' => 'userregister#thanks'
   post 'locationmaintenance/upload/' => 'locationmaintenance#upload'
-  resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance, :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :client
+  post 'itemmastermaintenance/upload/' => 'itemmastermaintenance#upload'
+  
+  resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister,:userregistermaintenance, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance, :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :client
 
 
   
