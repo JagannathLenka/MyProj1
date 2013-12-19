@@ -30,7 +30,7 @@ module WarehousemaintenanceHelper
       :url => '/warehousemaintenance/',
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> '100%',
+      :height=> 'auto',
       :width => 'auto',
       
       :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Location','Attribute5','Attribute6','Attribute7','Attribute8'],

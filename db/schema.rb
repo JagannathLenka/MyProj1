@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
   add_index "levels", ["bay_id"], :name => "index_levels_on_bay_id"
 
   create_table "locationerrors", :force => true do |t|
+    t.string   "client_id"
     t.integer  "transaction_id"
     t.integer  "sequence_no"
     t.string   "file_name"
@@ -267,10 +268,10 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
     t.string   "lock_code"
     t.string   "location_priority"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "positions", :force => true do |t|
@@ -311,11 +312,10 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
-
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
+    t.string   "prffered_warehouse"
     t.string   "preffered_zone"
     t.string   "preffered_aisle"
     t.string   "preffered_bay"
@@ -333,7 +333,12 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
+<<<<<<< HEAD
     t.string   "preffered_warehouse"
+=======
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+>>>>>>> 0123c305689b7987a4abfbe9e1b3168537ef04a6
     t.integer  "quantity_to_be_slotted"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
