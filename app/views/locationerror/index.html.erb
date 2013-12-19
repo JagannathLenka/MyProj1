@@ -4,16 +4,12 @@
 	var lastsel;
 </script>
 <%end%>
-<% if params[:lightweight] != "yes" %>
-
-		<%= render "shared/menu" %>
-		<div align="center"> 
-		<h1>Location Error</h1></a>
-</div>
+	
+	<%= render "shared/menu" %>
+	<h3><div class="label label-primary">Locaiton Error</div></h3><div>
 <div>
-<%end%>
-<table id=locationerror_list></table>
-<div id=locationerror_pager></div>
+	<table id=locationerror_list></table>
+	<div id=locationerror_pager></div>
+	<%= raw(locationerror_jqgrid) %>
 </div>
-<%= raw(locationerror_jqgrid) %>
-<br />
+

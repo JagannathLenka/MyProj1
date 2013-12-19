@@ -174,7 +174,9 @@ class LocationmaintenanceController < ApplicationController
          update_location_details loc, params[:cl_warehouse_id], params[:cl_barcode]           
              
    when "del"
-               loc =  Location.destroy(params[:id].to_i)
+       params[:id].split(',').each do |id|
+            Location.destroy(id.to_i)
+       end
            
    end
     
@@ -229,7 +231,7 @@ class LocationmaintenanceController < ApplicationController
              bay = Bay.where('cl_warehouse_id = ? and sm_zone_id =? and sm_aisle_id = ? and sm_bay_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id, pos.sm_bay_id).first
              level = Level.where('cl_warehouse_id = ? and sm_zone_id =? and sm_aisle_id =? and sm_bay_id =? and sm_level_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id, pos.sm_bay_id, pos.sm_level_id).first
              loc_seq_no = zone.attribute2 + '-' + aisle.attribute1 + '-' + bay.attribute5 + '-' +  level.attribute1 + '-' + pos.attribute3
-             loc_priority  = '00' + '-' + get_rating(aisle.attribute4) + '-' +get_rating(bay.attribute4) + '-' + get_rating(level.attribute4) + '-' + get_rating(pos.attribute4)
+             loc_priority  = '00' + '-' + Location.get_rating(aisle.attribute4) + '-' +Location.get_rating(bay.attribute4) + '-' + Location.get_rating(level.attribute4) + '-' + Location.get_rating(pos.attribute4)
              
              loc.update_attributes({
             
@@ -251,29 +253,8 @@ class LocationmaintenanceController < ApplicationController
 
  end
 
-  #
-  # Get the priority for the rating
-  #
-  def get_rating (priority)
-    
-     location_rating = '00'
-      
-      case priority 
-          when "Default"
-            location_rating = '00'
-          when "High"
-             location_rating = '09'
-          when "Medium"
-             location_rating = '05'
-          when "Low"
-             location_rating = '02'
-          else
-             location_rating = '00'
-      end
-     return location_rating
-     
-  end
-
+ 
+  
  def get_header_details
 
    if cookies[:userid].nil? 

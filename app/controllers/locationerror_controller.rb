@@ -50,7 +50,10 @@ class LocationerrorController < ApplicationController
                                        })
                                        
     when "del"  
-       Locationerror.destroy(params[:id].to_i) 
+ 
+       params[:id].split(',').each do |id|
+          Locationerror.destroy(id.to_i)
+       end
        
     when "proc"
        

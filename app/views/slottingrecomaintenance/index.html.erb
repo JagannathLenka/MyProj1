@@ -16,19 +16,13 @@
 	var lastsel;
 </script>
 <%end%>
-<% if params[:lightweight] != "yes" %>
 
-		<%= render "shared/menu" %>
-		<div align="center"><a href="/warehousemaintenance" >
-		<h1>Warehouse: <%= @warehouse%></h1></a>
-</div>
+	
+	<%= render "shared/menu" %>
+	<h3><div class="label label-primary">Items to be Slotted</div></h3>
+
 <div>
-<h2>Items to be Slotted:  <%= render_breadcrumbs %></h2><br>
-
-<%end%>
-<%= @to_be_slotted_item_list %>
-<table id=slotting_list></table>
-<div id=slotting_pager></div>
+	<table id=slotting_list></table>
+	<div id=slotting_pager></div>
+	<%= raw(slotting_jqgrid) %>
 </div>
-<%= raw(slotting_jqgrid) %>
-<br />

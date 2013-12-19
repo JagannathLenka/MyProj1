@@ -46,6 +46,7 @@ module LocationmaintenanceHelper
       :mtype => 'GET',
       :height=> 'auto',
       :width=> 'auto',
+      :scrollbar=> true,
       
       :colNames => ['Id','Sequence','Location','sm_pos_id', 'Position', 'sm_level_id','Level','sm_bay_id', 'Bay',
                     'sm_aisle_id','Aisle','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','sm_barcode', 'Barcode','Client Id',
@@ -97,6 +98,7 @@ module LocationmaintenanceHelper
       :viewrecords => true,
       :shrinkToFit => true,
       :autowidth => true,
+      :multiselect => true,
       :caption => 'Location Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,

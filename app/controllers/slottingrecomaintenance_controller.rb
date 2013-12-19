@@ -46,7 +46,7 @@ class SlottingrecomaintenanceController < ApplicationController
                                      :preffered_level => (params[:preffered_level].blank? ? '*'         : params[:preffered_level]),
                                      :preffered_position => (params[:preffered_position].blank? ? '*'   : params[:preffered_position]),
                                      :preffered_slotting_rules => (params[:preffered_slotting_rules].blank? ? '*':  params[:preffered_slotting_rules]),
-                                     :quantity_to_be_slotted => params[:quantity_to_be_slotted],
+                                     :quantity_to_be_slotted => (params[:quantity_to_be_slotted].blank? ? 0: params[:quantity_to_be_slotted]),
                                      :slotting_status => params[:slotting_status]
                             )
           
@@ -89,9 +89,10 @@ def sort_items(item_ids)
     sorted = Array.new(0)
 
    to_be_slotted_item_list = Slottingrecommendation
-                  .joins("INNER JOIN itemmasters on 
+                  .joins("LEFT OUTER JOIN itemmasters on 
                            slottingrecommendations.item_number = itemmasters.item_number")
-                  .select("slottingrecommendations.*, 
+                  .select("slottingrecommendations.*,
+                           itemmasters.item_number as item_master_item,  
                            itemmasters.velocity as velocity, 
                            itemmasters.attribute1 as putaway_type,
                            itemmasters.daily_forecast as daily_forecast")
@@ -137,9 +138,22 @@ def sort_items(item_ids)
           when "C"
           
         end
-        logger.debug selected_location
+        logger.debug to_be_slotted_item
         slotting_item = location_selection(position_requirement,location_requirement,selected_location) 
-        preferred_location =  slotting_item.nil? ? "No suitable location " :   slotting_item.cl_barcode             
+        
+        case 
+                  
+        when to_be_slotted_item["item_master_item"].nil?
+              preferred_location =  "Invalid Item"  
+
+        when slotting_item.nil?
+            preferred_location =   "No suitable location "  
+              
+        else                
+        preferred_location =  slotting_item.cl_barcode  
+        
+        end
+                    
         slotting_reco = Slottingrecommendation.find(to_be_slotted_item["id"].to_i)
         slotting_reco.update_attributes({ :location_recommended => preferred_location })  
         selected_location += (i== 0) ? ("'" + preferred_location + "'") : (" , '" + preferred_location + "'" )
@@ -185,7 +199,7 @@ def sort_items(item_ids)
                                      :preffered_level => (params[:preffered_level].blank? ? '*'         : params[:preffered_level]),
                                      :preffered_position => (params[:preffered_position].blank? ? '*'   : params[:preffered_position]),
                                      :preffered_slotting_rules => (params[:preffered_slotting_rules].blank? ? '*':  params[:preffered_slotting_rules]),
-                                     :quantity_to_be_slotted => params[:quantity_to_be_slotted],
+                                     :quantity_to_be_slotted => (params[:quantity_to_be_slotted].blank? ? 0: params[:quantity_to_be_slotted]),
                                      :slotting_status => params[:slotting_status]
                                   })
                                   

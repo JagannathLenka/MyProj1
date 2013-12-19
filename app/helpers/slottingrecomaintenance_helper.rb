@@ -6,8 +6,6 @@ module SlottingrecomaintenanceHelper
     options = {:on_document_ready => true, :html_tags => false}
       id  = params["id"]
       url = "/slottingrecomaintenance" 
-      height = 300 
-      width = 1100   
     
     
     addcheckfunc = 'function(postdata, formid) {return[true, " "]}'
@@ -47,8 +45,8 @@ module SlottingrecomaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> height,
-      :width => width,
+      :height=> 'auto',
+      :width => 'auto',
       
       :colNames => ['Id', 'Item No','Quantity to be slotted','Preffered Warehouse', 'Preffered  Zone' ,
         'Preffered Aisle','Preffered Bay','Preffered Level','Preffered Position','Preffered Slottingrules',
@@ -74,6 +72,8 @@ module SlottingrecomaintenanceHelper
       :rowList => [10, 20, 30],
       :sortname => 'id',
       :sortorder => 'asc',
+      :shrinkToFit => true,
+      :autowidth => true,
       :viewrecords => true,
       :caption => 'Slottingrecommendation Maintenance',
       :reloadAfterEdit => true,

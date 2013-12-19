@@ -51,7 +51,7 @@ module LocationerrorHelper
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,
-      :width => 1200,
+      :width => 'auto',
     
       :colNames => ['Id','FileName', 'TransactionId','SequenceNo','ErrorCode', 'ErrorDescription', 'Warehouse','Barcode','CurrentItem','CurrentQuantity','Totalpics','LockCode','Maximum Quantity','Minimum Quantity','Status'],
       :colModel  => [
@@ -79,6 +79,8 @@ module LocationerrorHelper
       :sortname => 'file_name',
       :sortorder => 'desc',
       :viewrecords => true,
+      :shrinkToFit => true,
+      :autowidth => true,
       :caption => 'LocationError',
       :reloadAfterEdit => true,
       :multiselect => true,
