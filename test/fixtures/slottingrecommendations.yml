@@ -3,7 +3,7 @@
 one:
   client_id: MyString
   item_number: MyString
-  quanttity_to_be_slotted: 1
+  quantity_to_be_slotted: 1
   prffered_warehouse: MyString
   preffered_zone: MyString
   preffered_aisle: MyString
@@ -26,7 +26,7 @@ one:
 two:
   client_id: MyString
   item_number: MyString
-  quanttity_to_be_slotted: 1
+  quantity_to_be_slotted: 1
   prffered_warehouse: MyString
   preffered_zone: MyString
   preffered_aisle: MyString

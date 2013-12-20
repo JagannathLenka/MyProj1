@@ -10,7 +10,6 @@ one:
   sm_zone_id: 1
   sm_warehouse_id: 1
   sm_barcode: MyString
-  level_id: 1
   cl_loc_id: MyString
   cl_pos_id: MyString
   cl_level_id: MyString
@@ -53,7 +52,6 @@ two:
   sm_zone_id: 1
   sm_warehouse_id: 1
   sm_barcode: MyString
-  level_id: 1
   cl_loc_id: MyString
   cl_pos_id: MyString
   cl_level_id: MyString

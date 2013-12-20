@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  client_id: MyString
+  client_id: CL1
   sm_aisle_id: 1
   sm_zone_id: 1
   sm_warehouse_id: 1
   zone_id: 1
-  cl_aisle_id: MyString
+  cl_aisle_id: A1
   cl_zone_id: MyString
   cl_warehouse_id: MyString
   description: MyString
