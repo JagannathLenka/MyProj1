@@ -333,12 +333,7 @@ ActiveRecord::Schema.define(:version => 20131207010259) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-<<<<<<< HEAD
     t.string   "preffered_warehouse"
-=======
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
->>>>>>> 0123c305689b7987a4abfbe9e1b3168537ef04a6
     t.integer  "quantity_to_be_slotted"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
