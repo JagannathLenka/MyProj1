@@ -4,46 +4,46 @@
 <script>
            
          $(document).ready(function() {
-                          $('.carousel').carousel({
-                           interval: 2000
-                         })
-                 });
+			  $('.carousel').carousel({
+ 			  interval: 2000
+			 })
+		 });
      
-               function register(){
-                                        $('#register').load("/userregister"); 
-                                    $('#register').dialog({
-                                      height: 1000,
-                                      width: 800,
-                                      modal: true
-                                 })
-               }
-               
+	       function register(){
+					$('#register').load("/userregister"); 
+				    $('#register').dialog({
+		    	  	height: 1000,
+		      		width: 800,
+		      		modal: true
+				 })
+	       }
+	       
           function getCookie(c_name)
-                                        {
-                                        var c_value = document.cookie;
-                                        var c_start = c_value.indexOf(" " + c_name + "=");
-                                        if (c_start == -1)
-                                          {
-                                          c_start = c_value.indexOf(c_name + "=");
-                                          }
-                                        if (c_start == -1)
-                                          {
-                                          c_value = null;
-                                          }
-                                        else
-                                          {
-                                          c_start = c_value.indexOf("=", c_start) + 1;
-                                          var c_end = c_value.indexOf(";", c_start);
-                                          if (c_end == -1)
-                                          {
-                                        c_end = c_value.length;
-                                        }
-                                        c_value = unescape(c_value.substring(c_start,c_end));
-                                        }
-                                        return c_value;
-                                        }
+					{
+					var c_value = document.cookie;
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1)
+					  {
+					  c_start = c_value.indexOf(c_name + "=");
+					  }
+					if (c_start == -1)
+					  {
+					  c_value = null;
+					  }
+					else
+					  {
+					  c_start = c_value.indexOf("=", c_start) + 1;
+					  var c_end = c_value.indexOf(";", c_start);
+					  if (c_end == -1)
+					  {
+					c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+					return c_value;
+					}
 
-                function login() {
+	        function login() {
                                 
                                  $.post("/login",
                                        {
@@ -52,28 +52,28 @@
                                        },
                                        function(data,status)
                                        {
-                                                               if (data.substring(0,5) == "Error")
-                                                                               $("#Error").html(data.substring(6));        
-                                                               else
-                                                                       redirect_url = getCookie("last_url")
-                                                                       if (redirect_url == null) {
-                                                                               redirect_url = "/warehousemaintenance"
-                                                                       }
-                                                                       window.location.href=redirect_url;
-                                                                                       
+                               				if (data.substring(0,5) == "Error")
+                               						$("#Error").html(data.substring(6));	
+                               				else
+                               					redirect_url = getCookie("last_url")
+                               					if (redirect_url == null) {
+                               						redirect_url = "/warehousemaintenance"
+                               					}
+                               					window.location.href=redirect_url;
+                               							
                                        });                                   
                    }
                    
                    
           jQuery(function(){
-                          jQuery(window).keyup( function(e){ 
-                            if (e.keyCode == 13) {
-                                 login()
-                          }
-                                  });
-                  });
+			  jQuery(window).keyup( function(e){ 
+    			if (e.keyCode == 13) {
+         			login()
+         		 }
+  				});
+		  });
        
-               
+	       
 </script>
 
 <%end%>
@@ -81,8 +81,8 @@
 <%= render "shared/menu" %>
 
 <div id="container" style="float: left; height:220px; width:100%">
-        
-<div  id="left_image" style="float: left; height:220px; width:70% ; margin: 20px">
+	
+<div  id="left_image" style="float: left; height:220px; width:70% ; margin-top: 20px">
     <div class="bs-example" style="height:100%; width: 400px">
       <div id="carousel-example-generic" style="height:100%; width: 400px;" class="carousel slide" data-ride="carousel">
         
@@ -118,51 +118,52 @@
         </a>
       </div>
     </div>
-                                
-                                
+				
+				
 </div>
-        
-        <div id="right_login" style="float: left; height:600px; width:25%;">
-                
-                <div id="login_div" class="ui-corner-all" style="margin-top: 25px; border-width: 1px; height: 220px;  width: 100%; border-style: solid; border-color: grey;background-color: #F8F8FF;">
-                        <div class="btn-primary" style="float: left; height: 40px; width: 100%; color: white">Sign in</div>
-                                <div id="login" style="float:left; margin: 25px; width: 80%">
-                                <table width="100%">
-                                  <%= form_tag("/login", method: "post") do %>  
-                                  <tr>
-                                          <td>
-                                            <div style="margin-top:5px">        
-                                              <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"width:100%" ) %>
-                                      </div>        
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                    <div style="margin-top:5px">        
-                                      <%= password_field_tag(:txtpswd, nil, :placeholder=>"Password" , :class=>"form-control", :style=>"width:100%") %>
-                                    </div>        
-                                    </td>
-                                  </tr>
-                                <tr>
-                                          <td>
-                                          <div style="margin-top:5px">        
-                                      <%= button_to_function("Login", "login()", :class=>"btn btn-lg btn-primary btn-block", :style=>"width:100%") %>
-                                           </div>        
-                                   </td>
-                                   </tr>
-                                   <tr>                  
-                                   <td colspan="3">
-                                        <div id="Error" style="color: red"></div>
-                                                <% flash.each do |key, value| %>
-                                                  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
-                                                <% end %>
-                                   </td>
-                                  </tr>
-                                <% end %>
-                                </table>
-                        </div>
-                        
-                        </div>
-                        <div id="register" style="margin-top:20px "><a href="/userregister" >New User? Join our Beta</a></div>
-        </div>
+	
+	<div id="right_login" style="float: left; height:600px; width:25%;">
+		
+		<div id="login_div" class="ui-corner-all" style="margin-top: 25px; border-width: 1px; height: 220px;  width: 100%; border-style: solid; border-color: grey;background-color: #F8F8FF;">
+			<div class="btn-primary" style="float: left; height: 40px; width: 100%; color: white">Sign in</div>
+				<div id="login" style="float:left; margin: 25px; width: 80%">
+				<table width="100%">
+				  <%= form_tag("/login", method: "post") do %>  
+				  <tr>
+				  	<td>
+				  	  <div style="margin-top:5px">	
+				     	 <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"width:100%" ) %>
+				      </div>	
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>
+				    <div style="margin-top:5px">	
+				      <%= password_field_tag(:txtpswd, nil, :placeholder=>"Password" , :class=>"form-control", :style=>"width:100%") %>
+				    </div>	
+				    </td>
+				  </tr>
+				<tr>
+				  	<td>
+				  	<div style="margin-top:5px">	
+				      <%= button_to_function("Login", "login()", :class=>"btn btn-lg btn-primary btn-block", :style=>"width:100%") %>
+				   	</div>	
+				   </td>
+				   </tr>
+				   <tr>		  
+				   <td colspan="3">
+				        <div id="Error" style="color: red"></div>
+						<% flash.each do |key, value| %>
+						  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
+						<% end %>
+				   </td>
+				  </tr>
+				<% end %>
+				</table>
+			</div>
+			
+			</div>
+			<div id="register" style="margin-top:20px "><a href="/userregister" >New User? Join our Beta</a></div>
+	</div>
 </div>
+	
