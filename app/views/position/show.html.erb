@@ -2,29 +2,24 @@
 <% content_for :head do %> 
 	  <style>
 
-	  	 #position 			{ float: left; background: white; border-width:1px; height: 600px; width: 1100px; margin-left: 00px}
-	  	.level 				{ float: left; height: 30px; font-size: px; width: 100px;  border: 1px solid #000; border-right:5px solid black;};
+	  	.position 			{ float: left; background: white; border-width:1px; height: 600px; width: 80%; margin-left: 00px}
+	  	.level 				{ float: left; height: 30px; font-size: 14px; width: 100px;  border: 1px solid #000; border-right:5px solid black;};
 	  	.col				{ height: 17px; width: <%= @pos_width %>px;  border: 1px solid #000; border-right:1px solid black;}
 	  	.pos 				{ float: left; height: 30px; width: <%= @pos_width %>px;  border: 1px solid #000; border-right:5px solid black;background-color: #CCFF99;}
 	    .pos_Empty 			{ float: left; height: 30px; width: <%= @pos_width %>px;  border: 1px solid #000; border-right:5px solid black;background-color: white;}
-
-
 	    .pos_draggedhelper  { float: left; height: 30px; width: <%= @pos_width %>px;  border: 1px solid #000; border-right:5px solid black;background-color: #eec917;} 
-	    .orange				{ float: left; height: 30px; width: 80px;  border: 1px solid #000; border-right:5px solid black;background-color: orange;}
-	    .green				{ float: left; height: 30px; width: 80px;  border: 1px solid #000; border-right:5px solid black;background-color: green;}
-	    .red				{ float: left; height: 30px; width: 80px;  border: 1px solid #000; border-right:5px solid black;background-color: red;}
 	    .pos_divider 		{ float: left; height: 1px;  width: <%= @level_width %>px; border: 1px solid #999; background: black}
 	    .level_Empty        { float: left;  height: 15px; width: <%= @level_width %>px; border:1px solid #000; background: white}  
-		.bay                { float: center;  margin:auto; height: 20px; width: 80px; border: 1px solid #000; background: -webkit-gradient(linear, left top, right top, from(#888888), to(#F8F8F8));}
 		
 table tr td { 
-
-  font-size: 8px;
-  background: #DDD;
-  color: #47433F;
-  border-top: 0px solid #FFF;
-  vertical-align:text-middle;	  
+  font-size: 10px;
+  border-top: 0px solid #FFF; 
 }
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
 
 </style>
 
@@ -35,22 +30,6 @@ table tr td {
     pos_html_map = {}	          
 	$( init );
  
- $(document).ready(function(){  
-
-		    $('#zoom').click(function(){
-		    $('#location2').load("/position/"+ <%= @bay_id %> + '?zoom=yes'); 
-		    $('#location2').animate({ 'zoom': 1.2 }, 800);
-		    
-		    $('#location2').dialog({
-    	  	height: 500,
-      		width: 1100,
-      		modal: true
-    });
-					
-	});	    
-});
-
-  
  
 //
 
@@ -58,28 +37,17 @@ table tr td {
 function init() { 
  
  posHTML.setDragnDrop()
+ 
  //Tooltip
-   $(function() {
-    $( document ).tooltip({
-      position: {
-        my: "center bottom-5",
-        at: "center top",
-        using: function( position, feedback ) {
-          $( this ).css( position );
-          $( "<div>" )
-            .addClass( "arrow" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-        }
-      }
-    });
-  });
-  
+  $("a").tooltip('show')
+  $('a').tooltip({html: true})  
+  $("a").tooltip('hide')  
 }
 
 
 var posHTML = {
+
+
 	
 setDragnDrop: function setDragnDrop() { 
  
@@ -134,24 +102,24 @@ setDragnDrop: function setDragnDrop() {
 			  $("#"+pos).attr('title', oldTitle);
 			  $("#"+pos).attr('class',  oldClass);
 
-		  $.post("/position",
-		  				{
-		  					"position[event]": "update_posclass",
-		  					"position[dragpos_id]": pos,
-		  					"position[droppos_id]": $(this).attr('id')	 
-		  				},
-		  				function(data,status)
-		  				{
-		  					//window.location.reload();
-		  					if (data=='false')
-		  						{alert('Can not move Item due to preference mismatch');}
-							
-							$('#position').load('/position/'+ <%= @bay_id %>);
-		  								
-          				});
-          	
-		} 
-	} //ends the init function
+			  $.post("/position",
+			  				{
+			  					"position[event]": "update_posclass",
+			  					"position[dragpos_id]": pos,
+			  					"position[droppos_id]": $(this).attr('id')	 
+			  				},
+			  				function(data,status)
+			  				{
+			  					//window.location.reload();
+			  					if (data=='false')
+			  						{alert('Can not move Item due to preference mismatch');}
+								
+								$('#position').load('/position/'+ <%= @bay_id %>);
+			  								
+	          				});
+	          	
+			} 
+		} //ends the init function
 
 }
 
@@ -164,46 +132,91 @@ setDragnDrop: function setDragnDrop() {
 
 <div id="position" class="position">
 
-   <div align="center" class="bay"> Bay: <%= @cl_bay_id %> </div>
-   
+   <div class="label label-primary" style="float:left; height: 30px ; width: 100px"> <h4>Bay: <%= @cl_bay_id %></h4></div>
+	
+  <div class="btn-group pull-right" style="float:left;; margin-left:20px">
+	  <button class="btn btn-primary">Action</button>
+	  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <!-- dropdown menu links -->
+	    <li>
+	    	<a href="javascript:$('#position').load('/position/<%= @bay_id %>?item=Yes')">Item</a>
+	    	<a href="javascript:$('#position').load('/position/<%= @bay_id %>')">Barcode</a>
+	    </li>	
+	  </ul>
+	</div>
+	   
 
    <div style="float: left" id="location"> 
     <table border="0" style="border-collapse:collapse">
    	<% @levelhash.each do |level, levelvalue| %>
    
-		<tr> <td><div  class= "level" style="background-color: <%= levelvalue["level_properties"]["priority_level"] == "Yes" ?  "yellow" : "grey" %>" >
-			Level: <%= levelvalue["level_properties"]["customer_id"] %></div></td>
-		  <% if levelvalue.empty? %>
-		  	<td><div class="level_Empty"></div></td></tr>
-		  <% else %>
-		  <td>
-		  	
-		  	
-	    	  <% levelvalue["pos"].each do |pos, posvalue| %>
-	    	            
-	          			 
-			 	<div id="<%= pos %>" class="<%= posvalue[:pos_type] %>" title="<%= raw(poistion_tooltip(posvalue)) %>" >
-	   	    	  
-				   	    	 <% case posvalue[:pos_continue] %>
-				   	    	 <% when "Continue"%>
-				   	    	 <%= image_tag("continue.jpg", alt: "", :width => 40, :height => 10, :id => "continue")%>
-				   	    	 <% when "Break"%>
-				   	    	 <%= image_tag("break.jpg", alt: "", :width => 40, :height => 10, :id => "break")%>
-				   	    	 <% else %>
-				   	    	 <label id="<%= pos%>_label">  <%= posvalue[:customer_id] %> </label> 
-				   	    	 <% end %>	   	    	
-			   	    		 </div>
-			   	    	 
-					
-		   		<% end %></td></tr>
+		<tr> 
+			<td>
+
+				<% case levelvalue["level_properties"]["priority_level"] %>
+					<% when "High" %>
+						<div  class= "level label label-danger" >
+							
+					<% when "Medium"%>
+						<div  class= "level label label-warning" >
+
+					<% when "Low" %>
+						<div  class= "level label label-success" >
+
+					<% else %>
+						<div  class= "level label label-info" >
+
+				 	<% end %>
+						Level: <%= levelvalue["level_properties"]["customer_id"] %>
+					</div>
+				
+			</td>
+		  
+			<% if levelvalue.empty? %>
+			  	<td>
+			  		<div class="level_Empty">
+			  			
+			  		</div>
+			  	</td>
+		   <% else %>
+		  
+		  
+	    	<% levelvalue["pos"].each do |pos, posvalue| %>
+			    	            
+			        <td style="float:left">    			 
+					 	<div id="<%= pos %>" class="<%= posvalue[:pos_type] %>">  
+			   	    	  
+						   	    	 <% case posvalue[:pos_continue] %>
+							   	    	 <% when "Continue"%>
+							   	    	 <%= image_tag("continue.jpg", alt: "", :width => 40, :height => 10, :id => "continue")%>
+							   	    	 <% when "Break"%>
+							   	    	 <%= image_tag("break.jpg", alt: "", :width => 40, :height => 10, :id => "break")%>
+							   	    	 <% else %>
+							   	    	 
+							   	    	 <a href="#" data-toggle="tooltip" data-placement="bottom" title="<%= raw(poistion_tooltip(posvalue)) %>"> 							   	    	 
+								   	    	 <% if @show_item=="Yes"%>
+								   	    	 	<label id="<%= pos%>">  <%= posvalue[:item] %> </label> 
+								   	    	 <%else%>
+								   	    	 	<label id="<%= pos%>">  <%= posvalue[:customer_id] %> </label>	
+											 <%end%>							   	    	 	
+										 </a>										 
+						   	    	 
+						   	    	 <% end %>	   	    	
+					   	 </div>				   	    	 
+					</td>		
+		   	<% end %>
 	   		
-	   		<% end %>
-	   		<tr><td width="<%= @pos_width %>px"></td>
-	   			<td class= "pos_divider"><div class= "pos_divider"> </div></td>
-	   		</tr>
-    	 <% end %>
-    
-   
+	   	  <% end %>
+		</tr>
+
+   		<tr><td width="<%= @pos_width %>px"></td>
+   			<td class= "pos_divider"><div class= "pos_divider"> </div></td>
+   		</tr>
+    <% end %>
+
 </table>
 </div>
 

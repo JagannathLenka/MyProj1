@@ -149,13 +149,31 @@ module BayHelper
                                 selected_bay(bayvalue).to_s  +    
                                 bay_type(bayvalue).to_s +            
                          '<span id="'+ bay.to_s + '_label" ' +
-                                 'class="label label-info pull-right"><h6>' + bayvalue[:customerid].to_s + '</h6></span>' +           
+                                 getClass(bayvalue[:priority_bay] ) + '<h6><p style="width:20px">' + bayvalue[:customerid].to_s.center(4) + '</p></h6></span>' + 
+                                 
                      '</div>
                   </td>'    
        return output  
  end 
 
+ def getClass baytype
+   
+     case baytype
+     when "High"
+        return 'class="label label-danger pull-right">'
+           
+     when "Medium"
+        return 'class="label label-warning pull-right">' 
+  
+     when "Low"
+        return 'class="label label-success pull-right">'
+  
+     else
+        return 'class="label label-info pull-right">'
+  
+   end
 
+end
 
   #Left side open aisle 
   def left_open aisle, aislevalue
