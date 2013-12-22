@@ -1,8 +1,6 @@
 module BayHelper
 
-  @output_aisle = 'Jagannath'
-  @output_bay   = 'Jagannath'
-  
+
 
   def selected_bay(bayvalue)
     image_tag("pointer.jpg") if bayvalue[:customerid] == params["selectedbay"]

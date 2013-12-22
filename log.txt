@@ -99,3 +99,104 @@
 2013-12-20T16:23:36.483371+00:00 heroku[worker.1]: Process exited with status 1
 2013-12-20T16:23:36.498854+00:00 heroku[worker.1]: State changed from up to crashed
 2013-12-20T16:23:38.043611+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno= connect= service= status=503 bytes=
+2013-12-20T16:29:55.964513+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-20 16:29:55 +0000
+2013-12-20T16:29:55.976744+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-20 16:29:55 +0000
+2013-12-20T16:29:55.974416+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-20T16:29:55.987368+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=8ms service=51ms status=304 bytes=0
+2013-12-20T16:29:55.988949+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-20T16:29:55.996439+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=14ms service=61ms status=304 bytes=0
+2013-12-20T16:29:56.231908+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_0_aaaaaa_40x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=3ms service=57ms status=200 bytes=212
+2013-12-20T16:29:56.250707+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_f5f8f9_1x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=3ms service=79ms status=200 bytes=333
+2013-12-20T16:29:56.312125+00:00 app[web.1]: Started GET "/warehousemaintenance/?_search=false&nd=1387556997464&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-20 16:29:56 +0000
+2013-12-20T16:29:56.308445+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_6da8d5_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=4549
+2013-12-20T16:29:56.358126+00:00 app[web.1]: Completed 200 OK in 35ms (Views: 0.2ms | ActiveRecord: 8.3ms)
+2013-12-20T16:29:56.358126+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387556997464", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-20T16:29:56.358126+00:00 app[web.1]: Processing by WarehousemaintenanceController#index as JSON
+2013-12-20T16:29:56.366915+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=7ms status=200 bytes=5824
+2013-12-20T16:29:56.366951+00:00 heroku[router]: at=info method=GET path=/assets/fonts/glyphicons-halflings-regular.woff host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=8ms status=304 bytes=0
+2013-12-20T16:29:56.572313+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=31ms service=5ms status=304 bytes=0
+2013-12-20T16:30:01.330886+00:00 app[web.1]: Started GET "/itemmastermaintenance" for 68.231.32.83 at 2013-12-20 16:30:01 +0000
+2013-12-20T16:30:01.346996+00:00 app[web.1]:   Rendered itemmastermaintenance/index.html.erb within layouts/application (3.8ms)
+2013-12-20T16:30:01.346996+00:00 app[web.1]: Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+2013-12-20T16:30:01.346996+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.7ms)
+2013-12-20T16:30:01.346996+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as HTML
+2013-12-20T16:30:01.480158+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-20 16:30:01 +0000
+2013-12-20T16:30:01.490702+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-20 16:30:01 +0000
+2013-12-20T16:30:01.485993+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-20T16:30:01.495143+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-20T16:30:01.501371+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=5ms service=18ms status=304 bytes=0
+2013-12-20T16:30:01.489167+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=4ms service=22ms status=304 bytes=0
+2013-12-20T16:30:01.493938+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=9ms service=29ms status=304 bytes=0
+2013-12-20T16:30:01.511394+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=43ms status=304 bytes=0
+2013-12-20T16:30:01.730960+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387557002908&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-20 16:30:01 +0000
+2013-12-20T16:30:01.764739+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-20T16:30:01.764739+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387557002908", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-20T16:30:01.764739+00:00 app[web.1]: Completed 200 OK in 23ms (Views: 0.2ms | ActiveRecord: 19.8ms)
+2013-12-20T16:30:01.766303+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387557002908&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=39ms status=200 bytes=42
+2013-12-20T16:30:02.123706+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=134ms service=162ms status=304 bytes=0
+2013-12-20T16:30:06.187293+00:00 app[web.1]: Started GET "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-20 16:30:06 +0000
+2013-12-20T16:30:06.220163+00:00 app[web.1]:   Rendered shared/_menu.html.erb (1.0ms)
+2013-12-20T16:30:06.220163+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (4.0ms)
+2013-12-20T16:30:06.220163+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
+2013-12-20T16:30:06.220163+00:00 app[web.1]: Completed 200 OK in 15ms (Views: 8.2ms | ActiveRecord: 0.0ms)
+2013-12-20T16:29:40.380223+00:00 heroku[router]: at=info method=GET path=/assets/fonts/glyphicons-halflings-regular.woff host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=21ms service=6ms status=200 bytes=23292
+2013-12-20T16:30:15.113044+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=7ms status=304 bytes=0
+2013-12-20T16:30:15.117960+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-20 16:30:15 +0000
+2013-12-20T16:30:15.119890+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-20T16:30:15.123336+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-20 16:30:15 +0000
+2013-12-20T16:30:15.125031+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-20T16:30:15.111696+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=4ms status=304 bytes=0
+2013-12-20T16:30:15.540963+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387557016714&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-20 16:30:15 +0000
+2013-12-20T16:30:15.562903+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-20T16:30:15.562903+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387557016714", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-20T16:30:15.565176+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=304 bytes=0
+2013-12-20T16:30:15.568150+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
+2013-12-20T16:30:15.568150+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
+2013-12-20T16:30:15.568150+00:00 app[web.1]:                                                                 ^
+2013-12-20T16:30:15.568150+00:00 app[web.1]: 
+2013-12-20T16:30:15.568309+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
+2013-12-20T16:30:15.568309+00:00 app[web.1]: 
+2013-12-20T16:30:15.569319+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
+2013-12-20T16:30:15.568309+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
+2013-12-20T16:30:15.568309+00:00 app[web.1]: 
+2013-12-20T16:30:16.218367+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_217bc0_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=6ms status=200 bytes=4549
+2013-12-20T16:30:22.202867+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-20 16:30:22 +0000
+2013-12-20T16:30:22.289552+00:00 app[web.1]: 
+2013-12-20T16:30:22.289882+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-20T16:30:22.292734+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=3ms service=139ms status=500 bytes=643
+2013-12-20T16:30:22.289552+00:00 app[web.1]: 
+2013-12-20T16:30:22.289552+00:00 app[web.1]: ActiveRecord::UnknownAttributeError (unknown attribute: preffered_warehouse):
+2013-12-20T16:30:22.289552+00:00 app[web.1]: 
+2013-12-20T16:30:22.289552+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:38:in `new'
+2013-12-20T16:30:22.289552+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:38:in `create'
+2013-12-20T16:30:22.289882+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
+2013-12-20T16:30:22.289882+00:00 app[web.1]: Completed 500 Internal Server Error in 77ms
+2013-12-20T16:29:40.151825+00:00 heroku[router]: at=info method=GET path=/assets/Slot6.jpg host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=23ms status=200 bytes=227453
+2013-12-20T16:29:56.441955+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=24ms status=200 bytes=4549
+2013-12-20T16:29:55.639341+00:00 heroku[router]: at=info method=POST path=/login host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=189ms status=200 bytes=7
+2013-12-20T16:29:56.360564+00:00 heroku[router]: at=info method=GET path=/warehousemaintenance/?_search=false&nd=1387556997464&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=8ms service=61ms status=200 bytes=1225
+2013-12-20T16:30:01.348299+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=21ms status=200 bytes=6521
+2013-12-20T16:29:55.817483+00:00 heroku[router]: at=info method=GET path=/warehousemaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=17ms service=68ms status=200 bytes=7533
+2013-12-20T16:29:56.200188+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_85_dfeffc_1x400.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=32ms status=200 bytes=341
+2013-12-20T16:30:15.123482+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=9ms status=304 bytes=0
+2013-12-20T16:30:22.208945+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=21ms service=29ms status=200 bytes=4549
+2013-12-20T16:31:13.030143+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate` by farooq.buvvaji@gmail.com
+2013-12-20T16:29:56.271295+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=5ms service=19ms status=200 bytes=4549
+2013-12-20T16:31:19.481360+00:00 heroku[run.5764]: Awaiting client
+2013-12-20T16:31:19.535911+00:00 heroku[run.5764]: Starting process with command `bundle exec rake db:migrate`
+2013-12-20T16:31:19.259046+00:00 heroku[run.5764]: State changed from starting to up
+2013-12-20T16:30:06.244125+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=32ms service=115ms status=200 bytes=7571
+2013-12-20T16:31:28.498840+00:00 heroku[run.5764]: Process exited with status 0
+2013-12-20T16:30:22.409271+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_95_fef1ec_1x400.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=13ms status=200 bytes=332
+2013-12-20T16:31:28.512714+00:00 heroku[run.5764]: State changed from up to complete
+2013-12-20T16:32:11.084263+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-20 16:32:11 +0000
+2013-12-20T16:32:11.110754+00:00 app[web.1]: 
+2013-12-20T16:32:11.111585+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-20T16:32:11.111585+00:00 app[web.1]:   Parameters: {"item_number"=>"1234", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
+2013-12-20T16:32:11.110754+00:00 app[web.1]: ActiveRecord::UnknownAttributeError (unknown attribute: preffered_warehouse):
+2013-12-20T16:32:11.110754+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:38:in `new'
+2013-12-20T16:32:11.111585+00:00 app[web.1]: Completed 500 Internal Server Error in 5ms
+2013-12-20T16:32:11.110754+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:38:in `create'
+2013-12-20T16:32:11.110754+00:00 app[web.1]: 
+2013-12-20T16:32:11.110754+00:00 app[web.1]: 
+2013-12-20T16:32:11.112717+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=34ms status=500 bytes=643

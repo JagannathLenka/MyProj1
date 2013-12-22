@@ -2,12 +2,10 @@
 <% content_for :head do %>   
 	  <style>
 	    .main             {width: 98%;  border: 0px solid #999; padding: 0px; margin-left:10px;}
-		.content 	      { float: left;   background: white; margin-left:10px;}
-        .area 	          { float: left;    background: white; border: 0px solid #000; }             
-        .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(#0033FF), to(lightblue));}
+		.content 	      { float: left;   background: white; margin-left:10px; max-width:100% }
+        .area 	          { float: left;    background: white; border: 0px solid #000; max-width:100%}             
+        .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: blue}
 
-		.bay_Empty        { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000; background: white;}
-		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 1px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}=======
 		.bay_col          { float: left;  height: 38px;  width: <%= @bay_width %>px;}
         .bay              { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000;border-right: 1px solid #000;}
         .reserve          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 0px solid #000;}
@@ -301,10 +299,10 @@ var indexHTML = {
    <div id="area" class="area"> 
 
     	<%= raw(aisle_render) %>
-    	<table border="0"> 
+    	<table border="0" style="max-width: 100%"> 
     		<tr>
-    			<td style="width: 80px">
-					<div id="aisle_header" style="overflow-y:hidden; float: left; width: 80px; height: 400px">
+    			<td style="width: 80px; float:left">
+					<div id="aisle_header" style="overflow-y:hidden; float: left; width: 100%; height: 400px">
     					<table>
     						<%=raw(BayHelper.output_aisle)%>
     				 	</table>	
@@ -312,7 +310,7 @@ var indexHTML = {
 	    		</td>   	 
     	
     			<td> 
-					<div id="aisle_details" style="overflow: auto; width: 1200px; height: 400px"> 
+					<div id="aisle_details" style="float:left; overflow: auto; width: 40%; height: 400px"> 
 						<table>
 							<%=raw(BayHelper.output_bay)%>
 					 	</table>	
@@ -338,7 +336,6 @@ var indexHTML = {
 <div id="showdataspace" class= "showdataspace"> 
  	<iframe id="showdataframe" frameborder="no"></iframe>
   </div>
-<
 
 </body>
 </html>
