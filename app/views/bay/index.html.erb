@@ -1,7 +1,7 @@
 <% provide(:title, 'Show Zone Layout') %>
 <% content_for :head do %>   
 	  <style>
-	    .main             {width: 98%;  border: 0px solid #999; padding: 0px; margin-left:10px;}
+	    .main             {width: 98%;  border: 0px solid #999;}
 		.content 	      { float: left;   background: white; margin-left:10px; max-width:100% }
         .area 	          { float: left;    background: white; border: 0px solid #000; max-width:100%}             
         .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: blue}
@@ -24,7 +24,7 @@ body {
 }
 
 table tr td { 
-  font-size: 10px;
+  font-size: 12px;
   background: white;
   color: #47433F;
   border-top: 0px solid #FFF;
@@ -37,16 +37,24 @@ table tr td {
       
       //global variable and call initialize function.
       index_html_map = {}	    
+	  	
+		
 	  $( init );
 
 	  $(document).ready(function(){
+			$("#aisle_details").css("width",$( window ).width() * .8)
+	  })
+	  
+	  $(document).ready(function(){
+			index_html_map.window_width = $( window ).width();
 	        var rightdivPos = $("#aisle_details").position();
-	        $("#aisle_header").css("position","absolute").css("top",rightdivPos.top).show();
+	        $("#aisle_header").css("top",rightdivPos.top).show();
 	        $("#aisle_details").scroll(function(){
 	            $("#aisle_header").scrollTop($("#aisle_details").scrollTop());
 	        });
 	  });
 
+ 
 
 	//To swap the position of two items
 	function init() { 
@@ -178,7 +186,7 @@ var indexHTML = {
 	        $('.aisle').contextPopup({
 	          title: 'Bay Update',
 	          items: [
-	            {label:'Edit aisle',                     action:function() {showdata($(this).attr('id'), "aisle");} },
+	            {label:'Edit aisle',                   action:function() {showdata($(this).attr('id'), "aisle");} },
 	            null, // divider
 	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
 	            {label:'Merge bay',         		   action:function() { alert('clicked 6') } },
@@ -310,7 +318,7 @@ var indexHTML = {
 	    		</td>   	 
     	
     			<td> 
-					<div id="aisle_details" style="float:left; overflow: auto; width: 40%; height: 400px"> 
+					<div id="aisle_details" style="float:left; overflow: auto;; height: 400px"> 
 						<table>
 							<%=raw(BayHelper.output_bay)%>
 					 	</table>	

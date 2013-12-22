@@ -53,7 +53,7 @@ module LocationerrorHelper
       :height=> 350,
       :width => 'auto',
     
-      :colNames => ['Id','FileName', 'TransactionId','SequenceNo','ErrorCode', 'ErrorDescription', 'Warehouse','Barcode','CurrentItem','CurrentQuantity','Totalpics','LockCode','Maximum Quantity','Minimum Quantity','Status'],
+      :colNames => ['Id','FileName', 'TransactionId','SequenceNo','ErrorCode', 'ErrorDescription','ClientId' ,'Warehouse','Barcode','CurrentItem','CurrentQuantity','Totalpics','LockCode','Maximum Quantity','Minimum Quantity','Status'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'file_name',   :index => 'file_name',:width => 350,:align => 'center',:editable => false},
@@ -70,7 +70,7 @@ module LocationerrorHelper
         { :name => 'attribute7',  :index => 'attribute7',   :width => 100,   :align => 'center', :editable => true,hidden:false},
         { :name => 'attribute8',  :index => 'attribute8',   :width => 100,   :align => 'center', :editable => true,hidden:false},
         { :name => 'attribute9',  :index => 'attribute9',   :width => 100,   :align => 'center', :editable => true,hidden:false},
-        
+        { :name => 'attribute10',  :index => 'attribute10',   :width => 100,   :align => 'center', :editable => true,hidden:false},
      ],
       :editurl => '/locationerror',
       :pager => '#locationerror_pager',

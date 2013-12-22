@@ -53,32 +53,35 @@ class LocationmaintenanceController < ApplicationController
    error = is_row_valid row_array
    if error.blank?
 
-      existloc = Location.where("cl_barcode = ? and  cl_warehouse_id = ?" , row_array[1], row_array[0]).first
+      existloc = Location.where(" client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , row_array[0], row_array[2], row_array[1]).first
       if existloc.nil?
-          loc = Location.new(                                
-                           :cl_warehouse_id   => (row_array[0].to_s.encode! 'utf-8'),
-                           :cl_barcode  =>(row_array[1].to_s.encode! 'utf-8'),
-                           :current_item => (row_array[2].to_s.encode! 'utf-8'),
-                           :current_quantity => (row_array[3].to_s.encode! 'utf-8'),
-                           :life_time_total_picks  => (row_array[4].to_s.encode! 'utf-8'),
-                           :lock_code => (row_array[5].to_s.encode! 'utf-8'),
-                           :maximum_quantity =>(row_array[6].to_s.encode! 'utf-8'),
-                           :minimum_quantity => (row_array[7].to_s.encode! 'utf-8'),
-                           :status => (row_array[8].to_s.encode! 'utf-8')
+          loc = Location.new(  
+                           :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
+                           :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
+                           :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
+                           :current_item => (row_array[3].to_s.encode! 'utf-8'),
+                           :current_quantity => (row_array[4].to_s.encode! 'utf-8'),
+                           :life_time_total_picks  => (row_array[5].to_s.encode! 'utf-8'),
+                           :lock_code => (row_array[6].to_s.encode! 'utf-8'),
+                           :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
+                           :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
+                           :status => (row_array[9].to_s.encode! 'utf-8')
                            )
              loc.save
              update_location_details loc, loc.cl_warehouse_id, loc.cl_barcode            
            else
              existloc.update_attributes({
-                           :cl_warehouse_id   => (row_array[0].to_s.encode! 'utf-8'),
-                           :cl_barcode  => (row_array[1].to_s.encode! 'utf-8'),
-                           :current_item => (row_array[2].to_s.encode! 'utf-8'),
-                           :current_quantity => (row_array[3].to_s.encode! 'utf-8'),
-                           :life_time_total_picks  => (row_array[4].to_s.encode! 'utf-8'),
-                           :lock_code => (row_array[5].to_s.encode! 'utf-8'),
-                           :maximum_quantity => (row_array[6].to_s.encode! 'utf-8'),
-                           :minimum_quantity => (row_array[7].to_s.encode! 'utf-8'),
-                           :status => (row_array[8].to_s.encode! 'utf-8')
+                             :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
+                             :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
+                             :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
+                             :current_item => (row_array[3].to_s.encode! 'utf-8'),
+                             :current_quantity => (row_array[4].to_s.encode! 'utf-8'),
+                             :life_time_total_picks  => (row_array[5].to_s.encode! 'utf-8'),
+                             :lock_code => (row_array[6].to_s.encode! 'utf-8'),
+                             :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
+                             :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
+                             :status => (row_array[9].to_s.encode! 'utf-8')
+                           
                                            })
              update_location_details existloc, existloc.cl_warehouse_id, existloc.cl_barcode           
 
@@ -97,7 +100,8 @@ class LocationmaintenanceController < ApplicationController
                            :attribute6 => (row_array[5].to_s.encode! 'utf-8'),
                            :attribute7 => (row_array[6].to_s.encode! 'utf-8'),
                            :attribute8 => (row_array[7].to_s.encode! 'utf-8'),
-                           :attribute9 => (row_array[8].to_s.encode! 'utf-8')
+                           :attribute9 => (row_array[8].to_s.encode! 'utf-8'),
+                           :attribute10 => (row_array[9].to_s.encode! 'utf-8')
                                           )
             locationerror.save
      end
@@ -113,22 +117,22 @@ class LocationmaintenanceController < ApplicationController
    
    error = ""
    #warehouse validation
-   if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[0]).first.nil?
+   if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[1]).first.nil?
      error = "Warehouse not found"
      
    end  
    #Barcode validation  
-   if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[1], rowOfcsv[0]).first.nil?
+   if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[2], rowOfcsv[1]).first.nil?
      error = error + "," + "Barcode not found"
       
    end
    
    #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
-   if rowOfcsv[3].to_i > rowOfcsv[6].to_i 
+   if rowOfcsv[4].to_i > rowOfcsv[7].to_i 
      error = error + "," + "Current quantity more than maximum quantity"
    end  
    
-   if rowOfcsv[3].to_i < rowOfcsv[7].to_i 
+   if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
       error = error + "," + "Current quantity less than the minimum quantity"      
    end
    
@@ -147,6 +151,7 @@ class LocationmaintenanceController < ApplicationController
   when "add"
         
          loc= Location.new(
+                           :client_id  => cookies[:client_id].strip,
                            :cl_loc_id   => params[:cl_loc_id],
                            :cl_warehouse_id   => params[:cl_warehouse_id],
                            :current_item => params[:current_item],
@@ -220,7 +225,7 @@ class LocationmaintenanceController < ApplicationController
  end
 
  #
- #Update locat
+ #Update location
  #    
   def update_location_details loc, warehouse, barcode 
          pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', warehouse, barcode).first
