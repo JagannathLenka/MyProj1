@@ -1,0 +1,13 @@
+<% provide(:title, 'ItemError Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;
+</script>
+<%end%>
+	<%= render "shared/menu" %>
+	<h3><div class="label label-primary">Item Error</div></h3><div>
+<div>
+	<table id=itemerror_list></table>
+	<div id=itemerror_pager></div>
+	<%= raw(itemerror_jqgrid) %>
+</div>

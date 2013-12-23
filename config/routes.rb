@@ -5,7 +5,8 @@ MyProj1::Application.routes.draw do
   post 'locationmaintenance/upload/' => 'locationmaintenance#upload'
   post 'itemmastermaintenance/upload/' => 'itemmastermaintenance#upload'
   
-  resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister,:userregistermaintenance, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance, :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :client
+  resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister,:userregistermaintenance, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance,
+            :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :itemerror , :client
 
 
   
