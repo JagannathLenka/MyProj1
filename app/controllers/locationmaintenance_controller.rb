@@ -116,24 +116,30 @@ class LocationmaintenanceController < ApplicationController
  def is_row_valid rowOfcsv
    
    error = ""
+   
+    #ClientId validation
+    if client = User.where(client_id: rowOfcsv[0]).first.nil?
+     error = "ClientId not found" 
+   end 
+   
    #warehouse validation
    if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[1]).first.nil?
-     error = "Warehouse not found"
+     error += (error.blank? ? "" : ",") + "Warehouse not found"
      
    end  
    #Barcode validation  
    if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[2], rowOfcsv[1]).first.nil?
-     error = error + "," + "Barcode not found"
+     error += (error.blank? ? "" : ",") + "Barcode not found"
       
    end
    
    #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
    if rowOfcsv[4].to_i > rowOfcsv[7].to_i 
-     error = error + "," + "Current quantity more than maximum quantity"
+     error += (error.blank? ? "" : ",") + "Current quantity more than maximum quantity"
    end  
    
    if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
-      error = error + "," + "Current quantity less than the minimum quantity"      
+     error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
    end
    
      return error

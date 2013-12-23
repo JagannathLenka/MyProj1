@@ -78,10 +78,15 @@ module ItemmastermaintenanceHelper
     pager = [:navGrid, "#item_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true}, 
                                                        {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
-    #slotting_button = [:navButtonAdd, "#slotting_pager", {:caption => 'Slot the items', :onClickButton => slottfunc.to_json_var }]               
     
+    
+     pager_button = [:navButtonAdd, "#item_pager", 
+                   {:caption => 'Show Errors', :onClickButton => 'function() {
+                                          win = window.open("/itemerror", "_blank");
+                                          win.focus();
+                                          }'.to_json_var }]
 
-    jqgrid_api 'item_list', grid, pager, options
+    jqgrid_api 'item_list', grid, pager , pager_button, options
 
   end
 

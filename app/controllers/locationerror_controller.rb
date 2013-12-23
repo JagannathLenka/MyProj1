@@ -126,26 +126,32 @@ class LocationerrorController < ApplicationController
    
  end
  def is_row_valid loc
-    error = ""
-   #warehouse validation
    
+    error = ""
+    
+    #ClientId validation
+    if client = User.where(client_id: loc.attribute1).first.nil?
+     error = "ClientId not found" 
+   end 
+    
+   #warehouse validation
    if warehouse = Warehouse.where(cl_warehouse_id: loc.attribute2).first.nil?
-     error = "Warehouse not found"
+     error += (error.blank? ? "" : ",") + "Warehouse not found"
    end  
    
    #Barcode validation  
    if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , loc.attribute3, loc.attribute2).first.nil?
-     error = error + "," +  "Barcode not found"   
+     error += (error.blank? ? "" : ",") +  "Barcode not found"   
    end
    
    #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
    if loc.attribute5.to_i > loc.attribute8.to_i
-      error = error + "," + "Current quantity is more than maximum quantity"
+      error += (error.blank? ? "" : ",") + "Current quantity is more than maximum quantity"
       
    end
    
    if loc.attribute5.to_i < loc.attribute9.to_i
-     error = error + "," + "Current quantity is less than minimum quantity "
+     error += (error.blank? ? "" : ",") + "Current quantity is less than minimum quantity "
    end
    
      return error
