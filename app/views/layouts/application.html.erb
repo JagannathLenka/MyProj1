@@ -8,17 +8,26 @@
   <script src="/assets/jquery.jqGrid.min.js" type="text/javascript"></script>  
   <%= csrf_meta_tags %>
   
+  <script>
+  		  $(document).ready(function(){
+			$("#wrap").css("height",$( window ).height() * .95)
+	  })
+  	
+  </script>
+  
   <style>
   	#wrap {
 		min-height: 100%;
 		height: auto;
-		margin: 0 auto -60px;
+		margin-left: 5%;
+		margin-right: 5%;
 		padding: 0 0 60px;
 		}
 		
-		#footer > .container {
-		padding-left: 15px;
-		padding-right: 15px;
+		#footer > .contain {
+		margin-left: 5%;
+		margin-right: 5%;
+
 		}
   </style>
   <%= yield :head %>
@@ -27,14 +36,14 @@
 <body>
 	
 <div id="wrap">
-  <div class="container">
+  <div class="contain">
   	<!--==Content goes here -->
 		<%= yield %>
   </div>	
  </div> 
  
 <div id="footer">
-  <div class="container">
+  <div class="contain">
     <p class="text-muted">All copyrights reserved SlotFire, contact the slotfire team</p>
  </div>
 
