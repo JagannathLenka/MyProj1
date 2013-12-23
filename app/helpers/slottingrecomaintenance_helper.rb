@@ -24,21 +24,31 @@ module SlottingrecomaintenanceHelper
                      } 
                    }"   
                       
-     slottfunc  = 'function() {
-                                var ids = $("#slotting_list").jqGrid("getGridParam","selarrrow");
+     slottfunc  = "function() {
+                                var ids = $('#slotting_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/slottingrecomaintenance",
+                                 $.post('/slottingrecomaintenance',
                                        {
-                                         "oper" :"slott",
-                                         "id"   :ids
-                                       },
-                                       function(data,status)
-                                       {
-                               
-                                       });
-                                 $("#slotting_list").trigger("reloadGrid"); 
-                                 lastsel=0;      
-                   }'
+                                         'oper' : 'slott',
+                                         'id'   :ids
+                                       })
+                                      .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                                                            
+                                     $('#slotting_list').trigger('reloadGrid'); 
+                                     lastsel=0;      
+                   }"
                                        
 
     grid = [{

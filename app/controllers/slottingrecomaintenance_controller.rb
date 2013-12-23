@@ -1,5 +1,6 @@
-
 class SlottingrecomaintenanceController < ApplicationController
+  
+rescue_from Exception, :with => :error_render_method
   
  # GET /Render the JQGrid for slotting recomendation
   def index
@@ -109,5 +110,12 @@ class SlottingrecomaintenanceController < ApplicationController
  def get_header_details
    
 end 
+    
+#Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 404
+      true
+  end 
     
 end

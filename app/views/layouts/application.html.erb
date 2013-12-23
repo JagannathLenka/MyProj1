@@ -42,10 +42,12 @@
   </div>	
  </div> 
  
-<div id="footer">
-  <div class="contain">
-    <p class="text-muted">All copyrights reserved SlotFire, contact the slotfire team</p>
- </div>
+<% if params[:lightweight] != "yes" %>
+	<div id="footer">
+	  <div class="contain">
+	    <p class="text-muted">All copyrights reserved SlotFire, contact the slotfire team</p>
+	 </div>
+<%end%>
 
 </body>
 </html>

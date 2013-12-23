@@ -87,7 +87,7 @@ class Slottingrecommendation < ActiveRecord::Base
           when "C"
           
         end
-        logger.debug to_be_slotted_item
+
         slotting_item = self.location_selection(position_requirement,location_requirement,selected_location) 
         
         case 

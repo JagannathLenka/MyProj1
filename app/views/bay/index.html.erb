@@ -5,10 +5,9 @@
 		.content 	      { float: left;   background: white; margin-left:10px; max-width:100% }
         .area 	          { float: left;    background: white; border: 0px solid #000; max-width:100%}             
         .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(blue), to(lightblue));}
-
+		.bay_nil{ float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 0px solid #000; border-right: 0px solid #000;background: white;}
 		.bay_col          { float: left;  height: 38px;  width: <%= @bay_width %>px;}
         .bay              { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000;border-right: 1px solid #000;}
-        .reserve          { float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 0px solid #000;}
 		.bay_Empty        { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000; border-right: 1px solid #000;background: white;}
 		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 0px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
@@ -158,9 +157,7 @@ var indexHTML = {
 			} 
 	},
 
-  	 //JQuery 		
-
-	  //$(document).ready(function(){  
+	  //Show Position Detail of the bay	
 	  setClickitem: function setClickitem() {	
 
 		    $('.bay, .bay_Empty').click(function(){   
@@ -169,19 +166,20 @@ var indexHTML = {
 					var wh=$(window).height()*.95;
 
 					//size iframe nice like
-					$("#positionframe").width(ww-10);
-					$("#positionframe").height(wh-10);
+					$("#positionframe").width(ww);
+					$("#positionframe").height(wh);
 
-				    $('#positionframe').attr('src',"/position/"+ this.id+ "?zoom=yes");
+				    $('#positionframe').attr('src',"/position/"+ this.id+ "?lightweight=yes");
 				    $('#positionspace').dialog({
 		    	  	height: 400,
 		      		width: 1100,
 		      		modal: true,
       			})
-	});
+			});
 
-		    $(function() {
 
+		//Show the operation to be done for aisle  
+		 $(function() {
 
 	        $('.aisle').contextPopup({
 	          title: 'Bay Update',
@@ -191,11 +189,11 @@ var indexHTML = {
 	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
 	            {label:'Merge bay',         		   action:function() { alert('clicked 6') } },
 	            null, // divider
-	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
 	            {label:'Close',                        action:function() { alert('clicked 8') } }
 	          ]
 	        });
 	        
+		//Show the operation to be done for aisle  
 	        $('.bay, .bay_Empty').contextPopup({
 	          title: 'Bay Update',
 	          items: [
@@ -203,12 +201,14 @@ var indexHTML = {
 	            null, // divider
 	            {label:'Show bay',              	   action:function() { alert('clicked 4') } },
 	            null, // divider
-	            //{label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
 	            {label:'Close',                        action:function() { alert('clicked 8') } }
 	          ]
 	        });	        
+
+
+	     //Show the data details of the bay and aisle	  
 	       function showdata(id, type){
-	       		
+	       		       		
 					// calc good width
 					var ww=$(window).width()*.95;
 					var wh=$(window).height()*.95;
@@ -224,8 +224,8 @@ var indexHTML = {
 					    $('#showdataframe').attr('src',"/aislemaintenance?lightweight=yes&aisleid=" + id);
 					}
 					    $('#showdataspace').dialog({
-			    	  	height: 300,
-			      		width: 1000,
+			    	  	height: wh-10,
+			      		width:  ww-10,
 			      		modal: true,
 			      		close: function() {
 	      					   window.parent.document.location.reload(true);
@@ -254,7 +254,7 @@ var indexHTML = {
 				    	  //alert(status);	
 						  if (status=="success") {
 
-				      			$("#positionspace").load("/position/"+data);
+				      			$("#positionspace").load("/position/"+data+"?lightweight=yes");
 							}	
 						  else
 						  	{

@@ -142,8 +142,8 @@ setDragnDrop: function setDragnDrop() {
 	  <ul class="dropdown-menu">
 	    <!-- dropdown menu links -->
 	    <li>
-	    	<a href="javascript:$('#position').load('/position/<%= @bay_id %>?item=Yes')">Item</a>
-	    	<a href="javascript:$('#position').load('/position/<%= @bay_id %>')">Barcode</a>
+	    	<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes&item=Yes')">Item</a>
+	    	<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes')">Barcode</a>
 	    </li>	
 	  </ul>
 	</div>
