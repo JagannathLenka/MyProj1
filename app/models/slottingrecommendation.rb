@@ -49,7 +49,7 @@ class Slottingrecommendation < ActiveRecord::Base
                               positions.cl_level_id")
                     .where( position_requirement)
                     .where( location_requirement)
-                    .where( selected_location + ")" )
+                    .where( selected_location + "')" )
                     .order('locations.location_priority desc, locations.attribute2 asc')
                     .first
                               
@@ -59,7 +59,7 @@ class Slottingrecommendation < ActiveRecord::Base
  
    def self.slott_items(to_be_slotted_item_list)
     
-    selected_location = 'locations.cl_barcode not in ('
+    selected_location = "locations.cl_barcode not in ('"
     to_be_slotted_item_list.each_with_index do|to_be_slotted_item , i|    
         position_requirement = ''
         position_requirement +=         "positions.cl_warehouse_id = " + "'" + to_be_slotted_item['preffered_warehouse'] + "'"        unless  to_be_slotted_item['preffered_warehouse'] == '*'

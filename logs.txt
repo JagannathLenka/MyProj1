@@ -1,101 +1,407 @@
-2013-12-23T04:50:37.037683+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387774242668&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=19ms status=200 bytes=42
-2013-12-23T04:50:44.084633+00:00 app[web.1]: Started GET "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
-2013-12-23T04:50:44.098546+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
-2013-12-23T04:50:44.098546+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (3.8ms)
-2013-12-23T04:50:44.098546+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
-2013-12-23T04:50:44.098546+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 0.0ms)
-2013-12-23T04:50:44.098931+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=23ms status=200 bytes=7571
-2013-12-23T04:50:44.234805+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
-2013-12-23T04:50:44.240653+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
-2013-12-23T04:50:44.241551+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
-2013-12-23T04:50:44.244332+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
-2013-12-23T04:50:44.300105+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=71ms status=304 bytes=0
-2013-12-23T04:50:44.573432+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387774250158&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
-2013-12-23T04:50:44.581115+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
-2013-12-23T04:50:44.581115+00:00 app[web.1]: 
-2013-12-23T04:50:44.581115+00:00 app[web.1]:                                                                 ^
-2013-12-23T04:50:44.581115+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
-2013-12-23T04:50:44.581115+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
-2013-12-23T04:50:44.581115+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
-2013-12-23T04:50:44.581115+00:00 app[web.1]: 
-2013-12-23T04:50:44.581115+00:00 app[web.1]: 
-2013-12-23T04:50:44.580807+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387774250158&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=16ms status=500 bytes=643
-2013-12-23T04:50:44.582533+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2013-12-23T04:50:44.582533+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387774250158", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-12-23T04:50:44.582533+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
-2013-12-23T04:50:44.247720+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=15ms status=304 bytes=0
-2013-12-23T04:51:02.441364+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 04:51:02 +0000
-2013-12-23T04:51:02.441245+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=200 bytes=4549
-2013-12-23T04:51:02.459536+00:00 app[web.1]: Completed 200 OK in 11ms (Views: 1.0ms | ActiveRecord: 5.1ms)
-2013-12-23T04:51:02.459536+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
-2013-12-23T04:51:02.459536+00:00 app[web.1]:   Parameters: {"item_number"=>"1234", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"PHX1", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
-2013-12-23T04:51:02.455548+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=4ms service=26ms status=200 bytes=533
-2013-12-23T04:51:02.569402+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387774268207&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 04:51:02 +0000
-2013-12-23T04:51:02.582109+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
-2013-12-23T04:51:02.582109+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
-2013-12-23T04:51:02.582109+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
-2013-12-23T04:51:02.582109+00:00 app[web.1]: 
-2013-12-23T04:51:02.582109+00:00 app[web.1]:                                                                 ^
-2013-12-23T04:51:02.582109+00:00 app[web.1]: 
-2013-12-23T04:51:02.582109+00:00 app[web.1]: 
-2013-12-23T04:51:02.582109+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
-2013-12-23T04:51:02.583101+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2013-12-23T04:51:02.583101+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387774268207", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-12-23T04:51:02.583101+00:00 app[web.1]: Completed 500 Internal Server Error in 6ms
-2013-12-23T05:04:26.429059+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate:down VERSION=20131012225758` by farooq.buvvaji@gmail.com
-2013-12-23T05:04:32.137785+00:00 heroku[run.8596]: Awaiting client
-2013-12-23T05:04:32.175876+00:00 heroku[run.8596]: Starting process with command `bundle exec rake db:migrate:down VERSION=20131012225758`
-2013-12-23T05:04:36.152049+00:00 heroku[run.8596]: Process exited with status 0
-2013-12-23T05:04:56.483493+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate:up VERSION=20131012225758` by farooq.buvvaji@gmail.com
-2013-12-23T05:05:02.063900+00:00 heroku[run.9973]: State changed from starting to up
-2013-12-23T05:05:02.100936+00:00 heroku[run.9973]: Awaiting client
-2013-12-23T05:05:02.200512+00:00 heroku[run.9973]: Starting process with command `bundle exec rake db:migrate:up VERSION=20131012225758`
-2013-12-23T05:05:06.884685+00:00 heroku[run.9973]: Process exited with status 0
-2013-12-23T05:05:06.897516+00:00 heroku[run.9973]: State changed from up to complete
-2013-12-23T05:05:24.929682+00:00 app[web.1]: Started GET "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:05:24 +0000
-2013-12-23T05:05:24.939255+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
-2013-12-23T05:05:24.939255+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (3.8ms)
-2013-12-23T05:05:24.939255+00:00 app[web.1]: Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms)
-2013-12-23T05:05:24.939255+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
-2013-12-23T05:05:24.946025+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=200 bytes=7571
-2013-12-23T05:05:25.067009+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=7ms status=304 bytes=0
-2013-12-23T05:05:25.075440+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
-2013-12-23T05:05:25.080416+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
-2013-12-23T05:05:25.081102+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
-2013-12-23T05:05:25.083250+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
-2013-12-23T05:05:25.078491+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=304 bytes=0
-2013-12-23T05:05:25.069588+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=10ms status=304 bytes=0
-2013-12-23T05:05:25.080549+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=304 bytes=0
-2013-12-23T05:05:25.341239+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775130996&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
-2013-12-23T05:05:25.348543+00:00 app[web.1]: 
-2013-12-23T05:05:25.348543+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
-2013-12-23T05:05:25.348543+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
-2013-12-23T05:05:25.348543+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
-2013-12-23T05:05:25.348543+00:00 app[web.1]:                                                                 ^
-2013-12-23T05:05:25.348543+00:00 app[web.1]: 
-2013-12-23T05:05:25.348543+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
-2013-12-23T05:05:25.348543+00:00 app[web.1]: 
-2013-12-23T05:05:25.348955+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2013-12-23T05:05:25.348955+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775130996", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-12-23T05:05:25.348955+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
-2013-12-23T05:05:25.344687+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775130996&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=14ms status=500 bytes=643
-2013-12-23T05:04:32.253210+00:00 heroku[run.8596]: State changed from starting to up
-2013-12-23T05:05:39.393604+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:05:39 +0000
-2013-12-23T05:05:39.408065+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=534
-2013-12-23T05:05:39.413129+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
-2013-12-23T05:05:39.413129+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"PHX1", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
-2013-12-23T05:05:39.413129+00:00 app[web.1]: Completed 200 OK in 16ms (Views: 1.3ms | ActiveRecord: 10.8ms)
-2013-12-23T05:05:39.518343+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775145161&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:05:39 +0000
-2013-12-23T05:05:39.526780+00:00 app[web.1]: 
-2013-12-23T05:05:39.526780+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
-2013-12-23T05:05:39.526780+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
-2013-12-23T05:05:39.526780+00:00 app[web.1]:                                                                 ^
-2013-12-23T05:05:39.526780+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
-2013-12-23T05:05:39.526780+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
-2013-12-23T05:05:39.526780+00:00 app[web.1]: 
-2013-12-23T05:05:39.526780+00:00 app[web.1]: 
-2013-12-23T05:05:39.527663+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775145161", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-12-23T05:05:39.527663+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2013-12-23T05:05:39.527663+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
-2013-12-23T05:05:39.523441+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775145161&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=20ms status=500 bytes=643
-2013-12-23T05:04:36.161373+00:00 heroku[run.8596]: State changed from up to complete
+2013-12-23T05:09:23.915010+00:00 app[web.1]: Completed 200 OK in 66ms (Views: 0.2ms | ActiveRecord: 34.4ms)
+2013-12-23T05:09:23.914397+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=32ms status=200 bytes=4549
+2013-12-23T05:09:23.950869+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_6da8d5_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=11ms status=200 bytes=4549
+2013-12-23T05:09:24.153398+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=6ms status=200 bytes=0
+2013-12-23T05:09:23.934931+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=8ms status=200 bytes=5824
+2013-12-23T05:09:23.753600+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_f5f8f9_1x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=6ms status=200 bytes=333
+2013-12-23T05:10:40.812894+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_75_d0e5f5_1x400.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=6ms status=200 bytes=336
+2013-12-23T05:10:41.936088+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_55_fbec88_40x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=6ms status=200 bytes=206
+2013-12-23T05:10:42.751652+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_217bc0_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=9ms status=200 bytes=4549
+2013-12-23T05:10:43.829562+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:10:43 +0000
+2013-12-23T05:10:43.871710+00:00 app[web.1]: 
+2013-12-23T05:10:43.871710+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:43.871710+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:43.871710+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:43.871933+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:43.872327+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Completed 500 Internal Server Error in 33ms
+2013-12-23T05:10:43.914526+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:43 +0000
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:43.928475+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775449489", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:43.870295+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=51ms status=500 bytes=643
+2013-12-23T05:10:43.927716+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:10:49.728518+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.741689+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775455386", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:49.759936+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.774142+00:00 app[web.1]: 
+2013-12-23T05:10:49.774142+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:49.774142+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:49.774368+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:49.774544+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Completed 500 Internal Server Error in 9ms
+2013-12-23T05:10:49.785441+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=11ms service=38ms status=500 bytes=643
+2013-12-23T05:10:49.751478+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:09:23.940702+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=12ms status=200 bytes=4549
+2013-12-23T05:22:16.749021+00:00 app[web.1]: Started GET "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:16 +0000
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as HTML
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered itemmastermaintenance/index.html.erb within layouts/application (4.9ms)
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+2013-12-23T05:22:16.827114+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=83ms status=200 bytes=6799
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
+2013-12-23T05:22:16.950065+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.045693+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=12ms status=304 bytes=0
+2013-12-23T05:22:17.035469+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.040311+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=304 bytes=0
+2013-12-23T05:22:17.039739+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.040341+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.043213+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.029460+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.289664+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.326836+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=30ms status=200 bytes=42
+2013-12-23T05:22:17.313929+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776142935", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 12.8ms)
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:17.334569+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=5ms service=5ms status=304 bytes=0
+2013-12-23T05:22:30.495103+00:00 app[web.1]: Started POST "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.540820+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=4549
+2013-12-23T05:22:30.524644+00:00 app[web.1]: Processing by ItemmastermaintenanceController#create as */*
+2013-12-23T05:22:30.524644+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "velocity"=>"A", "daily_avg_sales"=>"", "weekly_avg_sales"=>"", "monthly_avg_sales"=>"", "daily_forecast"=>"", "case_quantity"=>"", "case_split_allowed"=>"Yes", "attribute1"=>"", "oper"=>"add", "id"=>"_empty"}
+2013-12-23T05:22:30.549242+00:00 heroku[router]: at=info method=POST path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=61ms status=200 bytes=435
+2013-12-23T05:22:30.549252+00:00 app[web.1]: Completed 200 OK in 48ms (Views: 1.0ms | ActiveRecord: 22.5ms)
+2013-12-23T05:22:30.650331+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 4.5ms)
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:30.666071+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776156288", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:30.673428+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=29ms status=200 bytes=112
+2013-12-23T05:09:23.915010+00:00 app[web.1]: Completed 200 OK in 66ms (Views: 0.2ms | ActiveRecord: 34.4ms)
+2013-12-23T05:09:23.914397+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=32ms status=200 bytes=4549
+2013-12-23T05:09:23.950869+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_6da8d5_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=11ms status=200 bytes=4549
+2013-12-23T05:09:24.153398+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=6ms status=200 bytes=0
+2013-12-23T05:09:23.934931+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=8ms status=200 bytes=5824
+2013-12-23T05:09:23.753600+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_f5f8f9_1x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=6ms status=200 bytes=333
+2013-12-23T05:10:40.812894+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_75_d0e5f5_1x400.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=6ms status=200 bytes=336
+2013-12-23T05:10:41.936088+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_55_fbec88_40x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=6ms status=200 bytes=206
+2013-12-23T05:10:42.751652+00:00 heroku[router]: at=info method=GET path=/assets
+/images/ui-icons_217bc0_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=9ms status=200 bytes=4549
+2013-12-23T05:10:43.829562+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:10:43 +0000
+2013-12-23T05:10:43.871710+00:00 app[web.1]: 
+2013-12-23T05:10:43.871710+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:43.871710+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:43.871710+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:43.871933+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl
+_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:43.872327+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Completed 500 Internal Server Error in 33ms
+2013-12-23T05:10:43.914526+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:43 +0000
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:43.928475+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775449489", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:43.870295+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=51ms status=500 bytes=643
+2013-12-23T05:10:43.927716+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:10:49.728518+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.741689+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775455386", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:49.759936+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.774142+00:00 app[web.1]: 
+2013-12-23T05:10:49.774142+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:49.774142+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:49.774368+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:49.774544+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Completed 500 Internal Server Error in 9ms
+2013-12-23T05:10:49.785441+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=11ms service=38ms status=500 bytes=643
+2013-12-23T05:10:49.751478+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:09:23.940702+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=12ms status=200 bytes=4549
+2013-12-23T05:22:16.749021+00:00 app[web.1]: Started GET "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:16 +0000
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as HTML
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered itemmastermaintenance/index.html.erb within layouts/application (4.9ms)
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+2013-12-23T05:22:16.827114+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=83ms status=200 bytes=6799
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
+2013-12-23T05:22:16.950065+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.045693+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=12ms status=304 bytes=0
+2013-12-23T05:22:17.035469+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.040311+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=304 bytes=0
+2013-12-23T05:22:17.039739+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.040341+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.043213+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.029460+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.289664+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.326836+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=30ms status=200 bytes=42
+2013-12-23T05:22:17.313929+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776142935", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 12.8ms)
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:17.334569+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=5ms service=5ms status=304 bytes=0
+2013-12-23T05:22:30.495103+00:00 app[web.1]: Started POST "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.540820+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=4549
+2013-12-23T05:22:30.524644+00:00 app[web.1]: Processing by ItemmastermaintenanceController#create as */*
+2013-12-23T05:22:30.524644+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "velocity"=>"A", "daily_avg_sales"=>"", "weekly_avg_sales"=>"", "monthly_avg_sales"=>"", "daily_forecast"=>"", "case_quantity"=>"", "case_split_allowed"=>"Yes", "attribute1"=>"", "oper"=>"add", "id"=>"_empty"}
+2013-12-23T05:22:30.549242+00:00 heroku[router]: at=info method=POST path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=61ms status=200 bytes=435
+2013-12-23T05:22:30.549252+00:00 app[web.1]: Completed 200 OK in 48ms (Views: 1.0ms | ActiveRecord: 22.5ms)
+2013-12-23T05:22:30.650331+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 4.5ms)
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:30.666071+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776156288", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:30.673428+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=29ms status=200 bytes=112
+2013-12-23T05:10:43.871710+00:00 app[web.1]: 
+2013-12-23T05:10:43.871710+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:43.871710+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:43.871710+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:43.871710+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:43.871933+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:43.871933+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.871933+00:00 app[web.1]: 
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:43.872327+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:43.872327+00:00 app[web.1]: Completed 500 Internal Server Error in 33ms
+2013-12-23T05:10:43.914526+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:43 +0000
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:43.928475+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775449489", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:43.928475+00:00 app[web.1]: Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:43.870295+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=51ms status=500 bytes=643
+2013-12-23T05:10:43.927716+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775449489&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:10:49.728518+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.741689+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775455386", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:10:49.741689+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:10:49.759936+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:10:49 +0000
+2013-12-23T05:10:49.774142+00:00 app[web.1]: 
+2013-12-23T05:10:49.774142+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                                                              ^
+2013-12-23T05:10:49.774142+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:10:49.774368+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:10:49.774368+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:10:49.774142+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774368+00:00 app[web.1]: 
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:10:49.774544+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:10:49.774544+00:00 app[web.1]: Completed 500 Internal Server Error in 9ms
+2013-12-23T05:10:49.785441+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=11ms service=38ms status=500 bytes=643
+2013-12-23T05:10:49.751478+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775455386&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=22ms status=200 bytes=118
+2013-12-23T05:09:23.940702+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=12ms status=200 bytes=4549
+2013-12-23T05:22:16.749021+00:00 app[web.1]: Started GET "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:16 +0000
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as HTML
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered itemmastermaintenance/index.html.erb within layouts/application (4.9ms)
+2013-12-23T05:22:16.824246+00:00 app[web.1]: Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+2013-12-23T05:22:16.827114+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=83ms status=200 bytes=6799
+2013-12-23T05:22:16.824246+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
+2013-12-23T05:22:16.950065+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.045693+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=12ms status=304 bytes=0
+2013-12-23T05:22:17.035469+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.040311+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=304 bytes=0
+2013-12-23T05:22:17.039739+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.040341+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.043213+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T05:22:17.029460+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=7ms status=304 bytes=0
+2013-12-23T05:22:17.289664+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:17 +0000
+2013-12-23T05:22:17.326836+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776142935&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=30ms status=200 bytes=42
+2013-12-23T05:22:17.313929+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776142935", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 12.8ms)
+2013-12-23T05:22:17.313929+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:17.334569+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=5ms service=5ms status=304 bytes=0
+2013-12-23T05:22:30.495103+00:00 app[web.1]: Started POST "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.540820+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=4549
+2013-12-23T05:22:30.524644+00:00 app[web.1]: Processing by ItemmastermaintenanceController#create as */*
+2013-12-23T05:22:30.524644+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "velocity"=>"A", "daily_avg_sales"=>"", "weekly_avg_sales"=>"", "monthly_avg_sales"=>"", "daily_forecast"=>"", "case_quantity"=>"", "case_split_allowed"=>"Yes", "attribute1"=>"", "oper"=>"add", "id"=>"_empty"}
+2013-12-23T05:22:30.549242+00:00 heroku[router]: at=info method=POST path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=61ms status=200 bytes=435
+2013-12-23T05:22:30.549252+00:00 app[web.1]: Completed 200 OK in 48ms (Views: 1.0ms | ActiveRecord: 22.5ms)
+2013-12-23T05:22:30.650331+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:22:30 +0000
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 4.5ms)
+2013-12-23T05:22:30.666071+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:22:30.666071+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776156288", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:22:30.673428+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776156288&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=29ms status=200 bytes=112
+2013-12-23T05:31:26.049744+00:00 app[web.1]: Started POST "/itemmastermaintenance" for 68.231.32.83 at 2013-12-23 05:31:26 +0000
+2013-12-23T05:31:26.071734+00:00 app[web.1]: Processing by ItemmastermaintenanceController#create as */*
+2013-12-23T05:31:26.071734+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "velocity"=>"A", "daily_avg_sales"=>"10", "weekly_avg_sales"=>"10", "monthly_avg_sales"=>"10", "daily_forecast"=>"10", "case_quantity"=>"5", "case_split_allowed"=>"Yes", "attribute1"=>"", "oper"=>"edit", "id"=>"1"}
+2013-12-23T05:31:26.072353+00:00 heroku[router]: at=info method=POST path=/itemmastermaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=28ms status=200 bytes=4
+2013-12-23T05:31:26.071734+00:00 app[web.1]: Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 11.9ms)
+2013-12-23T05:31:26.197082+00:00 app[web.1]: Started GET "/itemmastermaintenance?_search=false&nd=1387776691822&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:31:26 +0000
+2013-12-23T05:31:26.209611+00:00 app[web.1]: Processing by ItemmastermaintenanceController#index as JSON
+2013-12-23T05:31:26.209611+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776691822", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:31:26.209611+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.4ms)
+2013-12-23T05:31:26.214289+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387776691822&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=21ms status=200 bytes=105
+2013-12-23T05:32:31.727799+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=12ms status=304 bytes=0
+2013-12-23T05:32:31.734201+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=12ms status=304 bytes=0
+2013-12-23T05:32:31.731872+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T05:32:31.893109+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387776757542&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:32:31 +0000
+2013-12-23T05:32:31.908284+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:32:31.908284+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776757542", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:32:31.908284+00:00 app[web.1]: Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 4.4ms)
+2013-12-23T05:32:31.918259+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387776757542&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=22ms status=200 bytes=118
+2013-12-23T05:32:31.581239+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=16ms status=200 bytes=7571
+2013-12-23T05:32:35.420868+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_217bc0_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=5ms status=304 bytes=0
+2013-12-23T05:32:37.480989+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:32:37 +0000
+2013-12-23T05:32:37.502666+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=28ms status=500 bytes=643
+2013-12-23T05:32:37.498923+00:00 app[web.1]: 
+2013-12-23T05:32:37.498923+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:32:37.498923+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                                                              ^
+2013-12-23T05:32:37.498923+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:32:37.499141+00:00 app[web.1]: 
+2013-12-23T05:32:37.499340+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:32:37.499141+00:00 app[web.1]: 
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:32:37.498923+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:32:37.499141+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:32:37.499340+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:32:37.499340+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:32:37.499141+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:32:37.500588+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387776763127&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:32:37 +0000
+2013-12-23T05:32:37.512968+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:32:37.512968+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776763127", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:32:37.512968+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:32:36.337828+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_55_fbec88_40x100.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=23ms status=304 bytes=0
+2013-12-23T05:32:37.527986+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387776763127&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=32ms status=200 bytes=118
+2013-12-23T05:32:46.457365+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:32:46 +0000
+2013-12-23T05:32:46.474336+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68
+.231.32.83" dyno=web.1 connect=1ms service=22ms status=500 bytes=643
+2013-12-23T05:32:46.472419+00:00 app[web.1]: 
+2013-12-23T05:32:46.472419+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:32:46.472419+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                                                              ^
+2013-12-23T05:32:46.472419+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:32:46.487115+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387776772112&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=6ms service=25ms status=200 bytes=118
+2013-12-23T05:32:46.472419+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:32:46.472657+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:32:46.472657+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:32:46.472657+00:00 app[web.1]: 
+2013-12-23T05:32:46.472657+00:00 app[web.1]: 
+2013-12-23T05:32:46.472826+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:32:46.472826+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:32:46.472826+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
+2013-12-23T05:32:46.473468+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387776772112&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:32:46 +0000
+2013-12-23T05:32:46.485855+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:32:46.485855+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776772112", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:32:46.485855+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.5ms)
+2013-12-23T05:32:59.344293+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:32:59 +0000
+2013-12-23T05:32:59.365063+00:00 app[web.1]: 
+2013-12-23T05:32:59.365063+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::SyntaxError: ERROR:  syntax error at or near ")"
+2013-12-23T05:32:59.365063+00:00 app[web.1]: LINE 7: ...attribute1 ='') AND (locations.cl_barcode not in ()) ORDER B...
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                                                              ^
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:91:in `block in slott_items'
+2013-12-23T05:32:59.365063+00:00 app[web.1]: : SELECT  locations.*,
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                               positions.cl_zone_id,
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                               positions.cl_aisle_id,
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each'
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                               positions.cl_bay_id,
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                               positions.cl_level_id FROM "locations" INNER JOIN positions on
+2013-12-23T05:32:59.365063+00:00 app[web.1]:                             locations.cl_barcode = positions.cl_barcode AND
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:54:in `location_selection'
+2013-12-23T05:32:59.365291+00:00 app[web.1]:                             locations.cl_warehouse_id = positions.cl_warehouse_id WHERE (positions.cl_warehouse_id = 'PHX1') AND (current_quantity =  0  AND locations.current_item ==12345 AND locations.maximum_quantity >=10 AND locations.minimum_quantity <=10 AND locations.attribute1 ='') AND (locations.cl_barcode not in ()) ORDER BY locations.location_priority desc, locations.attribute2 asc LIMIT 1):
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:68:in `create'
+2013-12-23T05:32:59.365291+00:00 app[web.1]: 
+2013-12-23T05:32:59.365291+00:00 app[web.1]: 
+2013-12-23T05:32:59.365533+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `each_with_index'
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:63:in `slott_items'
+2013-12-23T05:32:59.365533+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["1"]}
+2013-12-23T05:32:59.365291+00:00 app[web.1]:   app/models/slottingrecommendation.rb:35:in `sort_items'
+2013-12-23T05:32:59.365533+00:00 app[web.1]: Completed 500 Internal Server Error in 9ms
+2013-12-23T05:32:59.363941+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=29ms status=500 bytes=643
+2013-12-23T05:32:59.366441+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387776784998&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:32:59 +0000
+2013-12-23T05:32:59.378612+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:32:59.378612+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387776784998", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:32:59.381595+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387776784998&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=34ms status=200 bytes=118
+2013-12-23T05:32:59.378612+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.3ms)
