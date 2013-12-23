@@ -9,7 +9,7 @@ class SlottingrecomaintenanceController < ApplicationController
         'preffered_aisle','preffered_bay','preffered_level','preffered_position','preffered_slotting_rules','partial_slotting','location_recommended',
         'slotting_status']
                   
-         selectParam = 'slotting_status = "Open"'
+         selectParam = "slotting_status = 'Open'"
 
 
      slotting = Slottingrecommendation.select("*").where(selectParam).paginate(

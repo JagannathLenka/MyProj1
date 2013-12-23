@@ -1,101 +1,101 @@
-2013-08-20T03:26:19.065465+00:00 app[web.1]: Completed 200 OK in 106ms (Views: 0.2ms | ActiveRecord: 25.8ms)
-2013-08-20T03:26:19.065465+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
-2013-08-20T03:26:19.089866+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969155721&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=208ms status=200 bytes=3498
-2013-08-20T03:29:58.004472+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&lightweight=no host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=27ms status=200 bytes=6076
-2013-08-20T03:29:57.988276+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&lightweight=no" for 71.231.176.33 at 2013-08-20 03:29:57 +0000
-2013-08-20T03:29:58.007906+00:00 app[web.1]: Processing by BaysmaintenanceController#index as HTML
-2013-08-20T03:29:58.007906+00:00 app[web.1]:   Parameters: {"id"=>"162", "lightweight"=>"no"}
-2013-08-20T03:29:58.007906+00:00 app[web.1]: Completed 200 OK in 16ms (Views: 7.0ms | ActiveRecord: 6.3ms)
-2013-08-20T03:29:58.007906+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.1ms)
-2013-08-20T03:29:58.007906+00:00 app[web.1]:   Rendered baysmaintenance/index.html.erb within layouts/application (5.1ms)
-2013-08-20T03:29:58.149443+00:00 heroku[router]: at=info method=GET path=/assets/application-c5efa2db1b40b1cec91008ad3fe78f4a.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=13ms status=304 bytes=0
-2013-08-20T03:29:58.139635+00:00 heroku[router]: at=info method=GET path=/assets/application-0b0dbbd720ce7ce33884d6969653cf92.css host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=6ms status=304 bytes=0
-2013-08-20T03:29:58.152371+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=18ms status=404 bytes=728
-2013-08-20T03:29:58.143337+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
-2013-08-20T03:29:58.150636+00:00 app[web.1]: 
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
-2013-08-20T03:29:58.150636+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/assets/grid.locale-en.js"):
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `block in call'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `call'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:32:in `call_app'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/tagged_logging.rb:22:in `tagged'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/engine.rb:479:in `call'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
-2013-08-20T03:29:58.150636+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/request_id.rb:22:in `call'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/static.rb:63:in `call'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/log_tailer.rb:17:in `call'
-2013-08-20T03:29:58.150999+00:00 app[web.1]: 
-2013-08-20T03:29:58.153501+00:00 app[web.1]: ActionController::RoutingError (No route matches [GET] "/assets/jquery.jqGrid.min.js"):
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/methodoverride.rb:21:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/engine.rb:479:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `block in call'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/tagged_logging.rb:22:in `tagged'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:16:in `call'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/request_id.rb:22:in `call'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/log_tailer.rb:17:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/runtime.rb:17:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:136:in `forward'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/application.rb:223:in `call'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:66:in `call!'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:51:in `call'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:245:in `fetch'
-2013-08-20T03:29:58.150821+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/application.rb:223:in `call'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:59:in `service'
-2013-08-20T03:29:58.151355+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/lock.rb:15:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-cache-1.2/lib/rack/cache/context.rb:185:in `lookup'
-2013-08-20T03:29:58.153855+00:00 app[web.1]: 
-2013-08-20T03:29:58.150999+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
-2013-08-20T03:29:58.150999+00:00 app[web.1]: 
-2013-08-20T03:29:58.153501+00:00 app[web.1]: 
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
-2013-08-20T03:29:58.153501+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/rack/logger.rb:32:in `call_app'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/activesupport-3.2.13/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
-2013-08-20T03:29:58.153677+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/actionpack-3.2.13/lib/action_dispatch/middleware/static.rb:63:in `call'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/content_length.rb:14:in `call'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
-2013-08-20T03:29:58.153855+00:00 app[web.1]:   vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
-2013-08-20T03:29:58.153855+00:00 app[web.1]: 
-2013-08-20T03:29:58.148106+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=17ms status=404 bytes=728
-2013-08-20T03:29:58.463752+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969375268&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=40ms status=200 bytes=3498
-2013-08-20T03:29:58.468781+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=20ms status=304 bytes=0
-2013-08-20T03:29:58.427263+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&_search=false&nd=1376969375268&rows=30&page=1&sidx=id&sord=asc" for 71.231.176.33 at 2013-08-20 03:29:58 +0000
-2013-08-20T03:29:58.459656+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
-2013-08-20T03:29:58.459656+00:00 app[web.1]: Completed 200 OK in 28ms (Views: 0.2ms | ActiveRecord: 11.4ms)
-2013-08-20T03:29:58.459656+00:00 app[web.1]:   Parameters: {"id"=>"162", "_search"=>"false", "nd"=>"1376969375268", "rows"=>"30", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-08-20T03:30:15.449935+00:00 app[web.1]: Started GET "/baysmaintenance?id=162&_search=false&nd=1376969392255&rows=30&page=1&sidx=id&sord=asc" for 71.231.176.33 at 2013-08-20 03:30:15 +0000
-2013-08-20T03:30:15.545346+00:00 heroku[router]: at=info method=GET path=/baysmaintenance?id=162&_search=false&nd=1376969392255&rows=30&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=2ms service=132ms status=200 bytes=3498
-2013-08-20T03:30:15.535333+00:00 app[web.1]: Processing by BaysmaintenanceController#index as JSON
-2013-08-20T03:30:15.535333+00:00 app[web.1]:   Parameters: {"id"=>"162", "_search"=>"false", "nd"=>"1376969392255", "rows"=>"30", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2013-08-20T03:30:15.535333+00:00 app[web.1]: Completed 200 OK in 70ms (Views: 0.2ms | ActiveRecord: 16.8ms)
-2013-08-20T03:30:15.588640+00:00 heroku[router]: at=info method=POST path=/baysmaintenance host=slottingwarehouse.herokuapp.com fwd="71.231.176.33" dyno=web.1 connect=3ms service=180ms status=500 bytes=643
-2013-08-20T03:30:15.542099+00:00 app[web.1]: Started POST "/baysmaintenance" for 71.231.176.33 at 2013-08-20 03:30:15 +0000
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   app/controllers/baysmaintenance_controller.rb:74:in `create'
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:9:in `copyBaytoAisle'
-2013-08-20T03:30:15.580574+00:00 app[web.1]: 
-2013-08-20T03:30:15.580761+00:00 app[web.1]: 
-2013-08-20T03:30:15.580574+00:00 app[web.1]: 
-2013-08-20T03:30:15.580574+00:00 app[web.1]: NoMethodError (undefined method `no_of_pos_level' for nil:NilClass):
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:61:in `copy_LeveltoLevel'
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:54:in `block in update_level'
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:51:in `update_level'
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:31:in `copy_BaytoBay'
-2013-08-20T03:30:15.580574+00:00 app[web.1]:   lib/copy_object.rb:11:in `block in copyBaytoAisle'
-2013-08-20T03:30:15.580761+00:00 app[web.1]: Processing by BaysmaintenanceController#create as */*
-2013-08-20T03:30:15.580761+00:00 app[web.1]: Completed 500 Internal Server Error in 26ms
-2013-08-20T03:30:15.580761+00:00 app[web.1]:   Parameters: {"oper"=>"cpy", "id"=>"1452"}
+2013-12-23T04:50:37.037683+00:00 heroku[router]: at=info method=GET path=/itemmastermaintenance?_search=false&nd=1387774242668&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=19ms status=200 bytes=42
+2013-12-23T04:50:44.084633+00:00 app[web.1]: Started GET "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
+2013-12-23T04:50:44.098546+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
+2013-12-23T04:50:44.098546+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (3.8ms)
+2013-12-23T04:50:44.098546+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
+2013-12-23T04:50:44.098546+00:00 app[web.1]: Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+2013-12-23T04:50:44.098931+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=23ms status=200 bytes=7571
+2013-12-23T04:50:44.234805+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
+2013-12-23T04:50:44.240653+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-23T04:50:44.241551+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
+2013-12-23T04:50:44.244332+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T04:50:44.300105+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=71ms status=304 bytes=0
+2013-12-23T04:50:44.573432+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387774250158&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 04:50:44 +0000
+2013-12-23T04:50:44.581115+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
+2013-12-23T04:50:44.581115+00:00 app[web.1]: 
+2013-12-23T04:50:44.581115+00:00 app[web.1]:                                                                 ^
+2013-12-23T04:50:44.581115+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
+2013-12-23T04:50:44.581115+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
+2013-12-23T04:50:44.581115+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
+2013-12-23T04:50:44.581115+00:00 app[web.1]: 
+2013-12-23T04:50:44.581115+00:00 app[web.1]: 
+2013-12-23T04:50:44.580807+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387774250158&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=16ms status=500 bytes=643
+2013-12-23T04:50:44.582533+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T04:50:44.582533+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387774250158", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T04:50:44.582533+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
+2013-12-23T04:50:44.247720+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=15ms status=304 bytes=0
+2013-12-23T04:51:02.441364+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 04:51:02 +0000
+2013-12-23T04:51:02.441245+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_f9bd01_256x240.png host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=9ms status=200 bytes=4549
+2013-12-23T04:51:02.459536+00:00 app[web.1]: Completed 200 OK in 11ms (Views: 1.0ms | ActiveRecord: 5.1ms)
+2013-12-23T04:51:02.459536+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T04:51:02.459536+00:00 app[web.1]:   Parameters: {"item_number"=>"1234", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"PHX1", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
+2013-12-23T04:51:02.455548+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=4ms service=26ms status=200 bytes=533
+2013-12-23T04:51:02.569402+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387774268207&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 04:51:02 +0000
+2013-12-23T04:51:02.582109+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
+2013-12-23T04:51:02.582109+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
+2013-12-23T04:51:02.582109+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
+2013-12-23T04:51:02.582109+00:00 app[web.1]: 
+2013-12-23T04:51:02.582109+00:00 app[web.1]:                                                                 ^
+2013-12-23T04:51:02.582109+00:00 app[web.1]: 
+2013-12-23T04:51:02.582109+00:00 app[web.1]: 
+2013-12-23T04:51:02.582109+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
+2013-12-23T04:51:02.583101+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T04:51:02.583101+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387774268207", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T04:51:02.583101+00:00 app[web.1]: Completed 500 Internal Server Error in 6ms
+2013-12-23T05:04:26.429059+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate:down VERSION=20131012225758` by farooq.buvvaji@gmail.com
+2013-12-23T05:04:32.137785+00:00 heroku[run.8596]: Awaiting client
+2013-12-23T05:04:32.175876+00:00 heroku[run.8596]: Starting process with command `bundle exec rake db:migrate:down VERSION=20131012225758`
+2013-12-23T05:04:36.152049+00:00 heroku[run.8596]: Process exited with status 0
+2013-12-23T05:04:56.483493+00:00 heroku[api]: Starting process with command `bundle exec rake db:migrate:up VERSION=20131012225758` by farooq.buvvaji@gmail.com
+2013-12-23T05:05:02.063900+00:00 heroku[run.9973]: State changed from starting to up
+2013-12-23T05:05:02.100936+00:00 heroku[run.9973]: Awaiting client
+2013-12-23T05:05:02.200512+00:00 heroku[run.9973]: Starting process with command `bundle exec rake db:migrate:up VERSION=20131012225758`
+2013-12-23T05:05:06.884685+00:00 heroku[run.9973]: Process exited with status 0
+2013-12-23T05:05:06.897516+00:00 heroku[run.9973]: State changed from up to complete
+2013-12-23T05:05:24.929682+00:00 app[web.1]: Started GET "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:05:24 +0000
+2013-12-23T05:05:24.939255+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
+2013-12-23T05:05:24.939255+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (3.8ms)
+2013-12-23T05:05:24.939255+00:00 app[web.1]: Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+2013-12-23T05:05:24.939255+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
+2013-12-23T05:05:24.946025+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=200 bytes=7571
+2013-12-23T05:05:25.067009+00:00 heroku[router]: at=info method=GET path=/assets/application-ca1462380ca08023c3ca07171feecf9b.css host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=2ms service=7ms status=304 bytes=0
+2013-12-23T05:05:25.075440+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
+2013-12-23T05:05:25.080416+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
+2013-12-23T05:05:25.081102+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2013-12-23T05:05:25.083250+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2013-12-23T05:05:25.078491+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=304 bytes=0
+2013-12-23T05:05:25.069588+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=10ms status=304 bytes=0
+2013-12-23T05:05:25.080549+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=16ms status=304 bytes=0
+2013-12-23T05:05:25.341239+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775130996&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:05:25 +0000
+2013-12-23T05:05:25.348543+00:00 app[web.1]: 
+2013-12-23T05:05:25.348543+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
+2013-12-23T05:05:25.348543+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
+2013-12-23T05:05:25.348543+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
+2013-12-23T05:05:25.348543+00:00 app[web.1]:                                                                 ^
+2013-12-23T05:05:25.348543+00:00 app[web.1]: 
+2013-12-23T05:05:25.348543+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
+2013-12-23T05:05:25.348543+00:00 app[web.1]: 
+2013-12-23T05:05:25.348955+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:05:25.348955+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775130996", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:05:25.348955+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
+2013-12-23T05:05:25.344687+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775130996&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=14ms status=500 bytes=643
+2013-12-23T05:04:32.253210+00:00 heroku[run.8596]: State changed from starting to up
+2013-12-23T05:05:39.393604+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.32.83 at 2013-12-23 05:05:39 +0000
+2013-12-23T05:05:39.408065+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=33ms status=200 bytes=534
+2013-12-23T05:05:39.413129+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2013-12-23T05:05:39.413129+00:00 app[web.1]:   Parameters: {"item_number"=>"12345", "quantity_to_be_slotted"=>"10", "preffered_warehouse"=>"PHX1", "preffered_zone"=>"", "preffered_aisle"=>"", "preffered_bay"=>"", "preffered_level"=>"", "preffered_position"=>"", "preffered_slotting_rules"=>"", "partial_slotting"=>"", "location_recommended"=>"", "slotting_status"=>"Open", "oper"=>"add", "id"=>"_empty"}
+2013-12-23T05:05:39.413129+00:00 app[web.1]: Completed 200 OK in 16ms (Views: 1.3ms | ActiveRecord: 10.8ms)
+2013-12-23T05:05:39.518343+00:00 app[web.1]: Started GET "/slottingrecomaintenance?_search=false&nd=1387775145161&rows=10&page=1&sidx=id&sord=asc" for 68.231.32.83 at 2013-12-23 05:05:39 +0000
+2013-12-23T05:05:39.526780+00:00 app[web.1]: 
+2013-12-23T05:05:39.526780+00:00 app[web.1]: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "Open" does not exist
+2013-12-23T05:05:39.526780+00:00 app[web.1]: LINE 1: ... "slottingrecommendations"  WHERE (slotting_status = "Open")
+2013-12-23T05:05:39.526780+00:00 app[web.1]:                                                                 ^
+2013-12-23T05:05:39.526780+00:00 app[web.1]: : SELECT COUNT(*) FROM "slottingrecommendations"  WHERE (slotting_status = "Open")):
+2013-12-23T05:05:39.526780+00:00 app[web.1]:   app/controllers/slottingrecomaintenance_controller.rb:23:in `index'
+2013-12-23T05:05:39.526780+00:00 app[web.1]: 
+2013-12-23T05:05:39.526780+00:00 app[web.1]: 
+2013-12-23T05:05:39.527663+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1387775145161", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2013-12-23T05:05:39.527663+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2013-12-23T05:05:39.527663+00:00 app[web.1]: Completed 500 Internal Server Error in 3ms
+2013-12-23T05:05:39.523441+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1387775145161&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=1ms service=20ms status=500 bytes=643
+2013-12-23T05:04:36.161373+00:00 heroku[run.8596]: State changed from up to complete

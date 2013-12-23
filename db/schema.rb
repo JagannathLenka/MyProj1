@@ -385,7 +385,6 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
-    t.string   "prffered_warehouse"
     t.string   "preffered_zone"
     t.string   "preffered_aisle"
     t.string   "preffered_bay"
@@ -403,9 +402,10 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
+    t.string   "preffered_warehouse"
+    t.integer  "quantity_to_be_slotted"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.integer  "quantity_to_be_slotted"
   end
 
   create_table "users", :force => true do |t|
