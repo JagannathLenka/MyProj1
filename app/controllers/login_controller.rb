@@ -13,19 +13,14 @@ class LoginController < ApplicationController
  
    newuser = User.where(user_id: params[:txtuid]).first
       if newuser.nil?
-           
-           #flash[:notice] = "Incorrect User"
            render :text => "Error:Incorrect User" 
-           #redirect_to :back
-          
-   
-     elsif newuser.password == params[:txtpswd]
+
+      elsif   newuser.password == params[:txtpswd]
               newuser.last_login = Time.now.to_s
               newuser.save
               cookies[:userid] = {
                                   value: newuser.user_id,
                                   expires: 1.hour.from_now
-                                  
                                 }
              cookies[:client_id] = {
                     value: newuser.client_id,
@@ -33,19 +28,17 @@ class LoginController < ApplicationController
                     
                   }
              render :text => "Success"
-     else
-       #flash[:notice] = "Incorrect Password"
-       #render :text => "Error:Incorrect Password"
-       #redirect_to :back
-       render :text => "Success"
-     end
-  
-          
+      end
           
  end
 
  def aboutus
    
  end
+ 
+ def landingpage
+   
+ end
+ 
  
 end

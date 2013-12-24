@@ -162,17 +162,17 @@ var indexHTML = {
 
 		    $('.bay, .bay_Empty').click(function(){   
 					// calc good width
-					var ww=$(window).width()*.95;
-					var wh=$(window).height()*.95;
+					var ww=$(window).width()*.80;
+					var wh=$(window).height()*.80;
 
 					//size iframe nice like
-					$("#positionframe").width(ww);
-					$("#positionframe").height(wh);
+					$("#positionframe").width(ww-10);
+					$("#positionframe").height(wh-10);
 
 				    $('#positionframe').attr('src',"/position/"+ this.id+ "?lightweight=yes");
 				    $('#positionspace').dialog({
-		    	  	height: 400,
-		      		width: 1100,
+		    	  	height: wh,
+		      		width:  ww,
 		      		modal: true,
       			})
 			});
@@ -254,7 +254,7 @@ var indexHTML = {
 				    	  //alert(status);	
 						  if (status=="success") {
 
-				      			$("#positionspace").load("/position/"+data+"?lightweight=yes");
+				      			
 							}	
 						  else
 						  	{

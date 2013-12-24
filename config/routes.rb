@@ -1,6 +1,7 @@
 MyProj1::Application.routes.draw do
   get  'login/aboutus'  => 'login#aboutus' 
   get  'login/contactus' => 'login#contactus'
+  get  'login/landingpage' => 'login#landingpage'
   get  'userregister/thanks' => 'userregister#thanks'
   post 'locationmaintenance/upload/' => 'locationmaintenance#upload'
   post 'itemmastermaintenance/upload/' => 'itemmastermaintenance#upload'
