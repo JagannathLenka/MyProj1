@@ -69,7 +69,7 @@ module BaysmaintenanceHelper
       :width=> width,
       
      
-      :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','PriorityBay','Sequence No.','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Bay','Description','Client Id','sm_aisle_id','Aisle','aisle_id','sm_zone_id','Zone', 'sm_warehouse_id','Warehouse','Level/Bay', 'no_of_level_bay_hidden','Bay Sticker','Product Category','Row Of Aisle','PriorityBay','Sequence No.','Bay Type','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',      :index => 'id',    :width => 55, :hidden => true},
         { :name => 'sm_bay_id',  :index => 'sm_bay_id',  :width => 120, :align => 'center', :editable => true, :hidden => true},
@@ -88,9 +88,9 @@ module BaysmaintenanceHelper
         { :name => 'attribute1',   :index => 'attribute1',   :width => 120,   :align => 'center', :editable => true,:hidden => true },
         { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => true ,editrules:{required:true}},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
-        { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true},
-        { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true}, 
+        { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Clear Area:Clear Area; Damaged:Damaged; Reserved:Reserved" }},
         { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute8',   :index => 'attribute8',   :width => 120 ,  :align => 'center', :editable => true, :hidden => true}
         

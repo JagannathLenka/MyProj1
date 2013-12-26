@@ -4,7 +4,7 @@ one:
   client_id: MyString
   item_number: MyString
   quantity_to_be_slotted: 1
-  prffered_warehouse: MyString
+  preffered_warehouse: MyString
   preffered_zone: MyString
   preffered_aisle: MyString
   preffered_bay: MyString
@@ -27,7 +27,7 @@ two:
   client_id: MyString
   item_number: MyString
   quantity_to_be_slotted: 1
-  prffered_warehouse: MyString
+  preffered_warehouse: MyString
   preffered_zone: MyString
   preffered_aisle: MyString
   preffered_bay: MyString
