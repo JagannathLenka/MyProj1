@@ -41,7 +41,6 @@ class ItemmastermaintenanceController < ApplicationController
    row_array = row
       
       Itemmaster.validate_process row_array, params[:file]
-       In
   end
     redirect_to :back 
 end
