@@ -27,10 +27,12 @@ class Level < ActiveRecord::Base
   
   
   def update_seqno_pos
+   if no_of_pos_level_changed?
     positions = Position.where('sm_level_id = ? and sm_bay_id = ? and sm_aisle_id = ? and sm_zone_id = ? and sm_warehouse_id = ? ' , self.sm_level_id ,  self.sm_bay_id , self.sm_aisle_id , self.sm_zone_id , self.sm_warehouse_id).order(:sm_level_id)
     positions.each_with_index do |pos, i|
       pos.attribute3= "%03d" % pos.sm_pos_id
       pos.save
+     end
     end
   end
   

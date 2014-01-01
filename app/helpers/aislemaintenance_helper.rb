@@ -18,7 +18,7 @@ module AislemaintenanceHelper
       lightweight = "no"
       id  = params["id"]
       url = "/aislemaintenance?id=" +  id
-      height = 'auto' 
+      #height = 'auto' 
       width =  'auto' 
    end 
     editcheckfunc = 'function(postdata, formid) 
@@ -53,27 +53,36 @@ module AislemaintenanceHelper
                      } 
                    }"   
                       
-       copyrowfunc  = 'function() {
-                                var ids = $("#aisle_list").jqGrid("getGridParam","selarrrow");
+       copyrowfunc  = "function() {
+                                var ids = $('#aisle_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/aislemaintenance",
+                                 $.post('/aislemaintenance',
                                        {
-                                         "oper" :"cpy",
-                                         "id"   :ids[0]
-                                       },
-                                       function(data,status)
-                                       {
-                               
-                                       });
-                                 $("#aisle_list").trigger("reloadGrid");       
-                   }'
+                                         'oper' :'cpy',
+                                         'id'   :ids[0]
+                                       })
+                                        .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#aisle_list').trigger('reloadGrid');       
+                   }"
                                        
 
     grid = [{
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 'auto',
+      :height=> 350,
       :width => 'auto',
       
       :colNames => ['Id','Sequence', 'Aisle','Description','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
@@ -106,8 +115,8 @@ module AislemaintenanceHelper
       ],
       :editurl => '/aislemaintenance',
       :pager => '#aisle_pager',
-      :rowNum => 10,
-      :rowList => [10, 20, 30],
+      :rowNum => 30,
+      :rowList => [30, 40, 60],
       :sortname => 'sm_aisle_id',
       :sortorder => 'asc',
       :shrinkToFit => true,

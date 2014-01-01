@@ -1,4 +1,7 @@
 class PosmaintenanceController < ApplicationController
+  
+  rescue_from Exception, :with => :error_render_method
+  
   # GET /maintenance
   
   def index
@@ -164,6 +167,14 @@ class PosmaintenanceController < ApplicationController
    add_breadcrumb "Level:" + (level.cl_level_id.blank? ? level.sm_level_id.to_s : level.cl_level_id), "/posmaintenance?id="+ level.id.to_s
    @warehouse = warehouse.cl_warehouse_id
    @warehouse_description = warehouse.description
-  end   
+  end  
+  
+  #Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
+     
  
  end

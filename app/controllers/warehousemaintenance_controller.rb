@@ -1,5 +1,7 @@
 
 class WarehousemaintenanceController < ApplicationController
+
+rescue_from Exception, :with => :error_render_method
   
    # GET /maintenance
   def index
@@ -13,8 +15,7 @@ class WarehousemaintenanceController < ApplicationController
       :per_page => params[:rows],
       :order    => order_by_from_params(params))
   
-    if request.xhr? and params[:lightweight] !="yes"
-      
+    if request.xhr? and params[:lightweight] !="yes" 
       render :json => json_for_jqgrid(warehouse, columns)
     end
    
@@ -124,6 +125,11 @@ def remove_zones_from_warehouse warehouse
            
 end
 
-
+#Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
 
 end

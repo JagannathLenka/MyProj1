@@ -8,6 +8,7 @@
 		.bay_nil{ float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 0px solid #000; border-right: 0px solid #000;background: white;}
 		.bay_col          { float: left;  height: 38px;  width: <%= @bay_width %>px;}
         .bay              { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000;border-right: 1px solid #000;}
+        .ClearArea        { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 0px solid #000;border-right: 0px solid #000;}
 		.bay_Empty        { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000; border-right: 1px solid #000;background: white;}
 		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 0px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
@@ -228,7 +229,9 @@ var indexHTML = {
 			      		width:  ww-10,
 			      		modal: true,
 			      		close: function() {
-	      					   window.parent.document.location.reload(true);
+	      					   //window.parent.document.location.reload(true);
+	      				        $('body').load('/bay?id=<%= @zone_id %>');
+
 	      				}
 				 })
 	       }

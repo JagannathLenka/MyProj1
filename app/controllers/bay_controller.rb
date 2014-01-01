@@ -1,6 +1,8 @@
 require 'location_move'
 class BayController < ApplicationController
   
+rescue_from Exception, :with => :error_render_method
+  
 #Dynamically arranging bays in the aisle 
  
 def index
@@ -20,6 +22,7 @@ def index
 
       @bay = Bay.where(aisle_id: aislevalue.id.to_s).order("attribute3 ASC, id ASC")
       @zone      = aislevalue.cl_zone_id
+      @zone_id   = aislevalue.zone_id
       @warehouse = aislevalue.cl_warehouse_id
       
       
@@ -49,7 +52,7 @@ def index
          #customer_bay_id = bayvalue.cl_bay_id.blank? ? bayvalue.sm_bay_id : bayvalue.cl_bay_id
           
          baytype = check_baytype bayvalue
-         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute5, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4})
+         @bayhash= @bayhash.merge(bayvalue.id.to_s => {:type => baytype , :item => bayvalue.attribute5, :customerid => cl_bay_id, :priority_bay => bayvalue.attribute4, :bay_type => bayvalue.attribute6})
    
       end
      
@@ -109,6 +112,12 @@ def create
    
 end
   
-  
+ #Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
+     
   
 end

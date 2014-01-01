@@ -1,6 +1,8 @@
 require 'copy_object'
 class BaysmaintenanceController < ApplicationController
   
+ rescue_from Exception, :with => :error_render_method
+  
   include CopyObject
    # GET /Render the JQGrid for bay maintenance
   def index
@@ -32,6 +34,8 @@ end
 
 #Update the bays and create bays and levels beased on the input from JQgrid
  def create
+
+  
    
   @error = ""
   case params[:oper]
@@ -39,9 +43,8 @@ end
         edit_bays_details
        
   when "add"
-    
+        aisles = Aisle.find_by_id(params[:pt_aisle_id].to_i)  
         bays = Bay.find_by_id(params[:id])
-        aisles = Aisle.find_by_id(params[:pt_aisle_id].to_i)
         maximum_bay_id = Bay.where(:aisle_id => params[:pt_aisle_id]).maximum("sm_bay_id").to_i + 1
         bays= Bay.new(:sm_bay_id =>  maximum_bay_id, 
                          :cl_bay_id => params[:cl_bay_id],
@@ -66,20 +69,22 @@ end
                        )
         
                bays.save
+               aisles.update_attributes({:no_of_bays_aisle => aisles.no_of_bays_aisle.to_i + 1}) 
+               
                @error = params[:cl_bay_id]+ ' ' + bays.errors.values[0][0] if bays.errors.count > 0 
                add_levels_to_bay bays if bays.errors.count <= 0 
                
                
     when "del"
          bays = Bay.destroy(params[:id].to_i) 
-       
+         aisles = Aisle.find_by_id(bays.aisle_id.to_i)
+         aisles.update_attributes({:no_of_bays_aisle => aisles.no_of_bays_aisle.to_i - 1}) 
+
     when "cpy"
              
              CopyObject.copyBaytoAisle params[:id]
               
     end   
-   
-         
 
     if request.xhr?
        if !@error.blank?        
@@ -172,4 +177,12 @@ end
    @warehouse = warehouse.cl_warehouse_id 
    @warehouse_description = warehouse.description
 end 
+
+#Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
+    
 end

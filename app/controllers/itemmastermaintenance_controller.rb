@@ -40,8 +40,8 @@ class ItemmastermaintenanceController < ApplicationController
    CSV.parse(file) do |row|
    row_array = row
       
-      Itemmaster.validate_process row_array, params[:file]
-       In
+      Itemmaster.delay.validate_process row_array, params[:file]
+
   end
     redirect_to :back 
 end

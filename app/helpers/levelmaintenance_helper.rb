@@ -14,21 +14,32 @@ module LevelmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_bay_id=' + params["id"] + '; return[true, " "]}'
-    copyrowfunc  = 'function() {
-                                var ids = $("#level_list").jqGrid("getGridParam","selarrrow");
+    
+    copyrowfunc  = "function() {
+                                var ids = $('#level_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/levelmaintenance",
+                                 $.post('/levelmaintenance',
                                        {
-                                         "oper" :"cpy",
-                                         "id"   :ids[0]
-                                       },
-                                       function(data,status)
-                                       {
-                               
-                                       });
-                                 $("#level_list").trigger("reloadGrid");       
-                   }'
+                                         'oper' :'cpy',
+                                         'id'   :ids[0]
+                                       })
+                                        .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#level_list').trigger('reloadGrid');       
+                   }"
                    
+    
      aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
      selectrowfunc = "function(id) { 
                       if(id && id!==lastsel){

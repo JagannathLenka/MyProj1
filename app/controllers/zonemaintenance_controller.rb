@@ -1,4 +1,7 @@
 class ZonemaintenanceController < ApplicationController
+  
+#rescue_from Exception, :with => :error_render_method
+
    # GET /zonemaintenance
  def index
 
@@ -154,5 +157,13 @@ end
    @warehouse = warehouse.cl_warehouse_id
    @warehouse_description = warehouse.description
   end
+  
+ #Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
+
   
 end

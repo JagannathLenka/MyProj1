@@ -32,20 +32,29 @@ module BaysmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + id + '; return[true, " "]}'
-    copyrowfunc  = 'function() {
-                                var ids = $("#bays_list").jqGrid("getGridParam","selarrrow");
+    copyrowfunc  = "function() {
+                                var ids = $('#bays_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/baysmaintenance",
+                                 $.post('/baysmaintenance',
                                        {
-                                         "oper" :"cpy",
-                                         "id"   :ids[0]
-                                       },
-                                       function(data,status)
-                                       {
-                                        alert(data);
-                                       });
-                                 $("#bays_list").trigger("reloadGrid");       
-                   }'
+                                         'oper' :'cpy',
+                                         'id'   :ids[0]
+                                       })
+                                       .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#bays_list').trigger('reloadGrid');       
+                   }"
 
      aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
      selectrowfunc = "function(id) { 

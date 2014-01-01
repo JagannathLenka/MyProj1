@@ -114,7 +114,7 @@ end
 #Error Handling
 def error_render_method exception
       
-      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 404
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
       true
   end 
     

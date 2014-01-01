@@ -142,6 +142,10 @@ module BayHelper
    
        output = ''
        output  += '<td class="bay_col">' +
+       
+                (if bayvalue[:bay_type] == 'Clear Area'
+                     '<div class="ClearArea"></div>' 
+                 else 
                      '<div id="' + bay.to_s + '"' + 
                          ' class="' + bayvalue[:type].to_s + '"' + 
                          ' title=" Product Type:' +  bayvalue[:item].to_s + '"' +  
@@ -149,10 +153,10 @@ module BayHelper
                                 selected_bay(bayvalue).to_s  +    
                                 bay_type(bayvalue).to_s +            
                          '<span id="'+ bay.to_s + '_label" ' +
-                                 getClass(bayvalue[:priority_bay] ) + '<h6><p style="width:20px">' + bayvalue[:customerid].to_s.center(4) + '</p></h6></span>' + 
-                                 
-                     '</div>
-                  </td>'    
+                                 getClass(bayvalue[:priority_bay] ) + '<h6><p style="width:20px">' + bayvalue[:customerid].to_s.center(4) + '</p></h6></span>' +                                  
+                     '</div>' 
+                 end )+ 
+                 '</td>'    
        return output  
  end 
 
