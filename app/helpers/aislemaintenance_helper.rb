@@ -18,7 +18,7 @@ module AislemaintenanceHelper
       lightweight = "no"
       id  = params["id"]
       url = "/aislemaintenance?id=" +  id
-      #height = 'auto' 
+      height = 350 
       width =  'auto' 
    end 
     editcheckfunc = 'function(postdata, formid) 
@@ -82,7 +82,7 @@ module AislemaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 350,
+      :height=> height,
       :width => 'auto',
       
       :colNames => ['Id','Sequence', 'Aisle','Description','Client Id','sm_zone_id', 'Zone','zone_id','sm_warehouse_id',
@@ -104,7 +104,7 @@ module AislemaintenanceHelper
         { :name => 'no_of_levels_aisle',:index => 'no_of_levels_aisle',     :width => 80,  :align => 'center', :editable => true , editrules:{required:true,number:true}},
         { :name => 'no_of_levels_aisle_hidden',:index => 'no_of_levels_aisle_hidden',     :width => 80,  :align => 'left', :editable => true, :hidden => true },
         { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true ,edittype:"select", editoptions: {value: "LR:LR-Double Side Pick Aisle;R:R-Right Side Pick Aisle- Right;L:L-Left Side Aisle- Left" }},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 60,   :align => 'center', :editable => true, :hidden => true },

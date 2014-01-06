@@ -1,7 +1,5 @@
 module BayHelper
 
-
-
   def selected_bay(bayvalue)
     image_tag("pointer.jpg") if bayvalue[:customerid] == params["selectedbay"]
     
@@ -12,13 +10,13 @@ module BayHelper
     case 
       
    when bayvalue[:type] == 'bay'
-     return image_tag("low_priority_bay.jpg", :size => "100x35")
+     return image_tag("low_priority_bay.jpg", :size => "60x35")
   
    when bayvalue[:type] == 'bay_Empty' && bayvalue[:priority_bay] != "High"
-     return image_tag("low_priority_empty_bay.jpg", :size => "100x35")
+     return image_tag("low_priority_empty_bay.jpg", :size => "60x35")
     
    when bayvalue[:type] == 'bay_Empty' && bayvalue[:priority_bay] = "High"
-     return image_tag("high_priority_empty_bay.gif", :size => "100x35")
+     return image_tag("high_priority_empty_bay.gif", :size => "60x35")
     
    end 
   end
@@ -27,8 +25,8 @@ module BayHelper
 
   def aisle_render
     
-  BayHelper.output_aisle = ''
-  BayHelper.output_bay   = ''  
+   BayHelper.output_aisle = ''
+   BayHelper.output_bay   = ''  
 
      @aislehash.each do |aisle, aislevalue| 
         case aislevalue["aisle_properties"]["aisle_pick"]
@@ -65,7 +63,7 @@ module BayHelper
 
         output=     '</tr><tr>                      
                      <td> 
-                       <div  style="width:80px; height:38px; float:left"> </div> 
+                       <div  style="width:80px; height:' + (@bay_height-2).to_s + 'px; float:left"> </div> 
                    </td>'
        return output               
   end
@@ -74,7 +72,7 @@ module BayHelper
 
        output = '</tr>
                     <td>              
-                     <div  style="width:80px; height:4px; float:left"> </div>            
+                     <div  style="width:80px; height: 4px; float:left"> </div>            
                   </td>
                  </tr>
                 <tr> '
@@ -167,10 +165,10 @@ module BayHelper
         return 'class="label label-danger pull-right">'
            
      when "Medium"
-        return 'class="label label-warning pull-right">' 
+        return 'class="label label-success pull-right">' 
   
      when "Low"
-        return 'class="label label-success pull-right">'
+        return 'class="label label-info pull-right">'
   
      else
         return 'class="label label-info pull-right">'

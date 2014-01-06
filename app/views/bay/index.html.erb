@@ -4,15 +4,15 @@
 	    .main             {width: 98%;  border: 0px solid #999;}
 		.content 	      { float: left;   background: white; margin-left:10px; max-width:100% }
         .area 	          { float: left;    background: white; border: 0px solid #000; max-width:100%}             
-        .aisle            { float: left;  height: 40px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(blue), to(lightblue));}
-		.bay_nil{ float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 0px solid #000; border-right: 0px solid #000;background: white;}
-		.bay_col          { float: left;  height: 38px;  width: <%= @bay_width %>px;}
-        .bay              { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000;border-right: 1px solid #000;}
-        .ClearArea        { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 0px solid #000;border-right: 0px solid #000;}
-		.bay_Empty        { float: left;  height: 38px;  width: <%= @bay_width %>px; border-left: 1px solid #000; border-right: 1px solid #000;background: white;}
+        .aisle            { float: left;  height: <%= @bay_height %>px;  width: 80px; border: 0px solid #000; color: white; background: -webkit-gradient(linear, left top, left bottom, from(blue), to(lightblue));}
+		.bay_nil{ float: left;  height: <%= @bay_height-2 %>px;  width: <%= @bay_width %>px; border-left: 0px solid #000; border-right: 0px solid #000;background: white;}
+		.bay_col          { float: left;  height: <%= @bay_height-2 %>px;  width: <%= @bay_width %>px;}
+        .bay              { float: left;  height: <%= @bay_height-2 %>px;  width: <%= @bay_width %>px; border-left: 1px solid #000;border-right: 1px solid #000;}
+        .ClearArea        { float: left;  height: <%= @bay_height-2 %>px;  width: <%= @bay_width %>px; border-left: 0px solid #000;border-right: 0px solid #000;}
+		.bay_Empty        { float: left;  height: <%= @bay_height-2 %>px;  width: <%= @bay_width %>px; border-left: 1px solid #000; border-right: 1px solid #000;background: white;}
 		.bay_draggedhelper{ float: left;  height: <%= @bay_height %>px;  width: <%= @bay_width %>px; border: 0px solid #000; background: -webkit-gradient(linear, left top, left bottom, from(#FFCC66), to(#FFCC99));}
 		.aisle_divider    { float: left;  height: 2px;   width: <%= @aisle_width %>px; border: 2px solid #999; background: black}
-		.aisle_drivepath  { float: left;  height: 19px;   width: <%= @aisle_width %>px; border: 0px solid #999; background: #CCCCCC}
+		.aisle_drivepath  { float: left;  height: <%= (@bay_height-2)/2 %>px;   width: <%= @aisle_width %>px; border: 0px solid #999; background: #CCCCCC}
 		.aisle_Empty      { float: left;  height: <%= @bay_height %>px;  width: <%= @aisle_width %>px; border:1px solid #999; background: white}
 
 body {
@@ -42,7 +42,7 @@ table tr td {
 	  $( init );
 
 	  $(document).ready(function(){
-			$("#aisle_details").css("width",$( window ).width() * .8)
+			$("#aisle_details").css("width",$( window ).width() * .85)
 	  })
 	  
 	  $(document).ready(function(){
@@ -313,7 +313,7 @@ var indexHTML = {
     	<table border="0" style="max-width: 100%"> 
     		<tr>
     			<td style="width: 80px; float:left">
-					<div id="aisle_header" style="overflow-y:hidden; float: left; width: 80px; height: 400px">
+					<div id="aisle_header" style="overflow-y:hidden; float: left; width: 80px; height: 450px">
     					<table>
     						<%=raw(BayHelper.output_aisle)%>
     				 	</table>	
@@ -321,7 +321,7 @@ var indexHTML = {
 	    		</td>   	 
     	
     			<td> 
-					<div id="aisle_details" style="float:left; overflow: auto;; height: 400px"> 
+					<div id="aisle_details" style="float:left; overflow: auto;; height: 450px"> 
 						<table>
 							<%=raw(BayHelper.output_bay)%>
 					 	</table>	

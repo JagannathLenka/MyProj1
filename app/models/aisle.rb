@@ -183,7 +183,7 @@ class Aisle < ActiveRecord::Base
            Zone.oneway_sequence_with_aisle self
           
         when zone.attribute1 == 'ZigZag'
-          zigzag_sequence    
+          Zone.zigzag_sequence_with_aisle self  
      
      end 
      

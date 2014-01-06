@@ -10,7 +10,8 @@ def index
   @aislehash=Hash.new
   @bayhash = Hash.new
   @rowhash = Hash.new
-  @bay_width = 180
+  @bay_width = 100
+  @bay_height = 30
   max_bay = 0
    
   aisle = Aisle.where(zone_id: params[:id]).order("id ASC")

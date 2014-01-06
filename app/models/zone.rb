@@ -123,17 +123,24 @@ end
 
 def  zigzag_sequence
   
-     @aisle_step = 1  
-     aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
+     aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:attribute1)
      aisles.each do |aisle|
-          if aisle.attribute3 == 'LR'
+       Zone.zigzag_sequence_with_aisle aisle
+     end 
+  
+end
+
+
+
+def self.zigzag_sequence_with_aisle aisle
+  
+   if aisle.attribute3 == 'LR'
                          
-             if @aisle_step == 1
+             if (aisle.attribute1.to_i%2)== 1
                 bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
-                @aisle_step = 2
              else
                bays = Bay.where(:aisle_id => aisle.id).order('attribute3, sm_bay_id desc')
-               @aisle_step = 1     
+    
              end           
               
              bay_array = Array.new
@@ -181,8 +188,6 @@ def  zigzag_sequence
               bay.save
              end
           end   
-     end 
-  
 end
 
 #

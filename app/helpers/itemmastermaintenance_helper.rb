@@ -6,8 +6,8 @@ module ItemmastermaintenanceHelper
     options = {:on_document_ready => true, :html_tags => false}
       id  = params["id"]
       url = "/itemmastermaintenance" 
-      height = 300 
-      width = 1100   
+      height = 350 
+      width = 'auto'
     
     
     addcheckfunc = 'function(postdata, formid) {return[true, " "]}'
@@ -64,13 +64,14 @@ module ItemmastermaintenanceHelper
       ],
       :editurl => '/itemmastermaintenance',
       :pager => '#item_pager',
-      :rowNum => 10,
-      :rowList => [10, 20, 30],
+      :rowNum => 50,
+      :rowList => [50, 100, 150],
       :sortname => 'id',
       :sortorder => 'asc',
       :viewrecords => true,
       :caption => 'Item Master Maintenance',
       :reloadAfterEdit => true,
+      :autowidth => true,
       :multiselect => true,
       :onSelectRow => selectrowfunc.to_json_var }]
 
