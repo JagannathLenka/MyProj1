@@ -44,7 +44,7 @@ module LocationmaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 'auto',
+      :height=> 350,
       :width=> 'auto',
       :scrollbar=> true,
       

@@ -9,6 +9,7 @@ class Zone < ActiveRecord::Base
   
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :cl_warehouse_id, :cl_zone_id, :client_id, :description, :no_of_aisles_zone, :no_of_bays_aisle, :no_of_levels_aisle, :sm_warehouse_id, :sm_zone_id, :warehouse_id
   validates :cl_zone_id, :uniqueness => {:scope => :warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Zone Already Exists"}
+  
 #
 # Update zone client id in all aisle
 #  
@@ -23,22 +24,28 @@ class Zone < ActiveRecord::Base
      end
     end
   end
+  
 
 #
 #update seq no for aisle
 #
 def update_seqno_aisle
-  aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:sm_aisle_id)
-    aisles.each_with_index do |aisle, i|
-      aisle.attribute1 = "%03d" % aisle.sm_aisle_id
+  if no_of_aisles_zone_changed?
+      aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:sm_aisle_id)
+      aisles.each_with_index do |aisle, i|
+          aisle.attribute1 = "%03d" % aisle.sm_aisle_id
       aisle.save
-    end
+      end
+  end
 end
+
 
 #  
 #Update the sequence for the bay
 #
 def update_seqno_bay
+    
+  if attribute1_changed?
     case self.attribute1
       
         when 'Loop'
@@ -50,19 +57,31 @@ def update_seqno_bay
         when 'ZigZag'
           zigzag_sequence    
      
-     end   
+     end 
+   end    
  end 
+ 
 
 #
 #Provide seuqence for the loop
 #
 def loop_sequence
-    bays = Bay.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:sm_bay_id)
+   aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
+   aisles.each do |aisle|
+     Zone.loop_sequence_with_aisle aisle
+   end
+    
+end
+
+def self.loop_sequence_with_aisle aisle
+    bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
     bays.each_with_index do |bay, i|
       bay.attribute5 = "%03d" % bay.sm_bay_id
       bay.save
     end
+  
 end
+
 
 #
 #Provide seuqence for oneway  
@@ -70,42 +89,58 @@ end
 def oneway_sequence
       aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
       aisles.each do |aisle|
-          if aisle.attribute3 == 'LR'
-              bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
-              bays_count = bays.count
-              bays.each_with_index do |bay, i| 
+         Zone.oneway_sequence_with_aisle aisle 
 
-                  if bay.attribute3 == 'L'
-                     bay.attribute5 = "%03d" % (i+1)
-                  end
-                  
-                  #When Row changes from L to R
-                  if  bay.attribute3 == 'R'                    
-                      bay.attribute5 = "%03d" % (bays_count)
-                      bays_count -= 1
-                  end
-                  bay.save 
-              end          
-          end 
       end   
 end 
+
+
+def self.oneway_sequence_with_aisle aisle
+   
+
+  if aisle.attribute3 == 'LR'
+      bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
+      bays_count = bays.count
+      bays.each_with_index do |bay, i| 
+
+          if bay.attribute3 == 'L'
+             bay.attribute5 = "%03d" % (i+1)
+          end
+          
+          #When Row changes from L to R
+          if  bay.attribute3 == 'R'                    
+              bay.attribute5 = "%03d" % (bays_count)
+              bays_count -= 1
+          end
+          bay.save 
+      end          
+   end  
+end
 
 #
 #Zigzag logic for Front-Adjacent-Front logic
 #
+
 def  zigzag_sequence
   
-     @aisle_step = 1  
-     aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id)
+     aisles = Aisle.where('sm_zone_id = ? and sm_warehouse_id = ? ' ,  self.sm_zone_id , self.sm_warehouse_id).order(:attribute1)
      aisles.each do |aisle|
-          if aisle.attribute3 == 'LR'
+       Zone.zigzag_sequence_with_aisle aisle
+     end 
+  
+end
+
+
+
+def self.zigzag_sequence_with_aisle aisle
+  
+   if aisle.attribute3 == 'LR'
                          
-             if @aisle_step == 1
+             if (aisle.attribute1.to_i%2)== 1
                 bays = Bay.where(:aisle_id => aisle.id).order(:sm_bay_id)
-                @aisle_step = 2
              else
                bays = Bay.where(:aisle_id => aisle.id).order('attribute3, sm_bay_id desc')
-               @aisle_step = 1     
+    
              end           
               
              bay_array = Array.new
@@ -122,7 +157,6 @@ def  zigzag_sequence
                   if i==0
                     bay_array[i][:seq]= "%03d" % (i+1) 
                  
-                        logger.debug "start: " + @last_index.to_s + " " + i.to_s + " " + bay_array[i].to_s     
                         @last_index = 0
                         @step = 1
                    else
@@ -132,7 +166,6 @@ def  zigzag_sequence
                     when 1
                         front = (count -1) - @last_index 
                         bay_array[front][:seq]= "%03d" % (i+1)
-                        logger.debug "front: " + @last_index.to_s + " " + i.to_s + " " + bay_array[front].to_s     
                         @last_index  = front 
                         @step = 2
                 
@@ -143,7 +176,6 @@ def  zigzag_sequence
                             adjacent = @last_index + 1
                         end
                         bay_array[adjacent][:seq]= "%03d" % (i+1)    
-                        logger.debug "adjacent: " +@last_index.to_s + " "+ i.to_s + " " + bay_array[adjacent].to_s     
                         @last_index = adjacent
                         @step = 1
                          
@@ -156,8 +188,6 @@ def  zigzag_sequence
               bay.save
              end
           end   
-     end 
-  
 end
 
 #

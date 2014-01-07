@@ -29,7 +29,7 @@ def self.copy_AisletoAisle copied_from_aisle , copied_to_aisle
   copied_to_aisle.update_attributes({
                                    :cl_aisle_id => copy_cl_aisle_id,
                                    :no_of_levels_aisle => copied_from_aisle.no_of_levels_aisle,
-                                   :attribute1 => copied_from_aisle.attribute1,
+                                   #:attribute1 => copied_from_aisle.attribute1,
                                    :attribute2 => copied_from_aisle.attribute2, 
                                    :attribute3 => copied_from_aisle.attribute3,
                                    :attribute4 => copied_from_aisle.attribute4,
@@ -108,7 +108,7 @@ def self.copy_BaytoBay copied_from_bay , copied_to_bay
                            :attribute2 => copied_from_bay.attribute2, 
                            :attribute3 => copy_attribute3,
                            :attribute4 => priority_bay,
-                           :attribute5 => copied_from_bay.attribute5,
+                           #:attribute5 => copied_from_bay.attribute5,
                            :attribute6 => copied_from_bay.attribute6,
                            :attribute7 => copied_from_bay.attribute7,
                            :attribute8 => copied_from_bay.attribute8   
@@ -177,7 +177,7 @@ def self.copy_LeveltoLevel copied_from_level , copied_to_level
                                      
                                      :cl_level_id => copy_cl_level_id,
                                      :description => copied_from_level.description,
-                                     :attribute1 => copied_from_level.attribute1,
+                                     #:attribute1 => copied_from_level.attribute1,
                                      :attribute2 => copied_from_level.attribute2, 
                                      :attribute3 => copied_from_level.attribute3, 
                                      :attribute4 => priority_level,
@@ -228,7 +228,7 @@ def self.update_position copied_from_level, copied_to_level
                                  :description => from_position.description,
                                  :attribute1 => from_position.attribute1,
                                  :attribute2 => from_position.attribute2, 
-                                 :attribute3 => from_position.attribute3,
+                                 #:attribute3 => from_position.attribute3,
                                  :attribute4 => from_position.attribute4,
                                  :attribute5 => from_position.attribute5,
                                  :attribute6 => from_position.attribute6,

@@ -15,7 +15,7 @@ module BaysmaintenanceHelper
       lightweight = "no"
       id  = params["id"]
       url = "/baysmaintenance?id=" +  id
-      height = 'auto' 
+      height = 350 
       width = 'auto' 
    end 
     
@@ -32,20 +32,29 @@ module BaysmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_aisle_id=' + id + '; return[true, " "]}'
-    copyrowfunc  = 'function() {
-                                var ids = $("#bays_list").jqGrid("getGridParam","selarrrow");
+    copyrowfunc  = "function() {
+                                var ids = $('#bays_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/baysmaintenance",
+                                 $.post('/baysmaintenance',
                                        {
-                                         "oper" :"cpy",
-                                         "id"   :ids[0]
-                                       },
-                                       function(data,status)
-                                       {
-                                        alert(data);
-                                       });
-                                 $("#bays_list").trigger("reloadGrid");       
-                   }'
+                                         'oper' :'cpy',
+                                         'id'   :ids[0]
+                                       })
+                                       .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#bays_list').trigger('reloadGrid');       
+                   }"
 
      aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
      selectrowfunc = "function(id) { 
@@ -88,7 +97,7 @@ module BaysmaintenanceHelper
         { :name => 'attribute1',   :index => 'attribute1',   :width => 120,   :align => 'center', :editable => true,:hidden => true },
         { :name => 'attribute2',   :index => 'attribute2',   :width => 120,   :align => 'center', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 120,   :align => 'center', :editable => true ,editrules:{required:true}},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 120,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true}, 
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Clear Area:Clear Area; Damaged:Damaged; Reserved:Reserved" }},
         { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true, :hidden => true},

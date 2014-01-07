@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  client_id: MyString
+  client_id: CL1
   sm_zone_id: 1
   sm_warehouse_id: 1
   warehouse_id: 1
-  cl_zone_id: MyString
-  cl_warehouse_id: MyString
+  cl_zone_id: Z1
+  cl_warehouse_id: PHX1
   description: MyString
   no_of_aisles_zone: 1
   no_of_bays_aisle: 1
   no_of_levels_aisle: 1
-  attribute1: MyString
+  attribute1: Loop
   attribute2: MyString
   attribute3: MyString
   attribute4: MyString

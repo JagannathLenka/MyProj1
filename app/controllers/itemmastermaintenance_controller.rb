@@ -36,14 +36,10 @@ class ItemmastermaintenanceController < ApplicationController
   end
   
   def upload
-   file = params[:file].read
-   CSV.parse(file) do |row|
-   row_array = row
-      
-      Itemmaster.validate_process row_array, params[:file]
+   file= params[:file].read
+   Itemmaster.delay.upload_file file
+   redirect_to :back 
   end
-    redirect_to :back 
-end
 
 
 

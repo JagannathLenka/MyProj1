@@ -14,21 +14,32 @@ module LevelmaintenanceHelper
 
               return[true, " "]}'
     addcheckfunc = 'function(postdata, formid) {postdata.pt_bay_id=' + params["id"] + '; return[true, " "]}'
-    copyrowfunc  = 'function() {
-                                var ids = $("#level_list").jqGrid("getGridParam","selarrrow");
+    
+    copyrowfunc  = "function() {
+                                var ids = $('#level_list').jqGrid('getGridParam','selarrrow');
                                 
-                                 $.post("/levelmaintenance",
+                                 $.post('/levelmaintenance',
                                        {
-                                         "oper" :"cpy",
-                                         "id"   :ids[0]
-                                       },
-                                       function(data,status)
-                                       {
-                               
-                                       });
-                                 $("#level_list").trigger("reloadGrid");       
-                   }'
+                                         'oper' :'cpy',
+                                         'id'   :ids[0]
+                                       })
+                                        .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#level_list').trigger('reloadGrid');       
+                   }"
                    
+    
      aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
      selectrowfunc = "function(id) { 
                       if(id && id!==lastsel){
@@ -47,7 +58,7 @@ module LevelmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 'auto',
+      :height=> 350,
       :width=> 'auto',
       
       :colNames => ['Id','Sequence','Level','Description','Clent Id','sm_bay_id','Bay','bay_id','Position/Level','no_of_pos_level_hidden','sm_aisle_id','Aisle','sm_zone_id','Zone','sm_warehouse_id','Warehouse','Sequence No','Attribute2','Attribute3','PriorityLevel','Attribute5','Attribute6','Attribute7','Attribute8'],
@@ -71,7 +82,7 @@ module LevelmaintenanceHelper
         { :name => 'attribute1',   :index => 'attribute1',   :width => 80,   :align => 'center', :editable => true},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 80,   :align => 'center', :editable => true,:hidden => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 80,   :align => 'center', :editable => true,:hidden => true },
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 120,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute7',   :index => 'attribute7',   :width => 120,   :align => 'center', :editable => true,:hidden => true},

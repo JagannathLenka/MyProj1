@@ -1,4 +1,6 @@
 class ClientController < ApplicationController
+  
+rescue_from Exception, :with => :error_render_method
   # GET /Render the JQGrid for slotting recomendation
   def index
 
@@ -84,4 +86,12 @@ class ClientController < ApplicationController
  def get_header_details
  
  end 
+ 
+ #Error Handling
+def error_render_method exception
+      
+      render :json => "Error: PLEASE CONTACT YOUR IT " + "\n" + exception.message , status: 500
+      true
+  end 
+    
 end

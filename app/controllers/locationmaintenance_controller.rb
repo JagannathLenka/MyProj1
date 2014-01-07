@@ -45,105 +45,13 @@ class LocationmaintenanceController < ApplicationController
      end
    end
    
- def upload
-   file = params[:file].read
-   CSV.parse(file) do |row|
-   row_array = row
-
-   error = is_row_valid row_array
-   if error.blank?
-
-      existloc = Location.where(" client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , row_array[0], row_array[2], row_array[1]).first
-      if existloc.nil?
-          loc = Location.new(  
-                           :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
-                           :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
-                           :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
-                           :current_item => (row_array[3].to_s.encode! 'utf-8'),
-                           :current_quantity => (row_array[4].to_s.encode! 'utf-8'),
-                           :life_time_total_picks  => (row_array[5].to_s.encode! 'utf-8'),
-                           :lock_code => (row_array[6].to_s.encode! 'utf-8'),
-                           :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
-                           :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
-                           :status => (row_array[9].to_s.encode! 'utf-8')
-                           )
-             loc.save
-             update_location_details loc, loc.cl_warehouse_id, loc.cl_barcode            
-           else
-             existloc.update_attributes({
-                             :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
-                             :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
-                             :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
-                             :current_item => (row_array[3].to_s.encode! 'utf-8'),
-                             :current_quantity => (row_array[4].to_s.encode! 'utf-8'),
-                             :life_time_total_picks  => (row_array[5].to_s.encode! 'utf-8'),
-                             :lock_code => (row_array[6].to_s.encode! 'utf-8'),
-                             :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
-                             :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
-                             :status => (row_array[9].to_s.encode! 'utf-8')
-                           
-                                           })
-             update_location_details existloc, existloc.cl_warehouse_id, existloc.cl_barcode           
-
-           end
-                       
-      else
-      
-        locationerror = Locationerror.new(
-                           :file_name => params[:file].original_filename + Time.now.to_s,
-                           :error_description => error,
-                           :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
-                           :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
-                           :attribute3 => (row_array[2].to_s.encode! 'utf-8'),
-                           :attribute4 => (row_array[3].to_s.encode! 'utf-8'),
-                           :attribute5 => (row_array[4].to_s.encode! 'utf-8'),
-                           :attribute6 => (row_array[5].to_s.encode! 'utf-8'),
-                           :attribute7 => (row_array[6].to_s.encode! 'utf-8'),
-                           :attribute8 => (row_array[7].to_s.encode! 'utf-8'),
-                           :attribute9 => (row_array[8].to_s.encode! 'utf-8'),
-                           :attribute10 => (row_array[9].to_s.encode! 'utf-8')
-                                          )
-            locationerror.save
-     end
-  end 
-   
+  def upload
+   file= params[:file].read
+    Location.delay.upload_file file , params[:file].original_filename
    redirect_to :back 
- end
+  end
  
- #
- # Is this valid Row?
- #
- def is_row_valid rowOfcsv
-   
-   error = ""
-   
-    #ClientId validation
-    if client = User.where(client_id: rowOfcsv[0]).first.nil?
-     error = "ClientId not found" 
-   end 
-   
-   #warehouse validation
-   if warehouse = Warehouse.where(cl_warehouse_id: rowOfcsv[1]).first.nil?
-     error += (error.blank? ? "" : ",") + "Warehouse not found"
-     
-   end  
-   #Barcode validation  
-   if barcode = Position.where("cl_barcode = ? and  cl_warehouse_id = ?" , rowOfcsv[2], rowOfcsv[1]).first.nil?
-     error += (error.blank? ? "" : ",") + "Barcode not found"
-      
-   end
-   
-   #current quantity Should be greater than or equal to minimum quantity and less than or equal to maximum quantity
-   if rowOfcsv[4].to_i > rowOfcsv[7].to_i 
-     error += (error.blank? ? "" : ",") + "Current quantity more than maximum quantity"
-   end  
-   
-   if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
-     error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
-   end
-   
-     return error
-   end
+ 
 
  #
  #Manual addition of location
@@ -228,41 +136,6 @@ class LocationmaintenanceController < ApplicationController
                                          
     end
       
- end
-
- #
- #Update location
- #    
-  def update_location_details loc, warehouse, barcode 
-         pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', warehouse, barcode).first
-         
-         unless pos.nil?
-             zone = Zone.where('cl_warehouse_id = ? and sm_zone_id = ? ', warehouse, pos.sm_zone_id).first
-             aisle = Aisle.where('cl_warehouse_id = ? and sm_zone_id = ? and sm_aisle_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id).first
-             bay = Bay.where('cl_warehouse_id = ? and sm_zone_id =? and sm_aisle_id = ? and sm_bay_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id, pos.sm_bay_id).first
-             level = Level.where('cl_warehouse_id = ? and sm_zone_id =? and sm_aisle_id =? and sm_bay_id =? and sm_level_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id, pos.sm_bay_id, pos.sm_level_id).first
-             loc_seq_no = zone.attribute2 + '-' + aisle.attribute1 + '-' + bay.attribute5 + '-' +  level.attribute1 + '-' + pos.attribute3
-             loc_priority  = '00' + '-' + Location.get_rating(aisle.attribute4) + '-' +Location.get_rating(bay.attribute4) + '-' + Location.get_rating(level.attribute4) + '-' + Location.get_rating(pos.attribute4)
-             
-             loc.update_attributes({
-            
-                    :sm_zone_id => pos.sm_zone_id,
-                    :cl_zone_id => pos.cl_zone_id,
-                    :sm_aisle_id => pos.sm_aisle_id,
-                    :cl_aisle_id => pos.cl_aisle_id,
-                    :sm_bay_id => pos.sm_bay_id,
-                    :cl_bay_id => pos.cl_bay_id, 
-                    :sm_level_id => pos.sm_level_id,
-                    :cl_level_id => pos.cl_level_id, 
-                    :sm_pos_id => pos.sm_pos_id,
-                    :cl_pos_id => pos.cl_pos_id,
-                    :location_priority => loc_priority,
-                    :attribute2 => loc_seq_no
-                 }) 
-         end     
-
-
- end
 
  
   
@@ -273,5 +146,5 @@ class LocationmaintenanceController < ApplicationController
     else
       @userid = cookies[:userid]
     end
- 
+  end
 end

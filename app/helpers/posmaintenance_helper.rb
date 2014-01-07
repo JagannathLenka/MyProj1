@@ -24,7 +24,7 @@ module PosmaintenanceHelper
       :url => url ,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 'auto',
+      :height=> 350,
       :width=>'auto',
       
       :colNames => ['Id','Sequence', 'Position','Description','sm_level_id','Level','sm_bay_id', 'Bay',
@@ -53,7 +53,7 @@ module PosmaintenanceHelper
         { :name => 'attribute1',   :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true,edittype:"select", editoptions: {value: "Default:Default;Continue:Continuous from previous;Break:Break" }},
         { :name => 'attribute2',   :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute3',   :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
-        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true , edittype:"select", editoptions: {value: "Default:Default;High:High;Medium:Medium;Low:Low" }},
+        { :name => 'attribute4',   :index => 'attribute4',   :width => 80,   :align => 'center', :editable => true , edittype:"select", editoptions: {value: "High:High;Medium:Medium;Low:Low" }},
         { :name => 'attribute5',   :index => 'attribute5',   :width => 80,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute6',   :index => 'attribute6',   :width => 80,   :align => 'center', :editable => true, :hidden => true},
         { :name => 'attribute7',   :index => 'attribute7',   :width => 80,   :align => 'center', :editable => true,:hidden => true},
