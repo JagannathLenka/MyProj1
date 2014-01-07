@@ -12,7 +12,7 @@ def self.upload_file file, filename
 end
 
 #Validate the row and process
-def self.validate_process row_array, file
+def self.validate_process row_array, filename
    error = Itemmaster.is_row_valid row_array
    if error.blank?
      existitem = Itemmaster.where("client_id = ? and item_number = ? " , row_array[0] , row_array[1]).first
