@@ -2,11 +2,11 @@ require 'csv'
 class Itemmaster < ActiveRecord::Base
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :case_quantity, :case_split_allowed, :client_id, :daily_avg_sales, :daily_forecast, :description, :item_number, :monthly_avg_sales, :velocity, :weekly_avg_sales
 
-def self.upload_file file
+def self.upload_file file, filename
   
    CSV.parse(file) do |row|
    row_array = row
-      Itemmaster.validate_process row_array, file
+      Itemmaster.validate_process row_array, filename
    end
   
 end
@@ -55,7 +55,7 @@ def self.validate_process row_array, file
   else
     
      itemerror = Itemerror.new(
-                                     :file_name => file.original_filename + Time.now.to_s,
+                                     :file_name => filename + Time.now.to_s,
                                      :error_description => error,
                                      :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
                                      :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 

@@ -37,7 +37,7 @@ class ItemmastermaintenanceController < ApplicationController
   
   def upload
    file= params[:file].read
-   Itemmaster.delay.upload_file file
+   Itemmaster.delay.upload_file file, params[:file].original_filename
    redirect_to :back 
   end
 
