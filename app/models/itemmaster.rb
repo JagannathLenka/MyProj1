@@ -2,17 +2,25 @@ require 'csv'
 class Itemmaster < ActiveRecord::Base
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :case_quantity, :case_split_allowed, :client_id, :daily_avg_sales, :daily_forecast, :description, :item_number, :monthly_avg_sales, :velocity, :weekly_avg_sales
 
-def self.upload_file file, filename
-  
+def self.upload_file uploadfile_id, file, filename
+   no_of_error_records = 0
+   no_of_records = 0
    CSV.parse(file) do |row|
-   row_array = row
-      Itemmaster.validate_process row_array, filename
+   no_of_records  += 1 
+      no_of_error_records += Itemmaster.validate_process row, file, filename, uploadfile_id
    end
+   
+   file_uploaded = Uploadfile.find(file_id)  
+   file_uploaded.no_of_records = no_of_records
+   file_uploaded.no_of_error_records = no_of_error_records
+   file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
+   file_uploaded.attribute1 = "Processed"
+   file_uploaded.save
   
 end
 
 #Validate the row and process
-def self.validate_process row_array, filename
+def self.validate_process row_array, file, filename, uploadfile_id
    error = Itemmaster.is_row_valid row_array
    if error.blank?
      existitem = Itemmaster.where("client_id = ? and item_number = ? " , row_array[0] , row_array[1]).first
@@ -56,6 +64,7 @@ def self.validate_process row_array, filename
     
      itemerror = Itemerror.new(
                                      :file_name => filename + Time.now.to_s,
+                                     :uploadfile_id => uploadfile_id,
                                      :error_description => error,
                                      :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
                                      :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
@@ -70,9 +79,11 @@ def self.validate_process row_array, filename
                            
                                 )
             itemerror.save   
+            
+            return 1
      
    end
-
+   return 0 
 end
 
 

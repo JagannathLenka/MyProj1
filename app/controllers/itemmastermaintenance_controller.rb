@@ -35,13 +35,6 @@ class ItemmastermaintenanceController < ApplicationController
      return search_string
   end
   
-  def upload
-   file= params[:file].read
-    Itemmaster.delay.upload_file file, params[:file].original_filename
-   redirect_to :back 
-  end
-
-
 
  
  #Update the aisles and create bays and levels beased on the input from JQgrid

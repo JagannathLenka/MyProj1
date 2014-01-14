@@ -45,14 +45,6 @@ class LocationmaintenanceController < ApplicationController
      end
    end
    
-  def upload
-   file= params[:file].read
-    Location.delay.upload_file file , params[:file].original_filename
-   redirect_to :back 
-  end
- 
- 
-
  #
  #Manual addition of location
  #
@@ -90,7 +82,7 @@ class LocationmaintenanceController < ApplicationController
         
          loc.save
          
-         update_location_details loc, params[:cl_warehouse_id], params[:cl_barcode]           
+         Location.update_location_details loc, params[:cl_warehouse_id], params[:cl_barcode]           
              
    when "del"
        params[:id].split(',').each do |id|
@@ -132,7 +124,7 @@ class LocationmaintenanceController < ApplicationController
                                    :location_priority => params[:location_priority]    
                                 })
  
-         update_location_details loc, params[:cl_warehouse_id], params[:cl_barcode]
+        Location.update_location_details loc, params[:cl_warehouse_id], params[:cl_barcode]
                                          
     end
       

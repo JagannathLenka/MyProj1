@@ -1,0 +1,67 @@
+<!--	**Functionalities:
+	               1. Upload Files
+	                                
+	**Author : Mitali Madhuchhanda Swain
+-->
+
+<% provide(:title, 'Uploadfile Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;
+	
+	function customerLinkFormatter(cellvalue, options, rowdata) {
+               return '<a href="/locationerror?uploadfile_id=' + rowdata.id + '"> ' + cellvalue + '</a>';
+            }; 
+</script>
+<%end%>
+	<%= render "shared/menu" %>
+	<h3><div class="label label-primary">Upload File</h3>
+
+<div>
+	<table id=uploadfile_list></table>
+	<div id=uploadfile_pager></div>
+	<%= raw(uploadfile_jqgrid) %>
+</div>
+
+<div style="float: left">
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#uploadFile">
+ Upload File
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="uploadFileLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Select and Upload File</h4>
+      </div>
+
+      <div class="modal-body">
+      	<span>
+		  <%= form_tag({action: :upload}, multipart: true) do %>
+			  <%= file_field_tag 'file' %>
+  			  <%= submit_tag 'Upload File'%>
+		  
+		  <!--div style="position:relative; float:left; border:1px; width: 60%">
+		        <a class="btn btn-primary' href='javascript:;">
+        		    Choose File...
+            <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+        		</a>
+		        <span class='label label-info' id="upload-file-info"></span>
+			</div>
+			
+		  	<div style="float:left"><%= submit_tag 'Upload File', class: "btn btn-info" %></div>
+			-->
+		<% end %>
+		</span>
+      </div>
+      
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>

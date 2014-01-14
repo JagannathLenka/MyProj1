@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222155906) do
+ActiveRecord::Schema.define(:version => 20140114021922) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.string   "attribute60"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "uploadfile_id"
   end
 
   create_table "itemmasters", :force => true do |t|
@@ -296,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.string   "attribute60"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "uploadfile_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -338,10 +340,10 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
-    t.string   "lock_code"
-    t.string   "location_priority"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.string   "lock_code"
+    t.string   "location_priority"
   end
 
   create_table "positions", :force => true do |t|
@@ -382,6 +384,8 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
+
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
@@ -402,10 +406,30 @@ ActiveRecord::Schema.define(:version => 20131222155906) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.string   "preffered_warehouse"
-    t.integer  "quantity_to_be_slotted"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+    t.string   "preffered_warehouse"
+    t.integer  "quantity_to_be_slotted"
+  end
+
+  create_table "uploadfiles", :force => true do |t|
+    t.string   "client_id"
+    t.string   "upload_filename"
+    t.integer  "no_of_records"
+    t.integer  "no_of_processed_records"
+    t.integer  "no_of_error_records"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.string   "attribute9"
+    t.string   "attribute10"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "users", :force => true do |t|

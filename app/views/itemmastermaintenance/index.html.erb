@@ -24,12 +24,3 @@
 	<div id=item_pager></div>
 	<%= raw(item_jqgrid) %>
 </div>
-
-<div style="float: left">
-<span>
-  <%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'file' %>
-  <%= submit_tag 'Upload File'%>
-<% end %>
-</div>
-</span>
