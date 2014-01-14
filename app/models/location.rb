@@ -3,18 +3,24 @@ class Location < ActiveRecord::Base
   attr_accessible :attribute1, :attribute10, :attribute11, :attribute12, :attribute13, :attribute14, :attribute15, :attribute16, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :attribute9, :cl_aisle_id, :cl_barcode, :cl_bay_id, :cl_level_id, :cl_loc_id, :cl_pos_id, :cl_warehouse_id, :cl_zone_id, :client_id, :current_item, :current_quantity,  :life_time_total_picks, :lock_code, :location_priority, :maximum_quantity, :minimum_quantity, :sm_aisle_id, :sm_barcode, :sm_bay_id, :sm_level_id, :sm_loc_id, :sm_pos_id, :sm_warehouse_id, :sm_zone_id, :status
   validates :cl_barcode, :uniqueness => {:scope => :cl_warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Location Already Exists"}
 
-def self.upload_file file , filename
-  
+def self.upload_file uploadfile_id, file , filename
+   no_of_error_records = 0
+   no_of_records =0
    CSV.parse(file) do |row|
-      Location.validate_process row, filename
-      logger.debug filename
+     no_of_records +=1
+     no_of_error_records += Location.validate_process row, filename, uploadfile_id
    end
-  
+   
+   file_uploaded = Uploadfile.find(uploadfile_id)  
+   file_uploaded.no_of_records = no_of_records
+   file_uploaded.no_of_error_records = no_of_error_records
+   file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
+   file_uploaded.attribute1 = "Processed"
+   file_uploaded.save
 end
 
 #Validate the row and process
-def self.validate_process row_array, filename
-  logger.debug filename
+def self.validate_process row_array, filename , uploadfile_id
   error = Location.is_row_valid row_array
    if error.blank?
 
@@ -56,6 +62,7 @@ def self.validate_process row_array, filename
       
         locationerror = Locationerror.new(
                            :file_name => filename + Time.now.to_s,
+                           :uploadfile_id => uploadfile_id,
                            :error_description => error,
                            :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
                            :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
@@ -69,8 +76,9 @@ def self.validate_process row_array, filename
                            :attribute10 => (row_array[9].to_s.encode! 'utf-8')
                                           )
             locationerror.save
+            return 1
      end
-  
+      return 0
 end
 
  #

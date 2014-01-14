@@ -26,6 +26,11 @@ class LocationerrorController < ApplicationController
         search_string = params[:searchField] + " like '" +  params[:searchString] + "%'"
       end 
      end
+     
+     
+     if !params[:uploadfile_id].nil?
+        search_string = "uploadfile_id =" +  params[:uploadfile_id]
+     end
      return search_string
   end
   
@@ -71,11 +76,9 @@ class LocationerrorController < ApplicationController
    ids = params[:id]
    ids.each do |id|
    locationerror = Locationerror.find(id.to_i)
-   logger.debug locationerror.attributes
    error =  is_row_valid locationerror 
    if error.blank?
       existloc = Location.where("client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , locationerror.attribute1, locationerror.attribute3 , locationerror.attribute2).first
-     logger.debug locationerror.attributes
 
       if existloc.nil?
          loc = Location.new(
@@ -92,6 +95,7 @@ class LocationerrorController < ApplicationController
                        )
         
          loc.save
+         Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
          
        else
         existloc.update_attributes({

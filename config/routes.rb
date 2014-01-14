@@ -5,9 +5,9 @@ MyProj1::Application.routes.draw do
   get  'userregister/thanks' => 'userregister#thanks'
   post 'locationmaintenance/upload/' => 'locationmaintenance#upload'
   post 'itemmastermaintenance/upload/' => 'itemmastermaintenance#upload'
-  
+  post 'uploadfile/upload/' => 'uploadfile#upload'
   resources :warehouse, :bay, :position, :login, :locationerror, :locationmaintenance, :usermaintenance, :userregister,:userregistermaintenance, :posmaintenance, :levelmaintenance, :baysmaintenance, :aislemaintenance,
-            :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :itemerror , :client
+            :zonemaintenance, :warehousemaintenance, :slottingrecomaintenance, :itemmastermaintenance , :itemerror , :client , :uploadfile
 
 
   
