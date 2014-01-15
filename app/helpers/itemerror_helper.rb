@@ -5,6 +5,12 @@ include JqgridsHelper
   def itemerror_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
+    
+    if ! params[:uploadfile_id].nil?
+        url = '/itemerror?uploadfile_id=' + params[:uploadfile_id]   
+    else
+       url = '/itemerror/' 
+    end
    
     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     selectrowfunc = "function(id) { 
@@ -48,7 +54,7 @@ include JqgridsHelper
                    }"
        
     grid = [{
-      :url => '/itemerror/',
+      :url => url,
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,

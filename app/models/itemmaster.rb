@@ -10,7 +10,7 @@ def self.upload_file uploadfile_id, file, filename
       no_of_error_records += Itemmaster.validate_process row, file, filename, uploadfile_id
    end
    
-   file_uploaded = Uploadfile.find(file_id)  
+   file_uploaded = Uploadfile.find(uploadfile_id)  
    file_uploaded.no_of_records = no_of_records
    file_uploaded.no_of_error_records = no_of_error_records
    file_uploaded.no_of_processed_records =no_of_records - no_of_error_records

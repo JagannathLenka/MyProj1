@@ -4,6 +4,12 @@ module LocationerrorHelper
   def locationerror_jqgrid
 
     options = {:on_document_ready => true, :html_tags => false}
+    
+    if ! params[:uploadfile_id].nil?
+        url = '/locationerror?uploadfile_id=' + params[:uploadfile_id]   
+    else
+       url = '/locationerror/' 
+    end
    
     aftersubfunc = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     selectrowfunc = "function(id) { 
@@ -47,7 +53,7 @@ module LocationerrorHelper
                    }"
        
     grid = [{
-      :url => '/locationerror/',
+      :url => url,
       :datatype => 'json',
       :mtype => 'GET',
       :height=> 350,

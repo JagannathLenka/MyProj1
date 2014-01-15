@@ -26,7 +26,15 @@ module UploadfileHelper
                    }"  
                
       customerLinkFormatter = "function(cellvalue, options, rowdata) {
+      
+                                 if (rowdata[2] == 'Location.csv')
+                                   {
                                    return '<a href=\"locationerror?uploadfile_id=' + rowdata[0] + '\"> ' + cellvalue + '</a>';
+                                   }
+                                 else
+                                   {
+                                     return '<a href=\"itemerror?uploadfile_id=' + rowdata[0] + '\"> ' + cellvalue + '</a>';
+                                   }
                               }" 
 
     grid = [{

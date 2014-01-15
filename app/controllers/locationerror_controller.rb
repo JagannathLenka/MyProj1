@@ -31,6 +31,7 @@ class LocationerrorController < ApplicationController
      if !params[:uploadfile_id].nil?
         search_string = "uploadfile_id =" +  params[:uploadfile_id]
      end
+     
      return search_string
   end
   

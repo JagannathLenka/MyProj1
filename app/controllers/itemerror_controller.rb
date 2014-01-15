@@ -27,6 +27,11 @@ class ItemerrorController < ApplicationController
         search_string = params[:searchField] + " like '" +  params[:searchString] + "%'"
       end 
      end
+     
+       if !params[:uploadfile_id].nil?
+        search_string = "uploadfile_id =" +  params[:uploadfile_id]
+     end
+     
      return search_string
   end
   
