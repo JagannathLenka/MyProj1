@@ -340,10 +340,10 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
     t.string   "lock_code"
     t.string   "location_priority"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "positions", :force => true do |t|
@@ -384,8 +384,6 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
-
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
@@ -406,10 +404,10 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
     t.string   "preffered_warehouse"
     t.integer  "quantity_to_be_slotted"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "uploadfiles", :force => true do |t|

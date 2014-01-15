@@ -25,6 +25,9 @@ module UploadfileHelper
                      } 
                    }"  
                
+      customerLinkFormatter = "function(cellvalue, options, rowdata) {
+                                   return '<a href=\"locationerror?uploadfile_id=' + rowdata[0] + '\"> ' + cellvalue + '</a>';
+                              }" 
 
     grid = [{
       :url => url,
@@ -40,7 +43,7 @@ module UploadfileHelper
         { :name => 'created_at', :index => 'ucreated_at',  :width => 80, :align => 'center', :editable => false},
         { :name => 'no_of_records', :index => 'no_of_record',  :width => 80, :align => 'center', :editable => true},
         { :name => 'no_of processed_records', :index => 'no_of processed_records',  :width => 80, :align => 'center', :editable => true},
-        { :name => 'no_of_error_records', :index => 'no_of_error_records',  :width => 80, :align => 'center', :editable => true,formatter: 'customerLinkFormatter'},
+        { :name => 'no_of_error_records', :index => 'no_of_error_records',  :width => 80, :align => 'center', :editable => true, formatter: customerLinkFormatter.to_json_var},
         { :name => 'attribute1', :index => 'attribute1',  :width => 80, :align => 'center', :editable => true},
         { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => true}
       ],
