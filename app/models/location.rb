@@ -1,21 +1,40 @@
 require 'csv'
 class Location < ActiveRecord::Base
-  attr_accessible :attribute1, :attribute10, :attribute11, :attribute12, :attribute13, :attribute14, :attribute15, :attribute16, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :attribute9, :cl_aisle_id, :cl_barcode, :cl_bay_id, :cl_level_id, :cl_loc_id, :cl_pos_id, :cl_warehouse_id, :cl_zone_id, :client_id, :current_item, :current_quantity,  :life_time_total_picks, :lock_code, :location_priority, :maximum_quantity, :minimum_quantity, :sm_aisle_id, :sm_barcode, :sm_bay_id, :sm_level_id, :sm_loc_id, :sm_pos_id, :sm_warehouse_id, :sm_zone_id, :status
+  attr_accessible :attribute1, :attribute10, :attribute11, :attribute12, :attribute13, :attribute14, :attribute15, 
+                  :attribute16, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, 
+                  :attribute8, :attribute9, :cl_aisle_id, :cl_barcode, :cl_bay_id, :cl_level_id, :cl_loc_id, 
+                  :cl_pos_id, :cl_warehouse_id, :cl_zone_id, :client_id, :current_item, :current_quantity,  
+                  :life_time_total_picks, :lock_code, :location_priority, :maximum_quantity, :minimum_quantity, 
+                  :sm_aisle_id, :sm_barcode, :sm_bay_id, :sm_level_id, :sm_loc_id, :sm_pos_id, :sm_warehouse_id, 
+                  :sm_zone_id, :status, :location_length, :location_breadth, :location_height, :location_volume, 
+                  :allowed_weight, :item_short_description, :item_long_description
   validates :cl_barcode, :uniqueness => {:scope => :cl_warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Location Already Exists"}
 
 def self.upload_file uploadfile_id, file , filename
+  
+   file_uploaded = Uploadfile.find(uploadfile_id)  
+   file_uploaded.attribute1 = "Processing"
+   file_uploaded.save
+   
    no_of_error_records = 0
    no_of_records =0
    CSV.parse(file) do |row|
      no_of_records +=1
      no_of_error_records += Location.validate_process row, filename, uploadfile_id
+     if no_of_records%100 == 0 
+           file_uploaded.no_of_records = no_of_records 
+           file_uploaded.no_of_error_records = no_of_error_records
+           file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
+           file_uploaded.save
+       end
+       #logger.debug no_of_records
    end
    
    file_uploaded = Uploadfile.find(uploadfile_id)  
    file_uploaded.no_of_records = no_of_records
    file_uploaded.no_of_error_records = no_of_error_records
    file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
-   file_uploaded.attribute1 = "Processed"
+   file_uploaded.attribute1 = file_uploaded.no_of_error_records ==0 ? "Processed" : "Processed With Error"
    file_uploaded.save
 end
 
@@ -25,8 +44,7 @@ def self.validate_process row_array, filename , uploadfile_id
    if error.blank?
 
       existloc = Location.where(" client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , row_array[0], row_array[2], row_array[1]).first
-      if existloc.nil?
-          loc = Location.new(  
+      locationHash ={
                            :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
                            :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
                            :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
@@ -36,24 +54,21 @@ def self.validate_process row_array, filename , uploadfile_id
                            :lock_code => (row_array[6].to_s.encode! 'utf-8'),
                            :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
                            :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
-                           :status => (row_array[9].to_s.encode! 'utf-8')
-                           )
+                           :status => (row_array[9].to_s.encode! 'utf-8'),
+                           :location_length => (row_array[10].to_s.encode! 'utf-8').to_f,
+                           :location_breadth => (row_array[11].to_s.encode! 'utf-8').to_f,
+                           :location_height => (row_array[12].to_s.encode! 'utf-8').to_f,
+                           :location_volume => (row_array[13].to_s.encode! 'utf-8').to_f,
+                           :allowed_weight => (row_array[14].to_s.encode! 'utf-8').to_f,
+                           :item_short_description => (row_array[15].to_s.encode! 'utf-8'),
+                           :item_long_description => (row_array[16].to_s.encode! 'utf-8')
+      }
+      if existloc.nil?
+          loc = Location.new(locationHash)
              loc.save
              Location.update_location_details loc, loc.cl_warehouse_id, loc.cl_barcode            
            else
-             existloc.update_attributes({
-                             :client_id => (row_array[0].to_s.encode! 'utf-8'),                            
-                             :cl_warehouse_id   => (row_array[1].to_s.encode! 'utf-8'),
-                             :cl_barcode  =>(row_array[2].to_s.encode! 'utf-8'),
-                             :current_item => (row_array[3].to_s.encode! 'utf-8'),
-                             :current_quantity => (row_array[4].to_s.encode! 'utf-8'),
-                             :life_time_total_picks  => (row_array[5].to_s.encode! 'utf-8'),
-                             :lock_code => (row_array[6].to_s.encode! 'utf-8'),
-                             :maximum_quantity =>(row_array[7].to_s.encode! 'utf-8'),
-                             :minimum_quantity => (row_array[8].to_s.encode! 'utf-8'),
-                             :status => (row_array[9].to_s.encode! 'utf-8')
-                           
-                                           })
+             existloc.update_attributes(locationHash)
              Location.update_location_details existloc, existloc.cl_warehouse_id, existloc.cl_barcode           
 
            end
@@ -61,19 +76,26 @@ def self.validate_process row_array, filename , uploadfile_id
       else
       
         locationerror = Locationerror.new(
-                           :file_name => filename + Time.now.to_s,
-                           :uploadfile_id => uploadfile_id,
-                           :error_description => error,
-                           :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
-                           :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
-                           :attribute3 => (row_array[2].to_s.encode! 'utf-8'),
-                           :attribute4 => (row_array[3].to_s.encode! 'utf-8'),
-                           :attribute5 => (row_array[4].to_s.encode! 'utf-8'),
-                           :attribute6 => (row_array[5].to_s.encode! 'utf-8'),
-                           :attribute7 => (row_array[6].to_s.encode! 'utf-8'),
-                           :attribute8 => (row_array[7].to_s.encode! 'utf-8'),
-                           :attribute9 => (row_array[8].to_s.encode! 'utf-8'),
-                           :attribute10 => (row_array[9].to_s.encode! 'utf-8')
+                                               :file_name => filename + Time.now.to_s,
+                                               :uploadfile_id => uploadfile_id,
+                                               :error_description => error,
+                                               :attribute1 => (row_array[0].to_s.encode! 'utf-8'),
+                                               :attribute2 => (row_array[1].to_s.encode! 'utf-8'), 
+                                               :attribute3 => (row_array[2].to_s.encode! 'utf-8'),
+                                               :attribute4 => (row_array[3].to_s.encode! 'utf-8'),
+                                               :attribute5 => (row_array[4].to_s.encode! 'utf-8'),
+                                               :attribute6 => (row_array[5].to_s.encode! 'utf-8'),
+                                               :attribute7 => (row_array[6].to_s.encode! 'utf-8'),
+                                               :attribute8 => (row_array[7].to_s.encode! 'utf-8'),
+                                               :attribute9 => (row_array[8].to_s.encode! 'utf-8'),
+                                               :attribute10 => (row_array[9].to_s.encode! 'utf-8'),
+                                               :attribute11 => (row_array[10].to_s.encode! 'utf-8'),
+                                               :attribute12 => (row_array[11].to_s.encode! 'utf-8'),
+                                               :attribute13 => (row_array[12].to_s.encode! 'utf-8'),
+                                               :attribute14 => (row_array[13].to_s.encode! 'utf-8'),
+                                               :attribute15 => (row_array[14].to_s.encode! 'utf-8'),
+                                               :attribute16 => (row_array[15].to_s.encode! 'utf-8'),
+                                               :attribute17 => (row_array[16].to_s.encode! 'utf-8')
                                           )
             locationerror.save
             return 1

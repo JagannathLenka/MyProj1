@@ -79,41 +79,44 @@ class ItemerrorController < ApplicationController
    itemerror = Itemerror.find(id.to_i)
    error =  is_row_valid itemerror 
    if error.blank?
+     
+     itemHash = {:client_id => itemerror.attribute1,    
+                                   :item_number => itemerror.attribute2, 
+                                   :velocity => itemerror.attribute3,
+                                   :daily_avg_sales =>itemerror.attribute4, 
+                                   :weekly_avg_sales => itemerror.attribute5,
+                                   :monthly_avg_sales => itemerror.attribute6,
+                                   :daily_forecast => itemerror.attribute7,
+                                   :case_quantity => itemerror.attribute8,
+                                   :case_split_allowed => itemerror.attribute9,
+                                   :attribute1 => itemerror.attribute10,
+                                   :short_description => itemerror.attribute11,
+                                   :long_description => itemerror.attribute12,                                    
+                                   :item_category1 => itemerror.attribute13,
+                                   :item_category2 => itemerror.attribute14,
+                                   :item_category3 => itemerror.attribute15,
+                                   :unit_length => itemerror.attribute16,
+                                   :unit_breadth => itemerror.attribute17,
+                                   :unit_height => itemerror.attribute18,
+                                   :unit_volume => itemerror.attribute19,
+                                   :unit_weight => itemerror.attribute20,
+                                   :case_length => itemerror.attribute21,
+                                   :case_breadth => itemerror.attribute22,
+                                   :case_height => itemerror.attribute23,
+                                   :case_volume => itemerror.attribute24,
+                                   :case_weight => itemerror.attribute25,
+                                   :stocking_UOM => itemerror.attribute26
+                                   }
+                                   
+                                   
    existitem = Itemmaster.where("client_id = ? and item_number = ? " , itemerror.attribute1 , itemerror.attribute2).first
      if existitem.nil?
-          items= Itemmaster.new(
-                                   :client_id => itemerror.attribute1,    
-                                   :item_number => itemerror.attribute2, 
-                                   :velocity => itemerror.attribute3,
-                                   :daily_avg_sales =>itemerror.attribute4, 
-                                   :weekly_avg_sales => itemerror.attribute5,
-                                   :monthly_avg_sales => itemerror.attribute6,
-                                   :daily_forecast => itemerror.attribute7,
-                                   :case_quantity => itemerror.attribute8,
-                                   :case_split_allowed => itemerror.attribute9,
-                                   :attribute1 => itemerror.attribute10
-                                   
-                               )  
-        
+          items= Itemmaster.new(itemHash)
+                           
          items.save 
-         
+        
        else
-        existitem.update_attributes({
-                                          
-                                   :client_id => itemerror.attribute1,    
-                                   :item_number => itemerror.attribute2, 
-                                   :velocity => itemerror.attribute3,
-                                   :daily_avg_sales =>itemerror.attribute4, 
-                                   :weekly_avg_sales => itemerror.attribute5,
-                                   :monthly_avg_sales => itemerror.attribute6,
-                                   :daily_forecast => itemerror.attribute7,
-                                   :case_quantity => itemerror.attribute8,
-                                   :case_split_allowed => itemerror.attribute9,
-                                   :attribute1 => itemerror.attribute10
-                                       
-                                   })
-                                   
-                                       
+        existitem.update_attributes(itemHash)                               
        end
        
        Itemerror.destroy(id.to_i) 

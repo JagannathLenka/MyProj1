@@ -33,7 +33,7 @@ module WarehousemaintenanceHelper
       :height=> 350,
       :width => 'auto',
       
-      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Location','Attribute5','Attribute6','Attribute7','Attribute8'],
+      :colNames => ['Id','Sequence', 'Warehouse','Client Id','Description', 'No of Zones','Noof zones_hidden', 'City','State','Country','Location','Status','Attribute6','Attribute7','Attribute8'],
       :colModel  => [
         { :name => 'id',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'sm_warehouse_id',   :index => 'sm_warehouse_id',:width => 100,:align => 'center',:editable => false, hidden:true},
@@ -46,7 +46,7 @@ module WarehousemaintenanceHelper
         { :name => 'attribute2',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute3',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'attribute4',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
-        { :name => 'attribute5',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true,hidden:true},
+        { :name => 'attribute5',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true, hidden:true},
         { :name => 'attribute6',  :index => 'attribute6',   :width => 100,   :align => 'center', :editable => true,hidden:true},
         { :name => 'attribute7',  :index => 'attribute7',   :width => 100,   :align => 'center', :editable => true,hidden:true},
         { :name => 'attribute8',  :index => 'attribute8',   :width => 100,   :align => 'center', :editable => true,hidden:true},

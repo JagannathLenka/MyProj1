@@ -43,7 +43,7 @@ module UploadfileHelper
       :mtype => 'GET',
       :height=> height,
       :width => width,
-      :colNames => ['Id', 'Client Id','Upload Filename', 'Uploaded at', 'Total Records','Processed Records','Error Records','Status','attribute2'],
+      :colNames => ['Id', 'Client Id','Upload Filename', 'Uploaded at', 'Total Records',' Processed ','Error ','Status','attribute2'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'client_id', :index => 'client_id',  :width => 80, :align => 'center', :editable => true, :hidden => true},
@@ -66,10 +66,11 @@ module UploadfileHelper
       :reloadAfterEdit => true,
       :autowidth => true,
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      #:onSelectRow => selectrowfunc.to_json_var
+       }]
 
 
-    pager = [:navGrid, "#uploadfile_pager", {edit:false, add:true, del: true}, 
+    pager = [:navGrid, "#uploadfile_pager", {edit:false, add:false, del: true}, 
                                             {:closeAfterEdit => true, :closeAfterAdd => true, :closeOnEscape => true}, 
                                             {:closeAfterAdd=>true,    :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
                                             

@@ -1,7 +1,7 @@
 
 class WarehousemaintenanceController < ApplicationController
 
-rescue_from Exception, :with => :error_render_method
+#rescue_from Exception, :with => :error_render_method
   
    # GET /maintenance
   def index
@@ -10,6 +10,7 @@ rescue_from Exception, :with => :error_render_method
     
     columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
     warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ")
+    .where(" attribute1 != ? " , 'Deactivated')
     .where(authorize).paginate(
       :page     => params[:page],
       :per_page => params[:rows],
@@ -52,7 +53,11 @@ rescue_from Exception, :with => :error_render_method
          add_zones_to_warehouse warehouse if warehouse.errors.count <= 0
                         
     when "del"
-              Warehouse.destroy(params[:id].to_i)                               
+              deleted_warehouse = Warehouse.find(params[:id].to_i)
+              deleted_warehouse.attribute1 = "Deactivated"
+              deleted_warehouse.save
+              
+              #Warehouse.destroy(params[:id].to_i)                               
     end
     
     if request.xhr?

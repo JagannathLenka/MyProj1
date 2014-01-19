@@ -79,10 +79,7 @@ class LocationerrorController < ApplicationController
    locationerror = Locationerror.find(id.to_i)
    error =  is_row_valid locationerror 
    if error.blank?
-      existloc = Location.where("client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , locationerror.attribute1, locationerror.attribute3 , locationerror.attribute2).first
-
-      if existloc.nil?
-         loc = Location.new(
+      locationHash = {
                                    :client_id  => locationerror.attribute1,
                                    :cl_warehouse_id   => locationerror.attribute2,
                                    :cl_barcode  =>locationerror.attribute3,
@@ -92,29 +89,26 @@ class LocationerrorController < ApplicationController
                                    :lock_code => locationerror.attribute7,
                                    :maximum_quantity =>locationerror.attribute8,
                                    :minimum_quantity => locationerror.attribute9,
-                                   :status => locationerror.attribute10                            
-                       )
-        
+                                   :status => locationerror.attribute10,
+                                   :location_length => locationerror.attribute11,
+                                   :location_breadth => locationerror.attribute12,
+                                   :location_height => locationerror.attribute13,
+                                   :location_volume => locationerror.attribute14,
+                                   :allowed_weight => locationerror.attribute15,
+                                   :item_short_description => locationerror.attribute16,
+                                   :item_long_description => locationerror.attribute17     
+                      
+                      }
+      existloc = Location.where("client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , locationerror.attribute1, locationerror.attribute3 , locationerror.attribute2).first
+
+      if existloc.nil?
+         loc = Location.new(locationHash)
          loc.save
          Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
          
        else
-        existloc.update_attributes({
-                                          
-                                   :client_id  => locationerror.attribute1,
-                                   :cl_warehouse_id   => locationerror.attribute2,
-                                   :cl_barcode  =>locationerror.attribute3,
-                                   :current_item => locationerror.attribute4,
-                                   :current_quantity => locationerror.attribute5,
-                                   :life_time_total_picks  => locationerror.attribute6,
-                                   :lock_code => locationerror.attribute7,
-                                   :maximum_quantity =>locationerror.attribute8,
-                                   :minimum_quantity => locationerror.attribute9,
-                                   :status => locationerror.attribute10
-                                       
-                                   })
-                                   
-                                       
+        existloc.update_attributes(locationhash)
+                                      
        end
        
        Locationerror.destroy(id.to_i) 

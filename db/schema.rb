@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140114021922) do
+ActiveRecord::Schema.define(:version => 20140118164836) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -195,8 +195,26 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "short_description"
+    t.string   "long_description"
+    t.string   "item_category1"
+    t.string   "item_category2"
+    t.string   "item_category3"
+    t.string   "top_shelf_eligibility"
+    t.string   "product_fragile"
+    t.decimal  "unit_length"
+    t.decimal  "unit_breadth"
+    t.decimal  "unit_height"
+    t.decimal  "unit_volume"
+    t.decimal  "unit_weight"
+    t.decimal  "case_length"
+    t.decimal  "case_breadth"
+    t.decimal  "case_height"
+    t.decimal  "case_volume"
+    t.decimal  "case_weight"
+    t.string   "stocking_UOM"
   end
 
   create_table "levels", :force => true do |t|
@@ -340,10 +358,17 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.string   "attribute14"
     t.string   "attribute15"
     t.string   "attribute16"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "lock_code"
     t.string   "location_priority"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer  "location_length"
+    t.integer  "location_breadth"
+    t.integer  "location_height"
+    t.integer  "location_volume"
+    t.decimal  "allowed_weight"
+    t.string   "item_short_description"
+    t.string   "item_long_description"
   end
 
   create_table "positions", :force => true do |t|
@@ -384,6 +409,8 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
+
   create_table "slottingrecommendations", :force => true do |t|
     t.string   "client_id"
     t.string   "item_number"
@@ -404,10 +431,10 @@ ActiveRecord::Schema.define(:version => 20140114021922) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.string   "preffered_warehouse"
-    t.integer  "quantity_to_be_slotted"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+    t.string   "preffered_warehouse"
+    t.integer  "quantity_to_be_slotted"
   end
 
   create_table "uploadfiles", :force => true do |t|

@@ -65,6 +65,21 @@ class UploadfileController < ApplicationController
   
   def create
     
+    case params[:oper]
+      
+    when "del"
+      
+      params[:id].split(',').each do |id|
+          Uploadfile.destroy(id.to_i)
+      end 
+      
+    if request.xhr?
+       render :json => nil 
+    end
+    end
+    
+    
+    
   end
  #Write the breadcrumbs
  def get_header_details
