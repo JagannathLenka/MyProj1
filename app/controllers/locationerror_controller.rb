@@ -149,9 +149,9 @@ class LocationerrorController < ApplicationController
       
    end
    
-   if loc.attribute5.to_i < loc.attribute9.to_i
-     error += (error.blank? ? "" : ",") + "Current quantity is less than minimum quantity "
-   end
+   #if loc.attribute5.to_i < loc.attribute9.to_i
+    # error += (error.blank? ? "" : ",") + "Current quantity is less than minimum quantity "
+   #end
    
      return error
    end

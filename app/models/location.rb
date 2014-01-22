@@ -131,9 +131,9 @@ end
      error += (error.blank? ? "" : ",") + "Current quantity more than maximum quantity"
    end  
    
-   if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
-     error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
-   end
+   #if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
+    # error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
+   #end
    
      return error
    end

@@ -1319,3 +1319,5 @@ le-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 conn
 2013-12-28T17:29:25.152758+00:00 app[web.1]: Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 13.3ms)
 2013-12-28T17:28:54.359297+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=11ms service=36ms status=304 bytes=0
 2013-12-28T17:29:25.167509+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1388251767024&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=171ms status=200 bytes=242
+Running `logs` attached to terminal... up, run.3865
+bash: logs: command not found
