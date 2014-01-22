@@ -108,7 +108,7 @@ class LocationerrorController < ApplicationController
          Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
          
        else
-        existloc.update_attributes(locationhash)
+        existloc.update_attributes(locationHash)
                                       
        end
        
