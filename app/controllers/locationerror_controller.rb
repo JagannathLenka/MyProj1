@@ -75,6 +75,7 @@ class LocationerrorController < ApplicationController
   #reprocessing the error in locationerror
   def reprocess
    ids = params[:id]
+   locationHash = nil
    ids.each do |id|
    locationerror = Locationerror.find(id.to_i)
    error =  is_row_valid locationerror 

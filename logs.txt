@@ -1321,3 +1321,105 @@ le-en.js host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 conn
 2013-12-28T17:29:25.167509+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?_search=false&nd=1388251767024&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com fwd="68.231.32.83" dyno=web.1 connect=0ms service=171ms status=200 bytes=242
 Running `logs` attached to terminal... up, run.3865
 bash: logs: command not found
+2014-01-22T03:25:02.887359+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361102439", "rows"=>"300", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc"}
+2014-01-22T03:25:02.887359+00:00 app[web.1]: Completed 200 OK in 353ms (Views: 0.3ms | ActiveRecord: 174.0ms)
+2014-01-22T03:24:40.276088+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-01-22T03:24:40.276088+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-01-22T03:24:41.309984+00:00 app[worker.1]: [Worker(host:97186743-5514-403d-8c08-9b28731442c3 pid:2)] Starting job worker
+2014-01-22T03:25:12.857618+00:00 app[web.1]: Started POST "/locationerror" for 75.39.133.85 at 2014-01-22 03:25:12 +0000
+2014-01-22T03:25:12.874619+00:00 app[web.1]: Completed 200 OK in 14ms (Views: 1.6ms | ActiveRecord: 5.5ms)
+2014-01-22T03:25:12.874619+00:00 app[web.1]:   Parameters: {"attribute1"=>"SM", "attribute2"=>"BV1", "attribute3"=>"Z1-A-41-19-F-07", "attribute4"=>"", "attribute5"=>"0", "attribute6"=>"1", "attribute7"=>"", "attribute8"=>"30", "attribute9"=>"1", "attribute10"=>"A", "oper"=>"edit", "id"=>"31580"}
+2014-01-22T03:25:12.874619+00:00 app[web.1]: Processing by LocationerrorController#create as */*
+2014-01-22T03:25:12.875501+00:00 heroku[router]: at=info method=POST path=/locationerror host=slottingwarehouse.herokuapp.com request_id=09a0bc9e-5baa-4e8b-8e3c-f7745404ab91 fwd="75.39.133.85" dyno=web.1 connect=0ms service=23ms status=200 bytes=1423
+2014-01-22T03:25:13.034944+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361113169&rows=50&page=1&sidx=file_name&sord=desc&filters=" for 75.39.133.85 at 2014-01-22 03:25:13 +0000
+2014-01-22T03:25:13.193015+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361113169", "rows"=>"50", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc", "filters"=>""}
+2014-01-22T03:25:13.193015+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:13.193015+00:00 app[web.1]: Completed 200 OK in 155ms (Views: 0.1ms | ActiveRecord: 137.8ms)
+2014-01-22T03:25:13.195224+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361113169&rows=50&page=1&sidx=file_name&sord=desc&filters= host=slottingwarehouse.herokuapp.com request_id=6b8e67f9-a43c-40da-8351-30f9a7bd56dc fwd="75.39.133.85" dyno=web.1 connect=1ms service=163ms status=200 bytes=9547
+2014-01-22T03:25:17.819643+00:00 app[web.1]: Started POST "/locationerror" for 75.39.133.85 at 2014-01-22 03:25:17 +0000
+2014-01-22T03:25:17.844687+00:00 app[web.1]: NameError (undefined local variable or method `locationhash' for #<LocationerrorController:0x007fdd730f4850>):
+2014-01-22T03:25:17.844687+00:00 app[web.1]: 
+2014-01-22T03:25:17.844687+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:65:in `create'
+2014-01-22T03:25:17.844687+00:00 app[web.1]: 
+2014-01-22T03:25:17.844687+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `each'
+2014-01-22T03:25:17.844687+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:110:in `block in reprocess'
+2014-01-22T03:25:17.845029+00:00 app[web.1]:   Parameters: {"oper"=>"proc", "id"=>["31581"]}
+2014-01-22T03:25:17.845029+00:00 app[web.1]: Processing by LocationerrorController#create as */*
+2014-01-22T03:25:17.844687+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `reprocess'
+2014-01-22T03:25:17.844687+00:00 app[web.1]: 
+2014-01-22T03:25:17.845029+00:00 app[web.1]: Completed 500 Internal Server Error in 17ms
+2014-01-22T03:25:17.855299+00:00 heroku[router]: at=info method=POST path=/locationerror host=slottingwarehouse.herokuapp.com request_id=f6962b1e-2d15-4546-9dbd-0adce0350526 fwd="75.39.133.85" dyno=web.1 connect=1ms service=35ms status=500 bytes=643
+2014-01-22T03:25:17.917273+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361117950&rows=50&page=1&sidx=file_name&sord=desc&filters=" for 75.39.133.85 at 2014-01-22 03:25:17 +0000
+2014-01-22T03:25:18.126453+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:18.126453+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361117950", "rows"=>"50", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc", "filters"=>""}
+2014-01-22T03:25:18.126453+00:00 app[web.1]: Completed 200 OK in 206ms (Views: 0.2ms | ActiveRecord: 142.1ms)
+2014-01-22T03:25:22.684164+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6" for 75.39.133.85 at 2014-01-22 03:25:22 +0000
+2014-01-22T03:25:22.694581+00:00 app[web.1]: Processing by LocationerrorController#index as HTML
+2014-01-22T03:25:22.694581+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.9ms)
+2014-01-22T03:25:22.694581+00:00 app[web.1]: Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms)
+2014-01-22T03:25:22.694581+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6"}
+2014-01-22T03:25:22.694581+00:00 app[web.1]:   Rendered locationerror/index.html.erb within layouts/application (4.6ms)
+2014-01-22T03:25:22.892288+00:00 app[web.1]: Started GET "/assets/grid.locale-en.js" for 75.39.133.85 at 2014-01-22 03:25:22 +0000
+2014-01-22T03:25:22.894226+00:00 app[web.1]: Served asset /grid.locale-en.js - 304 Not Modified (0ms)
+2014-01
+-22T03:25:22.899282+00:00 app[web.1]: Started GET "/assets/jquery.jqGrid.min.js" for 75.39.133.85 at 2014-01-22 03:25:22 +0000
+2014-01-22T03:25:22.900762+00:00 app[web.1]: Served asset /jquery.jqGrid.min.js - 304 Not Modified (0ms)
+2014-01-22T03:25:22.901383+00:00 heroku[router]: at=info method=GET path=/assets/jquery.jqGrid.min.js host=slottingwarehouse.herokuapp.com request_id=d50016b3-72a4-45fa-a4d4-6fecac2bf677 fwd="75.39.133.85" dyno=web.1 connect=1ms service=8ms status=304 bytes=0
+2014-01-22T03:25:22.901644+00:00 heroku[router]: at=info method=GET path=/assets/grid.locale-en.js host=slottingwarehouse.herokuapp.com request_id=f07bc117-9ab8-478b-bfbb-95a2ff4e7f21 fwd="75.39.133.85" dyno=web.1 connect=7ms service=14ms status=304 bytes=0
+2014-01-22T03:25:23.488280+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361123401&rows=300&page=1&sidx=file_name&sord=desc&filters=" for 75.32.14.160 at 2014-01-22 03:25:23 +0000
+2014-01-22T03:25:23.772054+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:23.772054+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361123401", "rows"=>"300", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc", "filters"=>""}
+2014-01-22T03:25:23.772054+00:00 app[web.1]: Completed 200 OK in 280ms (Views: 0.2ms | ActiveRecord: 190.9ms)
+2014-01-22T03:25:23.819967+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361123401&rows=300&page=1&sidx=file_name&sord=desc&filters= host=slottingwarehouse.herokuapp.com request_id=71613e51-faec-423e-bfea-93fc826a9bf1 fwd="75.32.14.160" dyno=web.1 connect=1ms service=337ms status=200 bytes=57046
+2014-01-22T03:25:22.697964+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6 host=slottingwarehouse.herokuapp.com request_id=ed0707de-b781-42eb-8d00-b0a7ac480870 fwd="75.39.133.85" dyno=web.1 connect=5ms service=17ms status=200 bytes=8286
+2014-01-22T03:25:25.477212+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361125525&rows=50&page=1&sidx=file_name&sord=desc" for 75.39.133.85 at 2014-01-22 03:25:25 +0000
+2014-01-22T03:25:25.638341+00:00 app[web.1]: Completed 200 OK in 157ms (Views: 0.2ms | ActiveRecord: 138.3ms)
+2014-01-22T03:25:25.638341+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361125525", "rows"=>"50", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc"}
+2014-01-22T03:25:25.638341+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:25.658671+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361125525&rows=50&page=1&sidx=file_name&sord=desc host=slottingwarehouse.herokuapp.com request_id=b2d7d370-f2ef-4b60-b6a6-3b74ab2cd16c fwd="75.39.133.85" dyno=web.1 connect=13ms service=185ms status=200 bytes=9547
+2014-01-22T03:25:22.878429+00:00 heroku[router]: at=info method=GET path=/assets/application-a9c5640dceb8d951ea3f65064da43e52.js host=slottingwarehouse.herokuapp.com request_id=58c84e50-8d42-4555-9bd4-754f6fd553a1 fwd="75.39.133.85" dyno=web.1 connect=0ms service=19ms status=200 bytes=629688
+2014-01-22T03:25:31.931592+00:00 app[web.1]: Started POST "/locationerror" for 75.39.133.85 at 2014-01-22 03:25:31 +0000
+2014-01-22T03:25:31.955430+00:00 app[web.1]: 
+2014-01-22T03:25:31.955430+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:110:in `block in reprocess'
+2014-01-22T03:25:31.955430+00:00 app[web.1]: NameError (undefined local variable or method `locationhash' for #<LocationerrorController:0x007fdd724324f0>):
+2014-01-22T03:25:31.955430+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:65:in `create'
+2014-01-22T03:25:31.955430+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `each'
+2014-01-22T03:25:31.955430+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `reprocess'
+2014-01-22T03:25:31.955784+00:00 app[web.1]: Processing by LocationerrorController#create as */*
+2014-01-22T03:25:31.955430+00:00 app[web.1]: 
+2014-01-22T03:25:31.955430+00:00 app[web.1]: 
+2014-01-22T03:25:31.955784+00:00 app[web.1]:   Parameters: {"oper"=>"proc", "id"=>["31581"]}
+2014-01-22T03:25:31.955784+00:00 app[web.1]: Completed 500 Internal Server Error in 17ms
+2014-01-22T03:25:31.958749+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361132068&rows=50&page=1&sidx=file_name&sord=desc" for 75.39.133.85 at 2014-01-22 03:25:31 +0000
+2014-01-22T03:25:31.968639+00:00 heroku[router]: at=info method=POST path=/locationerror host=slottingwarehouse.herokuapp.com request_id=ece10eb2-b231-4e5a-be47-19d96370d3a3 fwd="75.39.133.85" dyno=web.1 connect=0ms service=43ms status=500 bytes=643
+2014-01-22T03:25:32.211695+00:00 app[web.1]: Completed 200 OK in 250ms (Views: 0.2ms | ActiveRecord: 230.7ms)
+2014-01-22T03:25:32.211695+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:32.211695+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361132068", "rows"=>"50", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc"}
+2014-01-22T03:25:32.214650+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361132068&rows=50&page=1&sidx=file_name&sord=desc host=slottingwarehouse.herokuapp.com request_id=1d84f117-0c0b-4490-9c27-379be298200f fwd="75.39.133.85" dyno=web.1 connect=5ms service=268ms status=200 bytes=9547
+2014-01-22T03:24:25.010609+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361064945&rows=50&page=1&sidx=file_name&sord=desc&filters= host=slottingwarehouse.herokuapp.com request_id=9992eedd-0753-4e55-bcfa-b6ee52f92a6a fwd="75.39.133.85" dyno=web.1 connect=0ms service=204ms status=200 bytes=9546
+2014-01-22T03:25:18.140100+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361117950&rows=50&page=1&sidx=file_name&sord=desc&filters= host=slottingwarehouse.herokuapp.com request_id=420f415a-70b1-409c-bfe3-7c214bccc887 fwd="75.39.133.85" dyno=web.1 connect=5ms service=226ms status=200 bytes=9547
+2014-01-22T03:25:40.406100+00:00 app[web.1]: Started POST "/locationerror" for 75.39.133.85 at 2014-01-22 03:25:40 +0000
+2014-01-22T03:25:40.436600+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `each'
+2014-01-22T03:25:40.436600+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:110:in `block in reprocess'
+2014-01-22T03:25:40.436600+00:00 app[web.1]: 
+2014-01-22T03:25:40.436600+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:78:in `reprocess'
+2014-01-22T03:25:40.436600+00:00 app[web.1]: 
+2014-01-22T03:25:40.436600+00:00 app[web.1]: NameError (undefined local variable or method `locationhash' for #<LocationerrorController:0x007fdd72f94bb8>):
+2014-01-22T03:25:40.436996+00:00 app[web.1]: Processing by LocationerrorController#create as */*
+2014-01-22T03:25:40.436600+00:00 app[web.1]:   app/controllers/locationerror_controller.rb:65:in `create'
+2014-01-22T03:25:40.436600+00:00 app[web.1]: 
+2014-01-22T03:25:40.436996+00:00 app[web.1]:   Parameters: {"oper"=>"proc", "id"=>["31581"]}
+2014-01-22T03:25:40.436996+00:00 app[web.1]: Completed 500 Internal Server Error in 22ms
+2014-01-22T03:25:40.437674+00:00 app[web.1]: Started GET "/locationerror?uploadfile_id=6&_search=false&nd=1390361140538&rows=50&page=1&sidx=file_name&sord=desc" for 75.39.133.85 at 2014-01-22 03:25:40 +0000
+2014-01-22T03:25:40.601524+00:00 app[web.1]: Processing by LocationerrorController#index as JSON
+2014-01-22T03:25:40.601524+00:00 app[web.1]:   Parameters: {"uploadfile_id"=>"6", "_search"=>"false", "nd"=>"1390361140538", "rows"=>"50", "page"=>"1", "sidx"=>"file_name", "sord"=>"desc"}
+2014-01-22T03:25:40.601524+00:00 app[web.1]: Completed 200 OK in 160ms (Views: 0.2ms | ActiveRecord: 142.8ms)
+2014-01-22T03:25:40.605905+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361140538&rows=50&page=1&sidx=file_name&sord=desc host=slottingwarehouse.herokuapp.com request_id=cca3e367-5737-445f-ac60-1aa87ccd711a fwd="75.39.133.85" dyno=web.1 connect=0ms service=191ms status=200 bytes=9547
+2014-01-22T03:25:40.441614+00:00 heroku[router]: at=info method=POST path=/locationerror host=slottingwarehouse.herokuapp.com request_id=a3c81ac5-b697-42aa-9128-2a163abd3e1e fwd="75.39.133.85" dyno=web.1 connect=4ms service=38ms status=500 bytes=643
+2014-01-22T03:26:03.601305+00:00 heroku[api]: Starting process with command `logs` by farooq.buvvaji@gmail.com
+2014-01-22T03:26:08.144825+00:00 heroku[run.3625]: Awaiting client
+2014-01-22T03:26:08.181549+00:00 heroku[run.3625]: Starting process with command `logs`
+2014-01-22T03:26:08.255715+00:00 heroku[run.3625]: State changed from starting to up
+2014-01-22T03:26:09.744929+00:00 heroku[run.3625]: Process exited with status 127
+2014-01-22T03:26:09.756379+00:00 heroku[run.3625]: State changed from up to complete
+2014-01-22T03:25:02.890734+00:00 heroku[router]: at=info method=GET path=/locationerror?uploadfile_id=6&_search=false&nd=1390361102439&rows=300&page=1&sidx=file_name&sord=desc host=slottingwarehouse.herokuapp.com request_id=7c218f3f-0bef-4db9-a90d-06e6fd032ed7 fwd="75.32.14.160" dyno=web.1 connect=1ms service=366ms status=200 bytes=57045
