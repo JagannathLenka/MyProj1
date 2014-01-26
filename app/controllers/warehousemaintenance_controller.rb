@@ -35,7 +35,7 @@ class WarehousemaintenanceController < ApplicationController
 
        #When warehouse is added, create the respective zones also
   when "add"
-        logger.debug 'client id' +  cookies[:client_id] 
+        #logger.debug 'client id' +  cookies[:client_id] 
         maximum_warehouse_id = Warehouse.maximum("sm_warehouse_id").to_i 
         warehouse= Warehouse.new(  :sm_warehouse_id => maximum_warehouse_id + 1 ,
                                    :cl_warehouse_id => params[:cl_warehouse_id], 

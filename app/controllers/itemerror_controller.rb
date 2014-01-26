@@ -119,7 +119,11 @@ class ItemerrorController < ApplicationController
         existitem.update_attributes(itemHash)                               
        end
        
-       Itemerror.destroy(id.to_i) 
+       Itemerror.destroy(id.to_i)
+        upload_file = Uploadfile.find(itemerror.uploadfile_id)
+        upload_file.no_of_error_records -= 1
+        upload_file.no_of_processed_records += 1
+        upload_file.save 
         
       else
 

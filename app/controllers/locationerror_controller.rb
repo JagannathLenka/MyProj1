@@ -62,7 +62,7 @@ class LocationerrorController < ApplicationController
        
     when "proc"
        
-       reprocess                                  
+       locationerror = reprocess                                  
       
    end
    
@@ -75,6 +75,7 @@ class LocationerrorController < ApplicationController
   #reprocessing the error in locationerror
   def reprocess
    ids = params[:id]
+   errorExists = false
    ids.each do |id|
    locationerror = Locationerror.find(id.to_i)
    error =  is_row_valid locationerror 
@@ -107,11 +108,15 @@ class LocationerrorController < ApplicationController
          Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
          
        else
-        existloc.update_attributes(locationhash)
+        existloc.update_attributes(locationHash)
                                       
        end
        
        Locationerror.destroy(id.to_i) 
+        upload_file = Uploadfile.find(locationerror.uploadfile_id)
+        upload_file.no_of_error_records -= 1
+        upload_file.no_of_processed_records += 1
+        upload_file.save
         
       else
 
@@ -120,7 +125,10 @@ class LocationerrorController < ApplicationController
                                       :error_description => error
                                        
                                    })
+          errorExists = true
+         
        end
+       return (errorExists  ? "Error Exists" : "")   
   end 
    
  end
@@ -149,9 +157,9 @@ class LocationerrorController < ApplicationController
       
    end
    
-   if loc.attribute5.to_i < loc.attribute9.to_i
-     error += (error.blank? ? "" : ",") + "Current quantity is less than minimum quantity "
-   end
+   #if loc.attribute5.to_i < loc.attribute9.to_i
+    # error += (error.blank? ? "" : ",") + "Current quantity is less than minimum quantity "
+   #end
    
      return error
    end

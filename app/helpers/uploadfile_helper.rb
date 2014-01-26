@@ -37,6 +37,31 @@ module UploadfileHelper
                                    }
                               }" 
 
+      statusFormatter = "function(cellvalue, options, rowdata) {
+      
+                             switch (cellvalue) 
+                                   {
+                                   case 'Error' :  
+                                   return '<div class=\"status level label label-danger\" >' + cellvalue + '</div>';
+                                   
+                                   case 'Processed' :  
+                                   return '<div class=\"status level label label-success\">' + cellvalue + '</div>';
+                                   
+                                   case 'Processed With Error' :  
+                                   return '<div class=\"status level label label-warning\">' + cellvalue + '</div>';
+                                   
+                                   case 'Uploaded':
+                                   return '<div class=\"status level label label-default\">' + cellvalue + '</div>';
+                                   
+                                   case 'Processing':
+                                    return '<div class=\"status level label label-info\">' + cellvalue + '</div>'; 
+                                    
+                                   default:
+                                    return '<div class=\"status level label label-default\">' + cellvalue + '</div>'; 
+                                   }
+                              }" 
+
+
     grid = [{
       :url => url,
       :datatype => 'json',
@@ -50,9 +75,9 @@ module UploadfileHelper
         { :name => 'upload_filename', :index => 'upload_filename',  :width => 80, :align => 'center', :editable => true},
         { :name => 'created_at', :index => 'ucreated_at',  :width => 80, :align => 'center', :editable => false},
         { :name => 'no_of_records', :index => 'no_of_record',  :width => 80, :align => 'center', :editable => true},
-        { :name => 'no_of processed_records', :index => 'no_of processed_records',  :width => 80, :align => 'center', :editable => true},
+        { :name => 'no_of_processed_records', :index => 'no_of_processed_records',  :width => 80, :align => 'center', :editable => true},
         { :name => 'no_of_error_records', :index => 'no_of_error_records',  :width => 80, :align => 'center', :editable => true, formatter: customerLinkFormatter.to_json_var},
-        { :name => 'attribute1', :index => 'attribute1',  :width => 80, :align => 'center', :editable => true},
+        { :name => 'attribute1', :index => 'attribute1',  :width => 80, :align => 'center', :editable => true, formatter: statusFormatter.to_json_var},
         { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => true}
       ],
       :editurl => '/uploadfile',
