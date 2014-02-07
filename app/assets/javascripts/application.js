@@ -13,5 +13,7 @@
 //=require jquery
 //=require jquery_ujs
 //=require jquery-ui
+//=require jquery.sessionTimeout
 //=require bootstrap
+//=require jquery.contextmenu
 //=require_slef

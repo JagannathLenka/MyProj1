@@ -39,16 +39,17 @@ include JqgridsHelper
                                        {
 
                                        })
-                                       .done(function()   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' +'</div>', 
+                                       .done(function(xhr, textStatus)  {
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' + xhr.responseText +  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                           })
                                        .fail(function(xhr, textStatus, errorThrown)   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +'</div>', 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText+  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                          })
+                                         
  
                                  $('#itemerror_list').trigger('reloadGrid');       
                    }"
@@ -92,9 +93,10 @@ include JqgridsHelper
       :reloadAfterEdit => true,
       :multiselect => true,
       :onSelectRow => selectrowfunc.to_json_var }]
-      pager = [:navGrid, "#itemerror_pager", {edit:false, add:false, del: true}, {:closeAfterEdit => true, :closeOnEscape => true}, 
-                                                       
-                                                       {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]                                                              
+      pager = [:navGrid, "#itemerror_pager",  {edit:false, add:false, del: true}, 
+                                                 {:closeAfterEdit => true, :closeOnEscape => true},                                                        
+                                                 {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, 
+                                                 {reloadAfterSubmit:true}, {closeAfterSearch:true}, {}]                                                              
 
    
                                           

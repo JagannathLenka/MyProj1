@@ -3,7 +3,7 @@ class UploadfileController < ApplicationController
   def index
 
      get_header_details  if !request.xhr?
-     columns =  ['id', 'client_id','upload_filename', 'created_at', 'no_of_records','no_of_processed_records','no_of_error_records','attribute1','attribute2']
+     columns =  ['id', 'client_id','upload_filename', 'created_at', 'no_of_records','no_of_processed_records','no_of_error_records','attribute2','attribute1']
       uploadfiles = Uploadfile.select("*")
                      .where(get_searchstring )
                      .paginate(
@@ -45,6 +45,7 @@ class UploadfileController < ApplicationController
                                       :no_of_records => 0,
                                       :no_of_processed_records => 0,
                                       :no_of_error_records => 0,
+                                      :attribute2 => 0,
                                       :attribute1 => "Uploaded"  
                                    )
       
@@ -69,7 +70,7 @@ class UploadfileController < ApplicationController
       
     when "del"
       
-      params[:id].split(',').each do |id|
+          params[:id].split(',').each do |id|
           Uploadfile.destroy(id.to_i)
       end 
       

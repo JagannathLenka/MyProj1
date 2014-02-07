@@ -57,12 +57,16 @@ class LocationerrorController < ApplicationController
     when "del"  
  
        params[:id].split(',').each do |id|
+         locationerror = Locationerror.find(id.to_i)
           Locationerror.destroy(id.to_i)
+          upload_file = Uploadfile.find(locationerror.uploadfile_id)
+          upload_file.no_of_error_records -= 1
+          upload_file.save
        end
        
     when "proc"
        
-       reprocess                                  
+       locationerror = reprocess                                  
       
    end
    
@@ -75,7 +79,7 @@ class LocationerrorController < ApplicationController
   #reprocessing the error in locationerror
   def reprocess
    ids = params[:id]
-   locationHash = nil
+   errorExists = false
    ids.each do |id|
    locationerror = Locationerror.find(id.to_i)
    error =  is_row_valid locationerror 
@@ -113,6 +117,10 @@ class LocationerrorController < ApplicationController
        end
        
        Locationerror.destroy(id.to_i) 
+        upload_file = Uploadfile.find(locationerror.uploadfile_id)
+        upload_file.no_of_error_records -= 1
+        upload_file.no_of_processed_records += 1
+        upload_file.save
         
       else
 
@@ -121,7 +129,10 @@ class LocationerrorController < ApplicationController
                                       :error_description => error
                                        
                                    })
+          errorExists = true
+         
        end
+       return (errorExists  ? "Error Exists" : "")   
   end 
    
  end

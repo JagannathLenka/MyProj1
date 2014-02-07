@@ -34,7 +34,7 @@ def self.upload_file uploadfile_id, file , filename
    file_uploaded.no_of_records = no_of_records
    file_uploaded.no_of_error_records = no_of_error_records
    file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
-   file_uploaded.attribute1 = file_uploaded.no_of_error_records ==0 ? "Processed" : "Processed With Error"
+   file_uploaded.attribute1 = file_uploaded.no_of_error_records ==0 ? "Processed" : "Processed with Error"
    file_uploaded.save
 end
 
@@ -132,7 +132,7 @@ end
    end  
    
    #if rowOfcsv[4].to_i < rowOfcsv[8].to_i 
-    # error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
+     #error += (error.blank? ? "" : ",") + "Current quantity less than the minimum quantity"      
    #end
    
      return error

@@ -4,15 +4,24 @@
   <title><%= yield(:title) %> | Slotting Management </title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <script src="/assets/grid.locale-en.js" type="text/javascript"></script>
-  <script src="/assets/jquery.jqGrid.min.js" type="text/javascript"></script>  
   <%= csrf_meta_tags %>
   
   <script>
-  		  $(document).ready(function(){
+  		  $(document).ready(function(){	
 			$("#wrap").css("height",$( window ).height() * .95)			
-	  })
-  	
+	      });
+	   
+		  !function(a){jQuery.sessionTimeout=function(b){function c(b){switch(b){case"start":e=setTimeout(function(){a("#sessionTimeout-dialog").dialog("open"),d("start")},h.warnAfter);break;case"stop":clearTimeout(e)}}function d(a){switch(a){case"start":f=setTimeout(function(){window.location=h.redirUrl},h.redirAfter-h.warnAfter);break;case"stop":clearTimeout(f)}}var e,f,g={message:"Your session is about to expire.",keepAliveUrl:"/keep-alive",redirUrl:"/timed-out",logoutUrl:"/log-out",warnAfter:9e5,redirAfter:12e5},h=g;b&&(h=a.extend(g,b)),a("body").append('<div title="Session Timeout" id="sessionTimeout-dialog">'+h.message+"</div>"),a("#sessionTimeout-dialog").dialog({autoOpen:!1,width:400,modal:!0,closeOnEscape:!1,open:function(){a(".ui-dialog-titlebar-close").hide()},buttons:{"Log Out Now":function(){window.location=h.logoutUrl},"Stay Connected":function(){a(this).dialog("close"),a.ajax({type:"POST",url:h.keepAliveUrl}),d("stop"),c("start")}}}),c("start")}}(jQuery);	
+	      $(document).ready(function() {
+	    	$.sessionTimeout({
+		        keepAliveUrl : '/login/?session=live',
+                redirUrl     : '/login',
+                logoutUrl    : '/login',
+                warnAfter    : 3300000, // 15 minutes
+                redirAfter   : 3600000 // 20 minutes
+	    	});
+		});
+			
   </script>
   
   <style>

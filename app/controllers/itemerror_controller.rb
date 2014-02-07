@@ -55,9 +55,14 @@ class ItemerrorController < ApplicationController
                                        })
                                        
     when "del"  
- 
+    
        params[:id].split(',').each do |id|
+         itemerror = Itemerror.find(id.to_i)
           Itemerror.destroy(id.to_i)
+           upload_file = Uploadfile.find(itemerror.uploadfile_id)
+          upload_file.no_of_error_records -= 1
+          upload_file.attribute2 = upload_file.attribute2.to_i + 1
+          upload_file.save 
        end
        
     when "proc"
@@ -119,7 +124,11 @@ class ItemerrorController < ApplicationController
         existitem.update_attributes(itemHash)                               
        end
        
-       Itemerror.destroy(id.to_i) 
+       Itemerror.destroy(id.to_i)
+        upload_file = Uploadfile.find(itemerror.uploadfile_id)
+        upload_file.no_of_error_records -= 1
+        upload_file.no_of_processed_records += 1
+        upload_file.save 
         
       else
 

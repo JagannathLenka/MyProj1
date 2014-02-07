@@ -1,4 +1,5 @@
 module LocationerrorHelper
+  
   include JqgridsHelper
 
   def locationerror_jqgrid
@@ -38,17 +39,17 @@ module LocationerrorHelper
                                        {
 
                                        })
-                                       .done(function()   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' +'</div>', 
+                                       .done(function(xhr, textStatus)   { 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' + xhr.responseText +  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                           })
                                        .fail(function(xhr, textStatus, errorThrown)   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +'</div>', 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                          })
- 
+                                       
                                  $('#locationerror_list').trigger('reloadGrid');       
                    }"
        
@@ -91,9 +92,10 @@ module LocationerrorHelper
       :reloadAfterEdit => true,
       :multiselect => true,
       :onSelectRow => selectrowfunc.to_json_var }]
-      pager = [:navGrid, "#locationerror_pager", {edit:false, add:false, del: true}, {:closeAfterEdit => true, :closeOnEscape => true}, 
-                                                       
-                                                       {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {closeAfterSearch:true}, {}]                                                              
+      pager = [:navGrid, "#locationerror_pager", {edit:false, add:false, del: true}, 
+                                                 {:closeAfterEdit => true, :closeOnEscape => true},                                                        
+                                                 {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, 
+                                                 {reloadAfterSubmit:true}, {closeAfterSearch:true}, {}]                                                              
 
    
                                           
@@ -103,5 +105,6 @@ module LocationerrorHelper
     jqgrid_api 'locationerror_list', grid, pager , pager_button , options
 
   end
+
 
 end
