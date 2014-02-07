@@ -57,7 +57,11 @@ class LocationerrorController < ApplicationController
     when "del"  
  
        params[:id].split(',').each do |id|
+         locationerror = Locationerror.find(id.to_i)
           Locationerror.destroy(id.to_i)
+          upload_file = Uploadfile.find(locationerror.uploadfile_id)
+          upload_file.no_of_error_records -= 1
+          upload_file.save
        end
        
     when "proc"

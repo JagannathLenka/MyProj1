@@ -47,7 +47,7 @@ module UploadfileHelper
                                    case 'Processed' :  
                                    return '<div class=\"status level label label-success\">' + cellvalue + '</div>';
                                    
-                                   case 'Processed With Error' :  
+                                   case 'Processed with Error' :  
                                    return '<div class=\"status level label label-warning\">' + cellvalue + '</div>';
                                    
                                    case 'Uploaded':
@@ -68,7 +68,7 @@ module UploadfileHelper
       :mtype => 'GET',
       :height=> height,
       :width => width,
-      :colNames => ['Id', 'Client Id','Upload Filename', 'Uploaded at', 'Total Records',' Processed ','Error ','Status','attribute2'],
+      :colNames => ['Id', 'Client Id','Upload Filename', 'Uploaded at', 'Total Records',' Processed Records ','Error Records','Deleted Records','Status'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'client_id', :index => 'client_id',  :width => 80, :align => 'center', :editable => true, :hidden => true},
@@ -77,8 +77,9 @@ module UploadfileHelper
         { :name => 'no_of_records', :index => 'no_of_record',  :width => 80, :align => 'center', :editable => true},
         { :name => 'no_of_processed_records', :index => 'no_of_processed_records',  :width => 80, :align => 'center', :editable => true},
         { :name => 'no_of_error_records', :index => 'no_of_error_records',  :width => 80, :align => 'center', :editable => true, formatter: customerLinkFormatter.to_json_var},
-        { :name => 'attribute1', :index => 'attribute1',  :width => 80, :align => 'center', :editable => true, formatter: statusFormatter.to_json_var},
-        { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => true}
+        { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => true},
+        { :name => 'attribute1', :index => 'attribute1',  :width => 80, :align => 'center', :editable => true, formatter: statusFormatter.to_json_var}
+        
       ],
       :editurl => '/uploadfile',
       :pager => '#uploadfile_pager',
