@@ -27,7 +27,7 @@ def self.upload_file uploadfile_id, file, filename
    file_uploaded.no_of_records = no_of_records
    file_uploaded.no_of_error_records = no_of_error_records
    file_uploaded.no_of_processed_records =no_of_records - no_of_error_records
-   file_uploaded.attribute1 = file_uploaded.no_of_error_records ==0 ? "Processed" : "Processed with Error"
+   file_uploaded.attribute1 = "Processing-Done"
    file_uploaded.save
   
 end

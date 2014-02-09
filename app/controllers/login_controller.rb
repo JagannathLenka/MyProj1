@@ -13,10 +13,12 @@ class LoginController < ApplicationController
    
    #To Keep the session alive 
    if params[:session]=='live'                 
-              cookies[:userid] = {                                  
+              cookies[:userid] = { 
+                                  value: cookies[:userid],               
                                   expires: 1.hour.from_now
                                 }
-             cookies[:client_id] = {                    
+             cookies[:client_id] = {
+                    value: cookies[:client_id],                    
                     expires: 1.hour.from_now                    
                   }   
    validationResponse = "Sucessess"                           

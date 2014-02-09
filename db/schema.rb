@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(:version => 20140118164836) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "no_of_levels_aisles"
   end
 
   create_table "bays", :force => true do |t|
@@ -247,7 +248,6 @@ ActiveRecord::Schema.define(:version => 20140118164836) do
   add_index "levels", ["bay_id"], :name => "index_levels_on_bay_id"
 
   create_table "locationerrors", :force => true do |t|
-    t.string   "client_id"
     t.integer  "transaction_id"
     t.integer  "sequence_no"
     t.string   "file_name"
@@ -431,10 +431,10 @@ ActiveRecord::Schema.define(:version => 20140118164836) do
     t.string   "attribute6"
     t.string   "attribute7"
     t.string   "attribute8"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
     t.string   "preffered_warehouse"
     t.integer  "quantity_to_be_slotted"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "uploadfiles", :force => true do |t|
