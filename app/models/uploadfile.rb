@@ -20,8 +20,30 @@ class Uploadfile < ActiveRecord::Base
      end 
   end
   
+  #Update the status of the uploaded file
   def update_status
-     self.attribute1 = ((self.no_of_error_records == 0  and self.attribute1_was=="Processed with Error") ? "Processed" : self.attribute1)
+    
+    logger.debug self.attribute1 + " " + self.no_of_processed_records.to_s + " " + self.no_of_error_records.to_s
+    case
+
+      #If the file is in processing dont change the status
+      when (self.attribute1 == "Processing" or self.attribute1 == "Uploaded")
+           self.attribute1 = self.attribute1
+      
+      #When the file has all processed record 
+      when (self.no_of_processed_records !=0 and self.no_of_error_records == 0)
+           self.attribute1 = "Processed" 
+  
+      #When the file has only error records no processed record
+      when (self.no_of_processed_records ==0 and self.no_of_error_records !=0)
+           self.attribute1 = "Error" 
+   
+      #When there are processed records and error records both in the file
+      when (self.no_of_processed_records!=0 and self.no_of_error_records !=0)
+           self.attribute1 = "Processed with Error" 
+           
+    end
+
   end
   
 end
