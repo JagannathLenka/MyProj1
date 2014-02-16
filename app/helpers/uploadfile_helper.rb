@@ -47,6 +47,9 @@ module UploadfileHelper
                                    case 'Processed' :  
                                    return '<div class=\"status level label label-success\">' + cellvalue + '</div>';
                                    
+                                   case 'Processed Successfully' :  
+                                   return '<div class=\"status level label label-success\">' + cellvalue + '</div>';
+                                   
                                    case 'Processed with Error' :  
                                    return '<div class=\"status level label label-warning\">' + cellvalue + '</div>';
                                    

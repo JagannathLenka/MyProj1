@@ -40,12 +40,12 @@ module LocationerrorHelper
 
                                        })
                                        .done(function(xhr, textStatus)   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processed Successfully' + xhr.responseText +  +'</div>', 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">' + xhr  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                           })
                                        .fail(function(xhr, textStatus, errorThrown)   { 
-                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' + xhr.responseText +  +'</div>', 
+                                          $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ 'Processing Failed' +  xhr  +'</div>', 
                                           $.jgrid.edit.bClose,{buttonalign:'right'});  
                                           lastsel=0;
                                          })

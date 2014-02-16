@@ -41,6 +41,9 @@ class Uploadfile < ActiveRecord::Base
       #When there are processed records and error records both in the file
       when (self.no_of_processed_records!=0 and self.no_of_error_records !=0)
            self.attribute1 = "Processed with Error" 
+      #When all the records are processed and no error and no deleted records
+       when (self.no_of_records == self.no_of_processed_records  and self.no_of_error_records == 0 and self.no_of_deleted_records == 0)
+            self.attribute1 = "Processed Successfully"
            
     end
 

@@ -36,3 +36,10 @@
 #rails generate migration add_fieldname_to_locationerrors  uploadfile_id:integer
 #rails generate migration add_fieldname_to_itemmaster  short_description:string long_description:string item_category1:string item_category2:string item_category3:string top_shelf_eligibility:string product_fragile:string unit_length:integer unit_breadth:integer unit_height:integer unit_volume:integer unit_weight:integer case_length:integer case_breadth:integer case_height:integer case_volume:integer case_weight:integer stocking_UOM:string
 #rails generate migration add_fieldname_to_locations location_length:integer location_breadth:integer location_height:integer location_volume:integer allowed_weight:decimal item_short_description:string item_long_description:string
+#rails generate model slottingrule_master priority:float description:string status:string users:string attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string attribute9:string attribute10:string attribute11:string attribute12:string
+rails generate model slottingrule_details rule_id:integer rule_type:string rule_description:string  attribute1:string attribute2:string attribute3:string attribute4:string attribute5:string attribute6:string attribute7:string attribute8:string attribute9:string attribute10:string attribute11:string attribute12:string
+
+
+
+
+
