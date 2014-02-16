@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  rule_id: 1
+  rule_type: MyString
+  rule_description: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString
+
+two:
+  rule_id: 1
+  rule_type: MyString
+  rule_description: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString

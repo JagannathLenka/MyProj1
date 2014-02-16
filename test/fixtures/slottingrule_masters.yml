@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  priority: 1.5
+  description: MyString
+  status: MyString
+  users: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString
+
+two:
+  priority: 1.5
+  description: MyString
+  status: MyString
+  users: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString

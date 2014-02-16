@@ -1,0 +1,26 @@
+<% provide(:title, 'Slottingrule Details Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;	   	 		 
+	
+	var states = { '1': 'Alabama', '2': 'California', '3': 'Florida', '4': 'Hawaii', '5': 'London', '6': 'Oxford' };
+	function targetselect_func(thisval){
+                                         var param = "oper=subselect&val="+thisval;
+                                         var targetSelect = jQuery.ajax({
+                                         url: "/slottingrule_detailsmaintenance/?"+param,
+                                         async: false
+                                         }).responseText;
+                                         
+                                         states = targetSelect
+                                         return targetSelect;
+                                        } 
+</script>
+
+<%end%>
+<%= render "shared/menu" %>
+<h3><div class="label label-primary"> Slottingrule Details</div></h3>
+<div>
+	<table id=slottingrule_details_list></table>
+	<div id=slottingrule_details_pager ></div>
+	<%= raw(slottingrule_details_jqgrid) %>
+</div>

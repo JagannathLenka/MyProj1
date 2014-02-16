@@ -1,0 +1,15 @@
+
+<% provide(:title, 'Slottingrule Master Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;	   	 		 
+</script>
+
+<%end%>
+<%= render "shared/menu" %>
+<h3><div class="label label-primary"> Slottingrule Master</div></h3>
+<div>
+	<table id=slottingrule_master_list></table>
+	<div id=slottingrule_master_pager ></div>
+	<%= raw(slottingrule_master_jqgrid) %>
+</div>

@@ -48,7 +48,7 @@ module ItemmastermaintenanceHelper
       :height=> height,
       :width => width,
       :colNames => ['Id', 'Item No','Description', 'Short Description', 'Velocity','Daily avg Sale','Weekly avg Sale','Monthly avg Sale',
-                    'Item Category 1','Item Category2', 'Item Category3','Unit Length','Unit Breadth','Unit Height','Unit Volume','Unit Weight','Case Length','Case Breadth',
+                    'Item Category 1','Item Category 2', 'Item Category 3','Unit Length','Unit Breadth','Unit Height','Unit Volume','Unit Weight','Case Length','Case Breadth',
                     'Case Height','Case Volume','Case Weight','UOM','Daily Forecast','Case Quantity','Case Split','PutAway Type'],
       :colModel  => [
         { :name => 'itemmaster[id]',   :index => 'id',    :width => 55,:hidden => true },
@@ -101,12 +101,24 @@ module ItemmastermaintenanceHelper
     
     
      pager_button = [:navButtonAdd, "#item_pager", 
-                   {:caption => 'Show Errors', :onClickButton => 'function() {
+                    {:caption => 'Show Errors', :onClickButton => 'function() {
                                           win = window.open("/itemerror", "_blank");
                                           win.focus();
-                                          }'.to_json_var }]
+                                          }'.to_json_var },
+                    ]
+ 
+   pager_button2 = [:navButtonAdd, "#item_pager", 
+                    {caption: "Columns",                    
+                    title: "Reorder Columns",
+                    onClickButton: "function (){
+                                                jQuery('#item_list').jqGrid('columnChooser');}".to_json_var}
+                    ]
 
-    jqgrid_api 'item_list', grid, pager , pager_button, options
+
+
+
+    jqgrid_api 'item_list', grid, pager , pager_button, pager_button2, options
+    
 
   end
 

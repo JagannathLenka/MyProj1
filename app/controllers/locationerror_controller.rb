@@ -72,7 +72,7 @@ class LocationerrorController < ApplicationController
    
    
     if request.xhr?
-       render :json => locationerror
+       render :json => locationerror.to_json
     end
   end
   
@@ -81,61 +81,64 @@ class LocationerrorController < ApplicationController
    ids = params[:id]
    errorExists = false
    ids.each do |id|
-   locationerror = Locationerror.find(id.to_i)
-   error =  is_row_valid locationerror 
-   if error.blank?
-      locationHash = {
-                                   :client_id  => locationerror.attribute1,
-                                   :cl_warehouse_id   => locationerror.attribute2,
-                                   :cl_barcode  =>locationerror.attribute3,
-                                   :current_item => locationerror.attribute4,
-                                   :current_quantity => locationerror.attribute5,
-                                   :life_time_total_picks  => locationerror.attribute6,
-                                   :lock_code => locationerror.attribute7,
-                                   :maximum_quantity =>locationerror.attribute8,
-                                   :minimum_quantity => locationerror.attribute9,
-                                   :status => locationerror.attribute10,
-                                   :location_length => locationerror.attribute11,
-                                   :location_breadth => locationerror.attribute12,
-                                   :location_height => locationerror.attribute13,
-                                   :location_volume => locationerror.attribute14,
-                                   :allowed_weight => locationerror.attribute15,
-                                   :item_short_description => locationerror.attribute16,
-                                   :item_long_description => locationerror.attribute17     
-                      
-                      }
-      existloc = Location.where("client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , locationerror.attribute1, locationerror.attribute3 , locationerror.attribute2).first
-
-      if existloc.nil?
-         loc = Location.new(locationHash)
-         loc.save
-         Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
+       locationerror = Locationerror.find(id.to_i)
+       error =  is_row_valid locationerror 
+       if error.blank?
          
-       else
-        existloc.update_attributes(locationHash)
+                      locationHash = {
+                                                   :client_id  => locationerror.attribute1,
+                                                   :cl_warehouse_id   => locationerror.attribute2,
+                                                   :cl_barcode  =>locationerror.attribute3,
+                                                   :current_item => locationerror.attribute4,
+                                                   :current_quantity => locationerror.attribute5,
+                                                   :life_time_total_picks  => locationerror.attribute6,
+                                                   :lock_code => locationerror.attribute7,
+                                                   :maximum_quantity =>locationerror.attribute8,
+                                                   :minimum_quantity => locationerror.attribute9,
+                                                   :status => locationerror.attribute10,
+                                                   :location_length => locationerror.attribute11,
+                                                   :location_breadth => locationerror.attribute12,
+                                                   :location_height => locationerror.attribute13,
+                                                   :location_volume => locationerror.attribute14,
+                                                   :allowed_weight => locationerror.attribute15,
+                                                   :item_short_description => locationerror.attribute16,
+                                                   :item_long_description => locationerror.attribute17     
                                       
-       end
+                                      }
+                      existloc = Location.where("client_id = ? and cl_barcode = ? and  cl_warehouse_id = ?" , locationerror.attribute1, locationerror.attribute3 , locationerror.attribute2).first
+                
+                      if existloc.nil?
+                         loc = Location.new(locationHash)
+                         loc.save
+                         Location.update_location_details loc, locationerror.attribute2, locationerror.attribute3
+                         
+                       else
+                        existloc.update_attributes(locationHash)
+                                                      
+                       end
+                       
+                       Locationerror.destroy(id.to_i) 
+                        upload_file = Uploadfile.find(locationerror.uploadfile_id)
+                        upload_file.no_of_error_records -= 1
+                        upload_file.no_of_processed_records += 1
+                        upload_file.save
+                        
+         else
+                     
+                          locationerror.update_attributes({
+                                                          
+                                                      :error_description => error
+                                                       
+                                                   })
+                          errorExists = true
+                         
+        end
        
-       Locationerror.destroy(id.to_i) 
-        upload_file = Uploadfile.find(locationerror.uploadfile_id)
-        upload_file.no_of_error_records -= 1
-        upload_file.no_of_processed_records += 1
-        upload_file.save
-        
-      else
-
-          locationerror.update_attributes({
-                                          
-                                      :error_description => error
-                                       
-                                   })
-          errorExists = true
-         
-       end
-       return (errorExists  ? "Error Exists" : "")   
+       return (errorExists  ? "Error Exists in processing" : "Processed Successfully")   
   end 
    
  end
+ 
  def is_row_valid loc
    
     error = ""
