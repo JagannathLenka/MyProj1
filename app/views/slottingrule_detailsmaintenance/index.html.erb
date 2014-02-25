@@ -3,17 +3,25 @@
 <script>
 	var lastsel;	   	 		 
 	
-	var states = { '1': 'Alabama', '2': 'California', '3': 'Florida', '4': 'Hawaii', '5': 'London', '6': 'Oxford' };
+
 	function targetselect_func(thisval){
-                                         var param = "oper=subselect&val="+thisval;
-                                         var targetSelect = jQuery.ajax({
-                                         url: "/slottingrule_detailsmaintenance/?"+param,
-                                         async: false
-                                         }).responseText;
-                                         
-                                         states = targetSelect
-                                         return targetSelect;
-                                        } 
+	                                         var param = "oper=subselect&val="+thisval;
+	                                         var targetSelect = jQuery.ajax({
+	                                         url: "/slottingrule_detailsmaintenance/?"+param,
+	                                         async: false
+	                                         }).responseText;
+	                                         
+	                                         var responseData='';
+	                                         var objs = jQuery.parseJSON(targetSelect);
+	                                         for(i=0;i<objs.length;i++){
+		                                         $.each(objs[i],function(key, val){
+		  											responseData +=	  
+		  												'<option role="option" value="'+ val + '">' + val + '</option>'
+												});
+											};	
+	                                         return responseData
+	                                    }
+
 </script>
 
 <%end%>

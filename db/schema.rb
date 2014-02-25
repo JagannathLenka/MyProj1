@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140212232459) do
+ActiveRecord::Schema.define(:version => 20140219213558) do
 
   create_table "aisles", :force => true do |t|
     t.string   "client_id"
@@ -407,6 +407,32 @@ ActiveRecord::Schema.define(:version => 20140212232459) do
     t.string   "attribute16"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+
+  add_index "positions", ["level_id"], :name => "index_positions_on_level_id"
+
+  create_table "slotting_waves", :force => true do |t|
+    t.string   "client_id"
+    t.string   "wave_number"
+    t.string   "preffered_warehouse"
+    t.string   "preffered_zone"
+    t.string   "preffered_aisle"
+    t.string   "preffered_bay"
+    t.string   "preffered_level"
+    t.string   "preffered_position"
+    t.string   "preffered_slotting_rules"
+    t.string   "wave_status"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "slottingrecommendations", :force => true do |t|

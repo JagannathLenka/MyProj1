@@ -23,7 +23,6 @@ class Uploadfile < ActiveRecord::Base
   #Update the status of the uploaded file
   def update_status
     
-    logger.debug self.attribute1 + " " + self.no_of_processed_records.to_s + " " + self.no_of_error_records.to_s
     case
 
       #If the file is in processing dont change the status

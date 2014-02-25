@@ -9,10 +9,13 @@ module SlottingruleDetailsmaintenanceHelper
      
     aftersubfunc   = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     addcheckfunc   = 'function(postdata, formid) {postdata.pt_master_id=' + params["id"] + '; return[true, " "]}' 
-    dataevent_func = 'function(e) {
-                                   var thisval = $(e.target).val();
-                                   $("#attribute2").html(targetselect_func(thisval))  
-                                  }'                              
+    dataevent_func = "function(e) {
+                                   var thisval = $(e.target).val();                                  
+                                   selectedRowId = $('#slottingrule_details_list').jqGrid ('getGridParam', 'selrow')
+                                   $('#SlottingruleDetails\\\\[attribute2\\\\]').html(targetselect_func(thisval));  
+                                   $('#' + selectedRowId + '_SlottingruleDetails\\\\[attribute2\\\\]').html(targetselect_func(thisval))  
+                                  }"                        
+                             
                     
     selectrowfunc  = "function(id) { 
                       if(id && id!==lastsel){
@@ -39,18 +42,17 @@ module SlottingruleDetailsmaintenanceHelper
       :colModel  => [
         { :name => 'SlottingruleDetails[id]',   :index => 'id',  :width => 55, hidden:true},
         { :name => 'SlottingruleDetails[rule_id]',   :index => 'rule_id',:width => 100,:align => 'center',:editable => false},
-        { :name => 'SlottingruleDetails[rule_type]',   :index => 'rule_type', :width => 150, :align => 'center', :editable => true, edittype:"select", editoptions: {value: "SELECTION:SELECTION;SORTING:SORTING", multiple:true }},
+        { :name => 'SlottingruleDetails[rule_type]',   :index => 'rule_type', :width => 150, :align => 'center', :editable => true, edittype:"select", editoptions: {value: "SELECTION:SELECTION;SORTING:SORTING"}},
         { :name => 'SlottingruleDetails[rule_description]',   :index => 'rule_description',    :width => 100, :align => 'center', :editable => true, edittype:"select", 
-                                                               editoptions: {value: "Item category1:item_category1;Item:Item_Number", 
-                                                                            dataEvents:   [                                                      
-                                                                                            {type: 'change',
-                                                                                             fn: dataevent_func.to_json_var 
-                                                                                             }
-                                                                                          ] 
-                                                                             }
-                                                                           }, 
+                                                               editoptions: {value: "select:select; item_category1:Item category1; item_category2:Item category2; item_category3:Item category3;velocity:Velocity", 
+                                                                              dataEvents:   [                                                      
+                                                                                            {type: 'change', fn: dataevent_func.to_json_var}, 
+                                                                                            {type: 'click', fn: dataevent_func.to_json_var} 
+                                                                                           ] 
+                                                                             }                                                               
+                                                                },
         { :name => 'SlottingruleDetails[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Equals:=;Like:like" }},
-        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: 'states' }},
+        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "select:select", multiple: true}},
         { :name => 'SlottingruleDetails[attribute3]',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute4]',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute5]',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true},
