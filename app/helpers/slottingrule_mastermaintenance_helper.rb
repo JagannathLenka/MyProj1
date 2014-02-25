@@ -20,6 +20,60 @@ module SlottingruleMastermaintenanceHelper
                      lastsel=id;
                      } 
                    }"       
+                   
+    add_slot_wave_func  = "function() {
+                                var ids = $('#slottingrule_master_list').jqGrid('getGridParam','selarrrow');
+                                
+                                 $.post('/slottingrule_mastermaintenance/',
+                                       {
+                                         'oper' :'add_slott_wave',
+                                         'rule_id'   :ids[0]
+                                       })
+                                       .done(function() {
+                                             var ids = $('#slottingrule_master_list').jqGrid('getGridParam','selarrrow');
+                                             var ww=$(window).width()*.80;
+                                             var wh=$(window).height()*.80;
+
+                                             //size iframe nice like
+                                              $('#positionframe').height(wh-10);
+                                              $('#positionframe').width(ww-10);  
+
+                                              $('#positionframe').attr('src', '/slotting_wavemaintenance?rule_id=' + ids[0] + '&lightweight=yes' );
+                                              $('#positionspace').dialog({
+                                                height: wh,
+                                                width:  ww,
+                                                modal: true,
+                                              });
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });                                 
+                   }"
+                   
+       show_slot_wave_func  = "function() {   
+                                             var ids = $('#slottingrule_master_list').jqGrid('getGridParam','selarrrow');
+                                             var ww=$(window).width()*.80;
+                                             var wh=$(window).height()*.80;
+
+                                             //size iframe nice like
+                                              $('#positionframe').height(wh-10);
+                                              $('#positionframe').width(ww-10);  
+
+                                              $('#positionframe').attr('src', '/slotting_wavemaintenance?rule_id=' + ids[0] + '&lightweight=yes&view=yes' );
+                                              $('#positionspace').dialog({
+                                                height: wh,
+                                                width:  ww,
+                                                modal: true,
+                                              });
+                              }"            
        
     grid = [{
       :url => '/slottingrule_mastermaintenance/',
@@ -60,9 +114,12 @@ module SlottingruleMastermaintenanceHelper
                                                        :closeOnEscape => true}, 
                                                        {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var}, {}, {}, {}]                                                              
 
-   
+
+    pager_button_1 = [:navButtonAdd, "#slottingrule_master_pager", {:caption => 'Create Slotting Wave', :onClickButton => add_slot_wave_func.to_json_var }]
+    pager_button_2 = [:navButtonAdd, "#slottingrule_master_pager", {:caption => 'Show Slotting Wave', :onClickButton => show_slot_wave_func.to_json_var }]
+
     
-    jqgrid_api 'slottingrule_master_list', grid, pager , options
+    jqgrid_api 'slottingrule_master_list', grid, pager ,pager_button_1,pager_button_2, options
 
   end
 end

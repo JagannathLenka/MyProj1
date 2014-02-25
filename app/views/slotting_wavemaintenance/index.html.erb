@@ -1,0 +1,18 @@
+<% provide(:title, 'Slotting Wave Maintenance') %>
+<% content_for :head do %>
+<script>
+	var lastsel;	   	 		 
+	
+</script>
+
+<%end%>
+<% if params[:lightweight] != "yes" %>
+		<%= render "shared/menu" %>
+		<h3><div class="label label-primary"> Slotting Wave</div></h3>
+<%end%>		
+
+<div>
+	<table id=slotting_wave_list></table>
+	<div id=slotting_wave_pager ></div>
+	<%= raw(slotting_wave_jqgrid) %>
+</div>

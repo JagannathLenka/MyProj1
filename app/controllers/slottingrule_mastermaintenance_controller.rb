@@ -29,18 +29,28 @@ class SlottingruleMastermaintenanceController < ApplicationController
          slottingrule_master = SlottingruleMaster.find_by_id(params[:id])
          slottingrule_master.update_attributes(params[:SlottingruleMaster])
            @error = params[:SlottingruleMaster][:priority] + ' ' + slottingrule_master.errors.values[0][0] if slottingrule_master.errors.count > 0 
-           logger.debug @error             
+                      
           
              
         when "add"
           
                   
            slottingrule_master = SlottingruleMaster.new(params[:SlottingruleMaster])  
-           
-           logger.debug @error                                 
+                                           
            slottingrule_master.save                                   
-           @error = params[:SlottingruleMaster][:priority] + ' ' + slottingrule_master.errors.values[0][0] if slottingrule_master.errors.count > 0 
-           logger.debug @error             
+           @error = params[:SlottingruleMaster][:priority] + ' ' + slottingrule_master.errors.values[0][0] if slottingrule_master.errors.count > 0  
+        
+        #Add a slotting wave to slotting wave master for the given rule selected   
+        when "add_slott_wave"
+          slotting_waves = SlottingWave.new(
+                                            {client_id: cookies[:client_id],
+                                             preffered_slotting_rules: params[:rule_id],
+                                             wave_status: "Open" ,
+                                             wave_number: "Wave" + Time.now().to_s 
+                                            }) 
+                            
+            slotting_waves.save
+                 
         when "del"
           
               params[:id].split(',').each do |id|

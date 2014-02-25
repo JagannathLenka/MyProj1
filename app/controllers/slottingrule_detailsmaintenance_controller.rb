@@ -12,17 +12,16 @@ class SlottingruleDetailsmaintenanceController < ApplicationController
 
       
       
-     if request.xhr? 
-       
-       if params[:oper]=='subselect'
-          item_category = Itemmaster.find_by_sql('select distinct item_category1 from itemmasters')
-          render :json => item_category.to_json
-       else
-         render :json => json_for_jqgrid(slottingrule_details, columns)
-       end
-       
-       
-     end
+      if request.xhr? 
+             if params[:oper]=='subselect'
+                  item_category = Itemmaster.find_by_sql('select distinct ' + params[:val] + ' from itemmasters where ' + params[:val] + ' not NULL and ' + params[:val] + ' !=""')
+                  render :json => item_category.to_json
+             else
+
+                 render :json => json_for_jqgrid(slottingrule_details, columns)
+                 
+             end
+         end
 
   end
   
