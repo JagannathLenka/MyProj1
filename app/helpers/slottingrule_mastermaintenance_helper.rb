@@ -87,7 +87,7 @@ module SlottingruleMastermaintenanceHelper
         { :name => 'SlottingruleMaster[id]',   :index => 'id',  :width => 55, :align => 'center',:editable => false, editrules:{required:true},formatter:'showlink', formatoptions:{baseLinkUrl:'/slottingrule_detailsmaintenance'}},
         { :name => 'SlottingruleMaster[priority]',   :index => 'priority',:width => 100,:align => 'center',:editable => true},
         { :name => 'SlottingruleMaster[description]',   :index => 'description', :width => 150, :align => 'center', :editable => true},
-        { :name => 'SlottingruleMaster[status]',   :index => 'status',    :width => 100, :align => 'center', :editable => true},
+        { :name => 'SlottingruleMaster[status]',   :index => 'status',    :width => 100, :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Active:Active;Inactive:Inactive" }},
         { :name => 'SlottingruleMaster[users]',  :index => 'users',  :width => 150, :align => 'center', :editable => true},
         { :name => 'SlottingruleMaster[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleMaster[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true},

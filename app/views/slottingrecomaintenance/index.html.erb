@@ -16,10 +16,10 @@
 	var lastsel;
 </script>
 <%end%>
-	
-	<%= render "shared/menu" %>
-	<h3><div class="label label-primary">Items to be Slotted</div></h3>
-
+	<% if params[:lightweight] != "yes" %>
+			<%= render "shared/menu" %>
+			<h3><div class="label label-primary">Items to be Slotted</div></h3>
+    <% end %>
 <div>
 	<table id=slotting_list></table>
 	<div id=slotting_pager></div>

@@ -51,7 +51,7 @@ module SlottingruleDetailsmaintenanceHelper
                                                                                            ] 
                                                                              }                                                               
                                                                 },
-        { :name => 'SlottingruleDetails[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Equals:=;Like:like" }},
+        { :name => 'SlottingruleDetails[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "in:=;Like:like" }},
         { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "select:select", multiple: true}},
         { :name => 'SlottingruleDetails[attribute3]',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute4]',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
