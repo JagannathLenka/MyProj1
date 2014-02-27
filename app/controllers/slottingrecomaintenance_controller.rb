@@ -8,12 +8,16 @@ rescue_from Exception, :with => :error_render_method
      get_header_details  if !request.xhr?
      columns =  ['id', 'item_number','quantity_to_be_slotted','preffered_warehouse', 'preffered_zone' ,
         'preffered_aisle','preffered_bay','preffered_level','preffered_position','preffered_slotting_rules','partial_slotting','location_recommended',
-        'slotting_status']
+        'slotting_status','attribute2']
                   
-         selectParam = "slotting_status = 'Open'"
+         selectParam = "slotting_status = 'Open' and attribute1 = '" + params[:id] + "'" 
+
+        
 
 
-     slotting = Slottingrecommendation.select("*").where(selectParam).paginate(
+     slotting = Slottingrecommendation.select("*")
+                 .where(selectParam)
+                  .paginate(
                      :page     => params[:page],
                      :per_page => params[:rows],
                      :order    => order_by_from_params(params))
@@ -48,7 +52,8 @@ rescue_from Exception, :with => :error_render_method
                                      :preffered_position => (params[:preffered_position].blank? ? '*'   : params[:preffered_position]),
                                      :preffered_slotting_rules => (params[:preffered_slotting_rules].blank? ? '*':  params[:preffered_slotting_rules]),
                                      :quantity_to_be_slotted => (params[:quantity_to_be_slotted].blank? ? 0: params[:quantity_to_be_slotted]),
-                                     :slotting_status => params[:slotting_status]
+                                     :slotting_status => params[:slotting_status],
+                                     :attribute2 => params[:attribute2]
                             )
           
            slotting_reco.save 

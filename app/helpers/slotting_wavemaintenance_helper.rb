@@ -35,7 +35,7 @@ module SlottingWavemaintenanceHelper
                      'Preffered Aisle','Preffered Bay','Preffered Level','Preffered Position','Preffered Slottingrules', 'Wave status'],
        :colModel  => [
         { :name => 'SlottingWave[id]',   :index => 'id',    :width => 55,:hidden => true },
-        { :name => 'SlottingWave[wave_number]', :index => 'wave_number',  :width => 80, :align => 'center', :editable => true, :hidden => false},
+        { :name => 'SlottingWave[wave_number]', :index => 'wave_number',  :width => 80, :align => 'center', :editable => true, :hidden => false,formatter:'showlink', formatoptions:{baseLinkUrl:'/slottingrecomaintenance', addParam: '&lightweight=yes'  }},
         { :name => 'SlottingWave[preffered_warehouse]', :index => 'preffered_warehouse',  :width => 80, :align => 'center', :editable => true},
         { :name => 'SlottingWave[preffered_zone]', :index => 'preffered_zone',  :width => 80, :align => 'center', :editable => true, :hidden => false},        
         { :name => 'SlottingWave[preffered_aisle]', :index => 'preffered_aisle',     :width => 80,  :align => 'center', :editable => true},

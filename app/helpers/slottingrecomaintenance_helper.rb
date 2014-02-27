@@ -5,7 +5,7 @@ module SlottingrecomaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
       id  = params["id"]
-      url = "/slottingrecomaintenance" 
+      url = "/slottingrecomaintenance?id=" + params[:id]
     
     
     addcheckfunc = 'function(postdata, formid) {return[true, " "]}'
@@ -55,12 +55,12 @@ module SlottingrecomaintenanceHelper
       :url => url,
       :datatype => 'json',
       :mtype => 'GET',
-      :height=> 'auto',
+      :height=> 350,
       :width => 'auto',
       
       :colNames => ['Id', 'Item No','Quantity to be slotted','Preffered Warehouse', 'Preffered  Zone' ,
         'Preffered Aisle','Preffered Bay','Preffered Level','Preffered Position','Preffered Slottingrules',
-        'Partial Slotting', 'Reco Location', 'Slotting status'],
+        'Partial Slotting', 'Reco Location', 'Slotting status' , 'Wave Number'],
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'item_number', :index => 'item_number',  :width => 80, :align => 'center', :editable => true, :hidden => false},
@@ -74,21 +74,22 @@ module SlottingrecomaintenanceHelper
         { :name => 'preffered_slotting_rules',:index => 'preffered_slotting_rules',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'partial_slotting',    :index => 'partial_slotting',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'location_recommended', :index => 'location_recommended',  :width => 80, :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/bay?id=161', addParam: '&selectedbay=B3'}},
-        { :name => 'slotting_status',:index => 'slotting_status',     :width => 80,  :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Open:Open;Close:Close" }}
+        { :name => 'slotting_status',:index => 'slotting_status',     :width => 80,  :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Open:Open;Close:Close" }},
+        { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => false, :hidden => false}
       ],
       :editurl => '/slottingrecomaintenance',
       :pager => '#slotting_pager',
-      :rowNum => 10,
-      :rowList => [10, 20, 30],
+      :rowNum => 50,
+      :rowList => [50, 100, 150],
       :sortname => 'id',
       :sortorder => 'asc',
-      :shrinkToFit => true,
       :autowidth => true,
       :viewrecords => true,
       :caption => 'Slottingrecommendation Maintenance',
       :reloadAfterEdit => true,
       :multiselect => true,
       :onSelectRow => selectrowfunc.to_json_var }]
+      
 
 
     pager = [:navGrid, "#slotting_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
