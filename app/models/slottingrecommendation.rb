@@ -64,7 +64,7 @@ class Slottingrecommendation < ActiveRecord::Base
         #pass 1
         logger.debug 'Pass1'
         location_requirement = ''
-        location_requirement += "current_quantity =  0 " 
+        location_requirement += "(current_quantity =  0 OR current_quantity IS NULL) " 
         location_requirement += " AND " + "locations.current_item ='" +  to_be_slotted_item["item_number"].to_s + "'"
         location_requirement += " AND " + "locations.maximum_quantity >=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
         location_requirement += " AND " + "locations.minimum_quantity <=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
@@ -78,7 +78,7 @@ class Slottingrecommendation < ActiveRecord::Base
         if (slotting_item.nil?)
           
             location_requirement = ''
-            location_requirement += "current_quantity =  0 " 
+            location_requirement += "(current_quantity =  0 OR current_quantity IS NULL) " 
             location_requirement += " AND " + "(locations.current_item = '' OR locations.current_item IS NULL )"
             location_requirement += " AND " + "locations.attribute1 =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"        
             slotting_item = self.location_selection(position_requirement,location_requirement,self.already_selected(selected_location))

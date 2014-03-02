@@ -118,10 +118,11 @@ class SlottingrecomaintenanceController < ApplicationController
                                   
  end
  
- #Write the breadcrumbs
- def get_header_details
-   
-end 
+#Write the breadcrumbs
+def get_header_details    
+  
+end
+  
     
 #Error Handling
 def error_render_method exception
