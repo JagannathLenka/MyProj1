@@ -1,5 +1,15 @@
+require 'csv'
 class Slottingrecommendation < ActiveRecord::Base
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :client_id, :item_number, :location_recommended, :partial_slotting, :preffered_aisle, :preffered_bay, :preffered_level, :preffered_position, :preffered_slotting_rules, :preffered_warehouse, :preffered_zone, :quantity_to_be_slotted, :slotting_status
+
+    def self.to_csv(options = {})
+      CSV.generate(options) do |csv|
+        csv << column_names
+        all.each do |slottingrecommendation|
+          csv << slottingrecommendation.attributes.values_at(*column_names)
+        end
+      end
+    end
 
     def self.sort_items(item_ids)
         
@@ -35,7 +45,83 @@ class Slottingrecommendation < ActiveRecord::Base
         self.slott_items(sorted)      
       end
     
-    def self.location_selection(position_requirement,location_requirement,selected_location)
+  def self.slott_items(to_be_slotted_item_list)
+    
+    selected_location = Array.new(0)
+    selected_location.clear
+    logger.debug selected_location
+    
+    #selected_location = "locations.cl_barcode not in ('"
+    to_be_slotted_item_list.each_with_index do|to_be_slotted_item , i|    
+        position_requirement = ''
+        position_requirement +=         "positions.cl_warehouse_id = " + "'" + to_be_slotted_item['preffered_warehouse'] + "'"        unless  to_be_slotted_item['preffered_warehouse'] == '*'
+        position_requirement += " AND " + "positions.cl_zone_id = "      + "'" + to_be_slotted_item['preffered_zone'] + "'"           unless  to_be_slotted_item['preffered_zone'] == '*'
+        position_requirement += " AND " + "positions.cl_aisle_id = "      + "'" + to_be_slotted_item['preffered_aisle'] + "'"         unless  to_be_slotted_item['preffered_aisle'] == '*'
+        position_requirement += " AND " + "positions.cl_bay_id = "      + "'" + to_be_slotted_item['preffered_bay'] + "'"             unless  to_be_slotted_item['preffered_bay'] == '*'
+        position_requirement += " AND " + "positions.cl_level_id = "      + "'" + to_be_slotted_item['preffered_level'] + "'"         unless  to_be_slotted_item['preffered_level'] == '*'
+        position_requirement += " AND " + "positions.cl_pos_id = "      + "'" + to_be_slotted_item['preffered_position'] + "'"        unless  to_be_slotted_item['preffered_position'] == '*'
+        
+        #pass 1
+        logger.debug 'Pass1'
+        location_requirement = ''
+        location_requirement += "current_quantity =  0 " 
+        location_requirement += " AND " + "locations.current_item ='" +  to_be_slotted_item["item_number"].to_s + "'"
+        location_requirement += " AND " + "locations.maximum_quantity >=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
+        location_requirement += " AND " + "locations.minimum_quantity <=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
+        location_requirement += " AND " + "locations.attribute1 =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"
+    
+       
+       slotting_item = self.location_selection(position_requirement,location_requirement,self.already_selected(selected_location))
+        
+        #pass 2
+        logger.debug 'Pass2'
+        if (slotting_item.nil?)
+          
+            location_requirement = ''
+            location_requirement += "current_quantity =  0 " 
+            location_requirement += " AND " + "(locations.current_item = '' OR locations.current_item IS NULL )"
+            location_requirement += " AND " + "locations.attribute1 =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"        
+            slotting_item = self.location_selection(position_requirement,location_requirement,self.already_selected(selected_location))
+        end
+        
+        case 
+                  
+        when to_be_slotted_item["item_master_item"].nil?
+              preferred_location =  "Invalid Item"  
+
+        when slotting_item.nil?
+            preferred_location =   "No suitable location "  
+              
+        else                
+        preferred_location =  slotting_item.cl_barcode  
+        selected_location << preferred_location
+        end
+                    
+        slotting_reco = Slottingrecommendation.find(to_be_slotted_item["id"].to_i)
+        slotting_reco.update_attributes({ :location_recommended => preferred_location })  
+      
+        
+    end
+    
+     
+
+  end
+
+  def self.already_selected(selected_location)
+    
+        selected_location_query_string = "locations.cl_barcode not in ("
+        selected_location.each_with_index do |preffered_location , i|
+          
+          selected_location_query_string += (i== 0) ? ( "'" +  preffered_location + "'" ) : (" , '" +  preffered_location + "'")
+          
+        end
+       
+       selected_location_query_string += (selected_location.length >= 0) ?  ")" : "' ')"
+       
+       return  selected_location_query_string
+  end
+   
+  def self.location_selection(position_requirement,location_requirement,selected_location)
    
           
            slotting_item = Location
@@ -49,7 +135,7 @@ class Slottingrecommendation < ActiveRecord::Base
                               positions.cl_level_id")
                     .where( position_requirement)
                     .where( location_requirement)
-                    .where( selected_location + "')" )
+                    .where( selected_location )
                     .order('locations.location_priority desc, locations.attribute2 asc')
                     .first
                               
@@ -57,60 +143,5 @@ class Slottingrecommendation < ActiveRecord::Base
                               
     end
  
-   def self.slott_items(to_be_slotted_item_list)
-    
-    selected_location = "locations.cl_barcode not in ('"
-    to_be_slotted_item_list.each_with_index do|to_be_slotted_item , i|    
-        position_requirement = ''
-        position_requirement +=         "positions.cl_warehouse_id = " + "'" + to_be_slotted_item['preffered_warehouse'] + "'"        unless  to_be_slotted_item['preffered_warehouse'] == '*'
-        position_requirement += " AND " + "positions.cl_zone_id = "      + "'" + to_be_slotted_item['preffered_zone'] + "'"           unless  to_be_slotted_item['preffered_zone'] == '*'
-        position_requirement += " AND " + "positions.cl_aisle_id = "      + "'" + to_be_slotted_item['preffered_aisle'] + "'"         unless  to_be_slotted_item['preffered_aisle'] == '*'
-        position_requirement += " AND " + "positions.cl_bay_id = "      + "'" + to_be_slotted_item['preffered_bay'] + "'"             unless  to_be_slotted_item['preffered_bay'] == '*'
-        position_requirement += " AND " + "positions.cl_level_id = "      + "'" + to_be_slotted_item['preffered_level'] + "'"         unless  to_be_slotted_item['preffered_level'] == '*'
-        position_requirement += " AND " + "positions.cl_pos_id = "      + "'" + to_be_slotted_item['preffered_position'] + "'"        unless  to_be_slotted_item['preffered_position'] == '*'
-        
-        location_requirement = ''
-        location_requirement += "current_quantity =  0 " 
-        location_requirement += " AND " + "locations.current_item ='" +  to_be_slotted_item["item_number"].to_s + "'"
-        location_requirement += " AND " + "locations.maximum_quantity >=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
-        location_requirement += " AND " + "locations.minimum_quantity <=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
-        location_requirement += " AND " + "locations.attribute1 =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"
-    
-        case to_be_slotted_item["velocity"] 
-            
-          when  "A"
-           # position_requirement += " AND " + "positions.attribute3 = 'Yes'"
-             
-          when "B"
-            
-             
-          when "C"
-          
-        end
-
-        slotting_item = self.location_selection(position_requirement,location_requirement,selected_location) 
-        
-        case 
-                  
-        when to_be_slotted_item["item_master_item"].nil?
-              preferred_location =  "Invalid Item"  
-
-        when slotting_item.nil?
-            preferred_location =   "No suitable location "  
-              
-        else                
-        preferred_location =  slotting_item.cl_barcode  
-        
-        end
-                    
-        slotting_reco = Slottingrecommendation.find(to_be_slotted_item["id"].to_i)
-        slotting_reco.update_attributes({ :location_recommended => preferred_location })  
-        selected_location += (i== 0) ? ("'" + preferred_location + "'") : (" , '" + preferred_location + "'" )
-        
-    end
-    
-     
-
-  end
-
+  
 end

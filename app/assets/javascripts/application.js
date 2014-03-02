@@ -11,9 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //=require jquery
+//=require grid.locale-en
+//=require jquery.jqGrid.min
+//=require bootstrap
 //=require jquery_ujs
 //=require jquery-ui
 //=require jquery.sessionTimeout
-//=require bootstrap
 //=require jquery.contextmenu
 //=require_slef

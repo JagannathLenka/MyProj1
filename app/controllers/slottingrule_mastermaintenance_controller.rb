@@ -42,11 +42,18 @@ class SlottingruleMastermaintenanceController < ApplicationController
         
         #Add a slotting wave to slotting wave master for the given rule selected   
         when "add_slott_wave"
-          slotting_waves = SlottingWave.new(
-                                            {client_id: cookies[:client_id],
+          slotting_waves = SlottingWave.new({
+                                            client_id: cookies[:client_id],
                                              preffered_slotting_rules: params[:rule_id],
+                                             preffered_warehouse: '*',
+                                             preffered_zone:  '*' ,
+                                             preffered_aisle: '*',
+                                             preffered_bay: '*',
+                                             preffered_level: '*',
+                                             preffered_position: '*',
                                              wave_status: "Open" ,
                                              wave_number: "Wave" + Time.now().to_s 
+                                            
                                             }) 
                             
             slotting_waves.save
