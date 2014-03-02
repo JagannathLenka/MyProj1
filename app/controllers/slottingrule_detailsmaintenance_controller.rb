@@ -61,8 +61,7 @@ class SlottingruleDetailsmaintenanceController < ApplicationController
   
  #Write the breadcrumbs
  def get_header_details
-   
-    
+   add_breadcrumb "Rules Master" ,  "/slottingrule_mastermaintenance"
  end 
  
 end

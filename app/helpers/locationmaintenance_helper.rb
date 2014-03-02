@@ -79,7 +79,7 @@ module LocationmaintenanceHelper
         {:name => 'location[minimum_quantity]', :index => 'minimum_quantity',  :width => 120, :align => 'center', :editable => true, editrules:{required:false}},
         {:name => 'location[maximum_quantity]', :index => 'maximum_quantity',  :width => 120, :align => 'center', :editable => true, editrules:{required:false}},
         {:name => 'location[status]', :index => 'status',  :width => 120, :align => 'center', :editable => true, editrules:{required:true}},
-        {:name => 'location[location_priority]', :index => 'location_priority',  :width => 120, :align => 'center', :editable => false,:hidden => true},
+        {:name => 'location[location_priority]', :index => 'location_priority',  :width => 120, :align => 'center', :editable => false,:hidden => false},
         {:name => 'location[location_length]', :index => 'location_length',  :width => 120, :align => 'center', :editable => true},
         {:name => 'location[location_breadth]', :index => 'location_breadth',  :width => 120, :align => 'center', :editable => true},
         {:name => 'location[location_height]', :index => 'location_height',  :width => 120, :align => 'center', :editable => true},
