@@ -1,6 +1,7 @@
+require 'csv'
 class SlottingrecomaintenanceController < ApplicationController
   
-rescue_from Exception, :with => :error_render_method
+#rescue_from Exception, :with => :error_render_method
   
  # GET /Render the JQGrid for slotting recomendation
   def index
@@ -10,7 +11,8 @@ rescue_from Exception, :with => :error_render_method
         'preffered_aisle','preffered_bay','preffered_level','preffered_position','preffered_slotting_rules','partial_slotting','location_recommended',
         'slotting_status','attribute2']
                   
-         selectParam = "slotting_status = 'Open' and attribute1 = '" + params[:id] + "'" 
+         selectParam = "slotting_status = 'Open'" 
+         (selectParam += "and attribute1 = '" + params[:id] + "'" ) if !params[:id].nil? 
 
         
 
@@ -26,6 +28,11 @@ rescue_from Exception, :with => :error_render_method
       
      if request.xhr? 
        render :json => json_for_jqgrid(slotting, columns)
+     else
+       respond_to do |format|
+          format.html
+          format.csv { send_data slotting.to_csv, filename: "slotting_data.csv" }
+        end
      end
 
   end

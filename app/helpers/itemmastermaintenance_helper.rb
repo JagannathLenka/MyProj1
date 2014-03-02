@@ -52,7 +52,7 @@ module ItemmastermaintenanceHelper
                     'Case Height','Case Volume','Case Weight','UOM','Daily Forecast','Case Quantity','Case Split','PutAway Type'],
       :colModel  => [
         { :name => 'itemmaster[id]',   :index => 'id',    :width => 55,:hidden => true },
-        { :name => 'itemmaster[item_number]', :index => 'item_number',  :width => 80, :align => 'center', :editable => true},
+        { :name => 'itemmaster[item_number]', :index => 'item_number',  :width => 80, :align => 'center', :editable => true, editrules:{required:true}},
         { :name => 'itemmaster[long_description]', :index => 'long_description',  :width => 80, :align => 'center', :editable => true},
         { :name => 'itemmaster[short_description]', :index => 'short_description',  :width => 80, :align => 'center', :editable => true, hidden:true},
         { :name => 'itemmaster[velocity]', :index => 'velocity',  :width => 80, :align => 'center', :editable => true},

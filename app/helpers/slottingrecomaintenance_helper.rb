@@ -5,7 +5,8 @@ module SlottingrecomaintenanceHelper
 
     options = {:on_document_ready => true, :html_tags => false}
       id  = params["id"]
-      url = "/slottingrecomaintenance?id=" + params[:id]
+      url = "/slottingrecomaintenance?" 
+      (url += "id=" + params[:id]) if !params[:id].nil? 
     
     
     addcheckfunc = 'function(postdata, formid) {return[true, " "]}'
@@ -49,6 +50,11 @@ module SlottingrecomaintenanceHelper
                                      $('#slotting_list').trigger('reloadGrid'); 
                                      lastsel=0;      
                    }"
+
+     download_func  = "function() {
+                                win = window.open('" + url + "&format=csv');
+                                win.focus();                                 
+                       }"
                                        
 
     grid = [{
@@ -64,7 +70,7 @@ module SlottingrecomaintenanceHelper
       :colModel  => [
         { :name => 'id',   :index => 'id',    :width => 55,:hidden => true },
         { :name => 'item_number', :index => 'item_number',  :width => 80, :align => 'center', :editable => true, :hidden => false},
-        { :name => 'quantity_to_be_slotted',:index => 'quantity_to_be_slotted',     :width => 80,  :align => 'center', :editable => true },
+        { :name => 'quantity_to_be_slotted',:index => 'quantity_to_be_slotted',     :width => 80,  :align => 'center', :editable => true, editrules:{required:true} },
         { :name => 'preffered_warehouse', :index => 'preffered_warehouse',  :width => 80, :align => 'center', :editable => true},
         { :name => 'preffered_zone', :index => 'preffered_zone',  :width => 80, :align => 'center', :editable => true, :hidden => false},        
         { :name => 'preffered_aisle', :index => 'preffered_aisle',     :width => 80,  :align => 'center', :editable => true},
@@ -97,8 +103,9 @@ module SlottingrecomaintenanceHelper
                                                        {:closeAfterAdd=>true, :errorTextFormat  =>aftersubfunc.to_json_var, :beforeSubmit => addcheckfunc.to_json_var}, {}, {}, {}]   
     slotting_button = [:navButtonAdd, "#slotting_pager", {:caption => 'Slot the items', :onClickButton => slottfunc.to_json_var }]               
     
+    download_button = [:navButtonAdd, "#slotting_pager", {:caption => 'Download', :onClickButton => download_func.to_json_var }]               
 
-    jqgrid_api 'slotting_list', grid, pager, slotting_button, options
+    jqgrid_api 'slotting_list', grid, pager, slotting_button, download_button, options
 
   end
 end

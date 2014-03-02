@@ -6,6 +6,8 @@ class Itemmaster < ActiveRecord::Base
                   :top_shelf_eligibility, :product_fragile, :unit_length, :unit_breadth, :unit_height, :unit_volume, :unit_weight,
                   :case_length, :case_breadth, :case_height, :case_volume, :case_weight, :stocking_UOM
 
+ validates :item_number, :uniqueness => {:scope => :client_id , :allow_nil => false, :allow_blank => false,  :message => "Item number Exists"}
+ 
 def self.upload_file uploadfile_id, file, filename
    file_uploaded = Uploadfile.find(uploadfile_id)  
    file_uploaded.attribute1 = "Processing"
