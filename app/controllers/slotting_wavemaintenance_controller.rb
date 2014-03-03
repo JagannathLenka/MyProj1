@@ -22,8 +22,8 @@ class SlottingWavemaintenanceController < ApplicationController
   def search_string
       
       search_string =  "1 = 1"
-      search_string += " and preffered_slotting_rules in (" + params[:rule_id] + ")"  if (!params[:rule_id].nil? and  !params[:rule_id].blank?)
-      search_string += " and wave_status in (" + params[:wave_status] + ")"  if (!params[:wave_status].nil? and !params[:wave_status].blank?) 
+      search_string += " AND preffered_slotting_rules IN (" + params[:rule_id] + ")"  if (!params[:rule_id].nil? and  !params[:rule_id].blank?)
+      search_string += " AND wave_status IN (" + params[:wave_status] + ")"  if (!params[:wave_status].nil? and !params[:wave_status].blank?) 
       
       return search_string
   end
