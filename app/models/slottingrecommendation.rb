@@ -138,7 +138,7 @@ class Slottingrecommendation < ActiveRecord::Base
                     .where( selected_location )
                     .order('locations.location_priority desc, locations.attribute2 asc')
                     .first
-                              
+            puts position_requirement + ' ' + location_requirement                  
             return slotting_item
                               
     end
