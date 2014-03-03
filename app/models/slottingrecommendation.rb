@@ -80,7 +80,7 @@ class Slottingrecommendation < ActiveRecord::Base
             location_requirement = ''
             location_requirement += "(current_quantity =  0 OR current_quantity IS NULL) " 
             location_requirement += " AND " + "(locations.current_item = '' OR locations.current_item IS NULL )"
-            location_requirement += " AND " + "locations.attribute1 =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"        
+            location_requirement += " AND " + "coalesce(locations.attribute1, ' ') =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"        
             slotting_item = self.location_selection(position_requirement,location_requirement,self.already_selected(selected_location))
         end
         
