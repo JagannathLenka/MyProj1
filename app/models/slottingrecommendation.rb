@@ -116,7 +116,7 @@ class Slottingrecommendation < ActiveRecord::Base
           
         end
        puts selected_location.length 
-       selected_location_query_string += (selected_location.length >= 0) ?  ")" : "' ')"
+       selected_location_query_string += (selected_location.length > 0) ?  ")" : "' ')"
        
        return  selected_location_query_string
   end
