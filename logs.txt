@@ -1,102 +1,102 @@
-2014-03-03T02:23:34.860731+00:00 app[web.1]: 0
-2014-03-03T02:23:34.871915+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157035000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:34.871915+00:00 app[web.1]: 0
-2014-03-03T02:23:34.861360+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:34.864133+00:00 app[web.1]: 0
-2014-03-03T02:23:34.883880+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157037000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:34.875698+00:00 app[web.1]: 0
-2014-03-03T02:23:34.884543+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:34.872461+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:34.902733+00:00 app[web.1]: 0
-2014-03-03T02:23:34.883880+00:00 app[web.1]: 0
-2014-03-03T02:23:34.902733+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157040000' AND locations.maximum_quantity >=1 AND locations.minimum_quanti
-ty <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:34.890199+00:00 app[web.1]: 0
-2014-03-03T02:23:34.903334+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:34.910450+00:00 app[web.1]: Completed 200 OK in 285ms (Views: 0.2ms | ActiveRecord: 229.4ms)
-2014-03-03T02:23:34.910450+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]}
-2014-03-03T02:23:34.910450+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
-2014-03-03T02:23:34.910324+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com request_id=1d20cf3d-ca3e-4269-b0bb-873992ca4959 fwd="68.231.1.111" dyno=web.1 connect=7ms service=340ms status=200 bytes=427
-2014-03-03T02:23:21.371573+00:00 heroku[router]: at=info method=GET path=/assets/application-4bc10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=bf3bf7ce-6a62-4fdd-be65-7ce512076ba6 fwd="68.231.1.111" dyno=web.1 connect=54ms service=130ms status=304 bytes=177
-2014-03-03T02:23:37.828822+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=2&_search=false&nd=1393813417224&rows=50&page=1&sidx=id&sord=asc&filters= host=slottingwarehouse.herokuapp.com request_id=811a4a74-97d0-4108-a9e3-563587c392d9 fwd="68.231.1.111" dyno=web.1 connect=0ms service=23ms status=200 bytes=2788
-2014-03-03T02:23:37.810673+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&_search=false&nd=1393813417224&rows=50&page=1&sidx=id&sord=asc&filters=" for 68.231.1.111 at 2014-03-03 02:23:37 +0000
-2014-03-03T02:23:37.826440+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2014-03-03T02:23:37.826440+00:00 app[web.1]:   Parameters: {"id"=>"2", "_search"=>"false", "nd"=>"1393813417224", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc", "filters"=>""}
-2014-03-03T02:23:37.826440+00:00 app[web.1]: Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.1ms)
-2014-03-03T02:23:21.682931+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_85_dfeffc_1x400.png host=slottingwarehouse.herokuapp.com request_id=9d332d75-9fb0-4c52-aac3-67f24dfb7b15 fwd="68.231.1.111" dyno=web.1 connect=14ms service=11ms status=200 bytes=600
-2014-03-03T02:23:27.098297+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com request_id=6ab92299-251e-4f58-b640-c2f19e0a0b58 fwd="68.231.1.111" dyno=web.1 connect=24ms service=4ms status=304 bytes=177
-2014-03-03T02:23:43.066377+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&_search=false&nd=1393813422476&rows=50&page=1&sidx=id&sord=asc&filters=" for 68.231.1.111 at 2014-03-03 02:23:43 +0000
-2014-03-03T02:23:43.179135+00:00 app[web.1]: 0
-2014-03-03T02:23:43.161743+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.1.111 at 2014-03-03 02:23:43 +0000
-2014-03-03T02:23:43.080596+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2014-03-03T02:23:43.080596+00:00 app[web.1]: Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 2.1ms)
-2014-03-03T02:23:43.179135+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157002000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.170281+00:00 app[web.1]: 0
-2014-03-03T02:23:43.080596+00:00 app[web.1]:   Parameters: {"id"=>"2", "_search"=>"false", "nd"=>"1393813422476", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc", "filters"=>""}
-2014-03-03T02:23:43.210729+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.224686+00:00 app[web.1]: 0
-2014-03-03T02:23:43.233046+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157005000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.233046+00:00 app[web.1]: 0
-2014-03-03T02:23:43.233474+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.238558+00:00 app[web.1]: 0
-2014-03-03T02:23:43.252546+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157007000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.252546+00:00 app[web.1]: 0
-2014-03-03T02:23:43.255979+00:00 app[web.1]: 0
-2014-03-03T02:23:43.283474+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157010000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.283474+00:00 app[web.1]: 0
-2014-03-03T02:23:43.284039+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.253019+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.296034+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.315810+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157015000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.287379+00:00 app[web.1]: 0
-2014-03-03T02:23:43.328536+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157017000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.328536+00:00 app[web.1]: 0
-2014-03-03T02:23:43.331980+00:00 app[web.1]: 0
-2014-03-03T02:23:43.295454+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157012000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.329027+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.352941+00:00 app[web.1]: 0
-2014-03-03T02:23:43.349832+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.316544+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.303795+00:00 app[web.1]: 0
-2014-03-03T02:23:43.319756+00:00 app[web.1]: 0
-2014-03-03T02:23:43.361943+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.295454+00:00 app[web.1]: 0
-2014-03-03T02:23:43.361489+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157022000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.349361+00:00 app[web.1]: 0
-2014-03-03T02:23:43.365403+00:00 app[web.1]: 0
-2014-03-03T02:23:43.380369+00:00 app[web.1]: 0
-2014-03-03T02:23:43.382894+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.361489+00:00 app[web.1]: 0
-2014-03-03T02:23:43.380369+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157025000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.392382+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157027000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.315893+00:00 app[web.1]: 0
-2014-03-03T02:23:43.392836+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.383984+00:00 app[web.1]: 0
-2014-03-03T02:23:43.349361+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157020000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.412271+00:00 app[web.1]: 0
-2014-03-03T02:23:43.412271+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157030000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.420101+00:00 app[web.1]: 0
-2014-03-03T02:23:43.428743+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157032000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.448123+00:00 app[web.1]: 0
-2014-03-03T02:23:43.429202+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.433523+00:00 app[web.1]: 0
-2014-03-03T02:23:43.412723+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.396963+00:00 app[web.1]: 0
-2014-03-03T02:23:43.444846+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157035000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.444846+00:00 app[web.1]: 0
-2014-03-03T02:23:43.428743+00:00 app[web.1]: 0
-2014-03-03T02:23:43.392382+00:00 app[web.1]: 0
-2014-03-03T02:23:43.456534+00:00 app[web.1]: 0
-2014-03-03T02:23:43.456534+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157037000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.445295+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.456985+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.460078+00:00 app[web.1]: 0
-2014-03-03T02:23:43.486748+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com request_id=c486389d-382f-4466-85d8-dde25b138662 fwd="68.231.1.111" dyno=web.1 connect=13ms service=327ms status=200 bytes=427
-2014-03-03T02:23:43.475772+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157040000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T02:23:43.475772+00:00 app[web.1]: 0
-2014-03-03T02:23:43.476280+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND locations.attribute1 =''
-2014-03-03T02:23:43.480667+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
-2014-03-03T02:23:43.480667+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]}
-2014-03-03T02:23:43.480667+00:00 app[web.1]: Completed 200 OK in 316ms (Views: 0.5ms | ActiveRecord: 278.2ms)
-2014-03-03T02:22:20.040865+00:00 heroku[router]: at=info method=GET path=/locationmaintenance?zone_id=52&_search=false&nd=1393813339233&rows=50&page=1&sidx=cl_barcode&sord=asc host=slottingwarehouse.herokuapp.com request_id=f9166f41-8578-4722-ac16-c49990f7e913 fwd="68.231.1.111" dyno=web.1 connect=15ms service=126ms status=200 bytes=12544
-2014-03-03T02:23:13.626636+00:00 heroku[router]: at=info method=GET path=/assets/fonts/glyphicons-halflings-regular.woff host=slottingwarehouse.herokuapp.com request_id=93bb9286-27bd-4ad1-bfba-9dc1fb0e1e18 fwd="68.231.1.111" dyno=web.1 connect=3ms service=6ms status=200 bytes=23565
+2014-03-03T02:26:52.828072+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-03-03T02:26:52.828072+00:00 app[web.1]: [2014-03-03 02:26:52] FATAL SignalException: SIGTERM
+2014-03-03T02:26:52.828072+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-03-03T02:26:52.828318+00:00 app[web.1]: Exiting
+2014-03-03T02:26:52.828318+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `<top (required)>'
+2014-03-03T02:26:52.828072+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/server.rb:268:in `start'
+2014-03-03T02:26:52.828072+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `tap'
+2014-03-03T02:26:52.828072+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands/server.rb:70:in `start'
+2014-03-03T02:26:52.828318+00:00 app[web.1]: 	script/rails:6:in `require'
+2014-03-03T02:26:53.353291+00:00 heroku[worker.1]: Starting process with command `bundle exec rake jobs:work`
+2014-03-03T02:26:53.933228+00:00 heroku[worker.1]: Stopping all processes with SIGTERM
+2014-03-03T02:26:54.123731+00:00 heroku[web.1]: Process exited with status 143
+2014-03-03T02:26:53.991756+00:00 heroku[worker.1]: State changed from starting to up
+2014-03-03T02:26:54.867198+00:00 app[worker.1]: [Worker(host:29b0d59d-a912-48eb-a4ed-ee7f3a9973c3 pid:2)] Exiting...
+2014-03-03T02:26:55.050534+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-03T02:26:55.050622+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-03T02:26:55.560688+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-03-03T02:26:55.560776+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle
+ them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-03-03T02:26:55.900415+00:00 app[web.1]: [2014-03-03 02:26:55] INFO  WEBrick 1.3.1
+2014-03-03T02:26:55.900869+00:00 app[web.1]: [2014-03-03 02:26:55] INFO  WEBrick::HTTPServer#start: pid=2 port=15591
+2014-03-03T02:26:55.900415+00:00 app[web.1]: [2014-03-03 02:26:55] INFO  ruby 2.0.0 (2014-02-24) [x86_64-linux]
+2014-03-03T02:26:56.061785+00:00 heroku[web.1]: State changed from starting to up
+2014-03-03T02:26:56.213808+00:00 app[worker.1]: [Worker(host:495663d6-33a8-4f4f-94cb-7d3c082a198c pid:2)] Starting job worker
+2014-03-03T02:26:59.793668+00:00 heroku[worker.1]: Process exited with status 0
+2014-03-03T02:53:27.422588+00:00 app[web.1]: => Booting WEBrick
+2014-03-03T02:53:27.422588+00:00 app[web.1]: => Rails 3.2.13 application starting in production on http://0.0.0.0:15591
+2014-03-03T02:53:27.422588+00:00 app[web.1]: => Call with -d to detach
+2014-03-03T02:53:27.422588+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-03-03T02:53:27.422588+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&_search=false&nd=1393815206642&rows=50&page=1&sidx=id&sord=asc&filters=" for 68.231.1.111 at 2014-03-03 02:53:27 +0000
+2014-03-03T02:53:27.627622+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157002000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.552961+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2014-03-03T02:53:27.552961+00:00 app[web.1]:   Parameters: {"id"=>"2", "_search"=>"false", "nd"=>"1393815206642", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc", "filters"=>""}
+2014-03-03T02:53:27.552961+00:00 app[web.1]: Completed 200 OK in 49ms (Views: 0.2ms | ActiveRecord: 15.2ms)
+2014-03-03T02:53:27.555629+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.1.111 at 2014-03-03 02:53:27 +0000
+2014-03-03T02:53:27.604669+00:00 app[web.1]: 0
+2014-03-03T02:53:27.627622+00:00 app[web.1]: 0
+2014-03-03T02:53:27.657267+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.656739+00:00 app[web.1]: 0
+2014-03-03T02:53:27.674643+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157007000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.666278+00:00 app[web.1]: 0
+2014-03-03T02:53:27.674643+00:00 app[web.1]: 0
+2014-03-03T02:53:27.675074+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.678721+00:00 app[web.1]: 0
+2014-03-03T02:53:27.636205+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.656739+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157005000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.646397+00:00 app[web.1]: 0
+2014-03-03T02:53:27.687379+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.703562+00:00 app[web.1]: 0
+2014-03-03T02:53:27.686904+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157010000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.699290+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157012000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.686904+00:00 app[web.1]: 0
+2014-03-03T02:53:27.691105+00:00 app[web.1]: 0
+2014-03-03T02:53:27.699755+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.699290+00:00 app[web.1]: 0
+2014-03-03T02:53:27.711931+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.711496+00:00 app[web.1]: 0
+2014-03-03T02:53:27.711496+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157015000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.716129+00:00 app[web.1]: 0
+2014-03-03T02:53:27.724810+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.732170+00:00 app[web.1]: 0
+2014-03-03T02:53:27.724190+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157017000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.724190+00:00 app[web.1]: 0
+2014-03-03T02:53:27.740926+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.753239+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.744519+00:00 app[web.1]: 0
+2014-03-03T02:53:27.740493+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157020000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.752825+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157022000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.757249+00:00 app[web.1]: 0
+2014-03-03T02:53:27.765235+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157025000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.740493+00:00 app[web.1]: 0
+2014-03-03T02:53:27.752825+00:00 app[web.1]: 0
+2014-03-03T02:53:27.765235+00:00 app[web.1]: 0
+2014-03-03T02:53:27.769008+00:00 app[web.1]: 0
+2014-03-03T02:53:27.765648+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.777323+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157027000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.777323+00:00 app[web.1]: 0
+2014-03-03T02:53:27.781182+00:00 app[web.1]: 0
+2014-03-03T02:53:27.789477+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157030000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.789477+00:00 app[web.1]: 0
+2014-03-03T02:53:27.789858+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.777711+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.793312+00:00 app[web.1]: 0
+2014-03-03T02:53:27.801407+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157032000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.801407+00:00 app[web.1]: 0
+2014-03-03T02:53:27.805358+00:00 app[web.1]: 0
+2014-03-03T02:53:27.813539+00:00 app[web.1]: 0
+2014-03-03T02:53:27.813539+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157035000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.813941+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.817395+00:00 app[web.1]: 0
+2014-03-03T02:53:27.801792+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.832815+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157037000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.832815+00:00 app[web.1]: 0
+2014-03-03T02:53:27.869798+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com request_id=0b8da20a-f2e2-4dcc-8a66-62e12d4ae4c7 fwd="68.231.1.111" dyno=web.1 connect=6ms service=461ms status=200 bytes=427
+2014-03-03T02:53:27.853180+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157040000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.853180+00:00 app[web.1]: 0
+2014-03-03T02:53:27.833308+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.853555+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
+2014-03-03T02:53:27.836940+00:00 app[web.1]: 0
+2014-03-03T02:53:27.857996+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2014-03-03T02:53:27.857996+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]}
+2014-03-03T02:53:27.857996+00:00 app[web.1]: Completed 200 OK in 298ms (Views: 0.2ms | ActiveRecord: 223.6ms)
