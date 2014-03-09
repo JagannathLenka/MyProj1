@@ -49,6 +49,11 @@ class LocationmaintenanceController < ApplicationController
       
      if request.xhr?
         render :json => json_for_jqgrid(loc, columns)
+          else
+       respond_to do |format|
+          format.html
+          format.csv { send_data loc.to_csv, filename: "location_data.csv" }
+        end   
      end
    end
    

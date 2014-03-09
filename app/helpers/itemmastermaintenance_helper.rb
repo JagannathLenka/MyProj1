@@ -16,15 +16,18 @@ module ItemmastermaintenanceHelper
                       if(id && id!==lastsel){
                            jQuery('#item_list').jqGrid('restoreRow',lastsel);
                            jQuery('#item_list').jqGrid('editRow',id,{keys: true, 
-                           aftersavefunc: function(){lastsel=0;jQuery('#item_list').trigger('reloadGrid');},
+                           aftersavefunc: function(){lastsel=0;
+                                      $('#item_list').trigger('reloadGrid',[{row:40}]);                                                    },
                            errorfunc: function(id, response){lastsel=0;
                                        $.jgrid.info_dialog($.jgrid.errors.errcap,'<div class=""ui-state-error"">'+ response.responseText +'</div>', 
                                        $.jgrid.edit.bClose,{buttonalign:'right'});}, 
                            afterrestorefunc : function(){lastsel=0;}            
                       });
                      lastsel=id;
+                    
                      } 
-                   }"   
+                   }" 
+                   
                       
      slottfunc  = 'function() {
                                 var ids = $("#item_list").jqGrid("getGridParam","selarrrow");
@@ -38,7 +41,7 @@ module ItemmastermaintenanceHelper
                                        {
                                
                                        });
-                                 $("#itemmastermaintenance").trigger("reloadGrid");       
+                                 $("#itemmastermaintenance").trigger("reloadGrid");      
                    }'
                                        
     grid = [{

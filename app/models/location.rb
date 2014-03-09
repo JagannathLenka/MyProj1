@@ -10,6 +10,15 @@ class Location < ActiveRecord::Base
                   :allowed_weight, :item_short_description, :item_long_description
   validates :cl_barcode, :uniqueness => {:scope => :cl_warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Location Already Exists"}
 
+ def self.to_csv(options = {})
+      CSV.generate(options) do |csv|
+        csv << column_names
+        all.each do |location|
+          csv << location.attributes.values_at(*column_names)
+        end
+      end
+ end
+
 def self.upload_file uploadfile_id, file , filename
   
    file_uploaded = Uploadfile.find(uploadfile_id)  

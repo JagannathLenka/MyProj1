@@ -10,7 +10,7 @@
  *
  *= require bootstrap
  *= require ui.jqgrid
- *= require jquery.ui
+ *= require jquery-ui.min
  *= require bootstrap-theme
  *= require jquery.contextmenu
  *= require_self

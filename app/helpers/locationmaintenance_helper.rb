@@ -39,6 +39,12 @@ module LocationmaintenanceHelper
                      } 
                    }" 
              
+      download_func  = "function() {
+                            win = window.open('" + url + "&format=csv');
+                            win.focus();                                 
+                   }"
+                                       
+        
       
       grid = [{
       :url => url,
@@ -122,7 +128,9 @@ module LocationmaintenanceHelper
                                           win.focus();
                                           }'.to_json_var }]
   
-      jqgrid_api 'loc_list', grid, pager,  pager_button, options
+      download_button = [:navButtonAdd, "#loc_pager", {:caption => 'Download', :onClickButton => download_func.to_json_var }]               
+
+      jqgrid_api 'loc_list', grid, pager,  pager_button, download_button,  options
 
   end
 
