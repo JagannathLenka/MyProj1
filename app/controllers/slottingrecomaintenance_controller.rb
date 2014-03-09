@@ -11,7 +11,7 @@ class SlottingrecomaintenanceController < ApplicationController
         'preffered_aisle','preffered_bay','preffered_level','preffered_position','preffered_slotting_rules','partial_slotting','location_recommended',
         'slotting_status','attribute2']
                   
-         selectParam = "slotting_status = 'Open'" 
+         selectParam = "slotting_status in ('Open' , 'Allocate')" 
          (selectParam += "and attribute1 = '" + params[:id] + "'" ) if !params[:id].nil? 
 
         

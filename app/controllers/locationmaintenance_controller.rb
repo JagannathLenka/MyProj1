@@ -73,6 +73,7 @@ class LocationmaintenanceController < ApplicationController
   when "add"
         
          loc= Location.new(params[:location])
+         loc.client_id = cookies[:client_id]
          loc.save
          
          Location.update_location_details loc, params[:location][:cl_warehouse_id], params[:location][:cl_barcode]           

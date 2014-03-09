@@ -80,7 +80,7 @@ module SlottingrecomaintenanceHelper
         { :name => 'preffered_slotting_rules',:index => 'preffered_slotting_rules',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'partial_slotting',    :index => 'partial_slotting',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'location_recommended', :index => 'location_recommended',  :width => 80, :align => 'center', :editable => true, formatter:'showlink', formatoptions:{baseLinkUrl:'/bay?id=161', addParam: '&selectedbay=B3'}},
-        { :name => 'slotting_status',:index => 'slotting_status',     :width => 80,  :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Open:Open;Close:Close" }},
+        { :name => 'slotting_status',:index => 'slotting_status',     :width => 80,  :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Open:Open;Allocate:Allocate;Close:Close" }},
         { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => false, :hidden => false}
       ],
       :editurl => '/slottingrecomaintenance',

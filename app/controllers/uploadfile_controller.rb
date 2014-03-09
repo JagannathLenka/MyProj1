@@ -59,7 +59,7 @@ class UploadfileController < ApplicationController
          Itemmaster.delay.upload_file  uploadfile.id , file , params[:file].original_filename
          
        when "Location.csv"
-         Location.upload_file uploadfile.id , file , params[:file].original_filename
+         Location.delay.upload_file uploadfile.id , file , params[:file].original_filename
       end
       redirect_to :back 
   end

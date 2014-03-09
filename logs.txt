@@ -1,101 +1,103 @@
-2014-03-03T03:18:52.329056+00:00 app[web.1]: Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.0ms)
-2014-03-03T03:18:52.329056+00:00 app[web.1]: Processing by SlottingWavemaintenanceController#index as HTML
-2014-03-03T03:18:52.329056+00:00 app[web.1]:   Parameters: {"rule_id"=>"1", "lightweight"=>"yes", "view"=>"yes"}
-2014-03-03T03:18:52.329056+00:00 app[web.1]:   Rendered slotting_wavemaintenance/index.html.erb within layouts/application (2.5ms)
-2014-03-03T03:18:52.537731+00:00 app[web.1]: Started GET "/slotting_wavemaintenance?rule_id=1&wave_status=&_search=false&nd=1393816731928&rows=10&page=1&sidx=id&sord=desc" for 68.231.1.111 at 2014-03-03 03:18:52 +0000
-2014-03-03T03:18:52.779750+00:00 app[web.1]: Processing by SlottingWavemaintenanceController#index as JSON
-2014-03-03T03:18:52.779750+00:00 app[web.1]:   Parameters: {"rule_id"=>"1", "wave_status"=>"", "_search"=>"false", "nd"=>"1393816731928", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"desc"}
-2014-03-03T03:18:52.779750+00:00 app[web.1]: Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 2.7ms)
-2014-03-03T03:18:52.820405+00:00 heroku[router]: at=info method=GET path=/slotting_wavemaintenance?rule_id=1&wave_status=&_search=false&nd=1393816731928&rows=10&page=1&sidx=id&sord=desc host=slottingwarehouse.herokuapp.com request_id=358fa916-c60c-45ee-b6bd-98e5d9b68d22 fwd="68.231.1.111" dyno=web.1 connect=1ms service=289ms status=200 bytes=826
-2014-03-03T03:18:54.206646+00:00 app[web.1]: Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
-2014-03-03T03:18:54.196023+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&lightweight=yes" for 68.231.1.111 at 2014-03-03 03:18:54 +0000
-2014-03-03T03:18:54.206646+00:00 app[web.1]:   Parameters: {"id"=>"2", "lightweight"=>"yes"}
-2014-03-03T03:18:54.206646+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
-2014-03-03T03:18:54.206646+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (3.2ms)
-2014-03-03T03:18:54.415852+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&_search=false&nd=1393816733804&rows=50&page=1&sidx=id&sord=asc" for 68.231.1.111 at 2014-03-03 03:18:54 +0000
-2014-03-03T03:18:54.439873+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=2&_search=false&nd=1393816733804&rows=50&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=bb2ab116-1cb1-4f1c-a68b-7fa3a038aa19 fwd="68.231.1.111" dyno=web.1 connect=1ms service=29ms status=200 bytes=2788
-2014-03-03T03:18:54.437717+00:00 app[web.1]:   Parameters: {"id"=>"2", "_search"=>"false", "nd"=>"1393816733804", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2014-03-03T03:18:54.437717+00:00 app[web.1]: Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 2.9ms)
-2014-03-03T03:18:54.437717+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2014-03-03T03:18:44.115705+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_0_aaaaaa_40x100.png host=slottingwarehouse.herokuapp.com request_id=785c7c0f-abdc-41eb-91b5-c45e532b5f07 fwd="68.231.1.111" dyno=web.1 connect=16ms service=6ms status=304 bytes=177
-2014-03-03T03:18:57.196807+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_75_d0e5f5_1x400.png host=slottingwarehouse.herokuapp.com request_id=3fa8e572-fcc3-47e9-bfa5-b16ef9c969af fwd="68.231.1.111" dyno=web.1 connect=8ms service=11ms status=304 bytes=177
-2014-03-03T03:19:00.945245+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=2&_search=false&nd=1393816740309&rows=50&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=825355f1-a505-4fdf-b9d8-9a7441f92aae fwd="68.231.1.111" dyno=web.1 connect=2ms service=26ms status=200 bytes=2788
-2014-03-03T03:19:00.921350+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=2&_search=false&nd=1393816740309&rows=50&page=1&sidx=id&sord=asc" for 68.231.1.111 at 2014-03-03 03:19:00 +0000
-2014-03-03T03:19:00.938740+00:00 app[web.1]: Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 3.2ms)
-2014-03-03T03:19:00.942395+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 68.231.1.111 at 2014-03-03 03:19:00 +0000
-2014-03-03T03:19:00.938740+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2014-03-03T03:19:00.938740+00:00 app[web.1]:   Parameters: {"id"=>"2", "_search"=>"false", "nd"=>"1393816740309", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2014-03-03T03:19:00.952673+00:00 app[web.1]: 0
-2014-03-03T03:19:00.962078+00:00 app[web.1]: 0
-2014-03-03T03:19:00.980592+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:00.962078+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157002000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:00.985465+00:00 app[web.1]: 0
-2014-03-03T03:19:00.994339+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157005000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:00.994585+00:00 app[web.1]: 0
-2014-03-03T03:19:00.998068+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.006876+00:00 app[web.1]: 0
-2014-03-03T03:19:01.016055+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157007000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.016055+00:00 app[web.1]: 0
-2014-03-03T03:19:01.016718+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.032733+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157010000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.032733+00:00 app[web.1]: 0
-2014-03-03T03:19:01.044959+00:00 app[web.1]: 0
-2014-03-03T03:19:01.053941+00:00 app[web.1]: 0
-2014-03-03T03:19:01.053941+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157012000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.054457+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.024636+00:00 app[web.1]: 0
-2014-03-03T03:19:01.033208+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.067128+00:00 app[web.1]: 0
-2014-03-03T03:19:01.076331+00:00 app[web.1]: 0
-2014-03-03T03:19:01.076331+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157015000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.078130+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.084900+00:00 app[web.1]: 0
-2014-03-03T03:19:01.093253+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157017000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.093876+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.099466+00:00 app[web.1]: 0
-2014-03-03T03:19:01.108485+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157020000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.108485+00:00 app[web.1]: 0
-2014-03-03T03:19:01.093253+00:00 app[web.1]: 0
-2014-03-03T03:18:44.219173+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png host=slottingwarehouse.herokuapp.com request_id=7f2591da-d1fa-4681-ad6e-456a3f4a4c74 fwd="68.231.1.111" dyno=web.1 connect=36ms service=10ms status=304 bytes=177
-2014-03-03T03:19:01.123863+00:00 app[web.1]: 0
-2014-03-03T03:19:01.109060+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.114823+00:00 app[web.1]: 0
-2014-03-03T03:19:01.123863+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157022000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.124364+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.146237+00:00 app[web.1]: 0
-2014-03-03T03:19:01.130600+00:00 app[web.1]: 0
-2014-03-03T03:19:01.141210+00:00 app[web.1]: 0
-2014-03-03T03:19:01.141210+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157025000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.141779+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.157622+00:00 app[web.1]: 0
-2014-03-03T03:19:01.175080+00:00 app[web.1]: 0
-2014-03-03T03:19:01.157622+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157027000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.158466+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.163803+00:00 app[web.1]: 0
-2014-03-03T03:19:01.175080+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157030000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.175578+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.180939+00:00 app[web.1]: 0
-2014-03-03T03:19:01.191439+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157032000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.191439+00:00 app[web.1]: 0
-2014-03-03T03:19:01.217043+00:00 app[web.1]: 0
-2014-03-03T03:19:01.227788+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157037000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.195858+00:00 app[web.1]: 0
-2014-03-03T03:19:01.232362+00:00 app[web.1]: 0
-2014-03-03T03:19:01.212831+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157035000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.227788+00:00 app[web.1]: 0
-2014-03-03T03:19:01.192102+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.228358+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.213348+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.212831+00:00 app[web.1]: 0
-2014-03-03T03:19:01.253499+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com request_id=1e20d9b4-8581-4a3b-b259-e62c93952997 fwd="68.231.1.111" dyno=web.1 connect=6ms service=318ms status=200 bytes=427
-2014-03-03T03:19:01.241492+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.249859+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
-2014-03-03T03:19:01.249859+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]}
-2014-03-03T03:19:01.240971+00:00 app[web.1]: 0
-2014-03-03T03:19:01.240971+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='F157040000' AND locations.maximum_quantity >=1 AND locations.minimum_quantity <=1 AND coalesce(locations.attribute1, ' ') =''
-2014-03-03T03:19:01.249859+00:00 app[web.1]: Completed 200 OK in 304ms (Views: 0.1ms | ActiveRecord: 253.4ms)
-2014-03-03T03:18:00.313845+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=2&_search=false&nd=1393816679252&rows=50&page=1&sidx=id&sord=asc&filters= host=slottingwarehouse.herokuapp.com request_id=b597230c-126b-4e14-b20f-2caab8c73281 fwd="68.231.1.111" dyno=web.1 connect=1ms service=383ms status=200 bytes=2788
-2014-03-03T03:18:22.202829+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_6da8d5_256x240.png host=slottingwarehouse.herokuapp.com request_id=c63632e7-57ba-4cd2-80e2-44fe0d3d7af3 fwd="68.231.1.111" dyno=web.1 connect=4ms service=35ms status=200 bytes=4809
-2014-03-03T03:18:44.123361+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_f5f8f9_1x100.png host=slottingwarehouse.herokuapp.com request_id=d032f847-7051-461b-9244-139f4828fc75 fwd="68.231.1.111" dyno=web.1 connect=14ms service=8ms status=304 bytes=177
-2014-03-03T03:18:44.143147+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com request_id=9fc23cb0-926a-444c-986f-aa834eda3a86 fwd="68.231.1.111" dyno=web.1 connect=1ms service=4ms status=304 bytes=177
-2014-03-03T03:18:49.493148+00:00 heroku[router]: at=info method=GET path=/assets/application-4bc10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=496340f5-16c6-4db9-8ba2-28ca36d80c68 fwd="68.231.1.111" dyno=web.1 connect=1ms service=8ms status=304 bytes=177
+2014-03-09T18:28:03.123835+00:00 app[web.1]: Processing by ZonemaintenanceController#index as HTML
+2014-03-09T18:28:03.123835+00:00 app[web.1]:   Rendered shared/_menu.html.erb (10.7ms)
+2014-03-09T18:28:03.123835+00:00 app[web.1]:   Rendered zonemaintenance/index.html.erb within layouts/application (56.1ms)
+2014-03-09T18:28:02.984205+00:00 app[web.1]: Started GET "/zonemaintenance?id=19" for 38.106.138.222 at 2014-03-09 18:28:02 +0000
+2014-03-09T18:28:03.123835+00:00 app[web.1]:   Rendered shared/_header.html.erb (0.1ms)
+2014-03-09T18:28:03.123835+00:00 app[web.1]: Completed 200 OK in 113ms (Views: 70.1ms | ActiveRecord: 21.7ms)
+2014-03-09T18:28:03.123835+00:00 app[web.1]:   Parameters: {"id"=>"19"}
+2014-03-09T18:28:03.124521+00:00 heroku[router]: at=info method=GET path=/zonemaintenance?id=19 host=slottingwarehouse.herokuapp.com request_id=a4094239-c39d-4303-afd5-01ee91007116 fwd="38.106.138.222" dyno=web.1 connect=18ms service=191ms status=200 bytes=11732
+2014-03-09T18:28:03.416027+00:00 app[web.1]: Started GET "/zonemaintenance?id=19&_search=false&nd=1394389684500&rows=30&page=1&sidx=sm_zone_id&sord=asc" for 38.106.138.222 at 2014-03-09 18:28:03 +0000
+2014-03-09T18:28:03.440301+00:00 app[web.1]: Processing by ZonemaintenanceController#index as JSON
+2014-03-09T18:28:03.440301+00:00 app[web.1]:   Parameters: {"id"=>"19", "_search"=>"false", "nd"=>"1394389684500", "rows"=>"30", "page"=>"1", "sidx"=>"sm_zone_id", "sord"=>"asc"}
+2014-03-09T18:28:03.440301+00:00 app[web.1]: Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 10.4ms)
+2014-03-09T18:28:05.902695+00:00 app[web.1]: Started GET "/bay?id=52" for 3
+8.106.138.222 at 2014-03-09 18:28:05 +0000
+2014-03-09T18:28:07.348555+00:00 app[web.1]:   Parameters: {"id"=>"52"}
+2014-03-09T18:28:07.348555+00:00 app[web.1]: Completed 200 OK in 1424ms (Views: 155.2ms | ActiveRecord: 852.3ms)
+2014-03-09T18:28:07.348555+00:00 app[web.1]: Processing by BayController#index as HTML
+2014-03-09T18:28:07.348555+00:00 app[web.1]:   Rendered shared/_menu.html.erb (1.1ms)
+2014-03-09T18:28:07.348555+00:00 app[web.1]:   Rendered bay/index.html.erb within layouts/application (147.8ms)
+2014-03-09T18:28:07.431348+00:00 heroku[router]: at=info method=GET path=/bay?id=52 host=slottingwarehouse.herokuapp.com request_id=42e7dd4f-c60f-4bae-8581-5cc714b34805 fwd="38.106.138.222" dyno=web.1 connect=13ms service=1538ms status=200 bytes=94280
+2014-03-09T18:28:07.752616+00:00 heroku[router]: at=info method=GET path=/assets/compass-c0480aab27f9f12bb2d1c5ff60816895.jpg host=slottingwarehouse.herokuapp.com request_id=c9e33d0a-7485-4058-89df-b14f9748c605 fwd="38.106.138.222" dyno=web.1 connect=6ms service=11ms status=304 bytes=177
+2014-03-09T18:28:07.798762+00:00 heroku[router]: at=info method=GET path=/assets/low_priority_empty_bay-2924d0209e908df3565be3a1e6eb25fd.jpg host=slottingwarehouse.herokuapp.com request_id=002954a0-c514-4202-af19-2d99506792cb fwd="38.106.138.222" dyno=web.1 connect=2ms service=14ms status=200 bytes=9700
+2014-03-09T18:28:24.523963+00:00 app[web.1]: Started GET "/position/3020?lightweight=yes" for 38.106.138.222 at 2014-03-09 18:28:24 +0000
+2014-03-09T18:28:25.763999+00:00 app[web.1]: Processing by PositionController#show as HTML
+2014-03-09T18:28:25.763999+00:00 app[web.1]:   Parameters: {"lightweight"=>"yes", "id"=>"3020"}
+2014-03-09T18:28:25.763999+00:00 app[web.1]:   Rendered position/show.html.erb within layouts/application (14.2ms)
+2014-03-09T18:28:25.763999+00:00 app[web.1]: Completed 200 OK in 1147ms (Views: 27.4ms | ActiveRecord: 797.9ms)
+2014-03-09T18:28:25.769733+00:00 heroku[router]: at=info method=GET path=/position/3020?lightweight=yes host=slottingwarehouse.herokuapp.com request_id=ab9602b3-8ee2-482a-a0b2-105cc49752c3 fwd="38.106.138.222" dyno=web.1 connect=2ms service=1252ms status=200 bytes=42484
+2014-03-09T18:28:26.157287+00:00 heroku[router]: at=info method=GET path=/assets/continue-8f15926b0d090d79dbcea8ca318de0c3.jpg host=slottingwarehouse.herokuapp.com request_id=b58ab9d8-2174-4473-9276-4f4654f51907 fwd="38.106.138.222" dyno=web.1 connect=66ms service=36ms status=200 bytes=932
+2014-03-09T18:27:18.464279+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=11&_search=false&nd=1394389639480&rows=50&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=c7d832e7-0627-4647-8a5a-856ec4fa88f1 fwd="38.106.138.222" dyno=web.1 connect=20ms service=72ms status=200 bytes=869
+2014-03-09T18:27:59.329438+00:00 heroku[router]: at=info method=GET path=/login/landingpage host=slottingwarehouse.herokuapp.com request_id=d46854e7-046e-4445-9edf-a09dcb6321a8 fwd="38.106.138.222" dyno=web.1 connect=14ms service=62ms status=304 bytes=355
+2014-03-09T18:29:12.895887+00:00 app[web.1]: Started GET "/login" for 38.106.138.222 at 2014-03-09 18:29:12 +0000
+2014-03-09T18:29:12.940020+00:00 app[web.1]: Processing by LoginController#index as HTML
+2014-03-09T18:29:12.940020+00:00 app[web.1]:   Rendered login/index.html.erb within layouts/application (1.9ms)
+2014-03-09T18:29:12.940020+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.4ms)
+2014-03-09T18:29:12.940020+00:00 app[web.1]: Completed 200 OK in 27ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+2014-03-09T18:29:18.890100+00:00 app[web.1]: Started POST "/login" for 38.106.138.222 at 2014-03-09 18:29:18 +0000
+2014-03-09T18:29:18.950716+00:00 heroku[router]: at=info method=POST path=/login host=slottingwarehouse.herokuapp.com request_id=1c9bd634-8e64-4038-ab23-0814c014aa94 fwd="38.106.138.222" dyno=web.1 connect=16ms service=105ms status=200 bytes=568
+2014-03-09T18:29:18.944398+00:00 app[web.1]: Processing by LoginController#create as */*
+2014-03-09T18:29:18.944398+00:00 app[web.1]:   Parameters: {"txtuid"=>"babu", "txtpswd"=>"slotting786"}
+2014-03-09T18:29:18.944398+00:00 app[web.1]:   Rendered text template (0.0ms)
+2014-03-09T18:29:18.944398+00:00 app[web.1]: Completed 200 OK in 40ms (Views: 0.5ms | ActiveRecord: 28.1ms)
+2014-03-09T18:29:19.317478+00:00 app[web.1]: Started GET "/login/landingpage" for 38.106.138.222 at 2014-03-09 18:29:19 +0000
+2014-03-09T18:29:19.340286+00:00 heroku[router]: at=info method=GET path=/login/landingpage host=slottingwarehouse.herokuapp.com request_id=7d66f900-2620-4705-aa2c-3336552dc55a fwd="38.106.138.222" dyno=web.1 connect=1ms service=32ms status=304 bytes=355
+2014-03-09T18:29:19.339891+00:00 app[web.1]:   Rendered shared/_menu.html.erb (2.5ms)
+2014-03-09T18:29:19.339891+00:00 app[web.1]:   
+Rendered login/landingpage.html.erb within layouts/application (2.8ms)
+2014-03-09T18:29:19.339891+00:00 app[web.1]: Processing by LoginController#landingpage as HTML
+2014-03-09T18:29:19.339891+00:00 app[web.1]: Completed 200 OK in 9ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+2014-03-09T18:29:20.715230+00:00 app[web.1]: Started GET "/warehousemaintenance" for 38.106.138.222 at 2014-03-09 18:29:20 +0000
+2014-03-09T18:29:20.817241+00:00 app[web.1]: Processing by WarehousemaintenanceController#index as HTML
+2014-03-09T18:29:20.817241+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
+2014-03-09T18:29:20.817241+00:00 app[web.1]:   Rendered warehousemaintenance/index.html.erb within layouts/application (24.6ms)
+2014-03-09T18:29:20.817241+00:00 app[web.1]: Completed 200 OK in 65ms (Views: 56.1ms | ActiveRecord: 0.0ms)
+2014-03-09T18:29:21.137939+00:00 app[web.1]: Started GET "/warehousemaintenance/?_search=false&nd=1394389762214&rows=10&page=1&sidx=id&sord=asc" for 38.106.138.222 at 2014-03-09 18:29:21 +0000
+2014-03-09T18:29:21.199200+00:00 heroku[router]: at=info method=GET path=/warehousemaintenance/?_search=false&nd=1394389762214&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=f4c87530-a4a0-4667-9ab2-0cbfb1b894a4 fwd="38.106.138.222" dyno=web.1 connect=1ms service=92ms status=200 bytes=1411
+2014-03-09T18:29:21.197917+00:00 app[web.1]: Processing by WarehousemaintenanceController#index as JSON
+2014-03-09T18:29:21.197917+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1394389762214", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2014-03-09T18:29:21.197917+00:00 app[web.1]: Completed 200 OK in 54ms (Views: 0.3ms | ActiveRecord: 7.5ms)
+2014-03-09T18:29:22.678071+00:00 app[web.1]: Started GET "/zonemaintenance?id=19" for 38.106.138.222 at 2014-03-09 18:29:22 +0000
+2014-03-09T18:29:22.716965+00:00 app[web.1]:   Parameters: {"id"=>"19"}
+2014-03-09T18:29:22.716965+00:00 app[web.1]: Processing by ZonemaintenanceController#index as HTML
+2014-03-09T18:29:22.716965+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
+2014-03-09T18:29:22.716965+00:00 app[web.1]:   Rendered shared/_header.html.erb (0.1ms)
+2014-03-09T18:29:22.716965+00:00 app[web.1]:   Rendered zonemaintenance/index.html.erb within layouts/application (8.3ms)
+2014-03-09T18:29:22.716965+00:00 app[web.1]: Completed 200 OK in 29ms (Views: 20.8ms | ActiveRecord: 6.3ms)
+2014-03-09T18:29:23.057324+00:00 app[web.1]: Started GET "/zonemaintenance?id=19&_search=false&nd=1394389764100&rows=30&page=1&sidx=sm_zone_id&sord=asc" for 38.106.138.222 at 2014-03-09 18:29:23 +0000
+2014-03-09T18:29:23.202147+00:00 app[web.1]: Processing by ZonemaintenanceController#index as JSON
+2014-03-09T18:29:23.202147+00:00 app[web.1]:   Parameters: {"id"=>"19", "_search"=>"false", "nd"=>"1394389764100", "rows"=>"30", "page"=>"1", "sidx"=>"sm_zone_id", "sord"=>"asc"}
+2014-03-09T18:29:23.202147+00:00 app[web.1]: Completed 200 OK in 78ms (Views: 2.5ms | ActiveRecord: 53.3ms)
+2014-03-09T18:29:12.958266+00:00 heroku[router]: at=info method=GET path=/login host=slottingwarehouse.herokuapp.com request_id=e35d1058-f104-4c8d-9fec-a87109e2d9b4 fwd="38.106.138.222" dyno=web.1 connect=15ms service=101ms status=200 bytes=8174
+2014-03-09T18:29:25.572575+00:00 app[web.1]: Started GET "/locationmaintenance?zone_id=52" for 38.106.138.222 at 2014-03-09 18:29:25 +0000
+2014-03-09T18:29:25.706182+00:00 app[web.1]:   Rendered shared/_header.html.erb (0.1ms)
+2014-03-09T18:29:25.706182+00:00 app[web.1]:   Parameters: {"zone_id"=>"52"}
+2014-03-09T18:29:25.706182+00:00 app[web.1]:   Rendered locationmaintenance/index.html.erb within layouts/application (34.1ms)
+2014-03-09T18:29:25.706182+00:00 app[web.1]: Processing by LocationmaintenanceController#index as HTML
+2014-03-09T18:29:25.706182+00:00 app[web.1]: Completed 200 OK in 114ms (Views: 53.7ms | ActiveRecord: 33.6ms)
+2014-03-09T18:29:25.706182+00:00 app[web.1]:   Rendered shared/_menu.html.erb (1.0ms)
+2014-03-09T18:29:26.201893+00:00 heroku[router]: at=info method=GET path=/locationmaintenance?zone_id=52&_search=false&nd=1394389767102&rows=50&page=1&sidx=cl_barcode&sord=asc host=slottingwarehouse.herokuapp.com request_id=0799c374-f294-4be0-bdf1-1241c73bc847 fwd="38.106.138.222" dyno=web.1 connect=3ms service=199ms status=200 bytes=12099
+2014-03-09T18:29:26.014846+00:00 app[web.1]: Started GET "/locationmaintenance?zone_id=52&_search=false&nd=1394389767102&rows=50&page=1&sidx=cl_barcode&sord=asc" for 38.106.138.222 at 2014-03-09 18:29:26 +0000
+2014-03-09T18:29:26.201874+00:00 app[web.1]: Processing by LocationmaintenanceController#index as JSON
+2014-03-09T18:29:26.201874+00:00 app[web.1]:   Parameters: {"zone_id"=>"52", "_search"=>"false", "nd"=>"1394389767102", "rows"=>"50", "page"=>"1", "sidx"=>"cl_barcode", "sord"=>"asc"}
+2014-03-09T18:29:26.201874+00:00 app[web.1]: Completed 200 OK in 180ms (Views: 0.2ms | ActiveRecord: 55.8ms)
+2014-03-09T18:29:22.725965+00:00 heroku[router]: at=info method=GET path=/zonemaintenance?id=19 host=slottingwarehouse.herokuapp.com request_id=9a4e169b-b31a-4c43-83ab-b796c50031da fwd="38.106.138.222" dyno=web.1 connect=15ms service=60ms status=200 bytes=11732
+2014-03-09T18:30:10.984543+00:00 app[web.1]: Started POST "/slottingrecomaintenance" for 38.106.138.222 at 2014-03-09 18:30:10 +0000
+2014-03-09T18:30:11.086706+00:00 app[web.1]: 0
+2014-03-09T18:30:11.102370+00:00 app[web.1]: 0
+2014-03-09T18:30:11.102370+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='1059060000' AND locations.maximum_quantity >=30 AND locations.minimum_quantity <=30 AND coalesce(locations.attribute1, '') =''
+2014-03-09T18:30:11.182521+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, '') =''
+2014-03-09T18:30:11.209699+00:00 app[web.1]: 1
+2014-03-09T18:30:11.218596+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND locations.current_item ='1059000000' AND locations.maximum_quantity >=60 AND locations.minimum_quantity <=60 AND coalesce(locations.attribute1, '') =''
+2014-03-09T18:30:11.218596+00:00 app[web.1]: 1
+2014-03-09T18:30:11.321398+00:00 app[web.1]: positions.cl_warehouse_id = 'BV1' (current_quantity =  0 OR current_quantity IS NULL)  AND (locations.current_item = '' OR locations.current_item IS NULL ) AND coalesce(locations.attribute1, '') =''
+2014-03-09T18:30:11.338172+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#create as */*
+2014-03-09T18:30:11.338172+00:00 app[web.1]:   Parameters: {"oper"=>"slott", "id"=>["208", "209"]}
+2014-03-09T18:30:11.338172+00:00 app[web.1]: Completed 200 OK in 320ms (Views: 0.5ms | ActiveRecord: 285.6ms)
+2014-03-09T18:30:11.338891+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=11&_search=false&nd=1394389811959&rows=50&page=1&sidx=id&sord=asc" for 38.106.138.222 at 2014-03-09 18:30:11 +0000
+2014-03-09T18:30:11.375384+00:00 app[web.1]:   Parameters: {"id"=>"11", "_search"=>"false", "nd"=>"1394389811959", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
+2014-03-09T18:30:11.375384+00:00 app[web.1]: Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 12.8ms)
+2014-03-09T18:30:11.375384+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
+2014-03-09T18:30:11.355359+00:00 heroku[router]: at=info method=POST path=/slottingrecomaintenance host=slottingwarehouse.herokuapp.com request_id=626e20f3-5bf1-4e22-8690-a77466a0a168 fwd="38.106.138.222" dyno=web.1 connect=39ms service=461ms status=200 bytes=427
+2014-03-09T18:30:11.392849+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=11&_search=false&nd=1394389811959&rows=50&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=55e60144-a431-4d20-bf31-2fcb1a7135ee fwd="38.106.138.222" dyno=web.1 connect=5ms service=334ms status=200 bytes=899
+2014-03-09T18:29:25.719395+00:00 heroku[router]: at=info method=GET path=/locationmaintenance?zone_id=52 host=slottingwarehouse.herokuapp.com request_id=e62af69c-d3aa-4848-baf1-ddc7fd391cce fwd="38.106.138.222" dyno=web.1 connect=9ms service=171ms status=200 bytes=13271

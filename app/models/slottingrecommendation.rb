@@ -1,7 +1,9 @@
 require 'csv'
 class Slottingrecommendation < ActiveRecord::Base
   attr_accessible :attribute1, :attribute2, :attribute3, :attribute4, :attribute5, :attribute6, :attribute7, :attribute8, :client_id, :item_number, :location_recommended, :partial_slotting, :preffered_aisle, :preffered_bay, :preffered_level, :preffered_position, :preffered_slotting_rules, :preffered_warehouse, :preffered_zone, :quantity_to_be_slotted, :slotting_status
-
+  
+  after_save     :allocate_slott_items, :if => :slotting_status_changed? 
+  
     def self.to_csv(options = {})
       CSV.generate(options) do |csv|
         csv << column_names
@@ -11,6 +13,21 @@ class Slottingrecommendation < ActiveRecord::Base
       end
     end
 
+  
+    def allocate_slott_items
+    
+        if self.slotting_status_was == "Open" and self.slotting_status =="Allocate" and 
+           location=Location.where('cl_warehouse_id = ? AND cl_barcode = ?', self.attribute3, location_recommended).first
+           if !location.nil? 
+             location.current_item = self.item_number                 
+             location.current_quantity = self.quantity_to_be_slotted
+             location.save 
+           end
+        end
+
+    end  
+  
+  
     def self.sort_items(item_ids)
         
        to_be_slotted_item_list = Hash.new(0)
@@ -66,8 +83,8 @@ class Slottingrecommendation < ActiveRecord::Base
         location_requirement = ''
         location_requirement += "(current_quantity =  0 OR current_quantity IS NULL) " 
         location_requirement += " AND " + "locations.current_item ='" +  to_be_slotted_item["item_number"].to_s + "'"
-        location_requirement += " AND " + "locations.maximum_quantity >=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
-        location_requirement += " AND " + "locations.minimum_quantity <=" +  to_be_slotted_item["quantity_to_be_slotted"].to_s
+        location_requirement += " AND " + "locations.maximum_quantity >=" +  (to_be_slotted_item["quantity_to_be_slotted"].nil? ? '0' : to_be_slotted_item["quantity_to_be_slotted"].to_s)
+        location_requirement += " AND " + "locations.minimum_quantity <=" +  (to_be_slotted_item["quantity_to_be_slotted"].nil? ? '0' : to_be_slotted_item["quantity_to_be_slotted"].to_s)
         location_requirement += " AND " + "coalesce(locations.attribute1, '') =" + "'" + to_be_slotted_item["putaway_type"].to_s + "'"
     
        
@@ -93,14 +110,18 @@ class Slottingrecommendation < ActiveRecord::Base
             preferred_location =   "No suitable location "  
               
         else                
-        preferred_location =  slotting_item.cl_barcode  
+        preferred_location =  slotting_item.cl_barcode          
         selected_location << preferred_location
         end
                     
         slotting_reco = Slottingrecommendation.find(to_be_slotted_item["id"].to_i)
-        slotting_reco.update_attributes({ :location_recommended => preferred_location })  
-      
-        
+        slotting_reco.location_recommended = preferred_location 
+        slotting_reco.attribute3 = slotting_item.cl_warehouse_id  if !slotting_item.nil?
+        slotting_reco.attribute4 = slotting_item.cl_zone_id  if !slotting_item.nil?
+        slotting_reco.attribute5 = slotting_item.cl_aisle_id if !slotting_item.nil?
+        slotting_reco.attribute6 = slotting_item.cl_bay_id   if !slotting_item.nil? 
+        slotting_reco.attribute7 = slotting_item.cl_level_id if !slotting_item.nil?
+        slotting_reco.save
     end
     
      

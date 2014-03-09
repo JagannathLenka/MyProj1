@@ -8,7 +8,7 @@ class Location < ActiveRecord::Base
                   :sm_aisle_id, :sm_barcode, :sm_bay_id, :sm_level_id, :sm_loc_id, :sm_pos_id, :sm_warehouse_id, 
                   :sm_zone_id, :status, :location_length, :location_breadth, :location_height, :location_volume, 
                   :allowed_weight, :item_short_description, :item_long_description
-  validates :cl_barcode, :uniqueness => {:scope => :cl_warehouse_id , :allow_nil => true, :allow_blank => true,  :message => "Location Already Exists"}
+  validates :cl_barcode, :uniqueness => {:scope => [:client_id, :cl_warehouse_id] , :allow_nil => true, :allow_blank => true,  :message => "Location Already Exists"}
 
  def self.to_csv(options = {})
       CSV.generate(options) do |csv|
