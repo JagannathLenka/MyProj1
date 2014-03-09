@@ -52,7 +52,11 @@ class LocationmaintenanceController < ApplicationController
           else
        respond_to do |format|
           format.html
-          format.csv { send_data loc.to_csv, filename: "location_data.csv" }
+          format.csv { 
+                 loc = Location.select("*")
+                .where(:cl_warehouse_id => @warehouse)
+                .where(search_string)
+                 send_data loc.to_csv, filename: "location_data.csv" }
         end   
      end
    end
