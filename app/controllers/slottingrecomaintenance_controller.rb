@@ -9,7 +9,7 @@ class SlottingrecomaintenanceController < ApplicationController
      get_header_details  if !request.xhr?
      columns =  ['id', 'item_number','quantity_to_be_slotted','preffered_warehouse', 'preffered_zone' ,
         'preffered_aisle','preffered_bay','preffered_level','preffered_position','preffered_slotting_rules','partial_slotting','location_recommended',
-        'slotting_status','attribute2']
+        'slotting_status','attribute2', 'attribute3', 'attribute6']
                   
          selectParam = "slotting_status in ('Open' , 'Allocate')" 
          (selectParam += "and attribute1 = '" + params[:id] + "'" ) if !params[:id].nil? 

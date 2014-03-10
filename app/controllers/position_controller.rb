@@ -1,19 +1,33 @@
 require 'location_move'
 class PositionController < ApplicationController
+  
+  def index
+    if !params[:cl_bay_id].nil? and !params[:cl_warehouse_id].nil?
+      bay= Bay.where('cl_warehouse_id = ?  AND cl_bay_id = ?',  params[:cl_warehouse_id], params[:cl_bay_id]).first
+      render_position bay.id
+    end  
+  end
+  
   def show
+      render_position params[:bay_id]  
+  end
+
+  def render_position(bay_id)
+    
     #zoom functionality
     if(params[:item] == "Yes")
        @show_item = "Yes"
     else
     
     end
-         
+    
+        
     max_pos = 0
     @pos_width = 100 
     pos_ctr = 0
     @levelhash = Hash.new
     poshash = Hash.new
-    level = Level.where(:bay_id => params[:id]).order("id ASC")
+    level = Level.where(:bay_id => bay_id).order("id ASC")
     level.each do |levelvalue|
     level_properties = {"customer_id" => (levelvalue.cl_level_id.blank? ? levelvalue.sm_level_id : levelvalue.cl_level_id), "priority_level" => levelvalue.attribute4}
     @cl_bay_id = levelvalue.cl_bay_id
@@ -53,8 +67,9 @@ class PositionController < ApplicationController
     
   @level_width = max_pos.zero? ? 1000 :(max_pos) * (@pos_width + 2) 
   
+  render 'show'
   
-    end
+  end
   
   def create
   
