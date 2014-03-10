@@ -103,7 +103,7 @@ class SlottingrecomaintenanceController < ApplicationController
          slotting_reco = Slottingrecommendation.find_by_id(params[:id])  
          slotting_reco.update_attributes({ 
                                      :item_number => params[:item_number], 
-                                     :location_recommended => params[:location_recommended],
+                                     #:location_recommended => params[:location_recommended],
                                      :partial_slotting => params[:partial_slotting],
                                      :preffered_warehouse => (params[:preffered_warehouse].blank? ? '*' : params[:preffered_warehouse]),
                                      :preffered_zone => (params[:preffered_zone].blank? ? '*'           : params[:preffered_zone]),
