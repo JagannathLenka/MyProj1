@@ -208,7 +208,7 @@ setDragnDrop: function setDragnDrop() {
 								   	    	 <% if @show_item=="Yes"%>
 								   	    	 	<label id="<%= pos%>">  <%= posvalue[:item] %> </label> 
 								   	    	 <%else%>
-								   	    	 	<label id="<%= pos%>">  <%= posvalue[:customer_id] %> </label>	
+								   	    	 	<label class="<%= (posvalue[:pos_selected] == 'no' ? "label label-info" : "label label-danger") %> id="<%= pos%>">  <%= posvalue[:customer_id] %> </label>	
 											 <%end%>							   	    	 	
 										 </a>										 
 						   	    	 
