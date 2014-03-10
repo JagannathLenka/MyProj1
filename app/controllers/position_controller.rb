@@ -4,15 +4,15 @@ class PositionController < ApplicationController
   def index
     if !params[:cl_bay_id].nil? and !params[:cl_warehouse_id].nil?
       bay= Bay.where('cl_warehouse_id = ?  AND cl_bay_id = ?',  params[:cl_warehouse_id], params[:cl_bay_id]).first
-      render_position bay.id
+      render_position bay.id, params[:cl_barcode]
     end  
   end
   
   def show
-      render_position params[:bay_id]  
+      render_position params[:id], nil  
   end
 
-  def render_position(bay_id)
+  def render_position(bay_id, cl_barcode)
     
     #zoom functionality
     if(params[:item] == "Yes")
@@ -46,6 +46,7 @@ class PositionController < ApplicationController
       end
        
       poshash = poshash.merge({posvalue.id => {:customer_id => posvalue.cl_barcode, 
+                                               :pos_selected => (posvalue.cl_barcode == cl_barcode ? 'yes' : 'no'),
                                                :pos_type => postype,
                                                :pos_continue => posvalue.attribute1, 
                                                :item => location.nil? ? "" :  location.current_item,

@@ -57,7 +57,7 @@ module SlottingrecomaintenanceHelper
                        }"
 
       customerLinkFormatter = "function(cellvalue, options, rowdata) {
-                                     return '<a href=\"position?cl_bay_id=' + rowdata[15]+ '&cl_warehouse_id=' + rowdata[14] + '&lightweight=yes\"> ' + cellvalue + '</a>';
+                                     return '<a href=\"position?cl_bay_id=' + rowdata[15]+ '&cl_warehouse_id=' + rowdata[14] + '&cl_barcode=' + rowdata[11] + '&lightweight=yes\"> ' + cellvalue + '</a>';
                               }" 
 
                                        
