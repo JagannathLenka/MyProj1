@@ -116,7 +116,7 @@ module LocationmaintenanceHelper
       :caption => 'Location Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
 
       pager = [:navGrid, "#loc_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                          :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 

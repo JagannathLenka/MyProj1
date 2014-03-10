@@ -93,7 +93,7 @@ module ItemmastermaintenanceHelper
       :reloadAfterEdit => true,
       :autowidth => true,
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
 
 
     pager = [:navGrid, "#item_pager", {edit:false, add:true, del: true, view: true}, 

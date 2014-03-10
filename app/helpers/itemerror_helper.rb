@@ -92,7 +92,7 @@ include JqgridsHelper
       :caption => 'ItemError',
       :reloadAfterEdit => true,
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
       pager = [:navGrid, "#itemerror_pager",  {edit:false, add:false, del: true}, 
                                                  {:closeAfterEdit => true, :closeOnEscape => true},                                                        
                                                  {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, 

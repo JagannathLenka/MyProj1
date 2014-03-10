@@ -61,7 +61,7 @@ module UserregistermaintenanceHelper
       :viewrecords => true,
       :caption => 'Userregister Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
     
      pager = [:navGrid, "#userregister_pager", {edit:true, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true}, 

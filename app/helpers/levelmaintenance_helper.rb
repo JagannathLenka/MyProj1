@@ -100,7 +100,7 @@ module LevelmaintenanceHelper
       :viewrecords => true,
       :caption => 'Level Maintenance',
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)

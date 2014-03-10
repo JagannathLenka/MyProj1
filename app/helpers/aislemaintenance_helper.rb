@@ -125,7 +125,7 @@ module AislemaintenanceHelper
       :caption => 'Aisle Maintenance',
       :reloadAfterEdit => true,
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow => selectrowfunc.to_json_var }]
 
     pager = [:navGrid, "#aisle_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,
                                                        :closeOnEscape => true, :beforeSubmit => editcheckfunc.to_json_var}, 

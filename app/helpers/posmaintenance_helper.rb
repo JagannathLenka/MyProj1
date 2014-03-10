@@ -72,7 +72,8 @@ module PosmaintenanceHelper
       :caption => 'Position Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
-     :onSelectRow => selectrowfunc.to_json_var }]
+      :multiselect => true,
+      :ondblClickRow  => selectrowfunc.to_json_var }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)

@@ -108,7 +108,7 @@ module SlottingruleMastermaintenanceHelper
       :viewrecords => true,
       :caption => 'Slottingrule Master Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
       
     pager = [:navGrid, "#slottingrule_master_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, 
                                                        :closeOnEscape => true}, 

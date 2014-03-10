@@ -58,7 +58,7 @@ module ClientHelper
       :caption => 'Client Details',
       :reloadAfterEdit => true,
       :multiselect => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
 
 
     pager = [:navGrid, "#client_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,

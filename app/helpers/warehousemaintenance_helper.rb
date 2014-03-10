@@ -61,9 +61,10 @@ module WarehousemaintenanceHelper
       :shrinkToFit => true,
       :autowidth => true,
       :viewrecords => true,
+      :multiselect => true,
       :caption => 'Warehouse Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow => selectrowfunc.to_json_var }]
     pager = [:navGrid, "#warehouse_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, 
                                                        :closeOnEscape => true,  :beforeSubmit => editcheckfunc.to_json_var}, 
                                                        {:closeAfterAdd=>true, :errorTextFormat  => aftersubfunc.to_json_var}, {}, {}, {}]                                                              

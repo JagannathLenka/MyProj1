@@ -95,7 +95,7 @@ module UploadfileHelper
       :reloadAfterEdit => true,
       :autowidth => true,
       :multiselect => true,
-      #:onSelectRow => selectrowfunc.to_json_var
+      :ondblClickRow  => selectrowfunc.to_json_var
        }]
 
 

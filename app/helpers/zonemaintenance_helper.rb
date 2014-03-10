@@ -76,7 +76,8 @@ module ZonemaintenanceHelper
       :autowidth => true,
       :caption => 'Zone Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :multiselect => true,
+      :ondblClickRow => selectrowfunc.to_json_var }]
     
 
     pager = [:navGrid, "#zone_pager", {edit:false, add:true, del: true}, {:closeAfterEdit => true, :closeAfterAdd => true,

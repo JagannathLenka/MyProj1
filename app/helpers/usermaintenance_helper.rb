@@ -48,7 +48,7 @@ include JqgridsHelper
       :caption => 'User Maintenance',
       :closeAfterEdit => true,
       :reloadAfterEdit => true,
-      :onSelectRow => "function(id) { 
+      :ondblClickRow  => "function(id) { 
                        if(id && id!==lastsel){
       jQuery('#user_list').jqGrid('restoreRow',lastsel);
       jQuery('#user_list').jqGrid('editRow',id,{keys: true, aftersavefunc: function(){lastsel=0;}});

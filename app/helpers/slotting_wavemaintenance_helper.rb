@@ -56,7 +56,7 @@ module SlottingWavemaintenanceHelper
       :viewrecords => true,
       :caption => 'Slottingrule Wave Maintenance',
       :reloadAfterEdit => true,
-      :onSelectRow => selectrowfunc.to_json_var }]
+      :ondblClickRow  => selectrowfunc.to_json_var }]
       
     pager = [:navGrid, "#slotting_wave_pager", {edit:false, add: params[:view] == 'yes' ? false : true,
                                                             del: params[:view] == 'yes' ? false : true}, {:closeAfterEdit => true, 
