@@ -124,6 +124,11 @@ setDragnDrop: function setDragnDrop() {
 
 }
 
+	function goBack()
+	  {
+	  window.history.back()
+	  }
+
 </script>
 
  <% end %>
@@ -133,6 +138,8 @@ setDragnDrop: function setDragnDrop() {
 
 <div id="position" class="position">
 
+   
+   <div><button class="btn btn-primary" onclick="goBack()">Go Back</button></div>
    <div class="label label-primary" style="float:left; height: 30px ; width: 100px"> <h4>Bay: <%= @cl_bay_id %></h4></div>
 	
   <div class="btn-group pull-right" style="float:left;; margin-left:20px">
