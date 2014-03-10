@@ -84,7 +84,7 @@ module SlottingrecomaintenanceHelper
         { :name => 'preffered_position',:index => 'preffered_position',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'preffered_slotting_rules',:index => 'preffered_slotting_rules',     :width => 80,  :align => 'center', :editable => true},
         { :name => 'partial_slotting',    :index => 'partial_slotting',     :width => 80,  :align => 'center', :editable => true},
-        { :name => 'location_recommended', :index => 'location_recommended',  :width => 80, :align => 'center', :editable => true, formatter:customerLinkFormatter.to_json_var},
+        { :name => 'location_recommended', :index => 'location_recommended',  :width => 80, :align => 'center', :editable => false, formatter:customerLinkFormatter.to_json_var},
         { :name => 'slotting_status',:index => 'slotting_status',     :width => 80,  :align => 'center', :editable => true, edittype:"select", editoptions: {value: "Open:Open;Allocate:Allocate;Close:Close" }},
         { :name => 'attribute2', :index => 'attribute2',  :width => 80, :align => 'center', :editable => false, :hidden => false},
         { :name => 'attribute3', :index => 'attribute3',  :width => 80, :align => 'center', :editable => false, :hidden => false}, 
