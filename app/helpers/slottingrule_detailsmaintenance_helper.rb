@@ -29,7 +29,22 @@ module SlottingruleDetailsmaintenanceHelper
                       });
                      lastsel=id;
                      } 
-                   }"       
+                   }"    
+                   
+    dataInitfunc ="function(elem) {                                                 
+                                   var thisval = 'item_category1';
+                                   var grid = jQuery('#slottingrule_details_list');
+                                   var sel_id = grid.jqGrid('getGridParam', 'selrow');
+                                   var myCellData = grid.jqGrid('getCell', sel_id, 'rule_description');
+                           
+                                   
+                                   var id = $('#slottingrule_details_list').getGridParam('selrow');
+
+                                   alert(id); 
+                                                                           
+                                   selectedRowId = $('#slottingrule_details_list').jqGrid ('getGridParam', 'selrow')
+                                   $(elem).html(targetselect_func(thisval));  
+                                  }"               
        
     grid = [{
       :url => '/slottingrule_detailsmaintenance/?id=' + id,
@@ -52,7 +67,8 @@ module SlottingruleDetailsmaintenanceHelper
                                                                              }                                                               
                                                                 },
         { :name => 'SlottingruleDetails[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "in:=;Like:like" }},
-        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "select:select", multiple: true}},
+        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", 
+                                                        editoptions: {value: "select:select", multiple: true, dataInit:dataInitfunc.to_json_var}},
         { :name => 'SlottingruleDetails[attribute3]',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute4]',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute5]',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true},
