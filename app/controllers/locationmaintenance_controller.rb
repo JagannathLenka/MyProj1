@@ -19,7 +19,7 @@ class LocationmaintenanceController < ApplicationController
       search_string = "cl_zone_id = '" +  zone.cl_zone_id + "'"
     end
     
-    
+    #Dynamic search
     if params[:_search] == "true"
       case params[:searchOper]
       when 'eq'
@@ -28,6 +28,14 @@ class LocationmaintenanceController < ApplicationController
         
       when 'bw'
         search_string = params[:searchField] + " like '" +  params[:searchString] + "%'"
+      else
+        (search_string += " AND cl_barcode = '"  + params[:cl_barcode]  + "'" ) if !params[:cl_barcode].nil?
+        (search_string += " AND cl_zone_id = '"  + params[:cl_zone_id]  + "'" ) if !params[:cl_zone_id].nil?
+        (search_string += " AND cl_aisle_id ='" + params[:cl_aisle_id]  + "'" ) if !params[:cl_aisle_id].nil?
+        (search_string += " AND cl_bay_id =  '"   + params[:cl_bay_id]  + "'" ) if !params[:cl_bay_id].nil?
+        (search_string += " AND cl_level_id ='"  + params[:cl_level_id] + "'" ) if !params[:cl_level_id].nil?  
+        (search_string += " AND cl_pos_id =  '"  + params[:cl_pos_id]   + "'" ) if !params[:cl_pos_id].nil?
+        (search_string += " AND current_item = '"  + params[:current_item] + "'")    if !params[:current_item].nil?  
         
       end 
     end
