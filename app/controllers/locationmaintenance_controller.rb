@@ -32,9 +32,9 @@ class LocationmaintenanceController < ApplicationController
       end 
     end
     
-    columns =  ['id','sm_loc_id','cl_loc_id','sm_pos_id','cl_pos_id','sm_level_id','cl_level_id','sm_bay_id', 
-                'cl_bay_id','sm_aisle_id','cl_aisle_id','sm_zone_id','cl_zone_id','sm_warehouse_id',
-                'cl_warehouse_id','sm_barcode','cl_barcode','client_id','current_item', 'current_quantity',
+    columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','sm_barcode','cl_barcode', 'sm_zone_id','cl_zone_id', 'sm_aisle_id','cl_aisle_id',  
+                'sm_bay_id', 'cl_bay_id', 'sm_level_id','cl_level_id','sm_pos_id','cl_pos_id',
+                'sm_loc_id','cl_loc_id','client_id','current_item', 'current_quantity',
                 'life_time_total_picks', 'lock_code',  'minimum_quantity','maximum_quantity','status', 
                 'location_priority', 'location_length','location_breadth','location_height',
                 'location_volume','allowed_weight', 'item_short_description','item_long_description',

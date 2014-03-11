@@ -12,3 +12,8 @@
 	<div id=loc_pager></div>
 	<%= raw(loc_jqgrid) %>
 </div>
+<script>
+      jQuery(document).ready(function() {
+	          $('#loc_list').jqGrid('filterToolbar', { searchOnEnter: true, enableClear: false });    
+	   });
+</script>
