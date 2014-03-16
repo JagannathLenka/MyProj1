@@ -1,101 +1,102 @@
-2014-03-16T05:33:10.224557+00:00 app[web.1]: Processing by SlottingWavemaintenanceController#index as HTML
-2014-03-16T05:33:10.224557+00:00 app[web.1]:   Parameters: {"rule_id"=>"1", "lightweight"=>"yes", "view"=>"yes"}
-2014-03-16T05:33:10.224557+00:00 app[web.1]:   Rendered slotting_wavemaintenance/index.html.erb within layouts/application (3.3ms)
-2014-03-16T05:33:10.224557+00:00 app[web.1]: Compiled slotting_wavemaintenance.css  (268ms)  (pid 2)
-2014-03-16T05:33:10.395589+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=91c7eb06-234d-4313-a354-6e09740a43dc fwd="68.231.7.96" dyno=web.1 connect=0ms service=5ms status=200 bytes=272
-2014-03-16T05:33:10.224249+00:00 app[web.1]:     at <eval>:53:3
-2014-03-16T05:33:10.224249+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
-2014-03-16T05:33:10.224557+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___3442879169097811087_70161459485300'
-2014-03-16T05:33:10.224249+00:00 app[web.1]:     12: 
-2014-03-16T05:33:10.224557+00:00 app[web.1]: Compiled slotting_wavemaintenance.js  (0ms)  (pid 2)
-2014-03-16T05:33:10.224557+00:00 app[web.1]: Completed 500 Internal Server Error in 379ms
-2014-03-16T05:33:10.224249+00:00 app[web.1]:   (in /app/app/assets/javascripts/slotting_wavemaintenance.js)):
-2014-03-16T05:33:14.085156+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance" for 68.231.7.96 at 2014-03-16 05:33:14 +0000
-2014-03-16T05:33:14.190245+00:00 app[web.1]: 
-2014-03-16T05:33:14.190245+00:00 app[web.1]: ActionView::Template::Error (Unexpected character '#' (line: 1, col: 0, pos: 0)
-2014-03-16T05:33:14.190245+00:00 app[web.1]: 
-2014-03-16T05:33:14.190245+00:00 app[web.1]: Error
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at parse_error (<eval>:2357:12691)
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at Object.next_token [as input] (<eval>:2357:17713)
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at next (<eval>:2357:19012)
-2014-03-16T05:33:14.190245+00:00 app[web.1]:     at Object.parse (<eval>:2357:18801)
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     at <eval>:19:26
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     at <eval>:53:3
-2014-03-16T05:33:14.190468+00:00 app[web.1]:   (in /app/app/assets/javascripts/slottingrule_mastermaintenance.js)):
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     7: 
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
-2014-03-16T05:33:14.190681+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___3442879169097811087_70161459485300'
-2014-03-16T05:33:14.190681+00:00 app[web.1]: 
-2014-03-16T05:33:14.190681+00:00 app[web.1]: 
-2014-03-16T05:33:14.190681+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as HTML
-2014-03-16T05:33:14.190681+00:00 app[web.1]:   Rendered shared/_menu.html.erb (5.0ms)
-2014-03-16T05:33:14.190681+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.js  (0ms)  (pid 2)
-2014-03-16T05:33:14.190681+00:00 app[web.1]: Completed 500 Internal Server Error in 95ms
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     10: 
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     12: 
-2014-03-16T05:33:14.190681+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.css  (4ms)  (pid 2)
-2014-03-16T05:33:14.190681+00:00 app[web.1]:   Rendered slottingrule_mastermaintenance/index.html.erb within layouts/application (15.8ms)
-2014-03-16T05:33:14.190468+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
-2014-03-16T05:33:15.559336+00:00 app[web.1]: 
-2014-03-16T05:33:15.559336+00:00 app[web.1]: ActionView::Template::Error (Unexpected character '#' (line: 1, col: 0, pos: 0)
-2014-03-16T05:33:15.559336+00:00 app[web.1]: 
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at Object.next_token [as input] (<eval>:2357:17713)
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at next (<eval>:2357:19012)
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at Object.parse (<eval>:2357:18801)
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     at <eval>:19:26
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     12: 
-2014-03-16T05:33:15.559772+00:00 app[web.1]: 
-2014-03-16T05:33:15.559772+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as HTML
-2014-03-16T05:33:15.559772+00:00 app[web.1]:   Rendered shared/_menu.html.erb (1.0ms)
-2014-03-16T05:33:15.559772+00:00 app[web.1]:   Rendered slottingrule_mastermaintenance/index.html.erb within layouts/application (4.3ms)
-2014-03-16T05:33:15.559772+00:00 app[web.1]: Completed 500 Internal Server Error in 10ms
-2014-03-16T05:33:15.540909+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance" for 68.231.7.96 at 2014-03-16 05:33:15 +0000
-2014-03-16T05:33:15.559336+00:00 app[web.1]: Error
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     7: 
-2014-03-16T05:33:15.559569+00:00 app[web.1]:   (in /app/app/assets/javascripts/slottingrule_mastermaintenance.js)):
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     10: 
-2014-03-16T05:33:15.559336+00:00 app[web.1]:     at parse_error (<eval>:2357:12691)
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     at <eval>:53:3
-2014-03-16T05:33:15.559772+00:00 app[web.1]: 
-2014-03-16T05:33:15.559569+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
-2014-03-16T05:33:15.559772+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___3442879169097811087_70161459485300'
-2014-03-16T05:33:15.560677+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance host=slottingwarehouse.herokuapp.com request_id=deac6f28-0bed-4e36-ad95-c60c6e1df753 fwd="68.231.7.96" dyno=web.1 connect=0ms service=25ms status=500 bytes=963
-2014-03-16T05:33:17.468549+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance host=slottingwarehouse.herokuapp.com request_id=960132c7-1b51-433c-adea-bec195e9a898 fwd="68.231.7.96" dyno=web.1 connect=1ms service=47ms status=500 bytes=963
-2014-03-16T05:33:17.424054+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance" for 68.231.7.96 at 2014-03-16 05:33:17 +0000
-2014-03-16T05:33:17.439890+00:00 app[web.1]: 
-2014-03-16T05:33:17.439890+00:00 app[web.1]: ActionView::Template::Error (Unexpected character '#' (line: 1, col: 0, pos: 0)
-2014-03-16T05:33:17.439890+00:00 app[web.1]: 
-2014-03-16T05:33:17.439890+00:00 app[web.1]: Error
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at parse_error (<eval>:2357:12691)
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at Object.next_token [as input] (<eval>:2357:17713)
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at next (<eval>:2357:19012)
-2014-03-16T05:33:17.439890+00:00 app[web.1]:     at Object.parse (<eval>:2357:18801)
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     at <eval>:19:26
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     at <eval>:53:3
-2014-03-16T05:33:17.440198+00:00 app[web.1]:   (in /app/app/assets/javascripts/slottingrule_mastermaintenance.js)):
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     7: 
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     10: 
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
-2014-03-16T05:33:17.440198+00:00 app[web.1]:     12: 
-2014-03-16T05:33:17.440399+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___3442879169097811087_70161459485300'
-2014-03-16T05:33:17.440399+00:00 app[web.1]: 
-2014-03-16T05:33:17.440399+00:00 app[web.1]: 
-2014-03-16T05:33:17.440399+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as HTML
-2014-03-16T05:33:17.440399+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
-2014-03-16T05:33:17.440399+00:00 app[web.1]:   Rendered slottingrule_mastermaintenance/index.html.erb within layouts/application (3.4ms)
-2014-03-16T05:33:17.440399+00:00 app[web.1]: Completed 500 Internal Server Error in 9ms
-2014-03-16T05:33:14.190601+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance host=slottingwarehouse.herokuapp.com request_id=baeca894-8023-496d-800c-aab44031804d fwd="68.231.7.96" dyno=web.1 connect=1ms service=122ms status=500 bytes=963
+2014-03-16T05:39:05.402626+00:00 app[web.1]: => Call with -d to detach
+2014-03-16T05:39:05.402626+00:00 app[web.1]: => Rails 3.2.13 application starting in production on http://0.0.0.0:12002
+2014-03-16T05:39:05.496349+00:00 app[web.1]: WARN: tilt autoloading 'sass' in a non thread-safe way; explicit require 'sass' suggested.
+2014-03-16T05:39:05.402626+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-03-16T05:39:05.402626+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance" for 68.231.7.96 at 2014-03-16 05:39:05 +0000
+2014-03-16T05:39:05.801463+00:00 app[web.1]: Error
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
+2014-03-16T05:39:05.801463+00:00 app[web.1]: 
+2014-03-16T05:39:05.801463+00:00 app[web.1]: ActionView::Template::Error (Unexpected character '#' (line: 1, col: 0, pos: 0)
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at next (<eval>:2357:19012)
+2014-03-16T05:39:05.801463+00:00 app[web.1]: 
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at parse_error (<eval>:2357:12691)
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at Object.next_token [as input] (<eval>:2357:17713)
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
+2014-03-16T05:39:05.801698+00:00 app[web.1]:   (in /app/app/assets/javascripts/slottingrule_mastermaintenance.js)):
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
+2014-03-16T05:39:05.801893+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb__4138361594630038194_70251271558220'
+2014-03-16T05:39:05.801893+00:00 app[web.1]: 
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     12: 
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
+2014-03-16T05:39:05.801463+00:00 app[web.1]:     at Object.parse (<eval>:2357:18801)
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     at <eval>:53:3
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     7: 
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     at <eval>:19:26
+2014-03-16T05:39:05.801893+00:00 app[web.1]:   Rendered slottingrule_mastermaintenance/index.html.erb within layouts/application (7.6ms)
+2014-03-16T05:39:05.801893+00:00 app[web.1]: 
+2014-03-16T05:39:05.801893+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.js  (0ms)  (pid 2)
+2014-03-16T05:39:05.801893+00:00 app[web.1]: Completed 500 Internal Server Error in 320ms
+2014-03-16T05:39:05.801893+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.css  (218ms)  (pid 2)
+2014-03-16T05:39:05.801893+00:00 app[web.1]:   Rendered shared/_menu.html.erb (2.6ms)
+2014-03-16T05:39:05.801698+00:00 app[web.1]:     10: 
+2014-03-16T05:39:05.801893+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as HTML
+2014-03-16T05:39:05.865241+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance host=slottingwarehouse.herokuapp.com request_id=5c0c4e67-5027-4d93-8232-f1c78f4674ee fwd="68.231.7.96" dyno=web.1 connect=4ms service=511ms status=500 bytes=963
+2014-03-16T05:39:06.087624+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=fe3c383e-98c5-4ee1-98d5-9110aabd3410 fwd="68.231.7.96" dyno=web.1 connect=5ms service=24ms status=200 bytes=272
+2014-03-16T05:39:14.280570+00:00 app[web.1]: Started GET "/login" for 68.231.7.96 at 2014-03-16 05:39:14 +0000
+2014-03-16T05:39:14.425644+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.4ms)
+2014-03-16T05:39:14.425644+00:00 app[web.1]: Compiled login.js  (54ms)  (pid 2)
+2014-03-16T05:39:14.425644+00:00 app[web.1]: Completed 200 OK in 139ms (Views: 138.5ms | ActiveRecord: 0.0ms)
+2014-03-16T05:39:14.425644+00:00 app[web.1]:   Rendered login/index.html.erb within layouts/application (2.1ms)
+2014-03-16T05:39:14.425644+00:00 app[web.1]: Compiled login.css  (1ms)  (pid 2)
+2014-03-16T05:39:14.425644+00:00 app[web.1]: Processing by LoginController#index as HTML
+2014-03-16T05:39:14.420569+00:00 heroku[router]: at=info method=GET path=/login host=slottingwarehouse.herokuapp.com request_id=d5885121-81b0-4a6f-b77b-c744053842e3 fwd="68.231.7.96" dyno=web.1 connect=0ms service=149ms status=200 bytes=7000
+2014-03-16T05:39:14.554631+00:00 heroku[router]: at=info method=GET path=/assets/application-2123727b17aeb798868f7ea45e0f173e.css host=slottingwarehouse.herokuapp.com request_id=849ad5cc-a089-484d-9ebc-4fcb459a32f0 fwd="68.231.7.96" dyno=web.1 connect=1ms service=30ms status=200 bytes=162233
+2014-03-16T05:39:14.578868+00:00 heroku[router]: at=info method=GET path=/assets/application-4bc10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=af28f549-1257-45ef-8448-88947a32fe2d fwd="68.231.7.96" dyno=web.1 connect=15ms service=25ms status=200 bytes=646727
+2014-03-16T05:39:14.598354+00:00 heroku[router]: at=info method=GET path=/assets/Slot2.jpg host=slottingwarehouse.herokuapp.com request_id=0d31ecc4-223b-4bd0-ab61-b4722aacb165 fwd="68.231.7.96" dyno=web.1 connect=2ms service=6ms status=200 bytes=13031
+2014-03-16T05:39:14.813403+00:00 heroku[router]: at=info method=GET path=/assets/Slot4.jpg host=slottingwarehouse.herokuapp.com request_id=7bff32fd-e503-40ac-9e40-bcda51be21c5 fwd="68.231.7.96" dyno=web.1 connect=6ms service=16ms status=200 bytes=359274
+2014-03-16T05:39:16.153909+00:00 heroku[router]: at=info method=GET path=/assets/Slot5.jpg host=slottingwarehouse.herokuapp.com request_id=e9e6a50b-8420-4a06-a046-d1323354d40b fwd="68.231.7.96" dyno=web.1 connect=1m
+s service=6ms status=200 bytes=74276
+2014-03-16T05:39:16.386734+00:00 heroku[router]: at=info method=GET path=/assets/Slot6.jpg host=slottingwarehouse.herokuapp.com request_id=d236f740-18e0-42f7-9fee-28b6808cfbad fwd="68.231.7.96" dyno=web.1 connect=1ms service=12ms status=200 bytes=227716
+2014-03-16T05:39:18.222670+00:00 heroku[router]: at=info method=GET path=/assets/fonts/glyphicons-halflings-regular.woff host=slottingwarehouse.herokuapp.com request_id=b2fa5110-7832-40c8-bff2-6a57a2688420 fwd="68.231.7.96" dyno=web.1 connect=1ms service=6ms status=200 bytes=23565
+2014-03-16T05:39:24.788087+00:00 app[web.1]: Started POST "/login" for 68.231.7.96 at 2014-03-16 05:39:24 +0000
+2014-03-16T05:39:24.869490+00:00 heroku[router]: at=info method=POST path=/login host=slottingwarehouse.herokuapp.com request_id=4728008c-eac4-4ab0-aef0-216328710f92 fwd="68.231.7.96" dyno=web.1 connect=9ms service=88ms status=200 bytes=573
+2014-03-16T05:39:24.868558+00:00 app[web.1]: Processing by LoginController#create as */*
+2014-03-16T05:39:24.868558+00:00 app[web.1]:   Parameters: {"txtuid"=>"jagannath", "txtpswd"=>"slotting786"}
+2014-03-16T05:39:24.868558+00:00 app[web.1]:   Rendered text template (0.0ms)
+2014-03-16T05:39:24.868558+00:00 app[web.1]: Completed 200 OK in 75ms (Views: 1.5ms | ActiveRecord: 29.4ms)
+2014-03-16T05:39:25.000224+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
+2014-03-16T05:39:24.981490+00:00 app[web.1]: Started GET "/login/landingpage" for 68.231.7.96 at 2014-03-16 05:39:24 +0000
+2014-03-16T05:39:25.000224+00:00 app[web.1]:   Rendered login/landingpage.html.erb within layouts/application (1.7ms)
+2014-03-16T05:39:25.000224+00:00 app[web.1]: Processing by LoginController#landingpage as HTML
+2014-03-16T05:39:25.000224+00:00 app[web.1]: Completed 200 OK in 13ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+2014-03-16T05:39:25.004914+00:00 heroku[router]: at=info method=GET path=/login/landingpage host=slottingwarehouse.herokuapp.com request_id=ce4b8b24-4849-4bd5-ae23-337b030493f9 fwd="68.231.7.96" dyno=web.1 connect=0ms service=23ms status=304 bytes=355
+2014-03-16T05:39:17.179568+00:00 heroku[router]: at=info method=GET path=/assets/Slot7.jpg host=slottingwarehouse.herokuapp.com request_id=889338e4-1b7e-4cc9-9b0a-87ec0b506967 fwd="68.231.7.96" dyno=web.1 connect=0ms service=70ms status=200 bytes=19805
+2014-03-16T05:39:25.100747+00:00 heroku[router]: at=info method=GET path=/assets/application-2123727b17aeb798868f7ea45e0f173e.css host=slottingwarehouse.herokuapp.com request_id=654beb56-3540-4e2b-8f66-6cc519aa21c0 fwd="68.231.7.96" dyno=web.1 connect=0ms service=5ms status=304 bytes=177
+2014-03-16T05:39:25.194907+00:00 heroku[router]: at=info method=GET path=/assets/application-4bc10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=ebae19d9-2740-41b0-a161-35bf3b48a69c fwd="68.231.7.96" dyno=web.1 connect=15ms service=43ms status=304 bytes=177
+2014-03-16T05:39:25.323382+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_fcfdfd_1x100.png host=slottingwarehouse.herokuapp.com request_id=9e0a4625-3c3a-4b24-ac08-11f867f3b9b4 fwd="68.231.7.96" dyno=web.1 connect=0ms service=5ms status=200 bytes=551
+2014-03-16T05:39:25.328186+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com request_id=a84f8ca1-4250-493f-a64c-93bd26e4e64a fwd="68.231.7.96" dyno=web.1 connect=1ms service=5ms status=200 bytes=4809
+2014-03-16T05:39:25.486972+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=7cbaa00e-d793-4a73-a75f-7c13bb68be4c fwd="68.231.7.96" dyno=web.1 connect=7ms service=14ms status=304 bytes=177
+2014-03-16T05:39:18.456581+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=1283e68c-7657-4b43-8ebf-a706adbd6347 fwd="68.231.7.96" dyno=web.1 connect=15ms service=56ms status=304 bytes=177
+2014-03-16T05:39:26.840614+00:00 app[web.1]: Started GET "/warehousemaintenance" for 68.231.7.96 at 2014-03-16 05:39:26 +0000
+2014-03-16T05:39:26.865876+00:00 app[web.1]: 
+2014-03-16T05:39:26.865876+00:00 app[web.1]: 
+2014-03-16T05:39:26.865876+00:00 app[web.1]: ActionView::Template::Error (Unexpected character '#' (line: 1, col: 0, pos: 0)
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
+2014-03-16T05:39:26.868221+00:00 heroku[router]: at=info method=GET path=/warehousemaintenance host=slottingwarehouse.herokuapp.com request_id=a5fd8eb7-30fd-45f9-ae05-d9b98765d72d fwd="68.231.7.96" dyno=web.1 connect=13ms service=32ms status=500 bytes=963
+2014-03-16T05:39:26.865876+00:00 app[web.1]: Error
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at parse_error (<eval>:2357:12691)
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at Object.next_token [as input] (<eval>:2357:17713)
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
+2014-03-16T05:39:26.866162+00:00 app[web.1]:   (in /app/app/assets/javascripts/warehousemaintenance.js)):
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     7: 
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at next (<eval>:2357:19012)
+2014-03-16T05:39:26.865876+00:00 app[web.1]:     at Object.parse (<eval>:2357:18801)
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     at <eval>:53:3
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     at <eval>:19:26
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     10: 
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     12: 
+2014-03-16T05:39:26.866364+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb__4138361594630038194_70251271558220'
+2014-03-16T05:39:26.866364+00:00 app[web.1]: 
+2014-03-16T05:39:26.866364+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.8ms)
+2014-03-16T05:39:26.866364+00:00 app[web.1]:   Rendered warehousemaintenance/index.html.erb within layouts/application (3.9ms)
+2014-03-16T05:39:26.866364+00:00 app[web.1]: Completed 500 Internal Server Error in 19ms
+2014-03-16T05:39:26.866162+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
+2014-03-16T05:39:26.866364+00:00 app[web.1]: Compiled warehousemaintenance.js  (0ms)  (pid 2)
+2014-03-16T05:39:26.866364+00:00 app[web.1]: Processing by WarehousemaintenanceController#index as HTML
+2014-03-16T05:39:26.866364+00:00 app[web.1]: Compiled warehousemaintenance.css  (1ms)  (pid 2)
+2014-03-16T05:39:26.866364+00:00 app[web.1]: 
