@@ -82,7 +82,7 @@ end
 
     when "cpy"
              
-             CopyObject.copyBaytoAisle params[:id]
+             CopyObject.delay.copyBaytoAisle params[:id]
               
     end   
 

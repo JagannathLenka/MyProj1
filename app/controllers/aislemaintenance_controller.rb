@@ -80,7 +80,7 @@ class AislemaintenanceController < ApplicationController
               
   when "cpy"
              
-              CopyObject.copyAisletoZone params[:id]
+              CopyObject.delay.copyAisletoZone params[:id]
            
  end        
     #If it is a Ajax then send the json details
