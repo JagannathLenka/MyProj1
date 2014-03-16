@@ -1,5 +1,5 @@
 //global variable
-    pos_html_map = {}           
+  pos_html_map = {}           
   $( init );
  
  
@@ -86,7 +86,7 @@ setDragnDrop: function setDragnDrop() {
                   if (data=='false')
                     {alert('Can not move Item due to preference mismatch');}
                 
-                $('#position').load('/position/'+ <%= @bay_id %>);
+                //$('#position').load('/position/'+ <%= @bay_id %>);
                         
                     });
               
