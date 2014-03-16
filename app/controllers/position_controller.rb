@@ -2,10 +2,19 @@ require 'location_move'
 class PositionController < ApplicationController
   
   def index
+    
     if !params[:cl_bay_id].nil? and !params[:cl_warehouse_id].nil?
       bay= Bay.where('cl_warehouse_id = ?  AND cl_bay_id = ?',  params[:cl_warehouse_id], params[:cl_bay_id]).first
       render_position bay.id, params[:cl_barcode]
     end  
+
+    if params[:cl_bay_id].nil? and !params[:cl_barcode].nil? and !params[:cl_warehouse_id].nil? 
+      location = Location.where('cl_warehouse_id = ?  AND cl_barcode = ?',  params[:cl_warehouse_id], params[:cl_barcode]).first      
+      bay= Bay.where('cl_warehouse_id = ?  AND cl_bay_id = ?',  params[:cl_warehouse_id], location.cl_bay_id).first
+      render_position bay.id, params[:cl_barcode]
+    end  
+
+    
   end
   
   def show
