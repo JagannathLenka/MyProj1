@@ -1,103 +1,102 @@
-2014-03-16T05:52:34.948780+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=285fa776-e54d-45aa-8ceb-f88891441c4c fwd="68.231.7.96" dyno=web.1 connect=2ms service=6ms status=200 bytes=272
-2014-03-16T05:52:34.820555+00:00 app[web.1]: Processing by AislemaintenanceController#index as JSON
-2014-03-16T05:52:34.820555+00:00 app[web.1]:   Parameters: {"id"=>"52", "_search"=>"false", "nd"=>"1394949155697", "rows"=>"30", "page"=>"1", "sidx"=>"sm_aisle_id", "sord"=>"asc"}
-2014-03-16T05:52:34.855936+00:00 app[web.1]: Completed 200 OK in 42ms (Views: 0.1ms | ActiveRecord: 13.2ms)
-2014-03-16T05:52:39.191417+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance" for 68.231.7.96 at 2014-03-16 05:52:39 +0000
-2014-03-16T05:52:39.246734+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance host=slottingwarehouse.herokuapp.com request_id=646b7d3c-5a5d-4130-9be3-1e927764295a fwd="68.231.7.96" dyno=web.1 connect=1ms service=69ms status=200 bytes=11578
-2014-03-16T05:52:39.254837+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as HTML
-2014-03-16T05:52:39.254837+00:00 app[web.1]:   Rendered slottingrule_mastermaintenance/index.html.erb within layouts/application (44.7ms)
-2014-03-16T05:52:39.254837+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.css  (1ms)  (pid 2)
-2014-03-16T05:52:39.254837+00:00 app[web.1]:   Rendered shared/_menu.html.erb (0.7ms)
-2014-03-16T05:52:39.254837+00:00 app[web.1]: Compiled slottingrule_mastermaintenance.js  (0ms)  (pid 2)
-2014-03-16T05:52:39.254837+00:00 app[web.1]: Completed 200 OK in 59ms (Views: 57.6ms | ActiveRecord: 0.0ms)
-2014-03-16T05:52:39.452782+00:00 heroku[router]: at=info method=GET path=/assets/slottingrule_mastermaintenance-1b13569e9620782f423d4cd3ce931750.js host=slottingwarehouse.herokuapp.com request_id=e5586a06-5705-441b-8b56-182038489df3 fwd="68.231.7.96" dyno=web.1 connect=1ms service=8ms status=200 bytes=512
-2014-03-16T05:52:39.450418+00:00 app[web.1]: Started GET "/assets/slottingrule_mastermaintenance-1b13569e9620782f423d4cd3ce931750.js" for 68.231.7.96 at 2014-03-16 05:52:39 +0000
-2014-03-16T05:52:39.453853+00:00 app[web.1]: Served asset /slottingrule_mastermaintenance-1b13569e9620782f423d4cd3ce931750.js - 200 OK (0ms)
-2014-03-16T05:52:39.733079+00:00 heroku[router]: at=info method=GET path=/slottingrule_mastermaintenance/?_search=false&nd=1394949160625&rows=10&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=82da8cac-85f3-4a4b-941f-e9001ad548b1 fwd="68.231.7.96" dyno=web.1 connect=1ms service=43ms status=200 bytes=774
-2014-03-16T05:52:39.705709+00:00 app[web.1]: Started GET "/slottingrule_mastermaintenance/?_search=false&nd=1394949160625&rows=10&page=1&sidx=id&sord=asc" for 68.231.7.96 at 2014-03-16 05:52:39 +0000
-2014-03-16T05:52:39.743582+00:00 app[web.1]: Processing by SlottingruleMastermaintenanceController#index as JSON
-2014-03-16T05:52:39.743582+00:00 app[web.1]:   Parameters: {"_search"=>"false", "nd"=>"1394949160625", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2014-03-16T05:52:39.743582+00:00 app[web.1]: Completed 200 OK in 33ms (Views: 0.1ms | ActiveRecord: 12.2ms)
-2014-03-16T05:52:40.237606+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_75_d0e5f5_1x400.png host=slottingwarehouse.herokuapp.com request_id=d64cc457-77d5-4419-92fc-3ef98fd3d496 fwd="68.231.7.96" dyno=web.1 connect=1ms service=5ms status=304 bytes=177
-2014-03-16T05:52:40.405112+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_217bc0_256x240.png host=slottingwarehouse.herokuapp.com request_id=1522d25d-ce7c-4f0b-9c1b-5c041a85f0a7 fwd="68.231.7.96" dyno=web.1 connect=3ms service=14ms status=200 bytes=4809
-2014-03-16T05:52:41.732078+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_55_fbec88_40x100.png host=slottingwarehouse.herokuapp.com request_id=e2ae9fc3-b69e-4b22-be49-8807cedc435f fwd="68.231.7.96" dyno=web.1 connect=1ms service=3ms status=200 bytes=465
-2014-03-16T05:52:42.995893+00:00 app[web.1]: Started GET "/slotting_wavemaintenance?rule_id=1&lightweight=yes&view=yes" for 68.231.7.96 at 2014-03-16 05:52:42 +0000
-2014-03-16T05:52:43.015031+00:00 heroku[router]: at=info method=GET path=/slotting_wavemaintenance?rule_id=1&lightweight=yes&view=yes host=slottingwarehouse.herokuapp.com request_id=3b350f2a-5a4e-4a29-a1d2-5de0303be3b8 fwd="68.231.7.96" dyno=web.1 connect=1ms service=29ms status=200 bytes=5445
-2014-03-16T05:52:43.021444+00:00 app[web.1]:   Parameters: {"rule_id"=>"1", "lightweight"=>"yes", "view"=>"yes"}
-2014-03-16T05:52:43.021444+00:00 app[web.1]: Completed 200 OK in 19ms (Views: 17.5ms | ActiveRecord: 0.0ms)
-2014-03-16T05:52:43.021444+00:00 app[web.1]:   Rendered slotting_wavemaintenance/index.html.erb within layouts/application (2.8ms)
-2014-03-16T05:52:43.021444+00:00 app[web.1]: Compiled slotting_wavemaintenance.css  (1ms)  (pid 2)
-2014-03-16T05:52:43.021444+00:00 app[web.1]: Compiled slotting_wavemaintenance.js  (0ms)  (pid 2)
-2014-03-16T05:52:43.021444+00:00 app[web.1]: Processing by SlottingWavemaintenanceController#index as HTML
-2014-03-16T05:52:43.164748+00:00 heroku[router]: at=info method=GET path=/assets/slotting_wavemaintenance-1b13569e9620782f423d4cd3ce931750.js host=slottingwarehouse.herokuapp.com request_id=99c524c8-5721-494b-8e2a-91c31406c07a fwd="68.231.7.96" dyno=web.1 connect=1ms service=11ms status=200 bytes=512
-2014-03-16T05:52:43.167235+00:00 heroku[router]: at=info method=GET path=/assets/application-4bc10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=0d4ad4b0-b042-4777-80b2-8b592d6dc4af fwd="68.231.7.96" dyno=web.1 connect=0ms service=5ms status=304 bytes=177
-2014-03-16T05:52:43.155558+00:00 heroku[router]: at=info method=GET path=/assets/application-2123727b17aeb798868f7ea45e0f173e.css host=slottingwarehouse.herokuapp.com request_id=f6833bc7-b220-495b-831d-f5181f9c22cc fwd="68.231.7.96" dyno=web.1 connect=1ms service=6ms status=304 bytes=177
-2014-03-16T05:52:43.167955+00:00 app[web.1]: Started GET "/assets/slotting_wavemaintenance-1b13569e9620782f423d4cd3ce931750.js" for 68.231.7.96 at 2014-03-16 05:52:43 +0000
-2014-03-16T05:52:43.173282+00:00 app[web.1]: Served asset /slotting_wavemaintenance-1b13569e9620782f423d4cd3ce931750.js - 200 OK (0ms)
-2014-03-16T05:52:43.381667+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_glass_85_dfeffc_1x400.png host=slottingwarehouse.herokuapp.com request_id=2f960cb0-78e7-4d07-bdb4-11aa89e217b3 fwd="68.231.7.96" dyno=web.1 connect=1ms service=4ms status=304 bytes=177
-2014-03-16T05:52:43.385281+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_flat_0_aaaaaa_40x100.png host=slottingwarehouse.herokuapp.com request_id=d9ed6e3f-61ef-4be5-9f5e-2bae10b63ec5 fwd="68.231.7.96" dyno=web.1 connect=1ms service=6ms status=304 bytes=177
-2014-03-16T05:52:43.391787+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_469bdd_256x240.png host=slottingwarehouse.herokuapp.com request_id=75db1cc4-a589-437c-b5b5-dcbe2df481b3 fwd="68.231.7.96" dyno=web.1 connect=2ms service=6ms status=304 bytes=177
-2014-03-16T05:52:43.387600+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-icons_6da8d5_256x240.png host=slottingwarehouse.herokuapp.com request_id=02fccd81-39a4-4497-873a-d96df9a0dc74 fwd="68.231.7.96" dyno=web.1 connect=0ms service=9ms status=304 bytes=177
-2014-03-16T05:52:43.342586+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_fcfdf
-d_1x100.png host=slottingwarehouse.herokuapp.com request_id=57fe8d3b-1668-424f-b26c-9d7913d98203 fwd="68.231.7.96" dyno=web.1 connect=1ms service=4ms status=304 bytes=177
-2014-03-16T05:52:43.437315+00:00 app[web.1]: Started GET "/slotting_wavemaintenance?rule_id=1&wave_status=&_search=false&nd=1394949164326&rows=10&page=1&sidx=id&sord=desc" for 68.231.7.96 at 2014-03-16 05:52:43 +0000
-2014-03-16T05:52:43.387105+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_inset-hard_100_f5f8f9_1x100.png host=slottingwarehouse.herokuapp.com request_id=09f7d1a3-0486-4e5c-a303-646fdedc9257 fwd="68.231.7.96" dyno=web.1 connect=1ms service=5ms status=304 bytes=177
-2014-03-16T05:52:43.473401+00:00 app[web.1]:   Parameters: {"rule_id"=>"1", "wave_status"=>"", "_search"=>"false", "nd"=>"1394949164326", "rows"=>"10", "page"=>"1", "sidx"=>"id", "sord"=>"desc"}
-2014-03-16T05:52:43.473401+00:00 app[web.1]: Processing by SlottingWavemaintenanceController#index as JSON
-2014-03-16T05:52:43.473401+00:00 app[web.1]: Completed 200 OK in 32ms (Views: 0.1ms | ActiveRecord: 6.4ms)
-2014-03-16T05:52:43.469961+00:00 heroku[router]: at=info method=GET path=/assets/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png host=slottingwarehouse.herokuapp.com request_id=c400652e-199f-4736-8b65-f9b826522c4d fwd="68.231.7.96" dyno=web.1 connect=0ms service=4ms status=304 bytes=177
-2014-03-16T05:52:43.474180+00:00 heroku[router]: at=info method=GET path=/assets
-/images/ui-icons_d8e7f3_256x240.png host=slottingwarehouse.herokuapp.com request_id=e20e29c0-d9fd-47d3-b4b1-42ac1c7eb023 fwd="68.231.7.96" dyno=web.1 connect=1ms service=4ms status=304 bytes=177
-2014-03-16T05:52:43.465784+00:00 heroku[router]: at=info method=GET path=/slotting_wavemaintenance?rule_id=1&wave_status=&_search=false&nd=1394949164326&rows=10&page=1&sidx=id&sord=desc host=slottingwarehouse.herokuapp.com request_id=2b8ea75c-79b3-4d23-a672-804fe86269a8 fwd="68.231.7.96" dyno=web.1 connect=1ms service=40ms status=200 bytes=1010
-2014-03-16T05:52:43.632327+00:00 heroku[router]: at=info method=GET path=/favicon.ico host=slottingwarehouse.herokuapp.com request_id=db2db767-390e-42d4-9b0e-78152d45205f fwd="68.231.7.96" dyno=web.1 connect=0ms service=3ms status=304 bytes=177
-2014-03-16T05:52:45.703918+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=4&lightweight=yes" for 68.231.7.96 at 2014-03-16 05:52:45 +0000
-2014-03-16T05:52:45.767539+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as HTML
-2014-03-16T05:52:45.767539+00:00 app[web.1]:   Parameters: {"id"=>"4", "lightweight"=>"yes"}
-2014-03-16T05:52:45.767539+00:00 app[web.1]:   Rendered slottingrecomaintenance/index.html.erb within layouts/application (43.4ms)
-2014-03-16T05:52:45.767539+00:00 app[web.1]: Completed 200 OK in 59ms (Views: 57.3ms | ActiveRecord: 0.0ms)
-2014-03-16T05:52:45.767539+00:00 app[web.1]: Compiled slottingrecomaintenance.js  (0ms)  (pid 2)
-2014-03-16T05:52:45.767539+00:00 app[web.1]: Compiled slottingrecomaintenance.css  (1ms)  (pid 2)
-2014-03-16T05:52:45.757867+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=4&lightweight=yes host=slottingwarehouse.herokuapp.com request_id=6ef26800-a504-418b-bcec-b6206e22442b fwd="68.231.7.96" dyno=web.1 connect=0ms service=69ms status=200 bytes=8531
-2014-03-16T05:52:45.947650+00:00 heroku[router]: at=info method=GET path=/assets/slottingrecomaintenance-1b13569e9620782f423d4cd3ce931750.js host=slottingwarehouse.herokuapp.com request_id=c522aa62-0af6-4f8d-b0e4-2afcdcaadb72 fwd="68.231.7.96" dyno=web.1 connect=1ms service=9ms status=200 bytes=512
-2014-03-16T05:52:45.944984+00:00 app[web.1]: Started GET "/assets/slottingrecomaintenance-1b13569e9620782f423d4cd3ce931750.js" for 68.231.7.96 at 2014-03-16 05:52:45 +0000
-2014-03-16T05:52:45.949412+00:00 app[web.1]: Served asset /slottingrecomaintenance-1b13569e9620782f423d4cd3ce931750.js - 200 OK (0ms)
-2014-03-16T05:52:46.103796+00:00 app[web.1]: Started GET "/slottingrecomaintenance?id=4&_search=false&nd=1394949167029&rows=50&page=1&sidx=id&sord=asc" for 68.231.7.96 at 2014-03-16 05:52:46 +0000
-2014-03-16T05:52:46.151141+00:00 heroku[router]: at=info method=GET path=/slottingrecomaintenance?id=4&_search=false&nd=1394949167029&rows=50&page=1&sidx=id&sord=asc host=slottingwarehouse.herokuapp.com request_id=d5c63dba-d612-46b9-99bb-53d23f0da545 fwd="68.231.7.96" dyno=web.1 connect=1ms service=61ms status=200 bytes=7692
-2014-03-16T05:52:46.160506+00:00 app[web.1]: Processing by SlottingrecomaintenanceController#index as JSON
-2014-03-16T05:52:46.160506+00:00 app[web.1]: Completed 200 OK in 52ms (Views: 0.1ms | ActiveRecord: 10.4ms)
-2014-03-16T05:52:46.160506+00:00 app[web.1]:   Parameters: {"id"=>"4", "_search"=>"false", "nd"=>"1394949167029", "rows"=>"50", "page"=>"1", "sidx"=>"id", "sord"=>"asc"}
-2014-03-16T05:52:48.591434+00:00 app[web.1]: Started GET "/position?cl_bay_id=02&cl_warehouse_id=BV1&cl_barcode=Z1-A-33-02-B-05&lightweight=yes" for 68.231.7.96 at 2014-03-16 05:52:48 +0000
-2014-03-16T05:52:49.261715+00:00 app[web.1]: Error
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     at expr_ops (<eval>:2357:30858)
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at js_error (<eval>:2357:10973)
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     at maybe_conditional (<eval>:2357:30958)
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     6:   <%= stylesheet_link_tag    controller.controller_name, :media => "all" %>
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     7: 
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     8:   <%= javascript_include_tag "application" %>
-2014-03-16T05:52:49.262078+00:00 app[web.1]:   app/controllers/position_controller.rb:71:in `render_position'
-2014-03-16T05:52:49.261914+00:00 app[web.1]:   (in /app/app/assets/javascripts/position.js)):
-2014-03-16T05:52:49.262078+00:00 app[web.1]: 
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at token_error (<eval>:2357:19335)
-2014-03-16T05:52:49.262078+00:00 app[web.1]:   app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb___2585692476989509073_69972439141460'
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     at expr_op (<eval>:2357:30669)
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     10: 
-2014-03-16T05:52:49.262078+00:00 app[web.1]:     11:   <%= csrf_meta_tags %>
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     9:   <%= javascript_include_tag controller.controller_name %>
-2014-03-16T05:52:49.262078+00:00 app[web.1]:     12: 
-2014-03-16T05:52:49.262078+00:00 app[web.1]:   app/controllers/position_controller.rb:7:in `index'
-2014-03-16T05:52:49.261715+00:00 app[web.1]: 
-2014-03-16T05:52:49.261715+00:00 app[web.1]: ActionView::Template::Error (Unexpected token: operator (<) (line: 89, col: 50, pos: 2196)
-2014-03-16T05:52:49.261715+00:00 app[web.1]: 
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at new JS_Parse_Error (<eval>:2357:10754)
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at expr_atom (<eval>:2357:27615)
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at croak (<eval>:2357:19198)
-2014-03-16T05:52:49.261715+00:00 app[web.1]:     at unexpected (<eval>:2357:19423)
-2014-03-16T05:52:49.261914+00:00 app[web.1]:     at maybe_unary (<eval>:2357:30108)
-2014-03-16T05:52:49.262078+00:00 app[web.1]: 
-2014-03-16T05:52:49.255154+00:00 heroku[router]: at=info method=GET path=/position?cl_bay_id=02&cl_warehouse_id=BV1&cl_barcode=Z1-A-33-02-B-05&lightweight=yes host=slottingwarehouse.herokuapp.com request_id=8d44d909-7dc3-4c83-8a65-3247092c498e fwd="68.231.7.96" dyno=web.1 connect=1ms service=676ms status=500 bytes=963
-2014-03-16T05:52:49.262857+00:00 app[web.1]:   Parameters: {"cl_bay_id"=>"02", "cl_warehouse_id"=>"BV1", "cl_barcode"=>"Z1-A-33-02-B-05", "lightweight"=>"yes"}
-2014-03-16T05:52:49.262857+00:00 app[web.1]: Compiled position.js  (0ms)  (pid 2)
-2014-03-16T05:52:49.262857+00:00 app[web.1]: Processing by PositionController#index as HTML
-2014-03-16T05:52:49.262857+00:00 app[web.1]:   Rendered position/show.html.erb within layouts/application (46.3ms)
-2014-03-16T05:52:49.262857+00:00 app[web.1]: Completed 500 Internal Server Error in 664ms
-2014-03-16T05:52:49.262857+00:00 app[web.1]: Compiled position.css  (2ms)  (pid 2)
+2014-03-17T01:38:13.175285+00:00 heroku[web.1]: Starting process with command `bundle exec rails server -p 57105`
+2014-03-17T01:38:16.417231+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-17T01:38:16.417081+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-17T01:38:17.323848+00:00 app[web.1]: [2014-03-17 01:38:17] INFO  ruby 2.0.0 (2014-02-24) [x86_64-linux]
+2014-03-17T01:38:17.323848+00:00 app[web.1]: [2014-03-17 01:38:17] INFO  WEBrick 1.3.1
+2014-03-17T01:38:17.324344+00:00 app[web.1]: [2014-03-17 01:38:17] INFO  WEBrick::HTTPServer#start: pid=2 port=57105
+2014-03-17T01:38:17.955686+00:00 heroku[web.1]: State changed from starting to up
+2014-03-17T01:38:19.558346+00:00 app[web.1]: => Call with -d to detach
+2014-03-17T01:38:19.558346+00:00 app[web.1]: => Rails 3.2.13 application starting in production on http://0.0.0.0:57105
+2014-03-17T01:38:19.558346+00:00 app[web.1]: => Booting WEBrick
+2014-03-17T01:38:19.558346+00:00 app[web.1]: Started GET "/login" for 166.137.156.23 at 2014-03-17 01:38:19 +0000
+2014-03-17T01:38:19.558346+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-03-17T01:38:19.670269+00:00 app[web.1]: WARN: tilt autoloading 'sass' in a non thread-safe way; explicit require 'sass' suggested.
+2014-03-17T01:38:20.114834+00:00 app[web.1]:   Rendered login/index.html.erb within layouts/application (8.0ms)
+2014-03-17T01:38:20.114834+00:00 app[web.1]: Compiled login.css  (281ms)  (pid 2)
+2014-03-17T01:38:20.114834+00:00 app[web.1]: Completed 200 OK in 462ms (Views: 461.7ms | ActiveRecord: 0.0ms)
+2014-03-17T01:38:20.118943+00:00 heroku[router]: at=info method=GET path=/login host=slottingwarehouse.herokuapp.com request_id=2648b422-f9c3-49ac-b351-e6a32cefbef5 fwd="166.137.156.23" dyno=web.1 connect=0ms service=618ms status=200 bytes=7272
+2014-03-17T01:38:20.114834+00:00 app[web.1]: Processing by LoginController#index as HTML
+2014-03-17T01:38:20.114834+00:00 app[web.1]:   Rendered shared/_menu.html.erb (3.0ms)
+2014-03-17T01:38:20.114834+00:00 app[web.1]: Compiled login.js  (0ms)  (pid 2)
+2014-03-17T01:38:20.378146+00:00 app[web.1]: Started GET "/assets/login-1b13569e9620782f423d4cd3ce931750.css" for 166.137.156.23 at 2014-03-17 01:38:20 +0000
+2014-03-17T01:38:20.386340+00:00 heroku[router]: at=info method=GET path=/assets/login-1b13569e9620782f423d4cd3ce931750.css host=slottingwarehouse.herokuapp.com request_id=a2da6f17-3f54-40f3-8591-6702f52f8633 fwd="166.137.156.23" dyno=web.1 connect=2ms service=14ms status=200 bytes=498
+2014-03-17T01:38:20.383881+00:00 app[web.1]: Served asset /login-1b13569e9620782f423d4cd3ce931750.css - 200 OK (0ms)
+2014-03-17T01:38:20.576960+00:00 heroku[router]: at=info method=GET path=/assets/application-2123727b17aeb798868f7ea45e0f173e.css host=slottingwarehouse.herokuapp.com request_id=acd08753-f02e-4f6f-8e04-006f5acc9230 fwd="166.137.156.23" dyno=web.1 connect=5ms service=9ms status=304 bytes=177
+2014-03-17T01:38:20.732881+00:00 heroku[router]: at=info method=GET path=/assets/application-4b
+c10cba0d667babafc96b1c0e0c32c8.js host=slottingwarehouse.herokuapp.com request_id=3a66835d-6468-4662-b96b-ea8ccc669fa6 fwd="166.137.156.23" dyno=web.1 connect=0ms service=5ms status=304 bytes=177
+2014-03-17T01:38:21.047228+00:00 heroku[router]: at=info method=GET path=/assets/Slot6.jpg host=slottingwarehouse.herokuapp.com request_id=98543810-fab7-43b6-ab2f-2d3336547509 fwd="166.137.156.23" dyno=web.1 connect=2ms service=8ms status=304 bytes=177
+2014-03-17T01:38:20.955668+00:00 heroku[router]: at=info method=GET path=/assets/Slot2.jpg host=slottingwarehouse.herokuapp.com request_id=9b58d2a4-d428-4239-afad-63d3c7e98656 fwd="166.137.156.23" dyno=web.1 connect=2ms service=58ms status=304 bytes=177
+2014-03-17T01:38:21.067338+00:00 heroku[router]: at=info method=GET path=/assets/Slot5.jpg host=slottingwarehouse.herokuapp.com request_id=aca4332c-0fa3-4ab4-a855-3ea73d77311b fwd="166.137.156.23" dyno=web.1 connect=6ms service=7ms status=304 bytes=177
+2014-03-17T01:38:21.108333+00:00 heroku[router]: at=info method=GET path=/assets/fonts/glyphicons-halflings-regular.woff host=slottingwarehouse.herokuapp.com request_id=0fcc9fa1-d7ea-4fd7-9dc6-6ea3213d0299 fwd="166.137.156.23" dyno=web.1 connect=0ms service=8ms status=304 bytes=177
+2014-03-17T01:38:20.951273+00:00 heroku[router]: at=info method=GET path=/assets/Slot4.jpg host=slottingwarehouse.herokuapp.com request_id=df96edda-ebbc-4dbb-b20c-cc18702393cd fwd="166.137.156.23" dyno=web.1 connect=1ms service=55ms status=304 bytes=177
+2014-03-17T01:38:21.062622+00:00 heroku[router]: at=info method=GET path=/assets/Slot7.jpg host=slottingwarehouse.herokuapp.com request_id=05d6f137-d9b9-41b3-b7f4-59b4f089a323 fwd="166.137.156.23" dyno=web.1 connect=3ms service=7ms status=304 bytes=177
+2014-03-17T02:44:53.488061+00:00 heroku[web.1]: Idling
+2014-03-17T02:44:53.489420+00:00 heroku[web.1]: State changed from up to down
+2014-03-17T02:44:56.468098+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: [2014-03-17 02:44:56] FATAL SignalException: SIGTERM
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/server.rb:268:in `start'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands/server.rb:70:in `start'
+2014-03-17T02:44:56.969219+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `tap'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-03-17T02:44:56.969219+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `<top (required)>'
+2014-03-17T02:44:56.969219+00:00 app[web.1]: [2014-03-17 02:44:56] INFO  going to shutdown ...
+2014-03-17T02:44:56.969219+00:00 app[web.1]: [2014-03-17 02:44:56] INFO  WEBrick::HTTPServer#start done.
+2014-03-17T02:44:56.969219+00:00 app[web.1]: Exiting
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:13:in `run'
+2014-03-17T02:44:56.969219+00:00 app[web.1]: 	script/rails:6:in `require'
+2014-03-17T02:44:56.968831+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:55:in `block in <top (required)>'
+2014-03-17T02:44:56.969219+00:00 app[web.1]: 	script/rails:6:in `<main>'
+2014-03-17T02:44:59.084087+00:00 heroku[web.1]: Process exited with status 143
+2014-03-17T04:01:50.945956+00:00 heroku[web.1]: State changed from down to starting
+2014-03-17T04:01:50.945626+00:00 heroku[web.1]: Unidling
+2014-03-17T04:01:55.838619+00:00 heroku[web.1]: Starting process with command `bundle exec rails server -p 55014`
+2014-03-17T04:01:59.862377+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-17T04:01:59.862732+00:00 app[web.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/config/environment.rb:5)
+2014-03-17T04:02:00.874769+00:00 app[web.1]: [2014-03-17 04:02:00] INFO  WEBrick 1.3.1
+2014-03-17T04:02:00.874992+00:00 app[web.1]: [2014-03-17 04:02:00] INFO  ruby 2.0.0 (2014-02-24) [x86_64-linux]
+2014-03-17T04:02:00.876003+00:00 app[web.1]: [2014-03-17 04:02:00] INFO  WEBrick::HTTPServer#start: pid=2 port=55014
+2014-03-17T04:02:01.107482+00:00 heroku[web.1]: State changed from starting to up
+2014-03-17T04:02:03.070535+00:00 app[web.1]: => Booting WEBrick
+2014-03-17T04:02:03.070535+00:00 app[web.1]: => Call with -d to detach
+2014-03-17T04:02:03.070535+00:00 app[web.1]: Started GET "/locationmaintenance?zone_id=52" for 166.137.156.41 at 2014-03-17 04:02:03 +0000
+2014-03-17T04:02:03.070535+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-03-17T04:02:03.070535+00:00 app[web.1]: => Rails 3.2.13 application starting in production on http://0.0.0.0:55014
+2014-03-17T04:02:03.281816+00:00 heroku[router]: at=info method=GET path=/locationmaintenance?zone_id=52 host=slottingwarehouse.herokuapp.com request_id=efd29e5d-8403-4e9c-8633-e8fab7d69fb4 fwd="166.137.156.41" dyno=web.1 connect=1ms service=271ms status=302 bytes=714
+2014-03-17T04:02:03.279570+00:00 app[web.1]: Redirected to http://slottingwarehouse.herokuapp.com/login
+2014-03-17T04:02:03.279570+00:00 app[web.1]: Filter chain halted as :login_require rendered or redirected
+2014-03-17T04:02:03.279570+00:00 app[web.1]: Processing by LocationmaintenanceController#index as HTML
+2014-03-17T04:02:03.279570+00:00 app[web.1]:   Parameters: {"zone_id"=>"52"}
+2014-03-17T04:02:03.279570+00:00 app[web.1]: Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+2014-03-17T05:09:50.604615+00:00 heroku[web.1]: Idling
+2014-03-17T05:09:50.605356+00:00 heroku[web.1]: State changed from up to down
+2014-03-17T05:09:54.155226+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands/server.rb:70:in `start'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: [2014-03-17 05:09:55] FATAL SignalException: SIGTERM
+2014-03-17T05:09:55.020663+00:00 app[web.1]: Exiting
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/handler/webrick.rb:13:in `run'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:55:in `block in <top (required)>'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `tap'
+2014-03-17T05:09:55.020663+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-3.2.13/lib/rails/commands.rb:50:in `<top (required)>'
+2014-03-17T05:09:55.020663+00:00 app[web.1]: 	script/rails:6:in `require'
+2014-03-17T05:09:55.020399+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.4.5/lib/rack/server.rb:268:in `start'
+2014-03-17T05:09:55.020663+00:00 app[web.1]: 	script/rails:6:in `<main>'
+2014-03-17T05:09:55.020663+00:00 app[web.1]: [2014-03-17 05:09:55] INFO  going to shutdown ...
+2014-03-17T05:09:55.020663+00:00 app[web.1]: [2014-03-17 05:09:55] INFO  WEBrick::HTTPServer#start done.
+2014-03-17T05:09:57.448067+00:00 heroku[web.1]: Process exited with status 143
+2014-03-17T06:19:04.161957+00:00 heroku[worker.1]: Cycling
+2014-03-17T06:19:04.162484+00:00 heroku[worker.1]: State changed from up to starting
+2014-03-17T06:19:06.536021+00:00 heroku[worker.1]: Stopping all processes with SIGTERM
+2014-03-17T06:19:07.045297+00:00 app[worker.1]: [Worker(host:f5ac7ec7-e7b3-4834-a2f7-3b54f930ad69 pid:2)] Exiting...
+2014-03-17T06:19:08.682287+00:00 heroku[worker.1]: Starting process with command `bundle exec rake jobs:work`
+2014-03-17T06:19:09.451182+00:00 heroku[worker.1]: State changed from starting to up
+2014-03-17T06:19:12.243333+00:00 heroku[worker.1]: Process exited with status 0
+2014-03-17T06:19:14.157835+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-03-17T06:19:14.158282+00:00 app[worker.1]: DEPRECATION WARNING: You have Rails 2.3-style plugins in vendor/plugins! Support for these plugins will be removed in Rails 4.0. Move them out and bundle them in your Gemfile, or fold them in to your app as lib/myplugin/* and config/initializers/myplugin.rb. See the release notes for more on this: http://weblog.rubyonrails.org/2012/1/4/rails-3-2-0-rc2-has-been-released. (called from <top (required)> at /app/Rakefile:7)
+2014-03-17T06:19:15.110027+00:00 app[worker.1]: [Worker(host:cab4a6d7-3086-4ebd-b3bd-e91290c9d2db pid:2)] Starting job worker
