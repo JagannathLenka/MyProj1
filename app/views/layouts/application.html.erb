@@ -34,9 +34,16 @@
   
   
   <style>
-  	#wrap {
+  	.wrapper {
 		margin-left: 5%;
 		margin-right: 5%;
+		height: 600px;
+		}
+		
+  	.container {
+		margin-left: 0%;
+		margin-right: 0%;
+		height: 100%;
 		}
 		
 		#footer > .contain {
@@ -55,8 +62,8 @@
 
 <body>
 	
-<div id="wrap" style="height:auto; margin-left: 5%; margin-right: 5%;">
-  <div class="contain">
+<div id="wrapper" class="wrapper">
+  <div class="container">
   	<!--==Content goes here -->
 		<%= yield %>
   </div>	

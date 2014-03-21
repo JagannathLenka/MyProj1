@@ -8,48 +8,50 @@
 
 <%= render "shared/menu" %>
 
-<div id="container-fluid" style="float: left; height:500px; width:100%">
-	<div style="margin: 0%; float:left; height:50%; width: 100%">
+<div id="container-fluid" style="height: 100%; width:100%">
+	<div style="margin: 0%; float:left; height:45%; width: 100%;">
 		<div style="margin: 0%; float:left; height:100%; width: 30%">
 			<div class="bs-example" style="height:99%; width: 99%">
 	   			 <div id="carousel-example-generic" style="height:100%; width: 99%;" class="carousel slide" data-ride="carousel">
 	        
-	        <ol class="carousel-indicators">
-	          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-	        </ol>
-	        
-	        <div class="carousel-inner">
-	          <div class="item active">
-	             <img src="/assets/Slot2.jpg" style="max-height: 95%; min-height: 95% ;width: 100%" alt="First slide">
-	          </div>
-	          <div class="item">
-	            <img src="/assets/Slot4.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Third slide">
-	          </div>
-	          <div class="item">
-	            <img src="/assets/Slot5.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Second slide">
-	          </div>
-	          <div class="item">
-	            <img src="/assets/Slot6.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Second slide">
-	          </div>
-	          <div class="item">
-	            <img src="/assets/Slot7.jpg" style="max-height:  95%;  min-height: 95% ; width: 100%"  alt="Second slide">
-	          </div>
-	        </div>
-	        
-	        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-	          <span class="glyphicon glyphicon-chevron-left"></span>
-	        </a>
-	        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-	          <span class="glyphicon glyphicon-chevron-right"></span>
-	        </a>
-	      </div>
+			        <ol class="carousel-indicators">
+			          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+			          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+			        </ol>
+			        
+			        <div class="carousel-inner">
+			          <div class="item active">
+			             <img src="/assets/Slot2.jpg" style="max-height: 95%; min-height: 95% ;width: 100%" alt="First slide">
+			          </div>
+			          <div class="item">
+			            <img src="/assets/Slot4.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Third slide">
+			          </div>
+			          <div class="item">
+			            <img src="/assets/Slot5.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Second slide">
+			          </div>
+			          <div class="item">
+			            <img src="/assets/Slot6.jpg" style="max-height:  95%;  min-height: 95%; width: 100%"  alt="Second slide">
+			          </div>
+			          <div class="item">
+			            <img src="/assets/Slot7.jpg" style="max-height:  95%;  min-height: 95% ; width: 100%"  alt="Second slide">
+			          </div>
+			        </div>
+			        
+			        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+			          <span class="glyphicon glyphicon-chevron-left"></span>
+			        </a>
+			        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+			          <span class="glyphicon glyphicon-chevron-right"></span>
+			        </a>
+			      </div>
+				</div>	
 			</div>
-		</div>	
-		<div style="margin: 0%; float:left; height:100%; width: 40%"></div>		
+		<div style="margin: 0%; float:left; height:100%; width: 40%">
+			<span>&nbsp;</span>
+		</div>		
 		<div style="margin: 0%; float:left; height:100%; width: 30%">
 			<div id="right_login" class="ui-corner-all" style="float: left; height:100%; width:100%; border-width: 1px; border-style: solid; border-color: grey;background-color: #F8F8FF;">
 						<div class="btn-primary"  style="float: left; height: 20%; width: 100%;">Sign in</div>
@@ -58,28 +60,28 @@
 							<table width="100%">
 							  <tr>
 							  	<td>
-							  	  <div style="margin:2%">	
-							     	 <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"heigh: 40%; width:100%" ) %>
+							  	  <div style="margin:3%">	
+							     	 <%= text_field_tag(:txtuid,  nil, :placeholder=>"Username" , :class=>"form-control", :style=>"height: 40%; width:100%" ) %>
 							      </div>	
 							    </td>
 							  </tr>
 							  <tr>
 							    <td>
-							    <div style="margin:2%">	
+							    <div style="margin:3%">	
 							      <%= password_field_tag(:txtpswd, nil, :placeholder=>"Password" , :class=>"form-control", :style=>"width:100%") %>
 							    </div>	
 							    </td>
 							  </tr>
 							<tr>
 							  	<td>
-							  	<div style="margin:2%">	
+							  	<div style="margin:3%">	
 							      <%= button_to_function(:Login, "login()", :class=>"btn btn-lg btn-primary btn-block", :style=>"width:100%") %>
 							   	</div>	
 							   </td>
 							   </tr>
 							   <tr>		  
 							   <td colspan="3">
-							        <div id="Error" style="color: red"></div>
+							        <div id="Error" style="color: red; margin:3%"></div>
 									<% flash.each do |key, value| %>
 									  <div style="color: red" class="alert alert-<%= key %>"><%= value %></div>
 									<% end %>
@@ -93,7 +95,7 @@
 	
 		</div>
 	</div>
-	<div style="margin: 0%; float:left; height:50%; width: 100%"></div>
+	<div style="margin: 0%;  height:55%; width: 100%"><span>&nbsp;</span></div>
 		
 	
 </div>	
