@@ -14,7 +14,10 @@ class SlottingruleDetailsmaintenanceController < ApplicationController
       
       if request.xhr? 
              if params[:oper]=='subselect'
-                  item_category = Itemmaster.find_by_sql('select distinct ' + params[:val] + ' from itemmasters where ' + params[:val] + ' IS NOT NULL and ' + params[:val] + " != '' ")
+                  #item_category = Itemmaster.find_by_sql('select distinct ' + params[:val] + ' from itemmasters where ' + params[:val] + ' IS NOT NULL and ' + params[:val] + " != '' ")
+                  item_category = Itemmaster.select('DISTINCT ' + params[:val])
+                    .where(params[:val] + ' IS NOT NULL and ' + params[:val] + "<>  ' '")
+                    .order(params[:val])
                   render :json => item_category.to_json
              else
 
