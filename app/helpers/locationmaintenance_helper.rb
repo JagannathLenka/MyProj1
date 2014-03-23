@@ -44,7 +44,11 @@ module LocationmaintenanceHelper
                             win.focus();                                 
                    }"
                                        
-        
+     customerLinkFormatter = "function(cellvalue, options, rowdata) {
+                                  remoteURL = '/position?cl_warehouse_id=' + rowdata[2] + '&cl_barcode=' + rowdata[4] + '&lightweight=yes';       
+                                  return '<a data-toggle=\"modal\" href=\"' + remoteURL + '\" data-target=\"#locationview\">' + cellvalue + '</a>'
+                              }" 
+   
       
       grid = [{
       :url => url,
@@ -64,7 +68,7 @@ module LocationmaintenanceHelper
         { :name => 'location[sm_warehouse_id]',:index => 'sm_warehouse_id',   :width => 80,   :align => 'center', :editable => false,:hidden => true },
         { :name => 'location[cl_warehouse_id]', :index => 'cl_warehouse_id',   :width => 100,   :align => 'center', :editable => true, :hidden => false, search: false},
         { :name => 'location[sm_barcode]', :index => 'sm_barcode',   :width => 80,   :align => 'center', :editable => false, :hidden => true},
-        { :name => 'location[cl_barcode]',   :index => 'cl_barcode',   :width => 160,   :align => 'center', :editable => true},
+        { :name => 'location[cl_barcode]',   :index => 'cl_barcode',   :width => 200,   :align => 'center', :editable => false, formatter:customerLinkFormatter.to_json_var},
         { :name => 'location[sm_zone_id]',  :index => 'sm_zone_id',     :width => 150,  :align => 'left', :editable => false,:hidden => true },
         { :name => 'location[cl_zone_id]',  :index => 'cl_zone_id',     :width => 100,  :align => 'center', :editable => true, :hidden => false},
         { :name => 'location[sm_aisle_id]', :index => 'sm_aisle_id', :width => 150,  :align => 'left', :editable => true,:hidden => true },
