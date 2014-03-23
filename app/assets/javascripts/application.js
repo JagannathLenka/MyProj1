@@ -16,6 +16,7 @@
 //=require bootstrap
 //=require jquery_ujs
 //=require jquery-ui
+//=require jquery.multiselect
 //=require jquery.sessionTimeout
 //=require jquery.contextmenu
 //=require_slef

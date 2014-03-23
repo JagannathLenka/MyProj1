@@ -11,6 +11,7 @@
  *= require bootstrap
  *= require ui.jqgrid
  *= require jquery-ui.min
+ *= require jquery.multiselect
  *= require bootstrap-theme
  *= require jquery.contextmenu
  *= require_self

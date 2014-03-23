@@ -10,10 +10,30 @@ module SlottingruleDetailsmaintenanceHelper
     aftersubfunc   = 'function(response, postdata) {message = response.responseText; success = false; return [success, message ]}'
     addcheckfunc   = 'function(postdata, formid) {postdata.pt_master_id=' + params["id"] + '; return[true, " "]}' 
     dataevent_func = "function(e) {
+
                                    var thisval = $(e.target).val();                                  
-                                   selectedRowId = $('#slottingrule_details_list').jqGrid ('getGridParam', 'selrow')
+                                   $('#' + lastsel + '_SlottingruleDetails\\\\[attribute2\\\\]').html('');
                                    $('#SlottingruleDetails\\\\[attribute2\\\\]').html(targetselect_func(thisval));  
-                                   $('#' + selectedRowId + '_SlottingruleDetails\\\\[attribute2\\\\]').html(targetselect_func(thisval))  
+                                   $('#' + lastsel + '_SlottingruleDetails\\\\[attribute2\\\\]').html(targetselect_func(thisval));                                     
+
+
+                                   setTimeout(function () {
+                                        $('#' + lastsel + '_SlottingruleDetails\\\\[attribute2\\\\]').multiselect({
+                                            minWidth: 100, //'auto',
+                                            height: 'auto',
+                                            selectedList: 2,
+                                            checkAllText: 'all',
+                                            uncheckAllText: 'no',
+                                            noneSelectedText: 'Any',
+                                            open: function () {
+                                                var $menu = $('.ui-multiselect-menu:visible');
+                                                $menu.width('auto');
+                                                return;
+                                            }
+                                        });
+                                    }, 50);
+   
+ 
                                   }"                        
                              
                     
@@ -31,20 +51,8 @@ module SlottingruleDetailsmaintenanceHelper
                      } 
                    }"    
                    
-    dataInitfunc ="function(elem) {                                                 
-                                   var thisval = 'item_category1';
-                                   var grid = jQuery('#slottingrule_details_list');
-                                   var sel_id = grid.jqGrid('getGridParam', 'selrow');
-                                   var myCellData = grid.jqGrid('getCell', sel_id, 'rule_description');
-                           
-                                   
-                                   var id = $('#slottingrule_details_list').getGridParam('selrow');
-
-                                   alert(id); 
-                                                                           
-                                   selectedRowId = $('#slottingrule_details_list').jqGrid ('getGridParam', 'selrow')
-                                   $(elem).html(targetselect_func(thisval));  
-                                  }"               
+    dataInitfunc ="function(elem) {
+                              }"               
        
     grid = [{
       :url => '/slottingrule_detailsmaintenance/?id=' + id,
@@ -62,13 +70,13 @@ module SlottingruleDetailsmaintenanceHelper
                                                                editoptions: {value: "select:select; item_category1:Item category1; item_category2:Item category2; item_category3:Item category3;velocity:Velocity", 
                                                                               dataEvents:   [                                                      
                                                                                             {type: 'change', fn: dataevent_func.to_json_var}, 
-                                                                                            {type: 'click', fn: dataevent_func.to_json_var} 
+                                                                                            {type: 'change', fn: dataevent_func.to_json_var} 
                                                                                            ] 
                                                                              }                                                               
                                                                 },
         { :name => 'SlottingruleDetails[attribute1]',  :index => 'attribute1',   :width => 100,   :align => 'center', :editable => true, edittype:"select", editoptions: {value: "in:=;Like:like" }},
-        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select", 
-                                                        editoptions: {value: "select:select", multiple: true, dataInit:dataInitfunc.to_json_var}},
+        { :name => 'SlottingruleDetails[attribute2]',  :index => 'attribute2',   :width => 100,   :align => 'center', :editable => true, edittype:"select",
+                                                                                  editoptions: {value: "Select:Select;", multiple: true, dataInit: dataInitfunc.to_json_var }},
         { :name => 'SlottingruleDetails[attribute3]',  :index => 'attribute3',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute4]',  :index => 'attribute4',   :width => 100,   :align => 'center', :editable => true},
         { :name => 'SlottingruleDetails[attribute5]',  :index => 'attribute5',   :width => 100,   :align => 'center', :editable => true},
