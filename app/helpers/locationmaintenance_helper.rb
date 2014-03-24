@@ -45,7 +45,7 @@ module LocationmaintenanceHelper
                    }"
                                        
      customerLinkFormatter = "function(cellvalue, options, rowdata) {
-                                  remoteURL = '/position?cl_warehouse_id=' + rowdata[2] + '&cl_barcode=' + rowdata[4] + '&lightweight=yes';       
+                                  remoteURL = 'position?cl_warehouse_id=' + rowdata[2] + '&cl_barcode=' + rowdata[4] + '&lightweight=yes';       
                                   return '<a data-toggle=\"modal\" href=\"' + remoteURL + '\" data-target=\"#locationview\">' + cellvalue + '</a>'
                               }" 
    

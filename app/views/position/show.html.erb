@@ -17,28 +17,25 @@
  
  
 
-<div id="position" class="position">
-
-   
-   <div>
-	   <div class="label label-primary" style="float:left; height: 30px ; width: 100px"> <h4>Bay: <%= @cl_bay_id %></h4></div>
-   
-   	   <div class="btn-group pull-right" style="float:left;; margin-left:20px">
-	  <button class="btn btn-primary">Action</button>
-	  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
-	    <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu">
-	    <!-- dropdown menu links -->
-	    <li>
-	    	<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes&item=Yes')">Item</a>
-	    	<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes')">Barcode</a>
-	    </li>	
-	  </ul>
-	</div>
+	  <div style="height: 30px; width: <%= @level_width + 100 %>px">	
+		<div class="btn btn-primary pull-left" style="float:left; height: 30px">Bay: <%= @cl_bay_id %></div> 
+   	  	<div class="btn-group pull-right" style="float:left">
+	 		 	<button class="btn btn-primary">Action</button>
+	  		 	<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+	    			<span class="caret"></span>
+	  			</button>
+	  			<ul class="dropdown-menu">
+	    		<!-- dropdown menu links -->
+	    			<li>
+	    				<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes&item=Yes')">Item</a>
+	    				<a href="javascript:$('body').load('/position/<%= @bay_id %>?lightweight=yes')">Barcode</a>
+	    			</li>	
+	  			</ul>
+		</div>
+	</div>	
 	   
 
-   <div style="float: left" id="location"> 
+   <div style="float: left; width: 100%" id="location"> 
     <table border="0" style="border-collapse:collapse">
    	<% @levelhash.each do |level, levelvalue| %>
    
