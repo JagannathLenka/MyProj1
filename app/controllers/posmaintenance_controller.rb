@@ -22,7 +22,20 @@ class PosmaintenanceController < ApplicationController
   @error = ""
   case params[:oper]
   when "edit"
-       update_position
+      pos = Position.find(params[:id])
+      pos.update_attributes({ 
+                                   :cl_pos_id   => params[:cl_pos_id],
+                                   :description => params[:description],
+                                   :sm_barcode  => params[:sm_barcode],
+                                   :attribute1 => params[:attribute1],
+                                   :attribute2 => params[:attribute2], 
+                                   :attribute3 => params[:attribute3],
+                                   :attribute4 => params[:attribute4],
+                                   :attribute5 => params[:attribute5],
+                                   :attribute6 => params[:attribute6],
+                                   :attribute7 => params[:attribute7],
+                                   :attribute8 => params[:attribute8]    
+                                })
         
   when "add"
         pos = Position.find_by_id(params[:id])
@@ -75,75 +88,8 @@ class PosmaintenanceController < ApplicationController
     end
  end
 
- def update_position
-   
-  pos = Position.find_by_id(params[:id])
-  case params[:attribute1]
-    when "Default"
-      
-      pos.update_attributes({ 
-                                   :cl_pos_id   => params[:cl_pos_id],
-                                   :description => params[:description],
-                                   :sm_barcode  => params[:sm_barcode],
-                                   :cl_barcode  => pos.cl_zone_id + "-" + pos.cl_aisle_id  + "-" + pos.cl_bay_id + "-" + pos.cl_level_id + "-" + params[:cl_pos_id],
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => params[:attribute2], 
-                                   :attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4],
-                                   :attribute5 => params[:attribute5],
-                                   :attribute6 => params[:attribute6],
-                                   :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
-                                })
-                                
-      when "Continue"
-        previous_pos = getprevious_position pos
-        
-        pos.update_attributes({ 
-                                   :cl_pos_id   => params[:cl_pos_id],
-                                   :description => params[:description],
-                                   :sm_barcode  => params[:sm_barcode],
-                                   :cl_barcode  => previous_pos.cl_barcode,
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => previous_pos.attribute2,
-                                   :attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4],
-                                   :attribute5 => params[:attribute5],
-                                   :attribute6 => params[:attribute6],
-                                   :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
-                                })
-                                
-       when "Break"
-        previous_pos = getprevious_position pos
-        pos.update_attributes({ 
-                                   :cl_pos_id   => params[:cl_pos_id],
-                                   :description => params[:description],
-                                   :sm_barcode  => params[:sm_barcode],
-                                   :cl_barcode  => previous_pos.cl_barcode,
-                                   :attribute1 => params[:attribute1],
-                                   :attribute2 => previous_pos.attribute2,
-                                   :attribute3 => params[:attribute3],
-                                   :attribute4 => params[:attribute4],
-                                   :attribute5 => params[:attribute5],
-                                   :attribute6 => params[:attribute6],
-                                   :attribute7 => params[:attribute7],
-                                   :attribute8 => params[:attribute8]    
-                                })
-        
-
-                               
-   end
-       @error = params[:cl_pos_id]+ ' ' + pos.errors.values[0][0] if pos.errors.count > 0
- end
  
- def getprevious_position position
-   
-        previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , position.level_id ,( position.sm_pos_id - 1)).first
-        previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id=? AND sm_level_id=?" , position.sm_warehouse_id ,position.sm_zone_id, position.sm_aisle_id, position.sm_bay_id, (position.sm_level_id-1)).last if previous_pos.nil?
-        previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND  sm_bay_id=?" , position.sm_warehouse_id ,position.sm_zone_id, position.sm_aisle_id, (position.sm_bay_id-1)).last if previous_pos.nil?
-        return previous_pos
- end
+ 
 
  def get_header_details
 
