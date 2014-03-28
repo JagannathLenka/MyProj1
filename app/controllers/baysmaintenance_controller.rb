@@ -1,7 +1,7 @@
 require 'copy_object'
 class BaysmaintenanceController < ApplicationController
   
- rescue_from Exception, :with => :error_render_method
+ #rescue_from Exception, :with => :error_render_method
   
   include CopyObject
    # GET /Render the JQGrid for bay maintenance
@@ -83,8 +83,14 @@ end
     when "cpy"
              
              CopyObject.delay.copyBaytoAisle params[:id]
-              
-    end   
+     
+     when "refresh"  
+              params[:ids].each do |id|
+                Bay.refresh_bay id 
+              end      
+    end 
+    
+    
 
     if request.xhr?
        if !@error.blank?        

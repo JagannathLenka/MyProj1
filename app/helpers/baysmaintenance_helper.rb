@@ -69,7 +69,32 @@ module BaysmaintenanceHelper
                              });
                      lastsel=id;
                      } 
-                   }" 
+                   }"
+                   
+      refreshbay  = "function() {
+                                var ids = $('#bays_list').jqGrid('getGridParam','selarrrow');
+                                
+                                 $.post('/baysmaintenance',
+                                       {
+                                         'oper' :'refresh',
+                                         'ids'   :ids
+                                       })
+                                        .done(function() {
+                                        
+                                      })
+                                      .fail( function(xhr, textStatus, errorThrown) {
+                                          $.jgrid.info_dialog(
+                                                $.jgrid.errors.errcap, 
+                                                '<div class=""ui-state-error"">' + xhr.responseText + '</div>', 
+                                                 $.jgrid.edit.bClose,{buttonalign:'right'});
+                                      })
+                                      
+                                      .always(function() {
+                                        
+                                    });
+                                 $('#bays_list').trigger('reloadGrid');       
+                   }"
+                                        
     grid = [{
       :url => url ,
       :datatype => 'json',
@@ -125,7 +150,10 @@ module BaysmaintenanceHelper
       
       pager_button = [:navButtonAdd, "#bays_pager", {:caption => 'Copy to other bay', :onClickButton => copyrowfunc.to_json_var }]
   
-      jqgrid_api 'bays_list', grid, pager,pager_button, options
+      refresh_bay_button = [:navButtonAdd, "#bays_pager", {:caption => 'Refresh Bay', :onClickButton => refreshbay.to_json_var }]               
+
+  
+      jqgrid_api 'bays_list', grid, pager,pager_button,refresh_bay_button, options
 
   end
 
