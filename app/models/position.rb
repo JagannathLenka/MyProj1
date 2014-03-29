@@ -10,8 +10,8 @@ class Position < ActiveRecord::Base
   
  def update_positions 
    
-    self.cl_barcode = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s
- 
+    self.cl_barcode = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s 
+
    case self.attribute1
     when "Default"
       

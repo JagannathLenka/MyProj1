@@ -60,6 +60,7 @@ class PositionController < ApplicationController
       end
        
       poshash = poshash.merge({posvalue.id => {:customer_id => posvalue.cl_barcode, 
+                                               :location_barcode => posvalue.description,
                                                :pos_selected => (posvalue.cl_barcode == cl_barcode ? 'yes' : 'no'),
                                                :pos_type => postype,
                                                :pos_continue => posvalue.attribute1, 

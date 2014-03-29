@@ -77,7 +77,9 @@
 			   	    	  
 						   	    	 <% case posvalue[:pos_continue] %>
 							   	    	 <% when "Continue"%>
-							   	    	 <%= image_tag("continue.jpg", alt: "", :width => 40, :height => 10, :id => "continue")%>
+							   	    	 <a href="#" data-toggle="tooltip" data-placement="bottom" title="<%= raw(poistion_tooltip(posvalue)) %>"> 							   	    	 
+							   	    	 		<%= image_tag("continue.jpg", alt: "", :width => 40, :height => 10, :id => "continue")%>
+							   	    	 </a>
 							   	    	 <% when "Break"%>
 							   	    	 <%= image_tag("break.jpg", alt: "", :width => 40, :height => 10, :id => "break")%>
 							   	    	 <% else %>

@@ -3,6 +3,7 @@ module PositionHelper
   def poistion_tooltip posvalue
   
       tooltip =   
+     "Location      :" + posvalue[:location_barcode].to_s               + "\n" +     
      "Item          :" + posvalue[:item].to_s               + "\n" + 
      "Current Inv   :" + posvalue[:current_inventory].to_s  + "\n" +  
      "Maximum Inv   :" + posvalue[:maximum_quantity].to_s   + "\n" +  
