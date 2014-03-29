@@ -154,6 +154,7 @@ end
   def self.update_location_details loc, warehouse, barcode 
          pos = Position.where('cl_warehouse_id = ? and cl_barcode =? ', warehouse, barcode).first
          
+         puts pos.attributes
          unless pos.nil?
              zone = Zone.where('cl_warehouse_id = ? and sm_zone_id = ? ', warehouse, pos.sm_zone_id).first
              aisle = Aisle.where('cl_warehouse_id = ? and sm_zone_id = ? and sm_aisle_id = ? ', warehouse, pos.sm_zone_id, pos.sm_aisle_id).first

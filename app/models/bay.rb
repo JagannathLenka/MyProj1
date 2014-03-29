@@ -144,19 +144,21 @@ class Bay < ActiveRecord::Base
  
  
  def self.refresh_bay bay_id
-   location_found = true
    bay = Bay.find(bay_id)
    positions = Position.where("sm_warehouse_id = ? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id = ?" ,bay.sm_warehouse_id , bay.sm_zone_id , bay.sm_aisle_id , bay.sm_bay_id).order(:sm_level_id , :sm_pos_id)
    positions.each do |position| 
    puts position
-   location = Location.where("cl_warehouse_id = ? AND cl_barcode = ?", position.cl_warehouse_id , position.cl_barcode).first 
+   location = Location.where(:cl_warehouse_id => position.cl_warehouse_id, 
+                             :cl_zone_id =>      position.cl_zone_id,
+                             :cl_aisle_id =>     position.cl_aisle_id,
+                             :cl_bay_id   =>     position.cl_bay_id,
+                             :cl_level_id =>     position.cl_level_id,
+                             :cl_pos_id   =>     position.cl_pos_id).first 
      if location.nil?
        position.attribute1 = "Continue" 
        position.save
-       location_found = false
      else 
-
-       position.attribute1 = (location_found ? "Default" : "Break")
+       position.attribute1 = "Default"
        position.save
        location_found = true
      end

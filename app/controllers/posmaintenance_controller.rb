@@ -25,7 +25,7 @@ class PosmaintenanceController < ApplicationController
       pos = Position.find(params[:id])
       pos.update_attributes({ 
                                    :cl_pos_id   => params[:cl_pos_id],
-                                   :description => params[:description],
+                                   #:description => params[:description],
                                    :sm_barcode  => params[:sm_barcode],
                                    :attribute1 => params[:attribute1],
                                    :attribute2 => params[:attribute2], 
@@ -54,7 +54,7 @@ class PosmaintenanceController < ApplicationController
                          :sm_warehouse_id => levels.sm_warehouse_id,
                          :cl_warehouse_id => levels.cl_warehouse_id,
                          :level_id     => levels.id,
-                         :description  => params[:description],
+                         #:description  => params[:description],
                          :sm_barcode  => params[:sm_barcode],
                          :cl_barcode  => params[:cl_barcode],
                          :attribute1 => params[:attribute1],

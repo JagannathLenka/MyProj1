@@ -1,6 +1,6 @@
 class Position < ActiveRecord::Base
   
-  before_save   :update_positions, :if => :attribute1_changed?
+  before_save   :update_positions 
   after_save :update_location_rating
   after_destroy :update_level_for_delete
   after_create  :update_level_for_add
@@ -10,17 +10,20 @@ class Position < ActiveRecord::Base
   
  def update_positions 
    
+    self.cl_barcode = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s
+ 
    case self.attribute1
     when "Default"
       
-        self.cl_barcode = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s
+        self.description = cl_zone_id.to_s + "-" + cl_aisle_id.to_s + "-" + cl_bay_id.to_s + "-" + cl_level_id.to_s + "-" + cl_pos_id.to_s
+
     
                                 
       when "Continue"
         
         previous_pos = getprevious_position 
         
-        self.cl_barcode  = previous_pos.cl_barcode
+        self.description  = previous_pos.description
         self.attribute2 = previous_pos.attribute2
                                   
                                
@@ -28,7 +31,7 @@ class Position < ActiveRecord::Base
        when "Break"
         previous_pos = getprevious_position
        
-        self.cl_barcode  = previous_pos.cl_barcode
+        self.description  = previous_pos.description
         self.attribute2 = previous_pos.attribute2
                                                              
    end
