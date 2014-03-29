@@ -148,6 +148,7 @@ class Bay < ActiveRecord::Base
    bay = Bay.find(bay_id)
    positions = Position.where("sm_warehouse_id = ? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id = ?" ,bay.sm_warehouse_id , bay.sm_zone_id , bay.sm_aisle_id , bay.sm_bay_id).order(:sm_level_id , :sm_pos_id)
    positions.each do |position| 
+   puts position
    location = Location.where("cl_warehouse_id = ? AND cl_barcode = ?", position.cl_warehouse_id , position.cl_barcode).first 
      if location.nil?
        position.attribute1 = "Continue" 

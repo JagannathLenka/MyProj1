@@ -40,6 +40,7 @@ class Position < ActiveRecord::Base
         previous_pos = Position.where("level_id = ? AND sm_pos_id = ?" , self.level_id ,( self.sm_pos_id - 1)).first
         previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id=? AND sm_level_id=?" , self.sm_warehouse_id ,self.sm_zone_id, self.sm_aisle_id, self.sm_bay_id, (self.sm_level_id-1)).last if previous_pos.nil?
         previous_pos = Position.where("sm_warehouse_id=? AND sm_zone_id = ? AND sm_aisle_id = ? AND sm_bay_id=?" , self.sm_warehouse_id ,self.sm_zone_id, self.sm_aisle_id, (self.sm_bay_id-1)).last if previous_pos.nil?
+        previous_pos = self if previous_pos.nil?
         return previous_pos
  end
 
