@@ -6,6 +6,7 @@ class LoginController < ApplicationController
       cookies.delete :userid
       cookies.delete :client_id
       cookies.delete :last_url
+      session[:user_id] = nil
     end
   end
   
@@ -34,6 +35,8 @@ class LoginController < ApplicationController
                                 value: newuser.user_id,
                                 expires: 1.hour.from_now
                               }
+            session[:userid] = newuser.user_id
+                             
      
             cookies[:client_id] = {
                   value: newuser.client_id,

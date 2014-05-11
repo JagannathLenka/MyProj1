@@ -10,7 +10,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
 end
 
 #gem 'jqgrid_for_rails', git: 'git://github.com/Juanmcuello/jqgrid_for_rails.git'
@@ -31,7 +31,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'therubyracer', :platforms => :ruby
+#gem 'therubyracer', :platforms => :ruby
+
+#gem 'therubyracer', '0.10.2', :platforms => :ruby
 
 #gem 'jquery-rails'
 #gem "jquery-rails", "~>1.0.19"
