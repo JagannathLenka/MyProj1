@@ -10,7 +10,7 @@ group :development, :test do
 end
 
 group :production do
-  #gem 'pg'
+  gem 'pg'
 end
 
 #gem 'jqgrid_for_rails', git: 'git://github.com/Juanmcuello/jqgrid_for_rails.git'
