@@ -6,7 +6,7 @@ class WarehousemaintenanceController < ApplicationController
    # GET /maintenance
   def index
     
-    authorize = cookies[:client_id].strip == 'SM'?  "" : 'client_id = "' + cookies[:client_id].strip + '"'
+    authorize = cookies[:client_id].strip == 'SM'?  "" : "client_id = '#{cookies[:client_id].strip}'"
     
     columns =  ['id','sm_warehouse_id', 'cl_warehouse_id','client_id','description', 'no_of_zones','no_of_zones_hidden', 'attribute1','attribute2','attribute3','attribute4','attribute5','attribute6','attribute7','attribute8' ]
     warehouse = Warehouse.select(" id ,sm_warehouse_id , cl_warehouse_id ,client_id , description , no_of_zones , no_of_zones as no_of_zones_hidden , attribute1 , attribute2 , attribute3 , attribute4, attribute5, attribute6 , attribute7 , attribute8 ")
